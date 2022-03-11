@@ -2,6 +2,13 @@
 
 This is the README for your extension "adonis-vscode-ace". After writing up a brief description, we recommend including the following sections.
 
+## TODO : 
+Serve ?
+Build ?
+dump:rcfile ?
+lsit routes ?
+
+
 ## Features
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
