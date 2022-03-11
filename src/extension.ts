@@ -15,6 +15,8 @@ export function activate(context: ExtensionContext) {
 	ctxSubs.push(commands.registerCommand(`${extName}.make.migration`, () => Commands.Migration.run()));
 	ctxSubs.push(commands.registerCommand(`${extName}.make.model`, () => Commands.Model.run()));
 	ctxSubs.push(commands.registerCommand(`${extName}.make.seeder`, () => Commands.Seeder.run()));
+  ctxSubs.push(commands.registerCommand(`${extName}.make.view`, () => Commands.View.run()));
+  ctxSubs.push(commands.registerCommand(`${extName}.make.validator`, () => Commands.Validator.run()));
 
   /**
    * Register migration:* commands
@@ -28,6 +30,7 @@ export function activate(context: ExtensionContext) {
    */
   ctxSubs.push(commands.registerCommand(`${extName}.generate.manifest`, () => Commands.Manifest.run()));
   ctxSubs.push(commands.registerCommand(`${extName}.configure`, () => Commands.Configure.run()));
+  ctxSubs.push(commands.registerCommand(`${extName}.type-check`, () => Commands.TypeCheck.run()));
 }
 
 export function deactivate() { }

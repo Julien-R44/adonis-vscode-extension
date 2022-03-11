@@ -72,14 +72,20 @@ export default class BaseCommand {
     let cmd = platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`;
 
     /**
-     * Execute the final command either in the background or not
-     * by creating a new VSCode terminal and showing it
+     * Execute the final command in the background
      */
     if (background) {
       return exec(cmd);
     }
 
-    const terminal = window.createTerminal(`AdonisJS Ace`);
+    /**
+     * Execute the final command in the foreground in the VSCode integrated terminal
+     */
+    let terminal = window.activeTerminal;
+    if (!terminal || terminal.name !== 'AdonisJS Ace') {
+      terminal = window.createTerminal(`AdonisJS Ace`);
+    }
+
     terminal.show();
     terminal.sendText(cmd);
 

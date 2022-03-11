@@ -49,6 +49,15 @@
 				"command": "adonis-vscode-ace.make.seeder",
 				"title": "Ace: Make Seeder"
 			},
+      {
+				"command": "adonis-vscode-ace.make.view",
+				"title": "Ace: Make View"
+			},
+      {
+				"command": "adonis-vscode-ace.make.validator",
+				"title": "Ace: Make Validator"
+			},
+
 			{
 				"command": "adonis-vscode-ace.migration.fresh",
 				"title": "Ace: Migration Fresh"
@@ -61,6 +70,7 @@
 				"command": "adonis-vscode-ace.migration.reset",
 				"title": "Ace: Migration Reset"
 			},
+
       {
 				"command": "adonis-vscode-ace.generate.manifest",
 				"title": "Ace: Generate Manifest"
@@ -68,6 +78,10 @@
       {
 				"command": "adonis-vscode-ace.configure",
 				"title": "Ace: Configure package"
+      },
+      {
+				"command": "adonis-vscode-ace.type-check",
+				"title": "Ace: Type Check"
       }
 		]
 	},

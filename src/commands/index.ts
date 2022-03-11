@@ -1,9 +1,4 @@
 /**
- * Generate
- */
-export { Manifest } from "./generate/Manifest";
-
-/**
  * Make
  */
 export { Command } from "./make/Command";
@@ -13,6 +8,8 @@ export { Middleware } from "./make/Middleware";
 export { Migration } from "./make/Migration";
 export { Model } from "./make/Model";
 export { Seeder } from "./make/Seeder";
+export { View } from "./make/View";
+export { Validator } from './make/Validator';
 
 /**
  * Migration
@@ -22,6 +19,8 @@ export { Refresh } from "./migration/Refresh";
 export { Reset } from "./migration/Reset";
 
 /**
- * Configure
+ * Misc. commands
  */
 export { Configure } from "./configure";
+export { TypeCheck } from "./type-check";
+export { Manifest } from "./generate/Manifest";
