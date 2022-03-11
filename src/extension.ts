@@ -3,34 +3,41 @@ import * as Commands from './commands';
 
 export function activate(context: ExtensionContext) {
 	const extName = 'adonis-vscode-ace';
+  const registerCommand = commands.registerCommand;
 
 	/**
 	 * Register make:* commands
 	 */
-	const ctxSubs = context.subscriptions;
-	ctxSubs.push(commands.registerCommand(`${extName}.make.command`, () => Commands.Command.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.controller`, () => Commands.Controller.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.exception`, () => Commands.Exception.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.middleware`, () => Commands.Middleware.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.migration`, () => Commands.Migration.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.model`, () => Commands.Model.run()));
-	ctxSubs.push(commands.registerCommand(`${extName}.make.seeder`, () => Commands.Seeder.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.make.view`, () => Commands.View.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.make.validator`, () => Commands.Validator.run()));
+  context.subscriptions.push(...[
+    registerCommand(`${extName}.make.command`, () => Commands.Command.run()),
+    registerCommand(`${extName}.make.controller`, () => Commands.Controller.run()),
+    registerCommand(`${extName}.make.exception`, () => Commands.Exception.run()),
+    registerCommand(`${extName}.make.middleware`, () => Commands.Middleware.run()),
+    registerCommand(`${extName}.make.migration`, () => Commands.Migration.run()),
+    registerCommand(`${extName}.make.model`, () => Commands.Model.run()),
+    registerCommand(`${extName}.make.seeder`, () => Commands.Seeder.run()),
+    registerCommand(`${extName}.make.view`, () => Commands.View.run()),
+    registerCommand(`${extName}.make.validator`, () => Commands.Validator.run()),
+    registerCommand(`${extName}.make.prldfile`, () => Commands.PreloadedFile.run())
+  ]);
 
   /**
    * Register migration:* commands
    */
-  ctxSubs.push(commands.registerCommand(`${extName}.migration.fresh`, () => Commands.Fresh.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.migration.refresh`, () => Commands.Refresh.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.migration.reset`, () => Commands.Reset.run()));
+  context.subscriptions.push(...[
+    registerCommand(`${extName}.migration.fresh`, () => Commands.Fresh.run()),
+    registerCommand(`${extName}.migration.refresh`, () => Commands.Refresh.run()),
+    registerCommand(`${extName}.migration.reset`, () => Commands.Reset.run()),
+  ]);
 
   /**
    * Register misc commands
    */
-  ctxSubs.push(commands.registerCommand(`${extName}.generate.manifest`, () => Commands.Manifest.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.configure`, () => Commands.Configure.run()));
-  ctxSubs.push(commands.registerCommand(`${extName}.type-check`, () => Commands.TypeCheck.run()));
+  context.subscriptions.push(...[
+    registerCommand(`${extName}.generate.manifest`, () => Commands.Manifest.run()),
+    registerCommand(`${extName}.configure`, () => Commands.Configure.run()),
+    registerCommand(`${extName}.type-check`, () => Commands.TypeCheck.run())
+  ]);
 }
 
 export function deactivate() { }

@@ -10,6 +10,7 @@ export { Model } from "./make/Model";
 export { Seeder } from "./make/Seeder";
 export { View } from "./make/View";
 export { Validator } from './make/Validator';
+export { PreloadedFile } from './make/PreloadedFile';
 
 /**
  * Migration

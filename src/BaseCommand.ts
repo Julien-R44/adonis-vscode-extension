@@ -43,6 +43,14 @@ export default class BaseCommand {
   }
 
   /**
+   * Prompt the user to select one or multiple input from a list
+   */
+   protected static async getListInput(placeHolder: string, list: string[], canPickMany: boolean = false): Promise<string[]> {
+    let name = await window.showQuickPick(list, { placeHolder: placeHolder, canPickMany }) as string[] | string;
+    return typeof name === 'string' ? [name] : name;
+  }
+
+  /**
    * Returns the path to ace location
    *
    * TODO: Support multi-workspaces ? Custom path config ?
@@ -75,6 +83,7 @@ export default class BaseCommand {
      * Execute the final command in the background
      */
     if (background) {
+      console.log('xecuting command : ' + cmd);
       return exec(cmd);
     }
 

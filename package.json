@@ -57,6 +57,10 @@
 				"command": "adonis-vscode-ace.make.validator",
 				"title": "Ace: Make Validator"
 			},
+      {
+				"command": "adonis-vscode-ace.make.prldfile",
+				"title": "Ace: Make Preloaded File"
+			},
 
 			{
 				"command": "adonis-vscode-ace.migration.fresh",
