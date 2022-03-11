@@ -1,16 +1,15 @@
-import { window, workspace } from 'vscode';
-import { platform } from 'process';
-import { promisify } from 'util';
-import { exec as baseExec } from 'child_process';
-const exec = promisify(baseExec);
+import { window, workspace } from 'vscode'
+import { platform } from 'process'
+import { promisify } from 'util'
+import { exec as baseExec } from 'child_process'
+const exec = promisify(baseExec)
 
 export default class BaseCommand {
-
   /**
    * Show a message to the user
    */
   protected static async showMessage(message: string) {
-    window.showInformationMessage(message);
+    window.showInformationMessage(message)
   }
 
   /**
@@ -18,36 +17,42 @@ export default class BaseCommand {
    */
   protected static async showError(message: string, consoleErr: any = null) {
     if (consoleErr !== null) {
-      message += ' (See output console for more details)';
-      console.error(consoleErr + ' (See output console for more details)');
+      message += ' (See output console for more details)'
+      console.error(consoleErr + ' (See output console for more details)')
     }
-    window.showErrorMessage(message);
-    return false;
+    window.showErrorMessage(message)
+    return false
   }
 
   /**
    * Prompt the user to select Yes or No
    */
   protected static async getYesNo(placeHolder: string): Promise<boolean> {
-    let value = await window.showQuickPick(['Yes', 'No'], { placeHolder });
-    return value?.toLowerCase() === 'yes' ? true : false;
+    let value = await window.showQuickPick(['Yes', 'No'], { placeHolder })
+    return value?.toLowerCase() === 'yes' ? true : false
   }
 
   /**
    * Prompt the user for an input
    */
   protected static async getInput(placeHolder: string) {
-    let name = await window.showInputBox({ placeHolder: placeHolder.replace(/\s\s+/g, ' ').trim() });
-    name = name === undefined ? '' : name;
-    return name;
+    let name = await window.showInputBox({ placeHolder: placeHolder.replace(/\s\s+/g, ' ').trim() })
+    name = name === undefined ? '' : name
+    return name
   }
 
   /**
    * Prompt the user to select one or multiple input from a list
    */
-   protected static async getListInput(placeHolder: string, list: string[], canPickMany: boolean = false): Promise<string[]> {
-    let name = await window.showQuickPick(list, { placeHolder: placeHolder, canPickMany }) as string[] | string;
-    return typeof name === 'string' ? [name] : name;
+  protected static async getListInput(
+    placeHolder: string,
+    list: string[],
+    canPickMany: boolean = false
+  ): Promise<string[]> {
+    let name = (await window.showQuickPick(list, { placeHolder: placeHolder, canPickMany })) as
+      | string[]
+      | string
+    return typeof name === 'string' ? [name] : name
   }
 
   /**
@@ -56,48 +61,49 @@ export default class BaseCommand {
    * TODO: Support multi-workspaces ? Custom path config ?
    */
   protected static getAcePath(): string {
-    return workspace.workspaceFolders![0].uri.path;
+    return workspace.workspaceFolders![0].uri.path
   }
 
   /**
    * Execute the final `node ace x` command
    */
   protected static async execCmd(command: string, background: boolean = true) {
-    let acePath = this.getAcePath();
+    let acePath = this.getAcePath()
 
     /**
      * If we are on windows, we need the remove the first slash
      */
-    const isWindows = platform === 'win32';
+    const isWindows = platform === 'win32'
     if (isWindows && acePath.startsWith('/')) {
-      acePath = acePath.substring(1);
+      acePath = acePath.substring(1)
     }
 
     /**
      * Create the final command : cd {acePath} && node ace {cmd}
      */
-    command = `node ace ${command}`;
-    let cmd = platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`;
+    command = `node ace ${command}`
+    let cmd =
+      platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`
 
     /**
      * Execute the final command in the background
      */
     if (background) {
-      console.log('xecuting command : ' + cmd);
-      return exec(cmd);
+      console.log('xecuting command : ' + cmd)
+      return exec(cmd)
     }
 
     /**
      * Execute the final command in the foreground in the VSCode integrated terminal
      */
-    let terminal = window.activeTerminal;
+    let terminal = window.activeTerminal
     if (!terminal || terminal.name !== 'AdonisJS Ace') {
-      terminal = window.createTerminal(`AdonisJS Ace`);
+      terminal = window.createTerminal(`AdonisJS Ace`)
     }
 
-    terminal.show();
-    terminal.sendText(cmd);
+    terminal.show()
+    terminal.sendText(cmd)
 
-    return ;
+    return
   }
 }

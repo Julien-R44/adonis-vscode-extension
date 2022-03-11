@@ -1,34 +1,39 @@
-import BaseCommand from "../../BaseCommand";
+import BaseCommand from '../../BaseCommand'
 
 /**
  * Handle make:model command
  */
 export class Model extends BaseCommand {
-
   public static async run() {
     /**
      * Get the migration name
      */
-    let modelName = await this.getInput('Model name');
+    let modelName = await this.getInput('Model name')
     if (!modelName) {
-      this.showError('Model name is required.');
-      return;
+      this.showError('Model name is required.')
+      return
     }
 
     /**
      * Prompt for generating migration and/or controller with the model
      */
-    let generateMigration = await this.getYesNo('Do you want to generate a migration for this model ?');
-    let generateController = await this.getYesNo('Do you want to generate a controller for this model ?');
+    let generateMigration = await this.getYesNo(
+      'Do you want to generate a migration for this model ?'
+    )
+    let generateController = await this.getYesNo(
+      'Do you want to generate a controller for this model ?'
+    )
 
     /**
      * Execute the command
      */
     try {
-      let command = `make:model ${modelName} --migration=${generateMigration ? 'true' : 'false'} --controller=${generateController ? 'true' : 'false'}`;
-      await this.execCmd(command);
+      let command = `make:model ${modelName} --migration=${
+        generateMigration ? 'true' : 'false'
+      } --controller=${generateController ? 'true' : 'false'}`
+      await this.execCmd(command)
     } catch (err) {
-      this.showError('Could not create the model.', err);
+      this.showError('Could not create the model.', err)
     }
   }
 }
