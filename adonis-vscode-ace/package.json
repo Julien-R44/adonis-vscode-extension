@@ -60,7 +60,15 @@
       {
 				"command": "adonis-vscode-ace.migration.reset",
 				"title": "Ace: Migration Reset"
-			}
+			},
+      {
+				"command": "adonis-vscode-ace.generate.manifest",
+				"title": "Ace: Generate Manifest"
+			},
+      {
+				"command": "adonis-vscode-ace.configure",
+				"title": "Ace: Configure package"
+      }
 		]
 	},
 	"scripts": {
@@ -91,4 +99,3 @@
 		"@vscode/test-electron": "^2.1.2"
 	}
 }
-

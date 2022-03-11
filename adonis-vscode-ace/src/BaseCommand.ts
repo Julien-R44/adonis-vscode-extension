@@ -1,6 +1,5 @@
 import { window, workspace } from 'vscode';
 import { platform } from 'process';
-import { sep, posix, resolve } from 'path';
 import { promisify } from 'util';
 import { exec as baseExec } from 'child_process';
 const exec = promisify(baseExec);
@@ -43,7 +42,6 @@ export default class BaseCommand {
     return name;
   }
 
-
   /**
    * Returns the path to ace location
    *
@@ -56,7 +54,7 @@ export default class BaseCommand {
   /**
    * Execute the final `node ace x` command
    */
-  protected static async execCmd(command: string) {
+  protected static async execCmd(command: string, background: boolean = true) {
     let acePath = this.getAcePath();
 
     /**
@@ -74,8 +72,17 @@ export default class BaseCommand {
     let cmd = platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`;
 
     /**
-     * Execute the final command
+     * Execute the final command either in the background or not
+     * by creating a new VSCode terminal and showing it
      */
-    return exec(cmd);
+    if (background) {
+      return exec(cmd);
+    }
+
+    const terminal = window.createTerminal(`AdonisJS Ace`);
+    terminal.show();
+    terminal.sendText(cmd);
+
+    return ;
   }
 }
