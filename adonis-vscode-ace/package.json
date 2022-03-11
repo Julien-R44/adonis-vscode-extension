@@ -38,8 +38,28 @@
 				"title": "Ace: Make Middleware"
 			},
 			{
+				"command": "adonis-vscode-ace.make.migration",
+				"title": "Ace: Make Migration"
+			},
+      {
+				"command": "adonis-vscode-ace.make.model",
+				"title": "Ace: Make Model"
+			},
+      {
+				"command": "adonis-vscode-ace.make.seeder",
+				"title": "Ace: Make Seeder"
+			},
+			{
 				"command": "adonis-vscode-ace.migration.fresh",
 				"title": "Ace: Migration Fresh"
+			},
+      {
+				"command": "adonis-vscode-ace.migration.refresh",
+				"title": "Ace: Migration Refresh"
+			},
+      {
+				"command": "adonis-vscode-ace.migration.reset",
+				"title": "Ace: Migration Reset"
 			}
 		]
 	},

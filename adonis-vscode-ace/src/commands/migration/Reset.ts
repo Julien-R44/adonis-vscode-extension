@@ -1,26 +1,25 @@
 import BaseCommand from "../../BaseCommand";
 
 /**
- * Handle migration:refresh command
+ * Handle migration:reset command
  */
-export class Refresh extends BaseCommand {
+export class Reset extends BaseCommand {
 
   public static async run() {
     /**
-     * Prompt user database name and if it should be seeded
+     * Prompt user database name
      */
     let dbName = await this.getInput('Which database do you want to migrate ? Leave empty for using the default.');
-    let seed = await this.getYesNo('Do you want to seed the database ?');
 
     /**
      * Execute the command
      */
     try {
-      let command = `migration:refresh ${dbName ? `--database=${dbName}` : ''} ${seed ? '--seed' : ''}`;
+      let command = `migration:reset ${dbName ? `--database=${dbName}` : ''}`;
       await this.execCmd(command);
       this.showMessage('Database has been successfully refreshed.');
     } catch (err) {
-      this.showError('Could not execute migration:fresh', err);
+      this.showError('Could not execute migration:reset', err);
     }
   }
 }

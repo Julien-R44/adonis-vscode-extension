@@ -1,12 +1,19 @@
 import { window, workspace } from 'vscode';
 import { platform } from 'process';
-import { resolve } from 'path';
-
+import { sep, posix, resolve } from 'path';
 import { promisify } from 'util';
 import { exec as baseExec } from 'child_process';
 const exec = promisify(baseExec);
 
 export default class BaseCommand {
+
+  /**
+   * Show a message to the user
+   */
+  protected static async showMessage(message: string) {
+    window.showInformationMessage(message);
+  }
+
   /**
    * Show an error message to the user
    */
@@ -22,7 +29,7 @@ export default class BaseCommand {
   /**
    * Prompt the user to select Yes or No
    */
-  protected static async getYesNo(placeHolder: string): Promise<Boolean> {
+  protected static async getYesNo(placeHolder: string): Promise<boolean> {
     let value = await window.showQuickPick(['Yes', 'No'], { placeHolder });
     return value?.toLowerCase() === 'yes' ? true : false;
   }
@@ -43,7 +50,7 @@ export default class BaseCommand {
    * TODO: Support multi-workspaces ? Custom path config ?
    */
   protected static getAcePath(): string {
-    return resolve(workspace.workspaceFolders![0].uri.path);
+    return workspace.workspaceFolders![0].uri.path;
   }
 
   /**
@@ -52,9 +59,23 @@ export default class BaseCommand {
   protected static async execCmd(command: string) {
     let acePath = this.getAcePath();
 
-    command = `node ace ${command}`;
-    let cmd = platform === 'win32' ? `cd "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`;
+    /**
+     * If we are on windows, we need the remove the first slash
+     */
+    const isWindows = platform === 'win32';
+    if (isWindows && acePath.startsWith('/')) {
+      acePath = acePath.substring(1);
+    }
 
+    /**
+     * Create the final command : cd {acePath} && node ace {cmd}
+     */
+    command = `node ace ${command}`;
+    let cmd = platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`;
+
+    /**
+     * Execute the final command
+     */
     return exec(cmd);
   }
 }

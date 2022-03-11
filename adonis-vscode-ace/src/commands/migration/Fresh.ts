@@ -18,6 +18,7 @@ export class Fresh extends BaseCommand {
     try {
       let command = `migration:fresh ${dbName ? `--database=${dbName}` : ''} ${seed ? '--seed' : ''}`;
       await this.execCmd(command);
+      this.showMessage('Database has been successfully freshed.');
     } catch (err) {
       this.showError('Could not execute migration:fresh', err);
     }

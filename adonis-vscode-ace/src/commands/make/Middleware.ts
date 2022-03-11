@@ -7,7 +7,7 @@ export class Middleware extends BaseCommand {
 
   public static async run() {
     /**
-     * Get the exception name
+     * Get the migration name
      */
     let commandName = await this.getInput('Middleware name');
     if (!commandName) {
@@ -22,7 +22,7 @@ export class Middleware extends BaseCommand {
       let command = `make:middleware ${commandName}`;
       await this.execCmd(command);
     } catch (err) {
-      this.showError('Could not create the exception.', err);
+      this.showError('Could not create the middleware.', err);
     }
   }
 }
