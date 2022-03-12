@@ -9,7 +9,6 @@
 * Migrate and seed your database ( db:\*, migration:\* )
 * Open and see docs within VS Code
 * .adonisrc.json file validation with JSON Schema
-
 * Edge Support, syntax highlighting + formatting ( TODO )
 * View your routes ( TODO )
 * Run custom commands ( TODO )
