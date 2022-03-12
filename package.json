@@ -16,7 +16,8 @@
 		"NodeJS"
 	],
 	"activationEvents": [
-		"workspaceContains:**/ace"
+		"workspaceContains:**/ace",
+    "onLanguage:edge"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -85,10 +86,42 @@
 				"command": "adonis-vscode-ace.type-check",
 				"title": "⌨️ AdonisJS(Ace) Type Check"
 			},
-      {
-        "command": "adonis-vscode-ace.docs.open",
-        "title": "📜 AdonisJS(Docs) Open Docs"
-      }
+			{
+				"command": "adonis-vscode-ace.docs.open",
+				"title": "📜 AdonisJS(Docs) Open Docs"
+			}
+		],
+		"snippets": [
+			{
+				"language": "typescript",
+				"path": "./src/snippets/adonis/routes.json"
+			}
+		],
+    "languages": [
+			{
+				"id": "edge",
+				"aliases": [
+					"Edge Template",
+					"Edge",
+					"edge"
+				],
+				"extensions": [
+					".edge",
+					".edge.html"
+				],
+				"configuration": "./src/syntaxes/edge.configuration.jsonc"
+			}
+		],
+		"grammars": [
+			{
+				"language": "edge",
+				"scopeName": "text.html.edge",
+				"path": "./src/syntaxes/edge/edge.tmLanguage.json",
+				"embeddedLanguages": {
+					"source.css": "css",
+					"source.js": "javascript"
+				}
+			}
 		]
 	},
 	"scripts": {
@@ -175,5 +208,9 @@
 		"bracketSpacing": true,
 		"arrowParens": "always",
 		"printWidth": 100
+	},
+	"dependencies": {
+		"vscode-html-languageservice": "^4.2.2",
+		"vscode-languageserver-types": "^3.16.0"
 	}
 }

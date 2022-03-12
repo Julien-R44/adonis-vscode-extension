@@ -1,0 +1,40 @@
+{
+  "route": {
+      "body": "Route.${1|get,put,post,patch,delete,any|}('$2', $3, $4)",
+      "description": "Adonis Route",
+      "prefix": "route"
+  },
+  "route: on(...).render('view')": {
+      "body": "Route.on($1).render($2)",
+      "description": "Adonis Route: on",
+      "prefix": "route-on"
+  },
+  "route: named route": {
+      "body": "Route.${1|get,put,post,patch,delete,any|}('$2', $3, $4).as('$7')",
+      "description": "Adonis Route: Name a route with a unique value.",
+      "prefix": "route-named"
+  },
+  "route: inline": {
+      "body": [
+          "Route.${1|get,put,post,patch,delete,any|}('$2', ($5) => {",
+          "  $7",
+          "\\})"
+      ],
+      "description": "Adonis Route: Map route to inline function.",
+      "prefix": "route-inline"
+  },
+  "route: resource": {
+      "body": "Route.resource('$1', $2).${3|apiOnly,only,except,middleware,formats|}($4)",
+      "description": "Adonis Route: Resources",
+      "prefix": "route-resource"
+  },
+  "Route.group": {
+      "body": [
+          "Route.group(() => {",
+          "  $1",
+          "}).${2|domain,prefix,middleware,namespace,formats|}($3)"
+      ],
+      "description": "Adonis Route: Group",
+      "prefix": "route-group"
+  }
+}
