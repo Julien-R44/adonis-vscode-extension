@@ -85,6 +85,10 @@
 				"command": "adonis-vscode-ace.type-check",
 				"title": "⌨️ AdonisJS(Ace) Type Check"
 			},
+			{
+				"command": "adonis-vscode-ace.list.routes",
+				"title": "⌨️ AdonisJS(Ace) List Routes"
+			},
       {
         "command": "adonis-vscode-ace.docs.open",
         "title": "📜 AdonisJS(Docs) Open Docs"
