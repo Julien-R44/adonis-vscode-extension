@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/5lvTET5.png" />
+  <img src="https://i.imgur.com/WXaijo6.png" />
   <em>Run AdonisJS Ace Commands without leaving VSCode</em>
   <p>🚨 Work in progress 🚨</p>
 </div>
@@ -7,10 +7,10 @@
 ## Features
 * Use all Adonis Assembler commands ( make:\* )
 * Migrate and seed your database ( db:\*, migration:\* )
+* View your routes
 * Open and see docs within VS Code
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting ( TODO )
-* View your routes ( TODO )
 * Run custom commands ( TODO )
 * Go To Controller ( TODO )
 * Go To View ( TODO )
