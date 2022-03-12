@@ -32,7 +32,6 @@ export class PreloadedFile extends BaseCommand {
      */
     try {
       let command = `make:prldfile ${prldName} --environment=${environment.join(',')}`
-      console.log(command)
       await this.execCmd(command, false)
       this.showMessage(`Preloaded file ${prldName} created.`)
     } catch (err) {

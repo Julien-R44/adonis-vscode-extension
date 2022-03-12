@@ -1,0 +1,260 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "JSON Schema for the adonisrc.json file",
+  "required": [
+    "typescript",
+    "commands",
+    "exceptionHandlerNamespace",
+    "aliases",
+    "preloads",
+    "providers",
+    "aceProviders",
+    "metaFiles"
+  ],
+  "properties": {
+    "additionalProperties": true,
+
+    /**
+     * Typescript property
+     */
+    "typescript": {
+      "$id": "#/properties/typescript",
+      "type": "boolean",
+      "description": "The typescript property informs the framework and the Ace commands that your application is using TypeScript.\nCurrently, this value is always set to true. However, we will later allow applications to be written in JavaScript as well.",
+      "default": true
+    },
+
+    /**
+     * Commands property
+     */
+    "commands": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "An array of paths to lookup/index Ace commands. You can define a relative path like ./command or path to an installed package.",
+      "examples": [["./commands", "@adonisjs/core/build/commands/index.js"]],
+      "items": {
+        "type": "string",
+        "anyOf": [{ "type": "string" }]
+      }
+    },
+
+    /**
+     * ExceptionHandlerNamespace property
+     */
+    "exceptionHandlerNamespace": {
+      "type": "string",
+      "description": "The namespace to the class that handles exceptions occurred during an HTTP request.",
+      "default": "App/Exceptions/Handler",
+      "examples": ["App/Exceptions/Handler"]
+    },
+
+    /**
+     * Aliases property
+     */
+    "aliases": {
+      "type": "object",
+      "description": "The aliases property allows you to define the import aliases for specific directories. After defining the alias, you will be able to import files from the root of the aliases directory.\nSee more: https://docs.adonisjs.com/guides/adonisrc-file#aliases",
+      "default": {
+        "App": "app",
+        "Config": "config",
+        "Database": "database",
+        "Contracts": "contracts"
+      },
+      "examples": [
+        {
+          "App": "app",
+          "Config": "config",
+          "Database": "database",
+          "Contracts": "contracts"
+        }
+      ],
+      "uniqueItems": true,
+      "patternProperties": {
+        "^[a-zA-Z0-9-_]+$": {
+          "type": "string",
+          "anyOf": [{ "type": "string" }]
+        }
+      }
+    },
+
+    /**
+     * Preloads property
+     */
+    "preloads": {
+      "type": "array",
+      "description": "An array of files to load at the time of booting the application. The files are loaded right after booting the service providers.\n\nYou can define the environment in which to load the file. The valid options are:\n- web environment refers to the process started for the HTTP server.\n- console environment refers to the Ace commands except for the repl command.\n- repl environment refers to the process started using the node ace repl command.\nFinally, test environment is reserved for the future when AdonisJS will have the inbuilt test runner.\nAlso, you can mark the file as optional, and we will ignore it if the file is missing on the disk.\nSee more : https://docs.adonisjs.com/guides/adonisrc-file#preloads",
+      "examples": [["./start/routes", "./start/kernel"]],
+      "additionalItems": false,
+      "uniqueItems": true,
+      "items": {
+        "uniqueItems": true,
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "examples": [
+              {
+                "file": "./start/MyPreloadedFile",
+                "environment": ["web"]
+              }
+            ],
+            "required": ["file", "environment"],
+            "properties": {
+              "file": {
+                "title": "File path",
+                "description": "The path to the file to load. The file must be relative to the project root."
+              },
+              "environment": {
+                "type": "array",
+                "title": "Environment",
+                "description": "Environment in which to load the file.",
+                "uniqueItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "enum": ["web", "console", "repl", "test"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+
+    /**
+     * Providers property
+     */
+    "providers": {
+      "type": "array",
+      "description": "An array of service providers to load during the application boot cycle. The providers mentioned inside this array are loaded in all the environments.",
+      "uniqueItems": true,
+      "items": { "anyOf": [{ "type": "string" }] }
+    },
+
+    /**
+     * AceProviders property
+     */
+    "aceProviders": {
+      "type": "array",
+      "description": "An array of providers to load when running the Ace commands. Here you can load the providers, which aren't required when starting the HTTP server.",
+      "uniqueItems": true,
+      "items": {
+        "anyOf": [{ "type": "string" }]
+      }
+    },
+
+    /**
+     * CommandAliases property
+     */
+    "commandsAliases": {
+      "type": "object",
+      "description": "A key-value pair of command aliases. This is usually to help you create memorable aliases for the commands that are harder to type or remember.",
+      "uniqueItems": true,
+      "default": {},
+      "examples": [
+        {
+          "migrate": "migration:run",
+          "up": "migration:run"
+        }
+      ],
+      "patternProperties": {
+        "^[a-zA-Z0-9-_]+$": {
+          "type": "string",
+          "anyOf": [{ "type": "string" }]
+        }
+      }
+    },
+
+    /**
+     * Directories property
+     */
+    "directories": {
+      "type": "object",
+      "description": "An object of known directories and their pre-configured paths. You can change the path to match your requirements. Also, all the Ace make commands references the .adonisrc.json file before creating the file.",
+      "examples": [
+        {
+          "config": "config",
+          "public": "public",
+          "contracts": "contracts",
+          "providers": "providers",
+          "database": "database",
+          "migrations": "database/migrations",
+          "seeds": "database/seeders",
+          "resources": "resources",
+          "views": "resources/views",
+          "start": "start",
+          "tmp": "tmp",
+          "tests": "tests"
+        }
+      ],
+      "patternProperties": {
+        "^[a-zA-Z0-9-_]+$": {
+          "type": "string",
+          "anyOf": [{ "type": "string" }]
+        }
+      }
+    },
+
+    /**
+     * Namespaces property
+     */
+    "namespaces": {
+      "title": "An object of namespaces for the known entities.",
+      "description": "For example, you can change the controller's namespace from App/Controllers/Http to App/Controllers and keep the controllers inside the ./app/Controllers directory.",
+      "type": "object",
+      "examples": [
+        {
+          "controllers": "App/Controllers"
+        }
+      ],
+      "patternProperties": {
+        "^[a-zA-Z0-9-_]+$": {
+          "type": "string",
+          "anyOf": [{ "type": "string" }]
+        }
+      }
+    },
+
+    /**
+     * metaFiles property
+     */
+    "metaFiles": {
+      "type": "array",
+      "description": "The metaFiles array accepts the files you want AdonisJS to copy to the build folder when creating the production build.\n- You can define the file paths as a glob pattern, and we will copy all the matching files for that pattern.\n\n- You can also instruct the development server to reload any files inside the matching pattern changes.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "pattern": "resources/views/**/*.edge",
+            "reloadServer": false
+          }
+        ]
+      ],
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "default": {},
+            "required": ["pattern", "reloadServer"],
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "examples": ["resources/views/**/*.edge"]
+              },
+              "reloadServer": {
+                "type": "boolean",
+                "default": false,
+                "examples": [false]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

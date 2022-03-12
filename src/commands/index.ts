@@ -14,6 +14,7 @@ import { Reset } from './migration/Reset'
 import { Configure } from './configure'
 import { TypeCheck } from './type-check'
 import { Manifest } from './generate/Manifest'
+import { RouteList } from './list/Routes'
 
 import { ExtensionContext, commands } from 'vscode'
 
@@ -25,39 +26,34 @@ export const registerAceCommands = (context: ExtensionContext) => {
    * Register make:* commands
    */
   context.subscriptions.push(
-    ...[
-      registerCommand(`${extName}.make.command`, () => Command.run()),
-      registerCommand(`${extName}.make.controller`, () => Controller.run()),
-      registerCommand(`${extName}.make.exception`, () => Exception.run()),
-      registerCommand(`${extName}.make.middleware`, () => Middleware.run()),
-      registerCommand(`${extName}.make.migration`, () => Migration.run()),
-      registerCommand(`${extName}.make.model`, () => Model.run()),
-      registerCommand(`${extName}.make.seeder`, () => Seeder.run()),
-      registerCommand(`${extName}.make.view`, () => View.run()),
-      registerCommand(`${extName}.make.validator`, () => Validator.run()),
-      registerCommand(`${extName}.make.prldfile`, () => PreloadedFile.run()),
-    ]
+    registerCommand(`${extName}.make.command`, () => Command.run()),
+    registerCommand(`${extName}.make.controller`, () => Controller.run()),
+    registerCommand(`${extName}.make.exception`, () => Exception.run()),
+    registerCommand(`${extName}.make.middleware`, () => Middleware.run()),
+    registerCommand(`${extName}.make.migration`, () => Migration.run()),
+    registerCommand(`${extName}.make.model`, () => Model.run()),
+    registerCommand(`${extName}.make.seeder`, () => Seeder.run()),
+    registerCommand(`${extName}.make.view`, () => View.run()),
+    registerCommand(`${extName}.make.validator`, () => Validator.run()),
+    registerCommand(`${extName}.make.prldfile`, () => PreloadedFile.run())
   )
 
   /**
    * Register migration:* commands
    */
   context.subscriptions.push(
-    ...[
-      registerCommand(`${extName}.migration.fresh`, () => Fresh.run()),
-      registerCommand(`${extName}.migration.refresh`, () => Refresh.run()),
-      registerCommand(`${extName}.migration.reset`, () => Reset.run()),
-    ]
+    registerCommand(`${extName}.migration.fresh`, () => Fresh.run()),
+    registerCommand(`${extName}.migration.refresh`, () => Refresh.run()),
+    registerCommand(`${extName}.migration.reset`, () => Reset.run())
   )
 
   /**
    * Register misc commands
    */
   context.subscriptions.push(
-    ...[
-      registerCommand(`${extName}.generate.manifest`, () => Manifest.run()),
-      registerCommand(`${extName}.configure`, () => Configure.run()),
-      registerCommand(`${extName}.type-check`, () => TypeCheck.run()),
-    ]
+    registerCommand(`${extName}.generate.manifest`, () => Manifest.run()),
+    registerCommand(`${extName}.configure`, () => Configure.run()),
+    registerCommand(`${extName}.type-check`, () => TypeCheck.run()),
+    registerCommand(`${extName}.list.routes`, () => RouteList.run())
   )
 }

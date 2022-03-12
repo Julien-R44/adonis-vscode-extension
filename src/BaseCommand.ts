@@ -89,7 +89,6 @@ export default class BaseCommand {
      * Execute the final command in the background
      */
     if (background) {
-      console.log('xecuting command : ' + cmd)
       return exec(cmd)
     }
 
