@@ -84,7 +84,11 @@
 			{
 				"command": "adonis-vscode-ace.type-check",
 				"title": "Ace: Type Check"
-			}
+			},
+      {
+        "command": "adonis-vscode-ace.docs.open",
+        "title": "AdonisJS: Open Docs"
+      }
 		]
 	},
 	"scripts": {

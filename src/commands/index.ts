@@ -1,27 +1,63 @@
-/**
- * Make
- */
-export { Command } from './make/Command'
-export { Controller } from './make/Controller'
-export { Exception } from './make/Exception'
-export { Middleware } from './make/Middleware'
-export { Migration } from './make/Migration'
-export { Model } from './make/Model'
-export { Seeder } from './make/Seeder'
-export { View } from './make/View'
-export { Validator } from './make/Validator'
-export { PreloadedFile } from './make/PreloadedFile'
+import { Command } from './make/Command'
+import { Controller } from './make/Controller'
+import { Exception } from './make/Exception'
+import { Middleware } from './make/Middleware'
+import { Migration } from './make/Migration'
+import { Model } from './make/Model'
+import { Seeder } from './make/Seeder'
+import { View } from './make/View'
+import { Validator } from './make/Validator'
+import { PreloadedFile } from './make/PreloadedFile'
+import { Fresh } from './migration/Fresh'
+import { Refresh } from './migration/Refresh'
+import { Reset } from './migration/Reset'
+import { Configure } from './configure'
+import { TypeCheck } from './type-check'
+import { Manifest } from './generate/Manifest'
 
-/**
- * Migration
- */
-export { Fresh } from './migration/Fresh'
-export { Refresh } from './migration/Refresh'
-export { Reset } from './migration/Reset'
+import { ExtensionContext, commands } from 'vscode'
 
-/**
- * Misc. commands
- */
-export { Configure } from './configure'
-export { TypeCheck } from './type-check'
-export { Manifest } from './generate/Manifest'
+export const registerAceCommands = (context: ExtensionContext) => {
+  const extName = 'adonis-vscode-ace'
+  const registerCommand = commands.registerCommand
+
+  /**
+   * Register make:* commands
+   */
+  context.subscriptions.push(
+    ...[
+      registerCommand(`${extName}.make.command`, () => Command.run()),
+      registerCommand(`${extName}.make.controller`, () => Controller.run()),
+      registerCommand(`${extName}.make.exception`, () => Exception.run()),
+      registerCommand(`${extName}.make.middleware`, () => Middleware.run()),
+      registerCommand(`${extName}.make.migration`, () => Migration.run()),
+      registerCommand(`${extName}.make.model`, () => Model.run()),
+      registerCommand(`${extName}.make.seeder`, () => Seeder.run()),
+      registerCommand(`${extName}.make.view`, () => View.run()),
+      registerCommand(`${extName}.make.validator`, () => Validator.run()),
+      registerCommand(`${extName}.make.prldfile`, () => PreloadedFile.run()),
+    ]
+  )
+
+  /**
+   * Register migration:* commands
+   */
+  context.subscriptions.push(
+    ...[
+      registerCommand(`${extName}.migration.fresh`, () => Fresh.run()),
+      registerCommand(`${extName}.migration.refresh`, () => Refresh.run()),
+      registerCommand(`${extName}.migration.reset`, () => Reset.run()),
+    ]
+  )
+
+  /**
+   * Register misc commands
+   */
+  context.subscriptions.push(
+    ...[
+      registerCommand(`${extName}.generate.manifest`, () => Manifest.run()),
+      registerCommand(`${extName}.configure`, () => Configure.run()),
+      registerCommand(`${extName}.type-check`, () => TypeCheck.run()),
+    ]
+  )
+}
