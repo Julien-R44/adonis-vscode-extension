@@ -23,71 +23,71 @@
 		"commands": [
 			{
 				"command": "adonis-vscode-ace.make.command",
-				"title": "Ace: Make Command"
+				"title": "⌨️ AdonisJS(Ace) Make Command"
 			},
 			{
 				"command": "adonis-vscode-ace.make.controller",
-				"title": "Ace: Make Controller"
+				"title": "⌨️ AdonisJS(Ace) Make Controller"
 			},
 			{
 				"command": "adonis-vscode-ace.make.exception",
-				"title": "Ace: Make Exception"
+				"title": "⌨️ AdonisJS(Ace) Make Exception"
 			},
 			{
 				"command": "adonis-vscode-ace.make.middleware",
-				"title": "Ace: Make Middleware"
+				"title": "⌨️ AdonisJS(Ace) Make Middleware"
 			},
 			{
 				"command": "adonis-vscode-ace.make.migration",
-				"title": "Ace: Make Migration"
+				"title": "⌨️ AdonisJS(Ace) Make Migration"
 			},
 			{
 				"command": "adonis-vscode-ace.make.model",
-				"title": "Ace: Make Model"
+				"title": "⌨️ AdonisJS(Ace) Make Model"
 			},
 			{
 				"command": "adonis-vscode-ace.make.seeder",
-				"title": "Ace: Make Seeder"
+				"title": "⌨️ AdonisJS(Ace) Make Seeder"
 			},
 			{
 				"command": "adonis-vscode-ace.make.view",
-				"title": "Ace: Make View"
+				"title": "⌨️ AdonisJS(Ace) Make View"
 			},
 			{
 				"command": "adonis-vscode-ace.make.validator",
-				"title": "Ace: Make Validator"
+				"title": "⌨️ AdonisJS(Ace) Make Validator"
 			},
 			{
 				"command": "adonis-vscode-ace.make.prldfile",
-				"title": "Ace: Make Preloaded File"
+				"title": "⌨️ AdonisJS(Ace) Make Preloaded File"
 			},
 			{
 				"command": "adonis-vscode-ace.migration.fresh",
-				"title": "Ace: Migration Fresh"
+				"title": "⌨️ AdonisJS(Ace) Migration Fresh"
 			},
 			{
 				"command": "adonis-vscode-ace.migration.refresh",
-				"title": "Ace: Migration Refresh"
+				"title": "⌨️ AdonisJS(Ace) Migration Refresh"
 			},
 			{
 				"command": "adonis-vscode-ace.migration.reset",
-				"title": "Ace: Migration Reset"
+				"title": "⌨️ AdonisJS(Ace) Migration Reset"
 			},
 			{
 				"command": "adonis-vscode-ace.generate.manifest",
-				"title": "Ace: Generate Manifest"
+				"title": "⌨️ AdonisJS(Ace) Generate Manifest"
 			},
 			{
 				"command": "adonis-vscode-ace.configure",
-				"title": "Ace: Configure package"
+				"title": "⌨️ AdonisJS(Ace) Configure package"
 			},
 			{
 				"command": "adonis-vscode-ace.type-check",
-				"title": "Ace: Type Check"
+				"title": "⌨️ AdonisJS(Ace) Type Check"
 			},
       {
         "command": "adonis-vscode-ace.docs.open",
-        "title": "AdonisJS: Open Docs"
+        "title": "📜 AdonisJS(Docs) Open Docs"
       }
 		]
 	},
