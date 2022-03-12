@@ -8,6 +8,7 @@
 - Use all Adonis Assembler commands ( make:\* )
 - Migrate and seed your database ( db:\*, migration:\* )
 - Open and see docs within VS Code
+- .adonisrc.json file validation with JSON Schema
 
 - Edge Support, syntax highlighting + formatting ( TODO )
 - View your routes ( TODO )

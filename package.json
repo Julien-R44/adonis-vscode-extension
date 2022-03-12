@@ -89,7 +89,13 @@
         "command": "adonis-vscode-ace.docs.open",
         "title": "📜 AdonisJS(Docs) Open Docs"
       }
-		]
+		],
+    "jsonValidation": [
+      {
+        "fileMatch": ".adonisrc.json",
+        "url": "./src/schemas/adonisrc.jsonc"
+      }
+    ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
