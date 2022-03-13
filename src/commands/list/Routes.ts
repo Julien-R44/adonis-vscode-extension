@@ -1,4 +1,4 @@
-import BaseCommand from '../../BaseCommand'
+import BaseCommand from '../BaseCommand'
 import { HtmlTable } from '../../helpers/HtmlTable'
 
 export class RouteList extends BaseCommand {
