@@ -1,0 +1,63 @@
+{
+  /**
+   * Conditionals
+   */
+  "edge: @if (...)": {
+    "prefix": "if",
+    "body": ["@if($1)", "  $2", "@end"],
+    "description": "Edge: if block"
+  },
+  "edge: @if (...) ... @else ... @end": {
+    "prefix": "ifelse",
+    "body": ["@if($1)", "  $2", "@else", "  $3", "@end"],
+    "description": "Edge: if-else block"
+  },
+  "edge: @if (...) ... @elseif (...) ... @else ... @end": {
+    "prefix": "ifelseif",
+    "body": ["@if($1)", "  $2", "@elseif($3)", "  $4", "@else", "  $5", "@end"],
+    "description": "Edge: if-else block"
+  },
+  "edge: @unless (...) ... @else ... @end": {
+    "prefix": "unless",
+    "body": ["@unless($1)", "  $2", "@else", "  $3", "@end"],
+    "description": "Edge: unless-block"
+  },
+
+  /**
+   * Loops
+   */
+  "edge: @each( (key, value) in object) ... @end": {
+    "prefix": "each-index",
+    "body": ["@each(${1:key}, ${2:value} in ${3:object})", "  $3", "@end"],
+    "description": "Edge: @each array block"
+  },
+  "edge: @each (item in array) ... @end": {
+    "prefix": "each-in",
+    "body": ["@each(${1:item} in ${2:array})", "  $3", "@end"],
+    "description": "Edge: @each else block"
+  },
+
+  /**
+   * Miscs
+   */
+  "edge: @section('block') ... @end": {
+    "prefix": "section-block",
+    "body": ["@section('${1:name}')", "  $2", "@end"],
+    "description": "Edge: Section block"
+  },
+  "edge: @slot('block') ... @end": {
+    "prefix": "slot-block",
+    "body": ["@slot('${1:name}')", "  $2", "@end"],
+    "description": "Edge: Slot block"
+  },
+  "edge: inspect(...)": {
+    "prefix": "inspect",
+    "body": ["{{ inspect($1) }}", ""],
+    "description": "Edge: inspect"
+  },
+  "edge: route(...)": {
+    "prefix": "route",
+    "body": ["{{ route($1) }}", ""],
+    "description": "Edge: route"
+  }
+}

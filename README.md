@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://i.imgur.com/WXaijo6.png" />
-  <em>Run AdonisJS Ace Commands without leaving VSCode</em>
+  <em>Official AdonisJS extension for VSCode</em>
   <p>🚨 Work in progress 🚨</p>
 </div>
 
@@ -10,7 +10,8 @@
 * View your routes
 * Open and see docs within VS Code
 * .adonisrc.json file validation with JSON Schema
-* Edge Support, syntax highlighting + formatting ( TODO )
+* Edge Support, syntax highlighting + formatting
+* Edge and AdonisJS Snippets
 * Run custom commands ( TODO )
 * Go To Controller ( TODO )
 * Go To View ( TODO )
