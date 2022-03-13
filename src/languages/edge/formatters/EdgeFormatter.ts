@@ -2,7 +2,6 @@
  * Format the content of an edge file.
  */
 class EdgeFormatter {
-  private newLine: string = '\n'
   private indentPattern: string
 
   /**
@@ -29,7 +28,6 @@ class EdgeFormatter {
    * @param inputText Test to format
    */
   public format(inputText: string): string {
-    console.log('format baby')
     let output: string = inputText
 
     // Block pattern

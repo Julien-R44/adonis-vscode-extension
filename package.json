@@ -17,7 +17,7 @@
 	],
 	"activationEvents": [
 		"workspaceContains:**/ace",
-    "onLanguage:edge"
+		"onLanguage:edge"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -86,13 +86,17 @@
 				"command": "adonis-vscode-ace.type-check",
 				"title": "⌨️ AdonisJS(Ace) Type Check"
 			},
-      {
-      "command": "adonis-vscode-ace.list.routes",
-      "title": "⌨️ AdonisJS(Ace) List Routes"
-      },
 			{
-				"command": "adonis-vscode-ace.docs.open",
+				"command": "adonis-vscode-ace.list.routes",
+				"title": "⌨️ AdonisJS(Ace) List Routes"
+			},
+			{
+				"command": "adonis-vscode-ace.docs.adonis",
 				"title": "📜 AdonisJS(Docs) Open Docs"
+			},
+			{
+				"command": "adonis-vscode-ace.docs.japa",
+				"title": "📜 AdonisJS(Docs) Open Japa Docs"
 			}
 		],
 		"snippets": [
@@ -101,7 +105,7 @@
 				"path": "./src/snippets/adonis/routes.json"
 			}
 		],
-    "languages": [
+		"languages": [
 			{
 				"id": "edge",
 				"aliases": [
@@ -120,19 +124,19 @@
 			{
 				"language": "edge",
 				"scopeName": "text.html.edge",
-				"path": "./src/syntaxes/edge/edge.tmLanguage.json",
+				"path": "./src/syntaxes/edge.tmLanguage.json",
 				"embeddedLanguages": {
 					"source.css": "css",
 					"source.js": "javascript"
 				}
 			}
 		],
-    "jsonValidation": [
-      {
-        "fileMatch": ".adonisrc.json",
-        "url": "./src/schemas/adonisrc.jsonc"
-      }
-    ]
+		"jsonValidation": [
+			{
+				"fileMatch": ".adonisrc.json",
+				"url": "./src/schemas/adonisrc.jsonc"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",

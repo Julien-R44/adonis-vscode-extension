@@ -8,27 +8,12 @@ export function activate(context: ExtensionContext) {
   registerDocsCommands(context)
 
   const edgeSelector = { language: 'edge', scheme: 'file' }
+  const edgeFormatter = new EdgeFormatterProvider()
 
-  // const edgeHover = languages.registerHoverProvider(edgeSelector, new EdgeHoverProvider())
-
-  // const edgeLink = languages.registerDocumentLinkProvider(edgeSelector, new EdgeLinkProvider())
-
-  // const edgeCompletion = languages.registerCompletionItemProvider(
-  //   edgeSelector,
-  //   new EdgeCompletionProvider()
-  // )
-
-  const edgeFormatters = [
-    languages.registerDocumentFormattingEditProvider(edgeSelector, new EdgeFormatterProvider()),
-
-    languages.registerDocumentRangeFormattingEditProvider(
-      edgeSelector,
-      new EdgeFormatterProvider()
-    ),
-  ]
-
-  context.subscriptions.push(...edgeFormatters)
-  // context.subscriptions.push(edgeHover)
+  context.subscriptions.push(
+    languages.registerDocumentFormattingEditProvider(edgeSelector, edgeFormatter),
+    languages.registerDocumentRangeFormattingEditProvider(edgeSelector, edgeFormatter)
+  )
 }
 
 export function deactivate() {}
