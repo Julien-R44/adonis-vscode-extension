@@ -14,6 +14,6 @@ const openUrlAsWebview = (viewId: string, panelName: string, url: string) => {
 export const registerDocsCommands = (context: ExtensionContext) => {
   const extName = 'adonis-vscode-ace'
 
-  commands.registerCommand(`${extName}.docs.adonis`, () => openUrlAsWebview('adonis', 'AdonisJS Docs', 'https://adonisjs.com/docs'))
-  commands.registerCommand(`${extName}.docs.japa`, () => openUrlAsWebview('japa', 'Japa Docs', 'https://japa.js.org/docs'))
+  commands.registerCommand(`${extName}.docs.adonis`, () => openUrlAsWebview('adonis', 'AdonisJS Docs', 'https://docs.adonisjs.com/'))
+  commands.registerCommand(`${extName}.docs.japa`, () => openUrlAsWebview('japa', 'Japa Docs', 'https://japa.dev'))
 }

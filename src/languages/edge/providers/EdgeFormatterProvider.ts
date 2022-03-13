@@ -10,7 +10,8 @@ import {
 import ConfigWrapper from '../../../utilities/config'
 import * as html from 'vscode-html-languageservice'
 import * as lst from 'vscode-languageserver-types'
-import EdgeFormatter from '../formatters/edgeFormatter'
+import EdgeFormatter from '../formatters/EdgeFormatter'
+
 const HtmlLanguageService = html.getLanguageService()
 
 class EdgeFormattingProvider
