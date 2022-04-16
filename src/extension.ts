@@ -6,7 +6,7 @@ import EdgeLinkProvider from './completion/edge/LinkProvider'
 import RouteControllerCompletionProvider from './completion/routes/CompletionProvider'
 import RouteControllerHoverProvider from './completion/routes/HoverProvider'
 import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
-import { registerDocsCommands } from './docs'
+import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
 
 export function activate(context: ExtensionContext) {

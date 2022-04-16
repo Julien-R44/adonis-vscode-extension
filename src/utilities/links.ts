@@ -5,11 +5,11 @@ import { parseControllerString, createControllerLink } from './controller'
 /**
  * Create document links from a given line in a document.
  *
- * @param regex Regulare expression to match string for link
+ * @param regex Regulars expression to match string for link
  * @param doc Document to create links from
  * @param lineNo Line number in document in which links are created
  * @param targetDirectories Directories to target
- * @param fileExtensions File extensions of all possile files to link to
+ * @param fileExtensions File extensions of all possible files to link to
  */
 export async function createDocumentLinks(
   regex: RegExp,
