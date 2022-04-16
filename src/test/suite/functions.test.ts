@@ -1,17 +1,19 @@
 import { getMethodsInSourceFile, getLineNumber } from '../../utilities/functions'
 import { workspace, WorkspaceFolder } from 'vscode'
-import * as assert from 'assert'
 import * as path from 'path'
+import { test } from '@japa/runner'
 
-suite('Autocomplete: Get All Functions In File', () => {
-  setup(function () {
+let mainWorkspace: string
+
+test.group('Autocomplete: Get All Functions In File', (group) => {
+  group.setup(() => {
     const workspaceFolders = workspace.workspaceFolders as WorkspaceFolder[]
-    this.workspace = workspaceFolders[0].uri.fsPath
+    mainWorkspace = workspaceFolders[0].uri.fsPath
   })
 
-  test('Test that all functions in a file is returned', function () {
-    const filePath = path.resolve(this.workspace, 'app/Models/User.ts')
+  test('Test that all functions in a file is returned', ({ assert }) => {
+    const filePath = path.resolve(mainWorkspace, 'app/Models/User.ts')
     const functions = getMethodsInSourceFile(filePath)
-    assert.deepStrictEqual(functions, ['methodA', 'methodB'])
+    assert.deepEqual(functions, ['methodA', 'methodB'])
   })
 })
