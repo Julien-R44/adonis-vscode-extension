@@ -38,7 +38,7 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
     const method = link.controller.method
 
     return new Promise(async (resolve) => {
-      const location = await getLineNumber(link.filePath.toString(), method)
+      const location = await getLineNumber(link.filePath.fsPath, method)
 
       link.target = Uri.parse(location.lineno === -1 ? `${path}#1` : `${path}#${location.lineno}`)
 

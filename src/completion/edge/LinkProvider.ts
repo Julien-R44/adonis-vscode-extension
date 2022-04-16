@@ -11,7 +11,6 @@ import Config from '../../utilities/config'
 
 class EdgeLinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {
-    console.log('provide edger')
     const config = Config.autocomplete
     const docLinks: DocumentLink[] = []
 

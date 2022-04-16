@@ -96,7 +96,7 @@
 				}
 			}
 		},
-    "commands": [
+		"commands": [
 			{
 				"command": "adonis-vscode-ace.make.command",
 				"title": "⌨️ AdonisJS(Ace) Make Command"
@@ -304,6 +304,7 @@
 	},
 	"dependencies": {
 		"@poppinss/module-methods-extractor": "^1.0.5",
+		"docblock": "^0.4.5",
 		"vscode-html-languageservice": "^4.2.2",
 		"vscode-languageserver-types": "^3.16.0"
 	}
