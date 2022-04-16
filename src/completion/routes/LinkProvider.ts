@@ -6,7 +6,6 @@ import ConfigWrapper from '../../utilities/config'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {
-    console.log('lets provider')
     const config = ConfigWrapper.autocomplete
     const docLinks: DocumentLink[] = []
 
@@ -16,7 +15,6 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
         const regex = new RegExp(config.controllersRegex, 'g')
         const maxLinesCount = getMaxLinesCount(doc)
 
-        console.log(config.controllersDirectories)
         while (currentLine < maxLinesCount) {
           const links = await createDocumentLinks(
             regex,
@@ -31,7 +29,6 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
         }
       }
 
-      console.log(docLinks)
       resolve(docLinks)
     })
   }
@@ -40,14 +37,11 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
     let path = link.filePath.toString()
     const method = link.controller.method
 
-    console.log({ path, method })
-
     return new Promise(async (resolve) => {
       const location = await getLineNumber(link.filePath.toString(), method)
 
       link.target = Uri.parse(location.lineno === -1 ? `${path}#1` : `${path}#${location.lineno}`)
 
-      console.log('hey', link.target)
       return resolve(link)
     })
   }
