@@ -12,8 +12,7 @@
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting
 * Edge and AdonisJS Snippets
-* Run custom commands ( TODO )
-* Go To Controller ( TODO )
+* Go To Controller
 * Go To View ( TODO )
 
 

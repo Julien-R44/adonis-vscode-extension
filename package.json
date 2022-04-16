@@ -21,7 +21,82 @@
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
-		"commands": [
+		"configuration": {
+			"type": "object",
+			"title": "AdonisJS",
+			"properties": {
+				"adonisjs.autocomplete.quickJump": {
+					"type": "boolean",
+					"default": true,
+					"description": "Quick jump between files using 'Ctrl' + Click"
+				},
+				"adonisjs.autocomplete.folderTip": {
+					"type": "boolean",
+					"default": true,
+					"description": "Display file path name on hover"
+				},
+				"adonisjs.autocomplete.maxLinesCount": {
+					"type": "integer",
+					"default": 1200,
+					"description": "Maximum lines of text to scan for autocompletion"
+				},
+				"adonisjs.autocomplete.viewsDirectories": {
+					"type": "array",
+					"description": "Paths to the directory containing edge views",
+					"default": [
+						"resources/views"
+					]
+				},
+				"adonisjs.autocomplete.viewsExtensions": {
+					"type": "array",
+					"description": "Supported file extension for view completion",
+					"default": [
+						".edge"
+					]
+				},
+				"adonisjs.autocomplete.viewsRegex": {
+					"type": "string",
+					"description": "Regular expression to match handle edge includes",
+					"default": "(?<=@include\\()(['\"])[^'\"]*\\1"
+				},
+				"adonisjs.autocomplete.viewsCompletionRegex": {
+					"type": "string",
+					"description": "Regular expression to match handle edge includes",
+					"default": "(?<=@include\\()(['\"])[^'\"]*\\1"
+				},
+				"adonisjs.autocomplete.controllersDirectories": {
+					"type": "array",
+					"description": "Paths to the directory containing AdonisJS controllers",
+					"default": [
+						"app/controllers"
+					]
+				},
+				"adonisjs.autocomplete.controllersExtensions": {
+					"type": "array",
+					"description": "Supported file extension for controller completion",
+					"default": [
+						"controller.ts",
+						"Controller.ts"
+					]
+				},
+				"adonisjs.autocomplete.controllersRegex": {
+					"type": "string",
+					"description": "Regular expression to match handle route controllers",
+					"default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^'\"]*)\\.?([^'\"]*)\\1"
+				},
+				"adonisjs.autocomplete.controllersNameCompletionRegex": {
+					"type": "string",
+					"description": "Regular expression to match handle route controllers",
+					"default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^\\.'\"]*)\\1"
+				},
+				"adonisjs.autocomplete.controllersMethodCompletionRegex": {
+					"type": "string",
+					"description": "Regular expression to match handle route controllers",
+					"default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^'\"]*)\\.([^'\"]*)\\1"
+				}
+			}
+		},
+    "commands": [
 			{
 				"command": "adonis-vscode-ace.make.command",
 				"title": "⌨️ AdonisJS(Ace) Make Command"
@@ -228,6 +303,7 @@
 		"printWidth": 100
 	},
 	"dependencies": {
+		"@poppinss/module-methods-extractor": "^1.0.5",
 		"vscode-html-languageservice": "^4.2.2",
 		"vscode-languageserver-types": "^3.16.0"
 	}
