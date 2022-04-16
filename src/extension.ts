@@ -1,5 +1,6 @@
 import { ExtensionContext, languages } from 'vscode'
 import { registerAceCommands } from './commands'
+import EdgeLinkProvider from './completion/edge/LinkProvider'
 import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
 import { registerDocsCommands } from './docs'
 import { EdgeFormatterProvider } from './languages'
@@ -24,7 +25,9 @@ export function activate(context: ExtensionContext) {
     new RouteControllerLinkProvider()
   )
 
-  context.subscriptions.push(routeLink)
+  const edgeLink = languages.registerDocumentLinkProvider(['edge'], new EdgeLinkProvider())
+
+  context.subscriptions.push(routeLink, edgeLink)
 }
 
 export function deactivate() {}
