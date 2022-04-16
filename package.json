@@ -4,7 +4,7 @@
 	"description": "Run Adonis Ace Commands without leaving VS Code",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.66.0"
+		"vscode": "^1.65.0"
 	},
 	"categories": [
 		"Other"
@@ -224,9 +224,9 @@
 		"package": "webpack --mode production --devtool hidden-source-map",
 		"compile-tests": "tsc -p . --outDir out",
 		"watch-tests": "tsc -p . -w --outDir out",
-		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"pretest": "npm run compile-tests && npm run compile",
 		"lint": "eslint . --ext=.ts",
-		"test": "echo 'No tests'",
+		"test": "node ./out/test/runTest.js",
 		"mrm": "mrm --preset=@adonisjs/mrm-preset",
 		"sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json Julien-R44/adonis-vscode-ace",
 		"release": "np --message=\"chore(release): %s\"",
@@ -237,7 +237,7 @@
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.0",
 		"@types/node": "14.x",
-		"@types/vscode": "^1.66.0",
+		"@types/vscode": "^1.65.0",
 		"@typescript-eslint/eslint-plugin": "^5.19.0",
 		"@typescript-eslint/parser": "^5.19.0",
 		"@vscode/test-electron": "^2.1.3",

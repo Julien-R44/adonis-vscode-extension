@@ -13,3 +13,5 @@ test/__app
 build
 dist
 shrinkwrap.yaml
+out/
+.vscode-test/
