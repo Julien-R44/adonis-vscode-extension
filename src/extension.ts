@@ -1,6 +1,7 @@
 import { ExtensionContext, languages } from 'vscode'
 import { registerAceCommands } from './commands'
 import EdgeLinkProvider from './completion/edge/LinkProvider'
+import RouteControllerCompletionProvider from './completion/routes/CompletionProvider'
 import RouteControllerHoverProvider from './completion/routes/HoverProvider'
 import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
 import { registerDocsCommands } from './docs'
@@ -25,7 +26,7 @@ export function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links
+   * Autocompletion, hover and links for TS files
    */
   const tsSelector = { language: 'typescript', scheme: 'file' }
 
@@ -35,10 +36,17 @@ export function activate(context: ExtensionContext) {
   )
 
   const routeHover = languages.registerHoverProvider(tsSelector, new RouteControllerHoverProvider())
+  const routeCompletion = languages.registerCompletionItemProvider(
+    tsSelector,
+    new RouteControllerCompletionProvider()
+  )
 
+  /**
+   * Autocompletion, hover and links for Edge files
+   */
   const edgeLink = languages.registerDocumentLinkProvider(['edge'], new EdgeLinkProvider())
 
-  context.subscriptions.push(routeLink, routeHover, edgeLink)
+  context.subscriptions.push(routeLink, routeHover, routeCompletion, edgeLink)
 }
 
 export function deactivate() {}
