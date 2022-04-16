@@ -1,5 +1,7 @@
 import { ExtensionContext, languages } from 'vscode'
 import { registerAceCommands } from './commands'
+import EdgeCompletionProvider from './completion/edge/CompletionProvider'
+import EdgeHoverProvider from './completion/edge/HoverProvider'
 import EdgeLinkProvider from './completion/edge/LinkProvider'
 import RouteControllerCompletionProvider from './completion/routes/CompletionProvider'
 import RouteControllerHoverProvider from './completion/routes/HoverProvider'
@@ -45,8 +47,20 @@ export function activate(context: ExtensionContext) {
    * Autocompletion, hover and links for Edge files
    */
   const edgeLink = languages.registerDocumentLinkProvider(['edge'], new EdgeLinkProvider())
+  const edgeHover = languages.registerHoverProvider(['edge'], new EdgeHoverProvider())
+  const edgeCompletion = languages.registerCompletionItemProvider(
+    ['edge'],
+    new EdgeCompletionProvider()
+  )
 
-  context.subscriptions.push(routeLink, routeHover, routeCompletion, edgeLink)
+  context.subscriptions.push(
+    routeLink,
+    routeHover,
+    routeCompletion,
+    edgeLink,
+    edgeHover,
+    edgeCompletion
+  )
 }
 
 export function deactivate() {}
