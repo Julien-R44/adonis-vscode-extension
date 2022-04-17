@@ -7,13 +7,19 @@
 ## Features
 * Use all Adonis Assembler commands ( make:\* )
 * Migrate and seed your database ( db:\*, migration:\* )
-* View your routes
-* Open and see docs within VS Code
+* View your routes within VSCode
+* Open and see docs within VSCode
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting
 * Edge and AdonisJS Snippets
-* Go To Controller
+* Go To Controller 
 * Go To View ( TODO )
+
+
+## Known Issues
+Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
+- Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
+- Edge Links Provider for `@includeIf` tag
 
 
 ## Contributing
