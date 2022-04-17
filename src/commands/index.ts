@@ -19,7 +19,7 @@ import { RouteList } from './list/Routes'
 import { ExtensionContext, commands } from 'vscode'
 
 export const registerAceCommands = (context: ExtensionContext) => {
-  const extName = 'adonis-vscode-ace'
+  const extName = 'adonis-vscode-extension'
   const registerCommand = commands.registerCommand
 
   /**

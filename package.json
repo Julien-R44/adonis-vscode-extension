@@ -1,6 +1,6 @@
 {
-	"name": "adonis-vscode-ace",
-	"displayName": "adonis-vscode-ace",
+	"name": "adonis-vscode-extension",
+	"displayName": "adonis-vscode-extension",
 	"description": "Run Adonis Ace Commands without leaving VS Code",
 	"version": "0.0.1",
 	"engines": {
@@ -98,79 +98,79 @@
 		},
 		"commands": [
 			{
-				"command": "adonis-vscode-ace.make.command",
+				"command": "adonis-vscode-extension.make.command",
 				"title": "⌨️ AdonisJS(Ace) Make Command"
 			},
 			{
-				"command": "adonis-vscode-ace.make.controller",
+				"command": "adonis-vscode-extension.make.controller",
 				"title": "⌨️ AdonisJS(Ace) Make Controller"
 			},
 			{
-				"command": "adonis-vscode-ace.make.exception",
+				"command": "adonis-vscode-extension.make.exception",
 				"title": "⌨️ AdonisJS(Ace) Make Exception"
 			},
 			{
-				"command": "adonis-vscode-ace.make.middleware",
+				"command": "adonis-vscode-extension.make.middleware",
 				"title": "⌨️ AdonisJS(Ace) Make Middleware"
 			},
 			{
-				"command": "adonis-vscode-ace.make.migration",
+				"command": "adonis-vscode-extension.make.migration",
 				"title": "⌨️ AdonisJS(Ace) Make Migration"
 			},
 			{
-				"command": "adonis-vscode-ace.make.model",
+				"command": "adonis-vscode-extension.make.model",
 				"title": "⌨️ AdonisJS(Ace) Make Model"
 			},
 			{
-				"command": "adonis-vscode-ace.make.seeder",
+				"command": "adonis-vscode-extension.make.seeder",
 				"title": "⌨️ AdonisJS(Ace) Make Seeder"
 			},
 			{
-				"command": "adonis-vscode-ace.make.view",
+				"command": "adonis-vscode-extension.make.view",
 				"title": "⌨️ AdonisJS(Ace) Make View"
 			},
 			{
-				"command": "adonis-vscode-ace.make.validator",
+				"command": "adonis-vscode-extension.make.validator",
 				"title": "⌨️ AdonisJS(Ace) Make Validator"
 			},
 			{
-				"command": "adonis-vscode-ace.make.prldfile",
+				"command": "adonis-vscode-extension.make.prldfile",
 				"title": "⌨️ AdonisJS(Ace) Make Preloaded File"
 			},
 			{
-				"command": "adonis-vscode-ace.migration.fresh",
+				"command": "adonis-vscode-extension.migration.fresh",
 				"title": "⌨️ AdonisJS(Ace) Migration Fresh"
 			},
 			{
-				"command": "adonis-vscode-ace.migration.refresh",
+				"command": "adonis-vscode-extension.migration.refresh",
 				"title": "⌨️ AdonisJS(Ace) Migration Refresh"
 			},
 			{
-				"command": "adonis-vscode-ace.migration.reset",
+				"command": "adonis-vscode-extension.migration.reset",
 				"title": "⌨️ AdonisJS(Ace) Migration Reset"
 			},
 			{
-				"command": "adonis-vscode-ace.generate.manifest",
+				"command": "adonis-vscode-extension.generate.manifest",
 				"title": "⌨️ AdonisJS(Ace) Generate Manifest"
 			},
 			{
-				"command": "adonis-vscode-ace.configure",
+				"command": "adonis-vscode-extension.configure",
 				"title": "⌨️ AdonisJS(Ace) Configure package"
 			},
 			{
-				"command": "adonis-vscode-ace.type-check",
+				"command": "adonis-vscode-extension.type-check",
 				"title": "⌨️ AdonisJS(Ace) Type Check"
 			},
 			{
-				"command": "adonis-vscode-ace.list.routes",
+				"command": "adonis-vscode-extension.list.routes",
 				"title": "⌨️ AdonisJS(Ace) List Routes"
 			},
 			{
-				"command": "adonis-vscode-ace.docs.adonis",
+				"command": "adonis-vscode-extension.docs.adonis",
 				"title": "📜 AdonisJS(Docs) Open Docs"
 			},
 			{
-				"command": "adonis-vscode-ace.docs.japa",
+				"command": "adonis-vscode-extension.docs.japa",
 				"title": "📜 AdonisJS(Docs) Open Japa Docs"
 			}
 		],
@@ -228,7 +228,7 @@
 		"lint": "eslint . --ext=.ts",
 		"test": "node ./out/test/runTest.js",
 		"mrm": "mrm --preset=@adonisjs/mrm-preset",
-		"sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json Julien-R44/adonis-vscode-ace",
+		"sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json Julien-R44/adonis-vscode-extension",
 		"release": "np --message=\"chore(release): %s\"",
 		"version": "npm run build",
 		"format": "prettier --write ."
