@@ -1,7 +1,7 @@
 import BaseCommand from '../BaseCommand'
 
 /**
- * Handle make:seeder command
+ * Handle make:prldfile command
  */
 export class PreloadedFile extends BaseCommand {
   public static async run() {

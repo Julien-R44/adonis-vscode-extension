@@ -1,3 +1,4 @@
+import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -23,5 +24,7 @@ export class Command extends BaseCommand {
     } catch (err) {
       this.showError('Could not create the command.', err)
     }
+
+    window.showInformationMessage('Command created successfully.')
   }
 }

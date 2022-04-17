@@ -1,3 +1,4 @@
+import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -51,5 +52,7 @@ export class Migration extends BaseCommand {
     } catch (err) {
       this.showError('Could not create the migration.', err)
     }
+
+    window.showInformationMessage('Migration created successfully.')
   }
 }

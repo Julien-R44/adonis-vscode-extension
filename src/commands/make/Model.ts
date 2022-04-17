@@ -1,3 +1,4 @@
+import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -35,5 +36,7 @@ export class Model extends BaseCommand {
     } catch (err) {
       this.showError('Could not create the model.', err)
     }
+
+    window.showInformationMessage('Model created successfully.')
   }
 }

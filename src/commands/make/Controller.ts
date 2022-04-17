@@ -1,3 +1,4 @@
+import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -28,5 +29,7 @@ export class Controller extends BaseCommand {
     } catch (err) {
       this.showError('Could not create the controller.', err)
     }
+
+    window.showInformationMessage('Controller created successfully.')
   }
 }

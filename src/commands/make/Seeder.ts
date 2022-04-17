@@ -1,3 +1,4 @@
+import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -23,5 +24,7 @@ export class Seeder extends BaseCommand {
     } catch (err) {
       this.showError('Could not create the seeder.', err)
     }
+
+    window.showInformationMessage('Seeder created successfully.')
   }
 }
