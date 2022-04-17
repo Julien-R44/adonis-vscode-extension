@@ -1,0 +1,11 @@
+<section>
+  <div>
+    @each(poll in polls)
+      @include('partials/sub/partialA')
+    @else
+      @include('partials/sub/partialB')
+    @end
+
+  </div>
+  @include('partials/footer')
+</section>

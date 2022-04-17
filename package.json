@@ -57,12 +57,12 @@
 				"adonisjs.autocomplete.viewsRegex": {
 					"type": "string",
 					"description": "Regular expression to match handle edge includes",
-					"default": "(?<=@include\\()(['\"])[^'\"]*\\1"
+					"default": "(?<=@include\\(['\\\"]|@layout\\(['\\\"]|@!component\\(['\\\"])([^'\">]+)"
 				},
 				"adonisjs.autocomplete.viewsCompletionRegex": {
 					"type": "string",
 					"description": "Regular expression to match handle edge includes",
-					"default": "(?<=@include\\()(['\"])[^'\"]*\\1"
+					"default": "(?<=@include\\(['\\\"]|@layout\\(['\\\"]|@!component\\(['\\\"])([^'\">]+)"
 				},
 				"adonisjs.autocomplete.controllersDirectories": {
 					"type": "array",
