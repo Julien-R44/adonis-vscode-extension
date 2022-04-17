@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -20,11 +19,11 @@ export class Exception extends BaseCommand {
      */
     try {
       let command = `make:exception ${commandName}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Exception created successfully.')
     } catch (err) {
       this.showError('Could not create the exception.', err)
     }
-
-    window.showInformationMessage('Exception created successfully.')
   }
 }

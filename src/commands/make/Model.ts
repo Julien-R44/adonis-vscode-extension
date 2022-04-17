@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -32,11 +31,11 @@ export class Model extends BaseCommand {
       let command = `make:model ${modelName} --migration=${
         generateMigration ? 'true' : 'false'
       } --controller=${generateController ? 'true' : 'false'}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Model created successfully.')
     } catch (err) {
       this.showError('Could not create the model.', err)
     }
-
-    window.showInformationMessage('Model created successfully.')
   }
 }

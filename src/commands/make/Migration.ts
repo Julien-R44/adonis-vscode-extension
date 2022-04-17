@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -49,10 +48,9 @@ export class Migration extends BaseCommand {
     try {
       let command = `${basePart} ${createPart} ${modifyPart} ${connectionPart}`
       await this.execCmd(command)
+      this.showMessage('Migration created successfully.')
     } catch (err) {
       this.showError('Could not create the migration.', err)
     }
-
-    window.showInformationMessage('Migration created successfully.')
   }
 }

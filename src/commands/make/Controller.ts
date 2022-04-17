@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -9,8 +8,8 @@ export class Controller extends BaseCommand {
     /**
      * Get the controller name
      */
-    let commandName = await this.getInput('Controller name')
-    if (!commandName) {
+    let controllerName = await this.getInput('Controller name')
+    if (!controllerName) {
       this.showError('Command name is required.')
       return
     }
@@ -24,12 +23,12 @@ export class Controller extends BaseCommand {
      * Execute the command
      */
     try {
-      let command = `make:controller ${commandName} -r=${resource}`
-      await this.execCmd(command)
+      let command = `make:controller ${controllerName} ${resource ? '-r' : ''}`
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Controller created successfully.')
     } catch (err) {
       this.showError('Could not create the controller.', err)
     }
-
-    window.showInformationMessage('Controller created successfully.')
   }
 }

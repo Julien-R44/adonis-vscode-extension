@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -20,11 +19,11 @@ export class View extends BaseCommand {
      */
     try {
       let command = `make:view ${viewName}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('View created successfully.')
     } catch (err) {
       this.showError('Could not create the view.', err)
     }
-
-    window.showInformationMessage('View created successfully.')
   }
 }

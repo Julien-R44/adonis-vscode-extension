@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -20,11 +19,11 @@ export class Seeder extends BaseCommand {
      */
     try {
       let command = `make:seeder ${seederName}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Seeder created successfully.')
     } catch (err) {
       this.showError('Could not create the seeder.', err)
     }
-
-    window.showInformationMessage('Seeder created successfully.')
   }
 }

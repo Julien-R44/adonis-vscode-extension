@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -20,11 +19,11 @@ export class Validator extends BaseCommand {
      */
     try {
       let command = `make:validator ${seederName}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Validator created successfully.')
     } catch (err) {
       this.showError('Could not create the validator.', err)
     }
-
-    window.showInformationMessage('Validator created successfully.')
   }
 }

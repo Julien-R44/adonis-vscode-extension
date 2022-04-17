@@ -1,4 +1,3 @@
-import { window } from 'vscode'
 import BaseCommand from '../BaseCommand'
 
 /**
@@ -20,11 +19,11 @@ export class Middleware extends BaseCommand {
      */
     try {
       let command = `make:middleware ${commandName}`
-      await this.execCmd(command)
+      const res = await this.execCmd(command)
+      this.openCreatedFile(res!.stdout)
+      this.showMessage('Middleware created successfully.')
     } catch (err) {
       this.showError('Could not create the middleware.', err)
     }
-
-    window.showInformationMessage('Middleware created successfully.')
   }
 }
