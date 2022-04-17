@@ -95,9 +95,12 @@ function getMatches(
     const globPattern = `${workspacePath}/${dir}/**/**(${extensionRegex})`
     const files = glob.sync(globPattern, { nodir: true })
 
-    const regexPattern = `${workspacePath}/${dir}/${textRegex}([\\w\/]*)(${extensionRegex})`
-    const regex = new RegExp(regexPattern, 'i')
+    const regexPattern = `${workspacePath.replaceAll(
+      '\\',
+      '/'
+    )}/${dir}/${textRegex}([\\w\/]*)(${extensionRegex})`
 
+    const regex = new RegExp(regexPattern, 'i')
     const matchedFiles = files.filter((file) => regex.test(file))
     result.push(...matchedFiles)
   }

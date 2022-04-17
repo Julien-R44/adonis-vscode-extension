@@ -72,7 +72,14 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const folder = workspace.getWorkspaceFolder(doc.uri)
     if (!folder) return []
 
-    return getSuggestions(text, folder, controllersDirectories, controllersExtensions)
+    return getSuggestions(text, folder, controllersDirectories, controllersExtensions).map(
+      (suggestion) => {
+        return {
+          ...suggestion,
+          text: suggestion.text.replace(/^Http\//g, ''),
+        }
+      }
+    )
   }
 
   /**
