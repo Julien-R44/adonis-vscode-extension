@@ -11,7 +11,7 @@ test.group('Autocomplete: Get All Functions In File', (group) => {
     mainWorkspace = workspaceFolders[0].uri.fsPath
   })
 
-  test('Test that all functions in a file is returned', ({ assert }) => {
+  test('All functions in a file is returned', ({ assert }) => {
     const filePath = path.resolve(mainWorkspace, 'app/Models/User.ts')
     const functions = getMethodsInSourceFile(filePath)
     assert.deepEqual(functions, ['methodA', 'methodB'])

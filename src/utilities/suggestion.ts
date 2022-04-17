@@ -75,7 +75,7 @@ function fromFilePaths(
 /**
  * Build a glob pattern string to match against files in a provided workspace
  *
- * @param workspacePath Worspace path to match for
+ * @param workspacePath Workspace path to match for
  * @param targetDirectories Directories in workspace to match
  * @param text Fragment text to match for
  * @param extensions File extensions to match for
@@ -128,7 +128,7 @@ export function toCompletionItems(
 }
 
 /**
- * Get a short descriptio text of a given file extension.
+ * Get a short description text of a given file extension.
  *
  * TODO: Improve on this implementation.
  *
