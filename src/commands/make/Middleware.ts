@@ -6,7 +6,7 @@ import BaseCommand from '../BaseCommand'
 export class Middleware extends BaseCommand {
   public static async run() {
     /**
-     * Get the migration name
+     * Get the middleware name
      */
     let commandName = await this.getInput('Middleware name')
     if (!commandName) {

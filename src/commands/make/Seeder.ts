@@ -6,7 +6,7 @@ import BaseCommand from '../BaseCommand'
 export class Seeder extends BaseCommand {
   public static async run() {
     /**
-     * Get the migration name
+     * Get the seeder name
      */
     let seederName = await this.getInput('Seeder name')
     if (!seederName) {

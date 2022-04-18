@@ -6,7 +6,7 @@ import BaseCommand from '../BaseCommand'
 export class View extends BaseCommand {
   public static async run() {
     /**
-     * Get the migration name
+     * Get the view name
      */
     let viewName = await this.getInput('View name')
     if (!viewName) {
