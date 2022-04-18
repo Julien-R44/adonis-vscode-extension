@@ -16,6 +16,7 @@ import { TypeCheck } from './type-check'
 import { Manifest } from './generate/Manifest'
 import { RouteList } from './list/Routes'
 import { Test } from './make/Test'
+import { RunTests } from './run-tests'
 
 import { ExtensionContext, commands } from 'vscode'
 
@@ -56,6 +57,7 @@ export const registerAceCommands = (context: ExtensionContext) => {
     registerCommand(`${extName}.generate.manifest`, () => Manifest.run()),
     registerCommand(`${extName}.configure`, () => Configure.run()),
     registerCommand(`${extName}.type-check`, () => TypeCheck.run()),
-    registerCommand(`${extName}.list.routes`, () => RouteList.run())
+    registerCommand(`${extName}.list.routes`, () => RouteList.run()),
+    registerCommand(`${extName}.test`, () => RunTests.run())
   )
 }

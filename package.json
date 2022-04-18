@@ -170,6 +170,10 @@
 				"command": "adonis-vscode-extension.list.routes",
 				"title": "⌨️ AdonisJS(Ace) List Routes"
 			},
+      {
+        "command": "adonis-vscode-extension.test",
+        "title": "⌨️  AdonisJS(Ace) Run Tests"
+      },
 			{
 				"command": "adonis-vscode-extension.docs.adonis",
 				"title": "📜 AdonisJS(Docs) Open Docs"
