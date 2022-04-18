@@ -13,7 +13,7 @@
 * Edge Support, syntax highlighting + formatting
 * Edge and AdonisJS Snippets
 * Go To Controller 
-* Go To View ( TODO )
+* Go To View
 
 ## Known Issues
 Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
