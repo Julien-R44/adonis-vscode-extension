@@ -13,7 +13,8 @@
 		"Adonis",
 		"AdonisJS",
 		"Ace",
-		"NodeJS"
+		"NodeJS",
+    "Edge"
 	],
 	"activationEvents": [
 		"workspaceContains:**/ace",
@@ -62,7 +63,7 @@
 				"adonisjs.autocomplete.viewsCompletionRegex": {
 					"type": "string",
 					"description": "Regular expression to match handle edge includes",
-					"default": "(?<=@include\\(['\\\"]|@layout\\(['\\\"]|@!component\\(['\\\"])([^'\">]+)"
+					"default": "(?<=@include\\()(['\"])[^'\"]*\\1"
 				},
 				"adonisjs.autocomplete.controllersDirectories": {
 					"type": "array",
