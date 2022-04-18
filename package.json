@@ -14,7 +14,7 @@
 		"AdonisJS",
 		"Ace",
 		"NodeJS",
-    "Edge"
+		"Edge"
 	],
 	"activationEvents": [
 		"workspaceContains:**/ace",
@@ -137,6 +137,10 @@
 			{
 				"command": "adonis-vscode-extension.make.prldfile",
 				"title": "⌨️ AdonisJS(Ace) Make Preloaded File"
+			},
+			{
+				"command": "adonis-vscode-extension.make.test",
+				"title": "⌨️ AdonisJS(Ace) Make Test"
 			},
 			{
 				"command": "adonis-vscode-extension.migration.fresh",

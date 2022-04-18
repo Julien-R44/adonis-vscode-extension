@@ -15,6 +15,7 @@ import { Configure } from './configure'
 import { TypeCheck } from './type-check'
 import { Manifest } from './generate/Manifest'
 import { RouteList } from './list/Routes'
+import { Test } from './make/Test'
 
 import { ExtensionContext, commands } from 'vscode'
 
@@ -35,7 +36,8 @@ export const registerAceCommands = (context: ExtensionContext) => {
     registerCommand(`${extName}.make.seeder`, () => Seeder.run()),
     registerCommand(`${extName}.make.view`, () => View.run()),
     registerCommand(`${extName}.make.validator`, () => Validator.run()),
-    registerCommand(`${extName}.make.prldfile`, () => PreloadedFile.run())
+    registerCommand(`${extName}.make.prldfile`, () => PreloadedFile.run()),
+    registerCommand(`${extName}.make.test`, () => Test.run())
   )
 
   /**
