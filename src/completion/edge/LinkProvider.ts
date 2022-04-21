@@ -59,8 +59,8 @@ class EdgeLinkProvider implements DocumentLinkProvider {
       let file = getExactPathMatch(item, doc, targetDirectories, fileExtensions)
 
       if (file !== null) {
-        let start = new Position(line.lineNumber, line.text.indexOf(item) + 1)
-        let end = start.translate(0, item.length - 2)
+        let start = new Position(line.lineNumber, line.text.indexOf(item))
+        let end = start.translate(0, item.length)
         let docLink = new DocumentLink(new Range(start, end), file.uri)
         docLinks.push(docLink)
       }
