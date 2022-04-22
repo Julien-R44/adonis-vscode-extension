@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://i.imgur.com/WXaijo6.png" />
-  <em>Official AdonisJS extension for VSCode</em>
-  <p>🚨 Work in progress 🚨</p>
+  <img src="https://i.imgur.com/a2w8csx.png" />
+  <h2>💻 Official AdonisJS extension for VSCode</h2>
+  <hr/>
 </div>
 
 ## Features
