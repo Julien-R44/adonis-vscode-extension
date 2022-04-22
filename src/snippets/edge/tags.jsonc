@@ -98,14 +98,6 @@
   /**
    * Miscs
    */
-  "edge: Inspect": {
-    "prefix": "inspect",
-    "body": ["{{ inspect($1) }}", ""]
-  },
-  "edge: Route": {
-    "prefix": "route",
-    "body": ["{{ route($1) }}", ""]
-  },
   "edge: Debugger": {
     "prefix": "@debugger",
     "body": ["@debugger"]

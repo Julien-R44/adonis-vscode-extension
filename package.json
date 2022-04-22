@@ -190,7 +190,7 @@
 			},
 			{
 				"language": "edge",
-				"path": "./src/snippets/edge/edge.jsonc"
+				"path": "./src/snippets/edge/tags.jsonc"
 			}
 		],
 		"languages": [

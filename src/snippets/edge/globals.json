@@ -1,0 +1,171 @@
+{
+  "edge: app": {
+    "body": "app",
+    "description": "Reference to application instance"
+  },
+  "edge: asset": {
+    "body": "asset('${1:filePath}')",
+    "description": "Get path to a frontend asset"
+  },
+  "edge: auth.isLoggedIn": {
+    "body": "auth.isLoggedIn",
+    "description": "Find if user is loggedin"
+  },
+  "edge: auth.user": {
+    "body": "auth.user",
+    "description": "Get auth user"
+  },
+  "edge: camelCase": {
+    "body": "camelCase(${1:'${2:value}'})",
+    "description": "Convert a string to camelcase"
+  },
+  "edge: capitalCase": {
+    "body": "capitalCase(${1:'${2:value}'})",
+    "description": "Convert a string to capitalCase"
+  },
+  "edge: config": {
+    "body": "config('${1:key}')",
+    "description": "Get config value"
+  },
+  "edge: cspNonce": {
+    "body": "cspNonce",
+    "description": "Use csp nonce on script tag"
+  },
+  "edge: csrfField": {
+    "body": "csrfField()",
+    "description": "Add csrfField input field to form"
+  },
+  "edge: dashCase": {
+    "body": "dashCase(${1:'${2:value}'})",
+    "description": "Convert a string to dashCase"
+  },
+  "edge: dotCase": {
+    "body": "dotCase(${1:'${2:value}'})",
+    "description": "Convert a string to dotCase"
+  },
+  "edge: driveSignedUrl": {
+    "body": "await driveSignedUrl('${1:location}'${2:, 'optionalDiskName'})",
+    "description": "Get signed URL to a file using AdonisJS drive"
+  },
+  "edge: driveUrl": {
+    "body": "await driveUrl('${1:location}'${2:, 'optionalDiskName'})",
+    "description": "Get URL to a file using AdonisJS drive"
+  },
+  "edge: e": {
+    "body": "e(${1:'${2:markup}'})",
+    "description": "Escape HTML markup"
+  },
+  "edge: env": {
+    "body": "env('${1:key}')",
+    "description": "Get environment variable value"
+  },
+  "edge: excerpt": {
+    "body": "excerpt(${1:value}, ${2:100})",
+    "description": "Generate plain text excerpt and truncate after given characters count"
+  },
+  "edge: filename": {
+    "body": "\\$filename",
+    "description": "Path to the template file"
+  },
+  "edge: flashMessages.all": {
+    "body": "inspect(flashMessages.all())",
+    "description": "Inspect all messages"
+  },
+  "edge: flashMessages.get": {
+    "body": "flashMessages.get('$1', $2)",
+    "description": "Get flash message value"
+  },
+  "edge: flashMessages.has": {
+    "body": "flashMessages.has('$1')",
+    "description": "Check if a flash message exists"
+  },
+  "edge: inspect": {
+    "body": "inspect($1)",
+    "description": "",
+    "prefix": "inspect"
+  },
+  "edge: nl2br": {
+    "body": "nl2br(e(${1:'${2:body}'}))",
+    "description": "Convert new line to br tags"
+  },
+  "edge: noCase": {
+    "body": "noCase(${1:'${2:value}'})",
+    "description": "Remove all sort of casing from a string"
+  },
+  "edge: ordinalize": {
+    "body": "ordinalize(${1:value})",
+    "description": "Ordinalize a string or a number value"
+  },
+  "edge: pascalCase": {
+    "body": "pascalCase(${1:'${2:value}'})",
+    "description": "Convert a string to pascalCase"
+  },
+  "edge: pluralize": {
+    "body": "pluralize(${1:value}${2:, optionalCount})",
+    "description": "Pluralize a word"
+  },
+  "edge: prettyBytes": {
+    "body": "prettyBytes(${1:1024})",
+    "description": "Pretty print bytes to human readable string"
+  },
+  "edge: prettyMs": {
+    "body": "prettyMs(${1:60000})",
+    "description": "Pretty print milliseconds to human readable string"
+  },
+  "edge: props.serialize": {
+    "body": "\\$props.serialize(${1:optionalObjectToMerge})",
+    "description": "Serialize component props to HTML attributes"
+  },
+  "edge: props.serializeExcept": {
+    "body": "\\$props.serializeExcept([$1], ${2:optionalObjectToMerge})",
+    "description": "Serialize selected component props to HTML attributes"
+  },
+  "edge: props.serializeOnly": {
+    "body": "\\$props.serializeOnly([$1], ${2:optionalObjectToMerge})",
+    "description": "Serialize selected component props to HTML attributes"
+  },
+  "edge: route": {
+    "body": "route('${1:routeName}', ${2:[args]})",
+    "description": "Make URL for a route"
+  },
+  "edge: safe": {
+    "body": "safe(${1:'${2: markup}'})",
+    "description": "Render HTML markup without escaping it"
+  },
+  "edge: sentenceCase": {
+    "body": "sentenceCase(${1:'${2:value}'})",
+    "description": "Convert a string to sentenceCase"
+  },
+  "edge: signedRoute": {
+    "body": "signedRoute('${1:routeName}', ${2:[args]})",
+    "description": "Make signed URL for a route"
+  },
+  "edge: snakeCase": {
+    "body": "snakeCase(${1:'${2:value}'})",
+    "description": "Convert a string to snakeCase"
+  },
+  "edge: state": {
+    "body": "state",
+    "description": "Template state object"
+  },
+  "edge: titleCase": {
+    "body": "titleCase(${1:'${2:value}'})",
+    "description": "Convert a string to titleCase"
+  },
+  "edge: toBytes": {
+    "body": "toBytes(${1:'1MB'})",
+    "description": "Convert human readable expression to bytes"
+  },
+  "edge: toMs": {
+    "body": "toMs(${1:'1min'})",
+    "description": "Convert human readable expression to milliseconds"
+  },
+  "edge: toSentence": {
+    "body": "toSentence([${1:'car'}, ${2: 'truck'}, ${3: 'van'}], { separator: ', ', lastSeparator: ', or ' })",
+    "description": "Convert an array to a sentence"
+  },
+  "edge: truncate": {
+    "body": "truncate(${1:value}, ${2:100})",
+    "description": "Truncate string after given characters count"
+  }
+}
