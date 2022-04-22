@@ -193,11 +193,11 @@
 		"snippets": [
 			{
 				"language": "typescript",
-				"path": "./src/snippets/adonis/routes.json"
+				"path": "./snippets/adonis/routes.json"
 			},
 			{
 				"language": "edge",
-				"path": "./src/snippets/edge/tags.jsonc"
+				"path": "./snippets/edge/tags.jsonc"
 			}
 		],
 		"languages": [
@@ -212,14 +212,14 @@
 					".edge",
 					".edge.html"
 				],
-				"configuration": "./src/syntaxes/edge.configuration.jsonc"
+				"configuration": "./syntaxes/edge.configuration.jsonc"
 			}
 		],
 		"grammars": [
 			{
 				"language": "edge",
 				"scopeName": "text.html.edge",
-				"path": "./src/syntaxes/edge.tmLanguage.json",
+				"path": "./syntaxes/edge.tmLanguage.json",
 				"embeddedLanguages": {
 					"source.css": "css",
 					"source.js": "javascript"
@@ -229,7 +229,7 @@
 		"jsonValidation": [
 			{
 				"fileMatch": ".adonisrc.json",
-				"url": "./src/schemas/adonisrc.jsonc"
+				"url": "./schemas/adonisrc.jsonc"
 			}
 		]
 	},

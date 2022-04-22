@@ -4,6 +4,7 @@ out/**
 node_modules/**
 src/**
 .gitignore
+.prettierignore
 .yarnrc
 webpack.config.js
 vsc-extension-quickstart.md
