@@ -15,3 +15,5 @@ dist
 shrinkwrap.yaml
 out/
 .vscode-test/
+
+*.vsix

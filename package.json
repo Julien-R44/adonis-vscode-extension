@@ -1,7 +1,10 @@
 {
 	"name": "adonis-vscode-extension",
-	"displayName": "adonis-vscode-extension",
-	"description": "Run Adonis Ace Commands without leaving VS Code",
+  "displayName": "AdonisJS Extension",
+	"description": "The official VSCode extension of AdonisJS",
+  "icon": "assets/adonis.png",
+  "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "publisher": "jripouteau",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.65.0"
@@ -16,7 +19,11 @@
 		"NodeJS",
 		"Edge"
 	],
-	"activationEvents": [
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Julien-R44/adonis-vscode-extension.git"
+  },
+  "activationEvents": [
 		"workspaceContains:**/ace",
 		"onLanguage:edge"
 	],
