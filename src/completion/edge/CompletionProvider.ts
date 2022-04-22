@@ -10,7 +10,7 @@ import {
 } from 'vscode'
 import Config from '../../utilities/config'
 import { getSuggestions, Suggestion, toCompletionItems } from '../../utilities/suggestion'
-import GlobalEdgeSnippets from '../../snippets/edge/globals.json'
+import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
   public provideCompletionItems(

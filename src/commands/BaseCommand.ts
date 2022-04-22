@@ -5,6 +5,8 @@ import { exec as baseExec } from 'child_process'
 import { join } from 'path'
 const exec = promisify(baseExec)
 
+let outputChannel = window.createOutputChannel('AdonisJS')
+
 export default class BaseCommand {
   /**
    * Show a message to the user
@@ -19,7 +21,8 @@ export default class BaseCommand {
   protected static async showError(message: string, consoleErr: any = null) {
     if (consoleErr !== null) {
       message += ' (See output console for more details)'
-      console.error(consoleErr + ' (See output console for more details)')
+      outputChannel.appendLine(consoleErr)
+      outputChannel.show()
     }
     window.showErrorMessage(message)
     return false
