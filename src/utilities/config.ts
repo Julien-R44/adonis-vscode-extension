@@ -9,27 +9,6 @@ import { CONFIG_NAME } from './constants'
 type Config = { [key: string]: any }
 
 /**
- * AdonisJS command task configuration.
- */
-type TaskConfig = {
-  /**
-   * Executable path for Adonis CLI.
-   */
-  adonisExecutable: string
-
-  /**
-   * Disable showing of prompts for optional fields. All commands will
-   * be ran with default values.
-   */
-  disableOptionalValuePrompts: boolean
-
-  /**
-   * Buffer size for stdout and stderr.
-   */
-  maxBuffer: number
-}
-
-/**
  * A wrapper around vscode configuration for this extension
  */
 class ConfigWrapper {
@@ -48,10 +27,10 @@ class ConfigWrapper {
   }
 
   /**
-   * Configuration for task related activities.
+   * Configuration for misc options
    */
-  public static get tasks(): TaskConfig {
-    return workspace.getConfiguration(CONFIG_NAME).tasks
+  public static get misc(): Config {
+    return workspace.getConfiguration(CONFIG_NAME).misc
   }
 }
 

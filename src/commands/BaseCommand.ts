@@ -3,6 +3,7 @@ import { platform } from 'process'
 import { promisify } from 'util'
 import { exec as baseExec } from 'child_process'
 import { join } from 'path'
+import Config from '../utilities/config'
 const exec = promisify(baseExec)
 
 let outputChannel = window.createOutputChannel('AdonisJS')
@@ -121,7 +122,9 @@ export default class BaseCommand {
      */
     command = `node ace ${command}`
     let cmd =
-      platform === 'win32' ? `cd /d "${acePath}" && ${command}` : `cd "${acePath}" && ${command}`
+      platform === 'win32' && !Config.misc.useUnixCd
+        ? `cd /d "${acePath}" && ${command}`
+        : `cd "${acePath}" && ${command}`
 
     /**
      * Execute the final command in the background
