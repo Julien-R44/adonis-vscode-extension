@@ -15,6 +15,35 @@
 * Go To Controller 
 * Go To View
 
+## Ace commands
+Launch ace commands directly from VScode. 
+Files created by adonis/assembler are automatically opened after their creation.
+
+![](https://i.imgur.com/BEb6Xpc.gif)
+
+## List Routes
+List all routes in your project from VSCode and filter them.
+
+![](https://i.imgur.com/WEr7s5K.png)
+
+## Documentations
+Consult and search the Adonis and Japa documentation directly from VSCode.
+
+![](https://i.imgur.com/kMjBvdh.png)
+
+## JSON Schema for .adonisrc
+![](https://i.imgur.com/6K5wnvE.gif)
+
+## Route controller completion + Go To
+Autocompletion for the name and handler of the controllers, alt+click to open the file, and the docblock documentation of the method that is displayed in hover.
+
+![](https://i.imgur.com/ZvnOtN3.gif)
+
+## Edge support
+Syntax highlighting, auto-completion of the tags that includes partials/components/layouts, alt+click to open an included file, many snippets...
+
+![](https://i.imgur.com/eDYb9fK.gif)
+
 ## Known Issues
 Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
