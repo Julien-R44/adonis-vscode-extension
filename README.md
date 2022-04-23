@@ -40,6 +40,7 @@ Autocompletion for the name and handler of the controllers, alt+click to open th
 
 ## Edge support
 Syntax highlighting, auto-completion of the tags that includes partials/components/layouts, alt+click to open an included file, many snippets...
+**No automatic formatting for the moment**
 
 ![](https://i.imgur.com/eDYb9fK.gif)
 
