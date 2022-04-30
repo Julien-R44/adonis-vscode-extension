@@ -29,7 +29,9 @@ export default class Extension {
    */
   public static getAdonisProjectFromFile(file: string): AdonisProject | null {
     const adonisProjects = this.getAdonisProjects()
-    const project = adonisProjects.find((adonisProject) => file.startsWith(adonisProject.path))
+    const project = adonisProjects.find((adonisProject) =>
+      file.toLowerCase().startsWith(adonisProject.path.toLowerCase())
+    )
     return project || null
   }
 }
