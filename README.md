@@ -48,7 +48,6 @@ Syntax highlighting, auto-completion of the tags that includes partials/componen
 Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
-- Multiple workspaces support
 
 ## Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
