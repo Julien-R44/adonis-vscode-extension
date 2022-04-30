@@ -6,7 +6,7 @@ async function main() {
   try {
     const workspacePath = path.resolve(__dirname, '../../../src/test/fixtures/basic-app')
     const extensionDevelopmentPath = path.resolve(__dirname, '../../')
-    const extensionTestsPath = path.resolve(__dirname, './suite/index')
+    const extensionTestsPath = path.resolve(__dirname, './index')
 
     const vscodeExecutablePath = await downloadAndUnzipVSCode('1.66.0')
 

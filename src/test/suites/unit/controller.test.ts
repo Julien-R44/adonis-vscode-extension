@@ -4,7 +4,7 @@ import {
   Controller,
   createControllerLink,
   RouteControllerLink,
-} from '../../utilities/controller'
+} from '../../../utilities/controller'
 import { Position, Uri, Range, workspace, WorkspaceFolder } from 'vscode'
 import * as path from 'path'
 

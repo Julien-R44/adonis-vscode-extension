@@ -1,4 +1,4 @@
-import { getMethodsInSourceFile, getLineNumber } from '../../utilities/functions'
+import { getMethodsInSourceFile, getLineNumber } from '../../../utilities/functions'
 import { workspace, WorkspaceFolder } from 'vscode'
 import * as path from 'path'
 import { test } from '@japa/runner'
