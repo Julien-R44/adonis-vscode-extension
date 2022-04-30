@@ -10,7 +10,7 @@ import {
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
-import { type Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
+import { Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
 import Extension from '../../Extension'
 
 const {

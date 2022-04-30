@@ -247,7 +247,7 @@
 		"watch-tests": "tsc -p . -w --outDir out",
 		"pretest": "npm run compile-tests && npm run compile",
 		"lint": "eslint . --ext=.ts",
-		"test": "node ./out/test/runTest.js",
+		"test": "node ./out/src/test/runTest.js",
 		"mrm": "mrm --preset=@adonisjs/mrm-preset",
 		"sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json Julien-R44/adonis-vscode-extension",
 		"release": "np --message=\"chore(release): %s\"",
