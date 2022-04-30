@@ -1,8 +1,8 @@
 import { TextDocument, ProviderResult, DocumentLink, DocumentLinkProvider, Uri } from 'vscode'
-import { getLineNumber } from '../../utilities/functions'
+import { getLineNumber, getMaxLinesCount } from '../../utilities/functions'
 import { RouteControllerLink } from '../../utilities/controller'
-import { createDocumentLinks } from '../../utilities/links'
 import ConfigWrapper from '../../utilities/config'
+import { DocumentLinker } from '../../services/DocumentLinker'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {
@@ -16,7 +16,7 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
         const maxLinesCount = getMaxLinesCount(doc)
 
         while (currentLine < maxLinesCount) {
-          const links = await createDocumentLinks(
+          const links = await DocumentLinker.createControllerDocumentLinks(
             regex,
             doc,
             currentLine,
@@ -45,14 +45,4 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
       return resolve(link)
     })
   }
-}
-
-/**
- * Get the maximum line count to scan for a given document.
- *
- * @param doc Document to resolve line count
- */
-function getMaxLinesCount(doc: TextDocument): number {
-  const maxLinesCount = ConfigWrapper.autocomplete.maxLinesCount
-  return doc.lineCount <= maxLinesCount ? doc.lineCount : maxLinesCount
 }

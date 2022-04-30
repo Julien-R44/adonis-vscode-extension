@@ -1,6 +1,8 @@
 import * as fs from 'fs'
 import { Extractor } from '@poppinss/module-methods-extractor'
 import { ExtractorOutput } from '@poppinss/module-methods-extractor/build/src/contracts'
+import { TextDocument } from 'vscode'
+import ConfigWrapper from './config'
 
 /**
  * Location of a method in a source file.
@@ -9,6 +11,16 @@ export type Location = {
   lineno: number
   name: string
   // column: number;
+}
+
+/**
+ * Get the maximum line count to scan for a given document.
+ *
+ * @param doc Document to resolve line count
+ */
+export function getMaxLinesCount(doc: TextDocument): number {
+  const maxLinesCount = ConfigWrapper.autocomplete.maxLinesCount
+  return doc.lineCount <= maxLinesCount ? doc.lineCount : maxLinesCount
 }
 
 /**

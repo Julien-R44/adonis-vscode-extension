@@ -1,6 +1,7 @@
 import { Uri, TextDocument, workspace as vsWorkspace, WorkspaceFolder } from 'vscode'
 import { getDirectories } from './directory'
 import * as fs from 'fs'
+import Extension, { AdonisProject } from '../Extension'
 
 /**
  * A minimal file path representation.
@@ -39,18 +40,18 @@ export function getPathMatches(
   targetDirectories: string[],
   extensions: string[]
 ): Path[] {
-  const workspace = vsWorkspace.getWorkspaceFolder(doc.uri)
-  if (!workspace) return []
+  const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+  if (!project) return []
 
-  const workspacePath = workspace.uri.fsPath
+  const workspacePath = project.uri.fsPath
   const fileName = text.replace(/\"|\'/g, '').replace(/\./g, '/')
   const directories = getDirectories(workspacePath, targetDirectories)
 
-  return buildPaths(workspace, directories, fileName, extensions)
+  return buildPaths(project, directories, fileName, extensions)
 }
 
 function buildPaths(
-  workspace: WorkspaceFolder,
+  adonisProject: AdonisProject,
   paths: string[],
   fileName: string,
   extensions: string[]
@@ -60,8 +61,8 @@ function buildPaths(
   for (const path in paths) {
     for (let extension of extensions) {
       const file = `${fileName}${extension}`
-      const filePath = `${workspace.uri.fsPath}/${paths[path]}/${file}`
-      const fullpath = `${workspace.name}/${paths[path]}/${file}`
+      const filePath = `${adonisProject.uri.fsPath}/${paths[path]}/${file}`
+      const fullpath = `${adonisProject.name}/${paths[path]}/${file}`
 
       if (fs.existsSync(filePath)) {
         result.push({
