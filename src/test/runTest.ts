@@ -4,7 +4,7 @@ import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron'
 
 async function main() {
   try {
-    const workspacePath = path.resolve(__dirname, '../../../src/test/fixtures')
+    const workspacePath = path.resolve(__dirname, '../../../src/test/fixtures/basic-app')
     const extensionDevelopmentPath = path.resolve(__dirname, '../../')
     const extensionTestsPath = path.resolve(__dirname, './suite/index')
 
