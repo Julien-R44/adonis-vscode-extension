@@ -1,5 +1,4 @@
 import * as path from 'path'
-
 import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron'
 
 async function main() {
@@ -9,6 +8,9 @@ async function main() {
     const extensionTestsPath = path.resolve(__dirname, './index')
 
     const vscodeExecutablePath = await downloadAndUnzipVSCode('1.66.0')
+
+    // @ts-ignore
+    process.env.FORCE_COLOR = true
 
     await runTests({
       launchArgs: [workspacePath, '--disable-extensions'],
