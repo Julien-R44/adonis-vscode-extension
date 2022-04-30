@@ -11,10 +11,7 @@ import { EdgeFormatterProvider } from './languages'
 import Extension from './Extension'
 
 export async function activate(context: ExtensionContext) {
-  let files = await workspace.findFiles('**/ace', undefined)
-  files.map((file) =>
-    Extension.adonisProjectPaths.push(file.path.split('/').slice(0, -1).join('/'))
-  )
+  await Extension.loadAdonisProjects()
 
   /**
    * Commands

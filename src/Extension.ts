@@ -1,5 +1,5 @@
 import { basename } from 'path'
-import { Uri } from 'vscode'
+import { Uri, workspace } from 'vscode'
 
 export interface AdonisProject {
   path: string
@@ -12,6 +12,16 @@ export default class Extension {
    * The paths to the different Adonis project in the workspace
    */
   public static adonisProjectPaths: string[] = []
+
+  /**
+   * Scan the whole workspace(s) for existing Adonis projects
+   */
+  public static async loadAdonisProjects() {
+    let files = await workspace.findFiles('**/ace', '**/node_modules/**', undefined)
+    files.map((file) =>
+      Extension.adonisProjectPaths.push(file.path.split('/').slice(0, -1).join('/'))
+    )
+  }
 
   /**
    * Returns the directories
