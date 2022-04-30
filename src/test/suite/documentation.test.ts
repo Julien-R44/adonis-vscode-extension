@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { test } from '@japa/runner'
 import { workspace, WorkspaceFolder, MarkdownString } from 'vscode'
-import { getDocForMethodInFile } from '../../utilities/documentation'
+import { DocumentationProvider } from '../../services/DocumentationProvider'
 
 let mainWorkspace: string
 
@@ -14,7 +14,7 @@ test.group('Autocomplete Markdown Documentation Generation', (group) => {
   test('Documentation is returned for existing method in typescript file', ({ assert }) => {
     const file = path.resolve(mainWorkspace, 'app/Controllers/Http/FooController.ts')
 
-    let documentation = getDocForMethodInFile(file, 'methodA')
+    let documentation = DocumentationProvider.getDocForMethodInFile(file, 'methodA')
     assert.notEqual(documentation, null)
 
     documentation = documentation as MarkdownString
@@ -26,7 +26,7 @@ test.group('Autocomplete Markdown Documentation Generation', (group) => {
   }) => {
     const file = path.resolve(mainWorkspace, 'app/Controllers/Http/FooController.ts')
 
-    let documentation = getDocForMethodInFile(file, 'notExisting')
+    let documentation = DocumentationProvider.getDocForMethodInFile(file, 'notExisting')
     assert.deepEqual(documentation, null)
   })
 })

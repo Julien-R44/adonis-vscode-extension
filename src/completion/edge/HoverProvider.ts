@@ -1,7 +1,7 @@
 import { HoverProvider, TextDocument, Position, ProviderResult, Hover } from 'vscode'
-import Config from '../../utilities/config'
+import { DocumentationProvider } from '../../services/DocumentationProvider'
 import { getExactPathMatch } from '../../utilities/pathMatching'
-import { generateDocFromPath } from '../../utilities/documentation'
+import Config from '../../utilities/config'
 
 class EdgeHoverProvider implements HoverProvider {
   public provideHover(doc: TextDocument, pos: Position): ProviderResult<Hover> {
@@ -19,7 +19,7 @@ class EdgeHoverProvider implements HoverProvider {
     )
 
     if (matchedView) {
-      const markdown = generateDocFromPath(matchedView, true)
+      const markdown = DocumentationProvider.generateDocFromPath(matchedView, true)
       return new Hover(markdown)
     }
   }

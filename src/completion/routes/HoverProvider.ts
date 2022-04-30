@@ -7,9 +7,9 @@ import {
   MarkdownString,
 } from 'vscode'
 import { parseControllerString, Controller } from '../../utilities/controller'
-import { getDocForMethodInFile, generateDocFromPath } from '../../utilities/documentation'
 import Config from '../../utilities/config'
 import { getExactPathMatch } from '../../utilities/pathMatching'
+import { DocumentationProvider } from '../../services/DocumentationProvider'
 const { controllersRegex, controllersDirectories, controllersExtensions } = Config.autocomplete
 
 class RouteControllerHoverProvider implements HoverProvider {
@@ -46,8 +46,8 @@ class RouteControllerHoverProvider implements HoverProvider {
 
     if (controllerPath) {
       const path = controllerPath.uri.fsPath
-      const methodDoc = getDocForMethodInFile(path, controller.method)
-      const markdown = methodDoc || generateDocFromPath(controllerPath, true)
+      const methodDoc = DocumentationProvider.getDocForMethodInFile(path, controller.method)
+      const markdown = methodDoc || DocumentationProvider.generateDocFromPath(controllerPath, false)
       return markdown
     }
 
