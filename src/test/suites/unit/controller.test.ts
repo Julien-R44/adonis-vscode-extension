@@ -1,12 +1,5 @@
 import { test } from '@japa/runner'
-import {
-  parseControllerString,
-  Controller,
-  createControllerLink,
-  RouteControllerLink,
-} from '../../../utilities/controller'
-import { Position, Uri, Range, workspace, WorkspaceFolder } from 'vscode'
-import * as path from 'path'
+import { parseControllerString } from '../../../utilities/controller'
 
 test.group('Parse route controller strings', (group) => {
   test('Controller string is parsed', ({ assert }) => {
