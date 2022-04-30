@@ -6,14 +6,10 @@ import { window } from 'vscode'
  */
 export class TypeCheck extends BaseCommand {
   public static async run() {
-    /**
-     * Execute the command
-     */
-    try {
-      let command = `type-check`
-      await this.execCmd(command, false)
-    } catch (err) {
-      this.showError('Could not run type-check command.', err)
-    }
+    return this.handleExecCmd({
+      command: `type-check`,
+      successMessage: 'Type-check completed successfully.',
+      errorMessage: 'Type-check failed.',
+    })
   }
 }

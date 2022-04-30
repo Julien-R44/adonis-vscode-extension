@@ -17,13 +17,10 @@ export class Validator extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `make:validator ${seederName}`
-      const res = await this.execCmd(command)
-      this.openCreatedFile(res.adonisProject, res.result!.stdout)
-      this.showMessage('Validator created successfully.')
-    } catch (err) {
-      this.showError('Could not create the validator.', err)
-    }
+    return this.handleExecCmd({
+      command: `make:validator ${seederName}`,
+      fileType: 'validator',
+      openCreatedFile: true,
+    })
   }
 }

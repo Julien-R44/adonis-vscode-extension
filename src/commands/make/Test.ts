@@ -26,13 +26,10 @@ export class Test extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `make:test ${suiteName} ${testName}`
-      const res = await this.execCmd(command)
-      this.openCreatedFile(res.adonisProject, res.result!.stdout)
-      this.showMessage('Test created successfully.')
-    } catch (err) {
-      this.showError('Could not create the test.', err)
-    }
+    return this.handleExecCmd({
+      command: `make:test ${suiteName} ${testName}`,
+      fileType: 'test',
+      openCreatedFile: true,
+    })
   }
 }

@@ -17,13 +17,10 @@ export class Command extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `make:command ${commandName}`
-      const res = await this.execCmd(command)
-      this.openCreatedFile(res.adonisProject, res.result!.stdout)
-      this.showMessage('Command created successfully.')
-    } catch (err) {
-      this.showError('Could not create the command.', err)
-    }
+    return this.handleExecCmd({
+      command: `make:command ${commandName}`,
+      fileType: 'command',
+      openCreatedFile: true,
+    })
   }
 }

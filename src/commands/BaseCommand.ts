@@ -5,9 +5,14 @@ import { exec as baseExec } from 'child_process'
 import { join } from 'path'
 import Config from '../utilities/config'
 import Extension, { AdonisProject } from '../Extension'
+import { capitalize } from '../utilities/functions'
 const exec = promisify(baseExec)
 
 let outputChannel = window.createOutputChannel('AdonisJS')
+
+export enum ExtensionErrors {
+  ERR_ADONIS_PROJECT_SELECTION_NEEDED,
+}
 
 export default class BaseCommand {
   /**
@@ -114,14 +119,55 @@ export default class BaseCommand {
       { placeHolder: 'Select the project in which you want to run this command' }
     )
 
-    return adonisProjects.find((project) => project.path === target!.description)!
+    return adonisProjects.find((project) => project.path === target?.description)
+  }
+
+  /**
+   * Execute execCmd and handle errors/success notifications
+   */
+  protected static async handleExecCmd({
+    command,
+    successMessage,
+    errorMessage,
+    fileType = 'file',
+    openCreatedFile = false,
+  }: {
+    command: string
+    successMessage?: string
+    errorMessage?: string
+    fileType?: string
+    openCreatedFile?: boolean
+  }) {
+    successMessage = successMessage || `${capitalize(fileType)} created successfully`
+    errorMessage = errorMessage || `Failed to create ${fileType.toLowerCase()}`
+
+    try {
+      const res = await this.execCmd(command)
+
+      if (openCreatedFile) {
+        this.openCreatedFile(res.adonisProject, res.result!.stdout)
+      }
+
+      this.showMessage(successMessage)
+    } catch (err) {
+      // @ts-ignore
+      if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
+        return this.showError('You must select an AdonisJS project on which to run your command.')
+      }
+
+      this.showError(errorMessage, err)
+    }
   }
 
   /**
    * Execute the final `node ace x` command
    */
   protected static async execCmd(command: string, background: boolean = true) {
-    let adonisProject = (await this.pickAdonisProject())!
+    let adonisProject = await this.pickAdonisProject()
+
+    if (!adonisProject) {
+      return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
+    }
 
     /**
      * If we are on windows, we need the remove the first slash

@@ -16,14 +16,11 @@ export class Fresh extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `migration:fresh ${dbName ? `--database=${dbName}` : ''} ${
-        seed ? '--seed' : ''
-      }`
-      await this.execCmd(command)
-      this.showMessage('Database has been successfully freshed.')
-    } catch (err) {
-      this.showError('Could not execute migration:fresh', err)
-    }
+    let command = `migration:fresh ${dbName ? `--database=${dbName}` : ''} ${seed ? '--seed' : ''}`
+    return this.handleExecCmd({
+      command,
+      successMessage: 'Migration:fresh command executed successfully.',
+      errorMessage: 'Migration:fresh command failed.',
+    })
   }
 }

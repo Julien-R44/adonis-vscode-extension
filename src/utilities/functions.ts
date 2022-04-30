@@ -67,3 +67,7 @@ function extractMethodsInSourceFile(sourcePath: string): ExtractorOutput | null 
   const extractor = new Extractor()
   return extractor.extract(source)
 }
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

@@ -18,11 +18,10 @@ export class RunTests extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `test ${suites} ${watchMode ? '-w' : ''}`
-      await this.execCmd(command, false)
-    } catch (err) {
-      this.showError('Could not run test command.', err)
-    }
+    return this.handleExecCmd({
+      command: `test ${suites} ${watchMode ? '-w' : ''}`,
+      successMessage: '',
+      errorMessage: 'Could not run tests.',
+    })
   }
 }

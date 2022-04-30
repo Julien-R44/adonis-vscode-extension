@@ -45,12 +45,11 @@ export class Migration extends BaseCommand {
     const modifyPart = `${modifyTable ? `--table=${tableName}` : ''}`
     const connectionPart = `${dbName ? `--database=${dbName}` : ''}`
 
-    try {
-      let command = `${basePart} ${createPart} ${modifyPart} ${connectionPart}`
-      await this.execCmd(command)
-      this.showMessage('Migration created successfully.')
-    } catch (err) {
-      this.showError('Could not create the migration.', err)
-    }
+    let command = `${basePart} ${createPart} ${modifyPart} ${connectionPart}`
+    return this.handleExecCmd({
+      command,
+      fileType: 'migration',
+      openCreatedFile: true,
+    })
   }
 }

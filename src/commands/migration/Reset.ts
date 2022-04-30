@@ -15,12 +15,11 @@ export class Reset extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `migration:reset ${dbName ? `--database=${dbName}` : ''}`
-      await this.execCmd(command)
-      this.showMessage('Database has been successfully refreshed.')
-    } catch (err) {
-      this.showError('Could not execute migration:reset', err)
-    }
+    let command = `migration:reset ${dbName ? `--database=${dbName}` : ''}`
+    return this.handleExecCmd({
+      command,
+      successMessage: 'Migration:reset command executed successfully.',
+      errorMessage: 'Migration:reset command failed.',
+    })
   }
 }

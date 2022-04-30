@@ -27,15 +27,14 @@ export class Model extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `make:model ${modelName} --migration=${
-        generateMigration ? 'true' : 'false'
-      } --controller=${generateController ? 'true' : 'false'}`
-      const res = await this.execCmd(command)
-      this.openCreatedFile(res.adonisProject, res.result!.stdout)
-      this.showMessage('Model created successfully.')
-    } catch (err) {
-      this.showError('Could not create the model.', err)
-    }
+    let command = `make:model ${modelName} --migration=${
+      generateMigration ? 'true' : 'false'
+    } --controller=${generateController ? 'true' : 'false'}`
+
+    return this.handleExecCmd({
+      command,
+      fileType: 'model',
+      openCreatedFile: true,
+    })
   }
 }

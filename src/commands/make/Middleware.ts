@@ -8,8 +8,8 @@ export class Middleware extends BaseCommand {
     /**
      * Get the middleware name
      */
-    let commandName = await this.getInput('Middleware name')
-    if (!commandName) {
+    let name = await this.getInput('Middleware name')
+    if (!name) {
       this.showError('Middleware name is required.')
       return
     }
@@ -17,13 +17,10 @@ export class Middleware extends BaseCommand {
     /**
      * Execute the command
      */
-    try {
-      let command = `make:middleware ${commandName}`
-      const res = await this.execCmd(command)
-      this.openCreatedFile(res.adonisProject, res.result!.stdout)
-      this.showMessage('Middleware created successfully.')
-    } catch (err) {
-      this.showError('Could not create the middleware.', err)
-    }
+    return this.handleExecCmd({
+      command: `make:middleware ${name}`,
+      fileType: 'middleware',
+      openCreatedFile: true,
+    })
   }
 }
