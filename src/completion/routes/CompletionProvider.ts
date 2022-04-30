@@ -5,13 +5,13 @@ import {
   CompletionItemProvider,
   CompletionItem,
   CompletionItemKind,
-  workspace,
   Range,
 } from 'vscode'
-import { getSuggestions, Suggestion, toCompletionItems } from '../../utilities/suggestion'
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
+import { type Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
+import Extension from '../../Extension'
 
 const {
   controllersDirectories,
@@ -38,7 +38,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
       ? this.getControllerMethodSuggestions(text, doc)
       : this.getControllerNameSuggestions(text, doc)
 
-    return toCompletionItems(suggestions, CompletionItemKind.Value)
+    return SuggestionMatcher.toCompletionItems(suggestions, CompletionItemKind.Value)
   }
 
   /**
@@ -69,17 +69,20 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const controller = parseControllerString(text)
     if (controller) text = controller.name
 
-    const folder = workspace.getWorkspaceFolder(doc.uri)
-    if (!folder) return []
+    const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+    if (!project) return []
 
-    return getSuggestions(text, folder, controllersDirectories, controllersExtensions).map(
-      (suggestion) => {
-        return {
-          ...suggestion,
-          text: suggestion.text.replace(/^Http\//g, ''),
-        }
+    return SuggestionMatcher.getSuggestions(
+      text,
+      project,
+      controllersDirectories,
+      controllersExtensions
+    ).map((suggestion) => {
+      return {
+        ...suggestion,
+        text: suggestion.text.replace(/^Http\//g, ''),
       }
-    )
+    })
   }
 
   /**

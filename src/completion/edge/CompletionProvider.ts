@@ -9,8 +9,9 @@ import {
   SnippetString,
 } from 'vscode'
 import Config from '../../utilities/config'
-import { getSuggestions, Suggestion, toCompletionItems } from '../../utilities/suggestion'
 import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
+import { Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
+import Extension from '../../Extension'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
   public provideCompletionItems(
@@ -44,7 +45,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
 
     const text = doc.getText(range)
     const suggestions = this.getViewSuggestions(text, doc)
-    return toCompletionItems(suggestions, CompletionItemKind.Value)
+    return SuggestionMatcher.toCompletionItems(suggestions, CompletionItemKind.Value)
   }
 
   /**
@@ -55,12 +56,13 @@ class EdgeCompletionProvider implements CompletionItemProvider {
    */
   private getViewSuggestions(text: string, doc: TextDocument): Suggestion[] {
     const config = Config.autocomplete
-    const folder = workspace.getWorkspaceFolder(doc.uri)
-    if (!folder) return []
 
-    const suggestions = getSuggestions(
+    const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+    if (!project) return []
+
+    const suggestions = SuggestionMatcher.getSuggestions(
       text,
-      folder,
+      project,
       config.viewsDirectories,
       config.viewsExtensions
     ).map((suggestion) => {
