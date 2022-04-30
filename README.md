@@ -10,6 +10,7 @@
 * Open and see docs within VSCode
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting
+* Multiple Workspaces and Monorepos support 
 * Edge and AdonisJS Snippets
 * Go To Controller 
 * Go To View
