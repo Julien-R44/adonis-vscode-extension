@@ -40,6 +40,7 @@ Autocompletion for the name and handler of the controllers, alt+click to open th
 
 ## Edge support
 Syntax highlighting, auto-completion of the tags that includes partials/components/layouts, alt+click to open an included file, many snippets...
+**No automatic formatting for the moment**
 
 ![](https://i.imgur.com/eDYb9fK.gif)
 
@@ -47,6 +48,7 @@ Syntax highlighting, auto-completion of the tags that includes partials/componen
 Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
+- Multiple workspaces support
 
 ## Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
