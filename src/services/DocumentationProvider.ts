@@ -46,7 +46,7 @@ export class DocumentationProvider {
   /**
    * Generate a markdown of all possible file paths provided.
    */
-  public static generateDocFromPath(path: Path, showFolderTip: boolean = true) {
+  public static generateDocFromPath(path: Path, showFolderTip: boolean = false) {
     let text: string = ''
     text += showFolderTip ? `\`${path.name}\`` : ''
     text += ` [${path.fullpath}](${path.uri})  \r`

@@ -19,7 +19,7 @@ class EdgeHoverProvider implements HoverProvider {
     )
 
     if (matchedView) {
-      const markdown = DocumentationProvider.generateDocFromPath(matchedView, true)
+      const markdown = DocumentationProvider.generateDocFromPath(matchedView)
       return new Hover(markdown)
     }
   }
