@@ -32,7 +32,7 @@ export class Model extends BaseCommand {
         generateMigration ? 'true' : 'false'
       } --controller=${generateController ? 'true' : 'false'}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('Model created successfully.')
     } catch (err) {
       this.showError('Could not create the model.', err)

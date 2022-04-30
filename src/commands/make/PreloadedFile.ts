@@ -33,7 +33,7 @@ export class PreloadedFile extends BaseCommand {
     try {
       let command = `make:prldfile ${prldName} --environment=${environment.join(',')}`
       const res = await this.execCmd(command, false)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage(`Preloaded file ${prldName} created.`)
     } catch (err) {
       this.showError('Could not create the seeder.', err)

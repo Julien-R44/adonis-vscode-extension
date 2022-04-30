@@ -20,7 +20,7 @@ export class Validator extends BaseCommand {
     try {
       let command = `make:validator ${seederName}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('Validator created successfully.')
     } catch (err) {
       this.showError('Could not create the validator.', err)

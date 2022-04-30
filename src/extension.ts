@@ -1,66 +1,35 @@
-import { ExtensionContext, languages } from 'vscode'
-import { registerAceCommands } from './commands'
-import EdgeCompletionProvider from './completion/edge/CompletionProvider'
-import EdgeHoverProvider from './completion/edge/HoverProvider'
-import EdgeLinkProvider from './completion/edge/LinkProvider'
-import RouteControllerCompletionProvider from './completion/routes/CompletionProvider'
-import RouteControllerHoverProvider from './completion/routes/HoverProvider'
-import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
-import { registerDocsCommands } from './commands/docs'
-import { EdgeFormatterProvider } from './languages'
+import { basename } from 'path'
+import { Uri } from 'vscode'
 
-export function activate(context: ExtensionContext) {
-  /**
-   * Commands
-   */
-  registerAceCommands(context)
-  registerDocsCommands(context)
-
-  /**
-   * Formatting and syntax
-   */
-  const edgeSelector = { language: 'edge', scheme: 'file' }
-  const edgeFormatter = new EdgeFormatterProvider()
-
-  context.subscriptions.push(
-    languages.registerDocumentFormattingEditProvider(edgeSelector, edgeFormatter),
-    languages.registerDocumentRangeFormattingEditProvider(edgeSelector, edgeFormatter)
-  )
-
-  /**
-   * Autocompletion, hover and links for TS files
-   */
-  const tsSelector = { language: 'typescript', scheme: 'file' }
-
-  const routeLink = languages.registerDocumentLinkProvider(
-    tsSelector,
-    new RouteControllerLinkProvider()
-  )
-
-  const routeHover = languages.registerHoverProvider(tsSelector, new RouteControllerHoverProvider())
-  const routeCompletion = languages.registerCompletionItemProvider(
-    tsSelector,
-    new RouteControllerCompletionProvider()
-  )
-
-  /**
-   * Autocompletion, hover and links for Edge files
-   */
-  const edgeLink = languages.registerDocumentLinkProvider(['edge'], new EdgeLinkProvider())
-  const edgeHover = languages.registerHoverProvider(['edge'], new EdgeHoverProvider())
-  const edgeCompletion = languages.registerCompletionItemProvider(
-    ['edge'],
-    new EdgeCompletionProvider()
-  )
-
-  context.subscriptions.push(
-    routeLink,
-    routeHover,
-    routeCompletion,
-    edgeLink,
-    edgeHover,
-    edgeCompletion
-  )
+export interface AdonisProject {
+  path: string
+  name: string
+  uri: Uri
 }
 
-export function deactivate() {}
+export default class Extension {
+  /**
+   * The paths to the different Adonis project in the workspace
+   */
+  public static adonisProjectPaths: string[] = []
+
+  /**
+   * Returns the directories
+   */
+  public static getAdonisProjects(): AdonisProject[] {
+    return this.adonisProjectPaths.map((path) => ({
+      name: basename(path),
+      path: path,
+      uri: Uri.file(path),
+    }))
+  }
+
+  /**
+   * Return the AdonisProject where the file is
+   */
+  public static getAdonisProjectFromFile(file: string): AdonisProject | null {
+    const adonisProjects = this.getAdonisProjects()
+    const project = adonisProjects.find((adonisProject) => file.startsWith(adonisProject.path))
+    return project || null
+  }
+}

@@ -20,7 +20,7 @@ export class View extends BaseCommand {
     try {
       let command = `make:view ${viewName}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('View created successfully.')
     } catch (err) {
       this.showError('Could not create the view.', err)

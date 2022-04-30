@@ -20,7 +20,7 @@ export class Exception extends BaseCommand {
     try {
       let command = `make:exception ${commandName}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('Exception created successfully.')
     } catch (err) {
       this.showError('Could not create the exception.', err)

@@ -29,7 +29,7 @@ export class Test extends BaseCommand {
     try {
       let command = `make:test ${suiteName} ${testName}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('Test created successfully.')
     } catch (err) {
       this.showError('Could not create the test.', err)

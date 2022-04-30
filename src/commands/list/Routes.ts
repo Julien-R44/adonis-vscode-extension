@@ -6,8 +6,8 @@ export class RouteList extends BaseCommand {
     let command = `list:routes --json`
 
     try {
-      const result = await this.execCmd(command)
-      const { headers, rows } = this.parseRoutes(result!.stdout)
+      const res = await this.execCmd(command)
+      const { headers, rows } = this.parseRoutes(res.result!.stdout)
       HtmlTable.openPanelWithTable('routes-list', 'Route List', headers, rows)
     } catch (err) {
       return this.showError('The route list could not be generated', err)

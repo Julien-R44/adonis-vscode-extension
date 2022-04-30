@@ -27,7 +27,7 @@
 		"workspaceContains:**/ace",
 		"onLanguage:edge"
 	],
-	"main": "./dist/extension.js",
+	"main": "./dist/index.js",
 	"contributes": {
 		"configuration": {
 			"type": "object",

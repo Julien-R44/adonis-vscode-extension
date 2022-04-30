@@ -20,7 +20,7 @@ export class Seeder extends BaseCommand {
     try {
       let command = `make:seeder ${seederName}`
       const res = await this.execCmd(command)
-      this.openCreatedFile(res!.stdout)
+      this.openCreatedFile(res.adonisProject, res.result!.stdout)
       this.showMessage('Seeder created successfully.')
     } catch (err) {
       this.showError('Could not create the seeder.', err)
