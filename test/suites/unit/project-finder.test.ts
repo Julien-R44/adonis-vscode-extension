@@ -4,17 +4,13 @@ import Extension from '../../../src/Extension'
 import { resolve } from 'path'
 
 test.group('Project Finder', (group) => {
-  // group.tap((g) => g.pin())
-
   test('Find simple project', async ({ assert }) => {
-    await Extension.loadAdonisProjects()
-
     const ret = Extension.getAdonisProjects()
-    const projectPath = resolve(__dirname, '../../.././../../test/fixtures/basic-app')
+    const projectPath = resolve(__dirname, '../.././../../test/fixtures/basic-app')
     assert.deepEqual(ret, [
       {
         name: 'basic-app',
-        path: projectPath,
+        path: Uri.file(projectPath).path,
         uri: Uri.file(projectPath),
       },
     ])
@@ -25,13 +21,16 @@ test.group('Project Finder', (group) => {
    * since VSCode does not support changing workspace while running tests
    */
 
-  test('Get Project from file', ({ assert }) => {
-    const filePath = resolve(
-      __dirname,
-      '../../.././../../test/fixtures/basic-app/app/Controllers/Http/FooController.ts'
+  test('Get Project from file', async ({ assert }) => {
+    const filePath = Uri.file(
+      resolve(
+        __dirname,
+        '../.././../../test/fixtures/basic-app/app/Controllers/Http/FooController.ts'
+      )
     )
 
-    const project = Extension.getAdonisProjectFromFile(filePath)
+    const project = Extension.getAdonisProjectFromFile(filePath.path)
+    assert.isNotNull(project)
     assert.deepInclude(project, { name: 'basic-app' })
   })
 })

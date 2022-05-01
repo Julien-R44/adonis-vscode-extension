@@ -11,7 +11,7 @@
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting
 * Multiple Workspaces and Monorepos support 
-* Edge and AdonisJS Snippets
+* Edge, AdonisJS, and Japa Snippets
 * Go To Controller 
 * Go To View
 

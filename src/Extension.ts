@@ -18,9 +18,7 @@ export default class Extension {
    */
   public static async loadAdonisProjects() {
     let files = await workspace.findFiles('**/ace', '**/node_modules/**', undefined)
-    files.map((file) =>
-      Extension.adonisProjectPaths.push(file.path.split('/').slice(0, -1).join('/'))
-    )
+    this.adonisProjectPaths = files.map((file) => file.path.split('/').slice(0, -1).join('/'))
   }
 
   /**
