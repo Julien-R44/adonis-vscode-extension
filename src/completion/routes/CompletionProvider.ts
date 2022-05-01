@@ -6,11 +6,12 @@ import {
   CompletionItem,
   CompletionItemKind,
   Range,
+  MarkdownString,
 } from 'vscode'
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
-import { Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
+import { Suggestion, SuggestionProvider, SuggestionType } from '../../services/SuggestionProvider'
 import Extension from '../../Extension'
 
 const {
@@ -38,7 +39,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
       ? this.getControllerMethodSuggestions(text, doc)
       : this.getControllerNameSuggestions(text, doc)
 
-    return SuggestionMatcher.toCompletionItems(suggestions, CompletionItemKind.Value)
+    return SuggestionProvider.toCompletionItems(suggestions)
   }
 
   /**
@@ -72,11 +73,12 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const project = Extension.getAdonisProjectFromFile(doc.uri.path)
     if (!project) return []
 
-    return SuggestionMatcher.getSuggestions(
+    return SuggestionProvider.getSuggestions(
       text,
       project,
       controllersDirectories,
-      controllersExtensions
+      controllersExtensions,
+      SuggestionType.ControllerName
     ).map((suggestion) => {
       return {
         ...suggestion,
@@ -100,6 +102,11 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     return methods.map((method) => {
       let newSuggestion = Object.assign({}, suggestions)
       newSuggestion.text = method
+      newSuggestion.documentation = SuggestionProvider.buildSuggestionDocumentation(
+        method,
+        newSuggestion.filePath,
+        SuggestionType.ControllerMethod
+      )
       return newSuggestion
     })
   }

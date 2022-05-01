@@ -10,7 +10,7 @@ import {
 } from 'vscode'
 import Config from '../../utilities/config'
 import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
-import { Suggestion, SuggestionMatcher } from '../../services/SuggestionMatcher'
+import { Suggestion, SuggestionProvider, SuggestionType } from '../../services/SuggestionProvider'
 import Extension from '../../Extension'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
@@ -45,7 +45,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
 
     const text = doc.getText(range)
     const suggestions = this.getViewSuggestions(text, doc)
-    return SuggestionMatcher.toCompletionItems(suggestions, CompletionItemKind.Value)
+    return SuggestionProvider.toCompletionItems(suggestions, CompletionItemKind.Value)
   }
 
   /**
@@ -60,11 +60,12 @@ class EdgeCompletionProvider implements CompletionItemProvider {
     const project = Extension.getAdonisProjectFromFile(doc.uri.path)
     if (!project) return []
 
-    const suggestions = SuggestionMatcher.getSuggestions(
+    const suggestions = SuggestionProvider.getSuggestions(
       text,
       project,
       config.viewsDirectories,
-      config.viewsExtensions
+      config.viewsExtensions,
+      SuggestionType.View
     ).map((suggestion) => {
       const txt = suggestion.text.replace(/\/+/g, '.')
       return { ...suggestion, text: txt }

@@ -1,6 +1,9 @@
 import * as glob from 'glob'
+import { relative } from 'path'
 import { MarkdownString, CompletionItem, CompletionItemKind } from 'vscode'
 import { AdonisProject } from '../Extension'
+import { getMethodsInSourceFile } from '../utilities/functions'
+import { DocumentationProvider } from './DocumentationProvider'
 
 /**
  * A code completion suggestion
@@ -12,21 +15,27 @@ export type Suggestion = {
   filePath: string
 }
 
-export class SuggestionMatcher {
+export enum SuggestionType {
+  ControllerName,
+  ControllerMethod,
+  View,
+}
+
+export class SuggestionProvider {
   /**
    * Convert a file path to a suggestion.
    */
-  private static fromFilePaths(
+  private static createSuggestionsFromFilePaths(
     directory: string,
     filePaths: string[],
     searchDirectories: string[],
-    extensions: string[]
+    extensions: string[],
+    suggestionType: SuggestionType
   ): Suggestion[] {
     let suggestions: Set<Suggestion> = new Set()
 
     for (const filePath of filePaths) {
-      const pwd = directory
-      const shortPath = `${directory}/${filePath.replace(`${pwd}/`, '')}`
+      const shortPath = relative(directory, filePath)
 
       const searchDirRegex = searchDirectories.join('|')
       const extensionRegex = extensions.join('|')
@@ -37,12 +46,11 @@ export class SuggestionMatcher {
       if (matches.length < 2) continue
       const extensionParts = matches[2].split('.')
       const textSuffix = extensionParts[0] === '.' ? '' : extensionParts[0]
+      const text = `${matches[1]}${textSuffix}`
 
-      const text: string = `${matches[1]}${textSuffix}`
-      const detail = this.extensionDescription(matches[2])
-      const documentation = new MarkdownString(shortPath)
+      const documentation = this.buildSuggestionDocumentation(text, filePath, suggestionType)
 
-      suggestions.add({ text, documentation, detail, filePath })
+      suggestions.add({ text, documentation, detail: shortPath, filePath })
     }
 
     return Array.from(suggestions)
@@ -88,18 +96,6 @@ export class SuggestionMatcher {
   }
 
   /**
-   * Get a short description text of a given file extension.
-   */
-  private static extensionDescription(fileExtension: string): string {
-    return (
-      {
-        '.edge': 'Edge Template',
-        'controller.ts': 'Controller',
-      }[fileExtension.trim()] || ''
-    )
-  }
-
-  /**
    * Get completion suggestion based on a provided text.
    *
    * @param text Text to match against
@@ -108,12 +104,20 @@ export class SuggestionMatcher {
     text: string,
     project: AdonisProject,
     targetDirectories: string[],
-    fileExtensions: string[]
+    fileExtensions: string[],
+    suggestionType: SuggestionType
   ): Suggestion[] {
     text = text.replace(/\"|\'/g, '').replace(/\./g, '/').replace(/\s/g, '')
 
     const matchedFiles = this.getMatches(project, targetDirectories, text, fileExtensions)
-    return this.fromFilePaths(project.uri.fsPath, matchedFiles, targetDirectories, fileExtensions)
+
+    return this.createSuggestionsFromFilePaths(
+      project.uri.fsPath,
+      matchedFiles,
+      targetDirectories,
+      fileExtensions,
+      suggestionType
+    )
   }
 
   /**
@@ -122,12 +126,33 @@ export class SuggestionMatcher {
    * @param suggestions List of suggestions to be converted to completion
    * @param itemKind Kind of completion items being converted to
    */
-  public static toCompletionItems(suggestions: Suggestion[], itemKind: CompletionItemKind) {
+  public static toCompletionItems(suggestions: Suggestion[], itemKind = CompletionItemKind.Value) {
     return suggestions.map((suggestion) => {
       let item = new CompletionItem(suggestion.text, itemKind)
       item.documentation = suggestion.documentation
       item.detail = suggestion.detail
       return item
     })
+  }
+
+  /**
+   * Build a suggestion documentation based on SuggestionType provided.
+   */
+  public static buildSuggestionDocumentation(
+    text: string,
+    filePath: string,
+    suggestionType: SuggestionType
+  ): string | MarkdownString {
+    if (suggestionType === SuggestionType.ControllerName) {
+      const fileMethods = getMethodsInSourceFile(filePath)
+      const bulletListMethods = fileMethods.map((item) => `- ${item}`).join('\n')
+      return new MarkdownString(`**Available Methods**\n` + bulletListMethods)
+    }
+
+    if (suggestionType === SuggestionType.ControllerMethod) {
+      return DocumentationProvider.getDocForMethodInFile(filePath, text) || ''
+    }
+
+    return ''
   }
 }
