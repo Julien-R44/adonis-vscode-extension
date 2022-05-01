@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { test } from '@japa/runner'
 import { workspace, WorkspaceFolder, MarkdownString } from 'vscode'
-import { DocumentationProvider } from '../../../services/DocumentationProvider'
+import { DocumentationProvider } from '../../../src/services/DocumentationProvider'
 
 let mainWorkspace: string
 

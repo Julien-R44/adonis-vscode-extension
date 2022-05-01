@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { parseControllerString } from '../../../utilities/controller'
+import { parseControllerString } from '../../../src/utilities/controller'
 
 test.group('Parse route controller strings', (group) => {
   test('Controller string is parsed', ({ assert }) => {

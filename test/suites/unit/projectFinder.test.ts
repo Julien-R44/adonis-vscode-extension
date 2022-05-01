@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { Uri } from 'vscode'
-import Extension from '../../../Extension'
+import Extension from '../../../src/Extension'
 import { resolve } from 'path'
 
 test.group('Project Finder', (group) => {
@@ -10,7 +10,7 @@ test.group('Project Finder', (group) => {
     await Extension.loadAdonisProjects()
 
     const ret = Extension.getAdonisProjects()
-    const projectPath = resolve(__dirname, '../../.././../../src/test/fixtures/basic-app')
+    const projectPath = resolve(__dirname, '../../.././../../test/fixtures/basic-app')
     assert.deepEqual(ret, [
       {
         name: 'basic-app',
@@ -28,7 +28,7 @@ test.group('Project Finder', (group) => {
   test('Get Project from file', ({ assert }) => {
     const filePath = resolve(
       __dirname,
-      '../../.././../../src/test/fixtures/basic-app/app/Controllers/Http/FooController.ts'
+      '../../.././../../test/fixtures/basic-app/app/Controllers/Http/FooController.ts'
     )
 
     const project = Extension.getAdonisProjectFromFile(filePath)
