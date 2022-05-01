@@ -1,23 +1,10 @@
 import BaseCommand, { ExtensionErrors } from '../BaseCommand'
 import { HtmlTable } from '../../helpers/HtmlTable'
+import { AdonisProject } from '../../Extension'
+import { WebviewPanel } from 'vscode'
 
 export class RouteList extends BaseCommand {
-  public static async run() {
-    let command = `list:routes --json`
-
-    try {
-      const res = await this.execCmd(command)
-      const { headers, rows } = this.parseRoutes(res.result!.stdout)
-      HtmlTable.openPanelWithTable('routes-list', 'Route List', headers, rows)
-    } catch (err) {
-      // @ts-ignore
-      if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
-        return this.showError('You must select an AdonisJS project on which to run your command.')
-      }
-
-      return this.showError('The route list could not be generated', err)
-    }
-  }
+  private static readonly command = 'list:routes --json'
 
   /**
    * Parse the return of `list:routes --json` command
@@ -40,9 +27,57 @@ export class RouteList extends BaseCommand {
       route.middleware.join(','),
     ])
 
-    return {
-      headers,
-      rows,
+    return { headers, rows }
+  }
+
+  /**
+   * Execute the `node ace list:routes --json` command and parse the JSON output
+   */
+  private static async execAndParseRoutes(project?: AdonisProject) {
+    const res = await this.execCmd(this.command, true, project)
+    const { headers, rows } = this.parseRoutes(res.result!.stdout)
+
+    return { res, headers, rows }
+  }
+
+  /**
+   * Handle message received by the table webview
+   */
+  private static async onReceiveWebviewMessage(
+    panel: WebviewPanel,
+    project: AdonisProject,
+    message: any
+  ) {
+    if (message.command !== 'refresh') {
+      return
+    }
+
+    try {
+      const { rows } = await this.execAndParseRoutes(project)
+      panel.webview.postMessage({ command: 'refresh', rows })
+    } catch (error) {
+      this.showError('Failed to refresh routes list', error)
+      panel.webview.postMessage({ command: 'refresh-failed', error })
+    }
+  }
+
+  /**
+   * Run the command
+   */
+  public static async run() {
+    try {
+      const { res, headers, rows } = await this.execAndParseRoutes()
+      const panel = await HtmlTable.openPanelWithTable('routes-list', 'Route List', headers, rows)
+      panel.webview.onDidReceiveMessage(
+        this.onReceiveWebviewMessage.bind(this, panel, res.adonisProject)
+      )
+    } catch (err) {
+      // @ts-ignore
+      if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
+        return this.showError('You must select an AdonisJS project on which to run your command.')
+      }
+
+      return this.showError('The route list could not be generated', err)
     }
   }
 }

@@ -162,8 +162,12 @@ export default class BaseCommand {
   /**
    * Execute the final `node ace x` command
    */
-  protected static async execCmd(command: string, background: boolean = true) {
-    let adonisProject = await this.pickAdonisProject()
+  protected static async execCmd(
+    command: string,
+    background: boolean = true,
+    adonisProject?: AdonisProject
+  ) {
+    adonisProject = adonisProject || (await this.pickAdonisProject())
 
     if (!adonisProject) {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
