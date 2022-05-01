@@ -10,13 +10,17 @@
 		"vscode": "^1.65.0"
 	},
 	"categories": [
-		"Other"
+    "Programming Languages",
+    "Formatters",
+		"Snippets",
+    "Other"
 	],
 	"keywords": [
 		"Adonis",
 		"AdonisJS",
 		"Ace",
 		"NodeJS",
+    "Japa",
 		"Edge"
 	],
   "repository": {
@@ -264,10 +268,10 @@
 		"@types/glob": "^7.2.0",
 		"@types/node": "14.x",
 		"@types/vscode": "^1.65.0",
-		"@typescript-eslint/eslint-plugin": "^5.19.0",
-		"@typescript-eslint/parser": "^5.19.0",
+		"@typescript-eslint/eslint-plugin": "^5.21.0",
+		"@typescript-eslint/parser": "^5.21.0",
 		"@vscode/test-electron": "^2.1.3",
-		"eslint": "^8.13.0",
+		"eslint": "^8.14.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-adonis": "^2.1.0",
 		"eslint-plugin-prettier": "^4.0.0",
@@ -275,8 +279,8 @@
 		"glob": "^7.2.0",
 		"np": "^7.6.1",
 		"prettier": "^2.6.2",
-		"ts-loader": "^9.2.8",
-		"typescript": "^4.6.3",
+		"ts-loader": "^9.3.0",
+		"typescript": "^4.6.4",
 		"webpack": "^5.72.0",
 		"webpack-cli": "^4.9.2"
 	},
@@ -330,7 +334,7 @@
 	"dependencies": {
 		"@poppinss/module-methods-extractor": "^1.0.5",
 		"docblock": "^0.4.5",
-		"vscode-html-languageservice": "^4.2.4",
+		"vscode-html-languageservice": "^4.2.5",
 		"vscode-languageserver-types": "^3.16.0"
 	}
 }
