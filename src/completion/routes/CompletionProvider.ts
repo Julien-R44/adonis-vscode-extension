@@ -4,9 +4,7 @@ import {
   ProviderResult,
   CompletionItemProvider,
   CompletionItem,
-  CompletionItemKind,
   Range,
-  MarkdownString,
 } from 'vscode'
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
@@ -79,12 +77,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
       controllersDirectories,
       controllersExtensions,
       SuggestionType.ControllerName
-    ).map((suggestion) => {
-      return {
-        ...suggestion,
-        text: suggestion.text.replace(/^Http\//g, ''),
-      }
-    })
+    )
   }
 
   /**

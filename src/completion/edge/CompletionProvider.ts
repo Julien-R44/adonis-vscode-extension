@@ -60,18 +60,13 @@ class EdgeCompletionProvider implements CompletionItemProvider {
     const project = Extension.getAdonisProjectFromFile(doc.uri.path)
     if (!project) return []
 
-    const suggestions = SuggestionProvider.getSuggestions(
+    return SuggestionProvider.getSuggestions(
       text,
       project,
       config.viewsDirectories,
       config.viewsExtensions,
       SuggestionType.View
-    ).map((suggestion) => {
-      const txt = suggestion.text.replace(/\/+/g, '.')
-      return { ...suggestion, text: txt }
-    })
-
-    return suggestions
+    )
   }
 }
 

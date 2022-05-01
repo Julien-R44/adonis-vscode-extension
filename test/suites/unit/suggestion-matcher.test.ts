@@ -79,9 +79,9 @@ test.group('Suggestion Matcher: Views', () => {
   test('Should return the correct view - "{result}"')
     .with([
       { needle: 'flat', path: 'flat.edge', result: 'flat' },
-      { needle: 'partialA', path: 'partials/sub/partialA.edge', result: 'partials/sub/partialA' },
-      { needle: 'footer', path: 'partials/footer.edge', result: 'partials/footer' },
-      { needle: 'button', path: 'components/button.edge', result: 'components/button' },
+      { needle: 'partialA', path: 'partials/sub/partialA.edge', result: 'partials.sub.partialA' },
+      { needle: 'footer', path: 'partials/footer.edge', result: 'partials.footer' },
+      { needle: 'button', path: 'components/button.edge', result: 'components.button' },
     ])
     .run(({ assert }, { needle, path, result }) => {
       const suggestions = SuggestionProvider.getSuggestions(
@@ -93,6 +93,7 @@ test.group('Suggestion Matcher: Views', () => {
       )
 
       const correctSuggestion = suggestions.find((suggestion) => suggestion.filePath.endsWith(path))
+
       assert.deepInclude(correctSuggestion!.text, result)
     })
 })

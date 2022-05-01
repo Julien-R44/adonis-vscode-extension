@@ -46,7 +46,16 @@ export class SuggestionProvider {
       if (matches.length < 2) continue
       const extensionParts = matches[2].split('.')
       const textSuffix = extensionParts[0] === '.' ? '' : extensionParts[0]
-      const text = `${matches[1]}${textSuffix}`
+      let text = `${matches[1]}${textSuffix}`
+
+      if (suggestionType === SuggestionType.View) {
+        text = text.replace(/\/+/g, '.')
+      } else if (
+        suggestionType === SuggestionType.ControllerMethod ||
+        suggestionType === SuggestionType.ControllerName
+      ) {
+        text = text.replace(/^Http\//g, '')
+      }
 
       const documentation = this.buildSuggestionDocumentation(text, filePath, suggestionType)
 
