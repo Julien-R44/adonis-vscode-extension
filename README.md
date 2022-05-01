@@ -2,7 +2,6 @@
   <img width="650px" src="https://i.imgur.com/bUsqL2V.png" />
   <h2>💻 Official AdonisJS extension for VSCode</h2>
 
-  <br/>
   <p align="center">
     <a href="https://github.com/Julien-R44/adonis-vscode-extension/actions/workflows/test.yml">
       <img src="https://img.shields.io/github/workflow/status/julien-r44/adonis-vscode-extension/test?label=%20&logo=github&style=flat-square&logoColor=white&color=5A45FF">
