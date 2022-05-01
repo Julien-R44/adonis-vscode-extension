@@ -1,0 +1,81 @@
+{
+  "Japa: Group Each Setup": {
+    "body": [
+      "group.each.setup(() => {",
+      "\t${1:// Setup}",
+      "})"
+    ],
+    "description": "Hook before each test in a group",
+    "prefix": "ja:ges"
+  },
+  "Japa: Group Each Teardown": {
+    "body": [
+      "group.each.teardown(() => {",
+      "\t${1:// Teardown}",
+      "})"
+    ],
+    "description": "Hook after each test in a group",
+    "prefix": "ja:get"
+  },
+  "Japa: Group Setup": {
+    "body": [
+      "group.setup(() => {",
+      "\t${1:// Setup}",
+      "})"
+    ],
+    "description": "Hook before all tests in a group",
+    "prefix": "ja:gs"
+  },
+  "Japa: Group Tap": {
+    "body": [
+      "group.tap((_test) => _test.${1:pin()})"
+    ],
+    "description": "Tap all tests in a group",
+    "prefix": "ja:tap"
+  },
+  "Japa: Group Teardown": {
+    "body": [
+      "group.teardown(() => {",
+      "\t${1:// Teardown}",
+      "})"
+    ],
+    "description": "Hook after all tests in a group",
+    "prefix": "ja:gt"
+  },
+  "Japa: New File": {
+    "body": [
+      "import { test } from '@japa/runner'",
+      "",
+      "test.group('${1:${TM_FILENAME_BASE/(.*)\\..+$/$1/}}', (group) => {",
+      "\ttest('${2:My Test}', ({ ${3|assert,expect|} }) => {",
+      "\t\t${4:// My test}",
+      "\t})",
+      "})",
+      ""
+    ],
+    "description": "Create a new file",
+    "prefix": "ja:new-file"
+  },
+  "Japa: New Test": {
+    "body": [
+      "test('${2:My Test}', ({ ${3|assert,expect|} }) => {",
+      "\t${4:// My test}",
+      "})",
+      ""
+    ],
+    "description": "Create a new test",
+    "prefix": "ja:test"
+  },
+  "Japa: New group": {
+    "body": [
+      "test.group('${1:${TM_FILENAME_BASE/(.*)\\..+$/$1/}}', (group) => {",
+      "\ttest('${2:My Test}', ({ ${3|assert,expect|} }) => {",
+      "\t\t${4:// My test}",
+      "\t})",
+      "})",
+      ""
+    ],
+    "description": "Create a new group",
+    "prefix": "ja:group"
+  }
+}
