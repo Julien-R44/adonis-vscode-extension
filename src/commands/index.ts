@@ -17,11 +17,12 @@ import { Manifest } from './generate/Manifest'
 import { RouteList } from './list/Routes'
 import { Test } from './make/Test'
 import { RunTests } from './run-tests'
+import { EXTENSION_NAME } from '../utilities/constants'
 
 import { ExtensionContext, commands } from 'vscode'
 
 export const registerAceCommands = (context: ExtensionContext) => {
-  const extName = 'adonis-vscode-extension'
+  const extName = EXTENSION_NAME
   const registerCommand = commands.registerCommand
 
   /**

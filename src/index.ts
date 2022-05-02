@@ -1,4 +1,4 @@
-import { ExtensionContext, languages, workspace } from 'vscode'
+import { commands, ExtensionContext, languages, workspace } from 'vscode'
 import { registerAceCommands } from './commands'
 import EdgeCompletionProvider from './completion/edge/CompletionProvider'
 import EdgeHoverProvider from './completion/edge/HoverProvider'
@@ -9,9 +9,16 @@ import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
 import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
 import Extension from './Extension'
+import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 
 export async function activate(context: ExtensionContext) {
+  console.log('Activate AdonisJS extension...')
   await Extension.loadAdonisProjects()
+
+  /**
+   * Set commands visibility
+   */
+  commands.executeCommand('setContext', CONTEXT_ADONIS_PROJECT_LOADED, true)
 
   /**
    * Commands
