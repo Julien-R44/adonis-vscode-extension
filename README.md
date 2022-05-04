@@ -20,7 +20,7 @@
 
 </div>
 
-## Features
+# Features
 * Use all Adonis Assembler commands ( make:\* )
 * Migrate and seed your database ( db:\*, migration:\* )
 * View your routes within VSCode
@@ -62,12 +62,24 @@ Syntax highlighting, auto-completion of the tags that includes partials/componen
 
 ![](https://i.imgur.com/eDYb9fK.gif)
 
-## Known Issues
+## Snippets
+Snippets for Edge, Japa, and AdonisJS are defined, take a look [here](./snippets/) to see the list of snippets.
+
+_Since I'm not a big snippet user, feel free to propose a PR with snippets you think are useful._
+
+
+# Configuration
+
+- `nodePath`: The path to the node executable.
+- `useUnixCd`: Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )
+- `quickJump`: Enable quick jump by using Ctrl + Click
+
+# Known Issues
 Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
 
-## Contributing
+# Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
 * Clone the project and open it in VS Code
 * Run `npm install`
