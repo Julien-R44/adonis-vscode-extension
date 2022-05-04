@@ -79,6 +79,21 @@ Below is the list of unsupported features (for the moment), feel free to make a 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
 
+## IntelliSense while typing
+In the context of controller and view autocompletion, we are inside strings. By default, VSCode totally disables the display of IntelliSense suggestions inside strings. So if you want to see the autocompletion of your controllers and views, you will have to press CTRL+Space to manually trigger IntelliSense.
+
+If you want the suggestions while typing, you can add this to your VSCode configuration :
+
+```json
+"editor.quickSuggestions": {
+  "other": "off",
+  "comments": "off",
+  "strings": "on" 👈 // This
+}
+```
+
+But be warned, this will automatically display intellisense even in "traditional" strings
+
 # Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
 * Clone the project and open it in VS Code
