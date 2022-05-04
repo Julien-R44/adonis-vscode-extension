@@ -22,6 +22,7 @@ export class RunTests extends BaseCommand {
       command: `test ${suites} ${watchMode ? '-w' : ''}`,
       successMessage: '',
       errorMessage: 'Could not run tests.',
+      background: false,
     })
   }
 }

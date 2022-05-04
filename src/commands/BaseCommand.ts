@@ -131,18 +131,20 @@ export default class BaseCommand {
     errorMessage,
     fileType = 'file',
     openCreatedFile = false,
+    background = true,
   }: {
     command: string
     successMessage?: string
     errorMessage?: string
     fileType?: string
     openCreatedFile?: boolean
+    background?: boolean
   }) {
     successMessage = successMessage || `${capitalize(fileType)} created successfully`
     errorMessage = errorMessage || `Failed to create ${fileType.toLowerCase()}`
 
     try {
-      const res = await this.execCmd(command)
+      const res = await this.execCmd(command, background)
 
       if (openCreatedFile) {
         this.openCreatedFile(res.adonisProject, res.result!.stdout)
