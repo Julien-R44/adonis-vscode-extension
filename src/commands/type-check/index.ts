@@ -10,6 +10,7 @@ export class TypeCheck extends BaseCommand {
       command: `type-check`,
       successMessage: 'Type-check completed successfully.',
       errorMessage: 'Type-check failed.',
+      background: false,
     })
   }
 }
