@@ -7,7 +7,7 @@ export interface AdonisProject {
   uri: Uri
 }
 
-export default class Extension {
+export default class ProjectFinder {
   /**
    * The paths to the different Adonis project in the workspace
    */

@@ -11,7 +11,7 @@ import {
 import Config from '../../utilities/config'
 import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
 import { Suggestion, SuggestionProvider, SuggestionType } from '../../services/SuggestionProvider'
-import Extension from '../../Extension'
+import ProjectFinder from '../../services/ProjectFinder'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
   public provideCompletionItems(
@@ -57,7 +57,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
   private getViewSuggestions(text: string, doc: TextDocument): Suggestion[] {
     const config = Config.autocomplete
 
-    const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+    const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
     if (!project) return []
 
     return SuggestionProvider.getSuggestions(

@@ -1,6 +1,6 @@
 import BaseCommand, { ExtensionErrors } from '../BaseCommand'
 import { HtmlTable } from '../../helpers/HtmlTable'
-import { AdonisProject } from '../../Extension'
+import { AdonisProject } from '../../services/ProjectFinder'
 import { WebviewPanel } from 'vscode'
 
 export class RouteList extends BaseCommand {

@@ -8,12 +8,12 @@ import RouteControllerHoverProvider from './completion/routes/HoverProvider'
 import { RouteControllerLinkProvider } from './completion/routes/LinkProvider'
 import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
-import Extension from './Extension'
+import ProjectFinder from './services/ProjectFinder'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 
 export async function activate(context: ExtensionContext) {
   console.log('Activate AdonisJS extension...')
-  await Extension.loadAdonisProjects()
+  await ProjectFinder.loadAdonisProjects()
 
   /**
    * Set commands visibility

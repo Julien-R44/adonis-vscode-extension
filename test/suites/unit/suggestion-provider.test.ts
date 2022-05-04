@@ -1,11 +1,11 @@
 import { test } from '@japa/runner'
 import { MarkdownString } from 'vscode'
-import Extension from '../../../src/Extension'
+import ProjectFinder from '../../../src/services/ProjectFinder'
 import { SuggestionProvider, SuggestionType } from '../../../src/services/SuggestionProvider'
 
-const project = Extension.getAdonisProjects()[0]
+const project = ProjectFinder.getAdonisProjects()[0]
 
-test.group('Suggestion Matcher: Controllers Name', () => {
+test.group('Suggestion Provider: Controllers Name', () => {
   test('Empty text should return all controllers', ({ assert }) => {
     const suggestions = SuggestionProvider.getSuggestions(
       '',
@@ -63,7 +63,7 @@ test.group('Suggestion Matcher: Controllers Name', () => {
     })
 })
 
-test.group('Suggestion Matcher: Views', () => {
+test.group('Suggestion Provider: Views', () => {
   test('Empty text should return all views', ({ assert }) => {
     const suggestions = SuggestionProvider.getSuggestions(
       '',

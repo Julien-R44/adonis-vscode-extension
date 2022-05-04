@@ -1,7 +1,7 @@
 import { Uri, TextDocument, workspace as vsWorkspace, WorkspaceFolder } from 'vscode'
 import { getDirectories } from './directory'
 import * as fs from 'fs'
-import Extension, { AdonisProject } from '../Extension'
+import ProjectFinder, { AdonisProject } from '../services/ProjectFinder'
 
 /**
  * A minimal file path representation.
@@ -40,7 +40,7 @@ export function getPathMatches(
   targetDirectories: string[],
   extensions: string[]
 ): Path[] {
-  const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+  const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
   if (!project) return []
 
   const workspacePath = project.uri.fsPath

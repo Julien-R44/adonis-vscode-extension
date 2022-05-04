@@ -2,7 +2,7 @@ import * as path from 'path'
 import { assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { configure, run as runJapa } from '@japa/runner'
-import Extension from '../src/Extension'
+import ProjectFinder from '../src/services/ProjectFinder'
 
 export async function run(): Promise<void> {
   const testsRoot = path.resolve(__dirname, '..')
@@ -16,7 +16,7 @@ export async function run(): Promise<void> {
       reporters: [specReporter()],
       setup: [
         async () => {
-          await Extension.loadAdonisProjects()
+          await ProjectFinder.loadAdonisProjects()
         },
       ],
       teardown: [

@@ -10,7 +10,7 @@ import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
 import { Suggestion, SuggestionProvider, SuggestionType } from '../../services/SuggestionProvider'
-import Extension from '../../Extension'
+import ProjectFinder from '../../services/ProjectFinder'
 
 const {
   controllersDirectories,
@@ -68,7 +68,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const controller = parseControllerString(text)
     if (controller) text = controller.name
 
-    const project = Extension.getAdonisProjectFromFile(doc.uri.path)
+    const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
     if (!project) return []
 
     return SuggestionProvider.getSuggestions(

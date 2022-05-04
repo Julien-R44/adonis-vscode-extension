@@ -1,7 +1,7 @@
 import * as glob from 'glob'
 import { relative } from 'path'
 import { MarkdownString, CompletionItem, CompletionItemKind } from 'vscode'
-import { AdonisProject } from '../Extension'
+import { AdonisProject } from './ProjectFinder'
 import { getMethodsInSourceFile } from '../utilities/functions'
 import { DocumentationProvider } from './DocumentationProvider'
 

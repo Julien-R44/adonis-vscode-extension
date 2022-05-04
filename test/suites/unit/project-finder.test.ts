@@ -1,11 +1,11 @@
 import { test } from '@japa/runner'
 import { Uri } from 'vscode'
-import Extension from '../../../src/Extension'
+import ProjectFinder from '../../../src/services/ProjectFinder'
 import { resolve } from 'path'
 
 test.group('Project Finder', (group) => {
   test('Find simple project', async ({ assert }) => {
-    const ret = Extension.getAdonisProjects()
+    const ret = ProjectFinder.getAdonisProjects()
     const projectPath = resolve(__dirname, '../.././../../test/fixtures/basic-app')
     assert.deepEqual(ret, [
       {
@@ -29,7 +29,7 @@ test.group('Project Finder', (group) => {
       )
     )
 
-    const project = Extension.getAdonisProjectFromFile(filePath.path)
+    const project = ProjectFinder.getAdonisProjectFromFile(filePath.path)
     assert.isNotNull(project)
     assert.deepInclude(project, { name: 'basic-app' })
   })

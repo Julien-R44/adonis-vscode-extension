@@ -4,7 +4,7 @@ import { promisify } from 'util'
 import { exec as baseExec } from 'child_process'
 import { join } from 'path'
 import Config from '../utilities/config'
-import Extension, { AdonisProject } from '../Extension'
+import ProjectFinder, { AdonisProject } from '../services/ProjectFinder'
 import { capitalize } from '../utilities/functions'
 const exec = promisify(baseExec)
 
@@ -105,7 +105,7 @@ export default class BaseCommand {
    * are present in the workspace
    */
   protected static async pickAdonisProject() {
-    const adonisProjects = Extension.getAdonisProjects()
+    const adonisProjects = ProjectFinder.getAdonisProjects()
 
     if (adonisProjects.length === 1) {
       return adonisProjects[0]
