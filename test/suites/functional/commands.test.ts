@@ -37,5 +37,5 @@ test.group('Commands: RunTests', (group) => {
     await RunTests.run()
 
     assert.deepEqual(execCmdMock.callCount, 1)
-  }).pin()
+  })
 })

@@ -49,7 +49,7 @@ export class SuggestionProvider {
       let text = `${matches[1]}${textSuffix}`
 
       if (suggestionType === SuggestionType.View) {
-        text = text.replace(/\/+/g, '.')
+        text = text.replace(/\.+/g, '/')
       } else if (
         suggestionType === SuggestionType.ControllerMethod ||
         suggestionType === SuggestionType.ControllerName
