@@ -1,33 +1,33 @@
 {
 	"name": "adonis-vscode-extension",
-  "displayName": "AdonisJS Extension",
+	"displayName": "AdonisJS Extension",
 	"description": "The official VSCode extension of AdonisJS",
-  "icon": "assets/adonis.png",
-  "author": "Julien Ripouteau <julien@ripouteau.com>",
-  "publisher": "jripouteau",
+	"icon": "assets/adonis.png",
+	"author": "Julien Ripouteau <julien@ripouteau.com>",
+	"publisher": "jripouteau",
 	"version": "0.2.0",
 	"engines": {
 		"vscode": "^1.65.0"
 	},
 	"categories": [
-    "Programming Languages",
-    "Formatters",
+		"Programming Languages",
+		"Formatters",
 		"Snippets",
-    "Other"
+		"Other"
 	],
 	"keywords": [
 		"Adonis",
 		"AdonisJS",
 		"Ace",
 		"NodeJS",
-    "Japa",
+		"Japa",
 		"Edge"
 	],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Julien-R44/adonis-vscode-extension.git"
-  },
-  "activationEvents": [
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Julien-R44/adonis-vscode-extension.git"
+	},
+	"activationEvents": [
 		"workspaceContains:**/ace",
 		"onLanguage:edge"
 	],
@@ -37,11 +37,11 @@
 			"type": "object",
 			"title": "AdonisJS",
 			"properties": {
-        "adonisjs.misc.nodePath": {
-          "type": "string",
-          "description": "The path to the node executable",
-          "default": "node"
-        },
+				"adonisjs.misc.nodePath": {
+					"type": "string",
+					"description": "The path to the node executable",
+					"default": "node"
+				},
 				"adonisjs.autocomplete.quickJump": {
 					"type": "boolean",
 					"default": true,
@@ -111,170 +111,170 @@
 					"description": "Regular expression to match handle route controllers",
 					"default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^'\"]*)\\.([^'\"]*)\\1"
 				},
-        "adonisjs.misc.useUnixCd": {
-          "type": "boolean",
-          "default": false,
-          "description": "Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )"
-        }
+				"adonisjs.misc.useUnixCd": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )"
+				}
 			}
 		},
-    "menus": {
-      "commandPalette": [
-        {
-          "command": "adonis-vscode-extension.make.command",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.controller",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.exception",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.middleware",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.migration",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.model",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.seeder",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.view",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.validator",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.prldfile",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.make.test",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.migration.fresh",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.migration.refresh",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.migration.reset",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.generate.manifest",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.configure",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.type-check",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.list.routes",
-          "when": "adonisProjectLoaded == true"
-        },
-        {
-          "command": "adonis-vscode-extension.test",
-          "when": "adonisProjectLoaded == true"
-        }
-      ]
-    },
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "adonis-vscode-extension.make.command",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.controller",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.exception",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.middleware",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.migration",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.model",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.seeder",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.view",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.validator",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.prldfile",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.make.test",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.migration.fresh",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.migration.refresh",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.migration.reset",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.generate.manifest",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.configure",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.type-check",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.list.routes",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.test",
+					"when": "adonisProjectLoaded == true"
+				}
+			]
+		},
 		"commands": [
-      {
-        "command": "adonis-vscode-extension.make.command",
-        "title": "⌨️ AdonisJS(Ace) Make Command"
-      },
-      {
-        "command": "adonis-vscode-extension.make.controller",
-        "title": "⌨️ AdonisJS(Ace) Make Controller"
-      },
-      {
-        "command": "adonis-vscode-extension.make.exception",
-        "title": "⌨️ AdonisJS(Ace) Make Exception"
-      },
-      {
-        "command": "adonis-vscode-extension.make.middleware",
-        "title": "⌨️ AdonisJS(Ace) Make Middleware"
-      },
-      {
-        "command": "adonis-vscode-extension.make.migration",
-        "title": "⌨️ AdonisJS(Ace) Make Migration"
-      },
-      {
-        "command": "adonis-vscode-extension.make.model",
-        "title": "⌨️ AdonisJS(Ace) Make Model"
-      },
-      {
-        "command": "adonis-vscode-extension.make.seeder",
-        "title": "⌨️ AdonisJS(Ace) Make Seeder"
-      },
-      {
-        "command": "adonis-vscode-extension.make.view",
-        "title": "⌨️ AdonisJS(Ace) Make View"
-      },
-      {
-        "command": "adonis-vscode-extension.make.validator",
-        "title": "⌨️ AdonisJS(Ace) Make Validator"
-      },
-      {
-        "command": "adonis-vscode-extension.make.prldfile",
-        "title": "⌨️ AdonisJS(Ace) Make Preloaded File"
-      },
-      {
-        "command": "adonis-vscode-extension.make.test",
-        "title": "⌨️ AdonisJS(Ace) Make Test"
-      },
-      {
-        "command": "adonis-vscode-extension.migration.fresh",
-        "title": "⌨️ AdonisJS(Ace) Migration Fresh"
-      },
-      {
-        "command": "adonis-vscode-extension.migration.refresh",
-        "title": "⌨️ AdonisJS(Ace) Migration Refresh"
-      },
-      {
-        "command": "adonis-vscode-extension.migration.reset",
-        "title": "⌨️ AdonisJS(Ace) Migration Reset"
-      },
-      {
-        "command": "adonis-vscode-extension.generate.manifest",
-        "title": "⌨️ AdonisJS(Ace) Generate Manifest"
-      },
-      {
-        "command": "adonis-vscode-extension.configure",
-        "title": "⌨️ AdonisJS(Ace) Configure package"
-      },
-      {
-        "command": "adonis-vscode-extension.type-check",
-        "title": "⌨️ AdonisJS(Ace) Type Check"
-      },
-      {
-        "command": "adonis-vscode-extension.list.routes",
-        "title": "⌨️ AdonisJS(Ace) List Routes"
-      },
-      {
-        "command": "adonis-vscode-extension.test",
-        "title": "⌨️  AdonisJS(Ace) Run Tests"
-      },
+			{
+				"command": "adonis-vscode-extension.make.command",
+				"title": "⌨️ AdonisJS(Ace) Make Command"
+			},
+			{
+				"command": "adonis-vscode-extension.make.controller",
+				"title": "⌨️ AdonisJS(Ace) Make Controller"
+			},
+			{
+				"command": "adonis-vscode-extension.make.exception",
+				"title": "⌨️ AdonisJS(Ace) Make Exception"
+			},
+			{
+				"command": "adonis-vscode-extension.make.middleware",
+				"title": "⌨️ AdonisJS(Ace) Make Middleware"
+			},
+			{
+				"command": "adonis-vscode-extension.make.migration",
+				"title": "⌨️ AdonisJS(Ace) Make Migration"
+			},
+			{
+				"command": "adonis-vscode-extension.make.model",
+				"title": "⌨️ AdonisJS(Ace) Make Model"
+			},
+			{
+				"command": "adonis-vscode-extension.make.seeder",
+				"title": "⌨️ AdonisJS(Ace) Make Seeder"
+			},
+			{
+				"command": "adonis-vscode-extension.make.view",
+				"title": "⌨️ AdonisJS(Ace) Make View"
+			},
+			{
+				"command": "adonis-vscode-extension.make.validator",
+				"title": "⌨️ AdonisJS(Ace) Make Validator"
+			},
+			{
+				"command": "adonis-vscode-extension.make.prldfile",
+				"title": "⌨️ AdonisJS(Ace) Make Preloaded File"
+			},
+			{
+				"command": "adonis-vscode-extension.make.test",
+				"title": "⌨️ AdonisJS(Ace) Make Test"
+			},
+			{
+				"command": "adonis-vscode-extension.migration.fresh",
+				"title": "⌨️ AdonisJS(Ace) Migration Fresh"
+			},
+			{
+				"command": "adonis-vscode-extension.migration.refresh",
+				"title": "⌨️ AdonisJS(Ace) Migration Refresh"
+			},
+			{
+				"command": "adonis-vscode-extension.migration.reset",
+				"title": "⌨️ AdonisJS(Ace) Migration Reset"
+			},
+			{
+				"command": "adonis-vscode-extension.generate.manifest",
+				"title": "⌨️ AdonisJS(Ace) Generate Manifest"
+			},
+			{
+				"command": "adonis-vscode-extension.configure",
+				"title": "⌨️ AdonisJS(Ace) Configure package"
+			},
+			{
+				"command": "adonis-vscode-extension.type-check",
+				"title": "⌨️ AdonisJS(Ace) Type Check"
+			},
+			{
+				"command": "adonis-vscode-extension.list.routes",
+				"title": "⌨️ AdonisJS(Ace) List Routes"
+			},
+			{
+				"command": "adonis-vscode-extension.test",
+				"title": "⌨️  AdonisJS(Ace) Run Tests"
+			},
 			{
 				"command": "adonis-vscode-extension.docs.adonis",
 				"title": "📜 AdonisJS(Docs) Open Docs"
@@ -293,10 +293,10 @@
 				"language": "edge",
 				"path": "./snippets/edge/tags.jsonc"
 			},
-      {
-        "language": "typescript",
-        "path": "./snippets/japa/index.json"
-      }
+			{
+				"language": "typescript",
+				"path": "./snippets/japa/index.json"
+			}
 		],
 		"languages": [
 			{
@@ -352,6 +352,7 @@
 		"@japa/spec-reporter": "^1.1.12",
 		"@types/glob": "^7.2.0",
 		"@types/node": "14.x",
+		"@types/sinon": "^10.0.11",
 		"@types/vscode": "^1.65.0",
 		"@typescript-eslint/eslint-plugin": "^5.21.0",
 		"@typescript-eslint/parser": "^5.21.0",
@@ -364,6 +365,7 @@
 		"glob": "^7.2.0",
 		"np": "^7.6.1",
 		"prettier": "^2.6.2",
+		"sinon": "^13.0.2",
 		"ts-loader": "^9.3.0",
 		"typescript": "^4.6.4",
 		"webpack": "^5.72.0",
