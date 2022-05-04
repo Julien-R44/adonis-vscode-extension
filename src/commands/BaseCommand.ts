@@ -181,21 +181,14 @@ export default class BaseCommand {
       adonisProject.path = adonisProject.path.substring(1)
     }
 
-    /**
-     * Create the final command : cd {adonisProject.path} && node ace {cmd}
-     */
     const nodePath = Config.misc.nodePath || 'node'
-    command = `"${nodePath}" ace ${command}`
-    let cmd =
-      platform === 'win32' && !Config.misc.useUnixCd
-        ? `cd /d "${adonisProject.path}" && ${command}`
-        : `cd "${adonisProject.path}" && ${command}`
 
     /**
      * Execute the final command in the background
      */
+    command = `"${nodePath}" ace ${command}`
     if (background) {
-      const result = await exec(cmd)
+      const result = await exec(command, { cwd: adonisProject.path })
       return { result, adonisProject }
     }
 
@@ -207,8 +200,17 @@ export default class BaseCommand {
       terminal = window.createTerminal(`AdonisJS Ace`)
     }
 
+    /**
+     * Since we are in the integrated terminal, we need to
+     * manually set the cwd to the adonis project path
+     */
+    let cmdWithCd =
+      platform === 'win32' && !Config.misc.useUnixCd
+        ? `cd /d "${adonisProject.path}" && ${command}`
+        : `cd "${adonisProject.path}" && ${command}`
+
     terminal.show()
-    terminal.sendText(cmd)
+    terminal.sendText(cmdWithCd)
 
     return { adonisProject }
   }

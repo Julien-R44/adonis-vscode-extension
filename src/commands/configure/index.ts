@@ -1,5 +1,4 @@
 import BaseCommand from '../BaseCommand'
-import { window } from 'vscode'
 
 /**
  * Handle ace configure command
