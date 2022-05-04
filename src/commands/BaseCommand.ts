@@ -150,7 +150,9 @@ export default class BaseCommand {
         this.openCreatedFile(res.adonisProject, res.result!.stdout)
       }
 
-      this.showMessage(successMessage)
+      if (successMessage) {
+        this.showMessage(successMessage)
+      }
     } catch (err) {
       // @ts-ignore
       if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
