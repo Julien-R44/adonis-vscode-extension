@@ -184,7 +184,8 @@ export default class BaseCommand {
     /**
      * Create the final command : cd {adonisProject.path} && node ace {cmd}
      */
-    command = `node ace ${command}`
+    const nodePath = Config.misc.nodePath || 'node'
+    command = `"${nodePath}" ace ${command}`
     let cmd =
       platform === 'win32' && !Config.misc.useUnixCd
         ? `cd /d "${adonisProject.path}" && ${command}`

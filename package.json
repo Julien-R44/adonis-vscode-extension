@@ -37,6 +37,11 @@
 			"type": "object",
 			"title": "AdonisJS",
 			"properties": {
+        "adonisjs.misc.nodePath": {
+          "type": "string",
+          "description": "The path to the node executable",
+          "default": "node"
+        },
 				"adonisjs.autocomplete.quickJump": {
 					"type": "boolean",
 					"default": true,
