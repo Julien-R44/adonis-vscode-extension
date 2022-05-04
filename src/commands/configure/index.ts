@@ -18,7 +18,7 @@ export class Configure extends BaseCommand {
      * Execute the command
      */
     try {
-      let command = `configure ${packageName}`
+      let command = `configure "${packageName}"`
       await this.execCmd(command, false)
     } catch (err) {
       this.showError('Could not configure package.', err)

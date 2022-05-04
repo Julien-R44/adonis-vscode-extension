@@ -166,38 +166,26 @@ export default class BaseCommand {
     command: string,
     background: boolean = true,
     adonisProject?: AdonisProject
-  ) {
+  ): Promise<{ adonisProject: AdonisProject; result?: { stdout: string; stderr: string } }> {
     adonisProject = adonisProject || (await this.pickAdonisProject())
 
     if (!adonisProject) {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
     }
 
-    /**
-     * If we are on windows, we need the remove the first slash
-     */
     const isWindows = platform === 'win32'
     if (isWindows && adonisProject.path.startsWith('/')) {
       adonisProject.path = adonisProject.path.substring(1)
     }
 
-    const nodePath = Config.misc.nodePath || 'node'
-
     /**
      * Execute the final command in the background
      */
+    const nodePath = Config.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
     if (background) {
       const result = await exec(command, { cwd: adonisProject.path })
       return { result, adonisProject }
-    }
-
-    /**
-     * Execute the final command in the foreground in the VSCode integrated terminal
-     */
-    let terminal = window.activeTerminal
-    if (!terminal || terminal.name !== 'AdonisJS Ace') {
-      terminal = window.createTerminal(`AdonisJS Ace`)
     }
 
     /**
@@ -209,9 +197,21 @@ export default class BaseCommand {
         ? `cd /d "${adonisProject.path}" && ${command}`
         : `cd "${adonisProject.path}" && ${command}`
 
-    terminal.show()
-    terminal.sendText(cmdWithCd)
+    this.sendTextToAdonisTerminal(cmdWithCd)
 
     return { adonisProject }
+  }
+
+  /**
+   * Execute a command in the foreground, in the VSCode integrated terminal
+   */
+  protected static sendTextToAdonisTerminal(command: string) {
+    let terminal = window.activeTerminal
+    if (!terminal || terminal.name !== 'AdonisJS Ace') {
+      terminal = window.createTerminal(`AdonisJS Ace`)
+    }
+
+    terminal.show()
+    terminal.sendText(command)
   }
 }
