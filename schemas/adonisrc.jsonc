@@ -255,6 +255,80 @@
           }
         ]
       }
+    },
+
+    /**
+     * testProviders property
+     */
+    "testProviders": {
+      "type": "array",
+      "description": "An array of service providers to load during tests only.",
+      "uniqueItems": true,
+      "items": { "anyOf": [{ "type": "string" }] },
+      "default": ["@japa/preset-adonis/TestsProvider"]
+    },
+
+    /**
+     * tests property
+     */
+    "tests": {
+      "type": "object",
+      "description": "Test suites are registered here. A suite combines a unique name and a glob pattern for the files.\nSee more : https://docs.adonisjs.com/guides/testing/introduction#test-suites",
+      "properties": {
+        "forceExit": {
+          "type": "boolean",
+          "default": false,
+          "description": "The tests runner waits for the process to exit gracefully. It means if your application makes any long-lived connections with a database or starts an HTTP server, then you must close it after the tests, or the process will not exit.\nWe recommend you gracefully close all open connections. However, you can force the tests runner to exit forcefully as soon as tests are finished.\n\nSee more : https://japa.dev/runner-config#forceexit-optional"
+        },
+        "timeout": {
+          "type": "number",
+          "default": 6000,
+          "description": "Define the global timeout for all the tests"
+        },
+        "suites": {
+          "type": "array",
+          "description": "Test suites are registered here. A suite combines a unique name and a glob pattern for the files.\nSee more : https://docs.adonisjs.com/guides/testing/introduction#test-suites",
+          "examples": [
+            [
+              {
+                "files": ["tests/unit/**/*.spec(.ts|.js)"],
+                "name": "unit",
+                "timeout": 60000
+              }
+            ]
+          ],
+          "items": {
+            "type": "object",
+            "examples": [
+              {
+                "files": ["tests/unit/**/*.spec(.ts|.js)"],
+                "name": "unit",
+                "timeout": 60000
+              }
+            ],
+            "required": ["files", "name"],
+            "properties": {
+              "files": {
+                "type": "array",
+                "description": "Glob pattern for the files to be tested",
+                "examples": [["tests/unit/**/*.spec(.ts|.js)"]],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "Unique name for the suite"
+              },
+              "timeout": {
+                "type": "number",
+                "default": 60000,
+                "description": "Define the timeout for all the tests of the suite"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
