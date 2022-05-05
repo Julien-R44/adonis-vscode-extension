@@ -219,8 +219,9 @@ export default class BaseCommand {
    * Execute a command in the foreground, in the VSCode integrated terminal
    */
   protected static sendTextToAdonisTerminal(command: string) {
-    let terminal = window.activeTerminal
-    if (!terminal || terminal.name !== 'AdonisJS Ace') {
+    let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
+
+    if (!terminal) {
       terminal = window.createTerminal(`AdonisJS Ace`)
     }
 
