@@ -94,6 +94,14 @@ If you want the suggestions while typing, you can add this to your VSCode config
 
 But be warned, this will automatically display intellisense even in "traditional" strings
 
+## Emmet doesn't working in edge files
+Just add this in your VSCode settings : 
+```json
+"emmet.includeLanguages": {
+  "edge": "html"
+}
+```
+
 # Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
 * Clone the project and open it in VS Code
