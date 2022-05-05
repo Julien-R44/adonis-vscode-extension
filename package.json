@@ -37,6 +37,11 @@
 			"type": "object",
 			"title": "AdonisJS",
 			"properties": {
+				"adonisjs.misc.runMigrationInBackground": {
+					"type": "boolean",
+					"description": "Should migration/seeds commands run in background ?",
+					"default": false
+				},
 				"adonisjs.misc.nodePath": {
 					"type": "string",
 					"description": "The path to the node executable",
@@ -177,6 +182,14 @@
 					"when": "adonisProjectLoaded == true"
 				},
 				{
+					"command": "adonis-vscode-extension.migration.run",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
+					"command": "adonis-vscode-extension.migration.rollback",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
 					"command": "adonis-vscode-extension.generate.manifest",
 					"when": "adonisProjectLoaded == true"
 				},
@@ -254,6 +267,14 @@
 			{
 				"command": "adonis-vscode-extension.migration.reset",
 				"title": "⌨️ AdonisJS(Ace) Migration Reset"
+			},
+			{
+				"command": "adonis-vscode-extension.migration.run",
+				"title": "⌨️ AdonisJS(Ace) Migration Run"
+			},
+			{
+				"command": "adonis-vscode-extension.migration.rollback",
+				"title": "⌨️ AdonisJS(Ace) Migration Rollback"
 			},
 			{
 				"command": "adonis-vscode-extension.generate.manifest",

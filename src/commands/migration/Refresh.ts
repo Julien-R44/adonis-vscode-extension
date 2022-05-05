@@ -22,8 +22,11 @@ export class Refresh extends BaseCommand {
 
     return this.handleExecCmd({
       command,
-      successMessage: 'Migration:refresh command executed successfully.',
+      successMessage: this.runMigrationInBackground
+        ? 'Migration:refresh was successfully run.'
+        : '',
       errorMessage: 'Migration:refresh command failed.',
+      background: this.runMigrationInBackground,
     })
   }
 }

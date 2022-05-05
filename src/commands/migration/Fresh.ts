@@ -19,8 +19,9 @@ export class Fresh extends BaseCommand {
     let command = `migration:fresh ${dbName ? `--database=${dbName}` : ''} ${seed ? '--seed' : ''}`
     return this.handleExecCmd({
       command,
-      successMessage: 'Migration:fresh command executed successfully.',
+      successMessage: this.runMigrationInBackground ? 'Migration:fresh was successfully run.' : '',
       errorMessage: 'Migration:fresh command failed.',
+      background: this.runMigrationInBackground,
     })
   }
 }

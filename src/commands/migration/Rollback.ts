@@ -1,9 +1,9 @@
 import BaseCommand from '../BaseCommand'
 
 /**
- * Handle migration:reset command
+ * Handle migration:rollback command
  */
-export class Reset extends BaseCommand {
+export class Rollback extends BaseCommand {
   public static async run() {
     /**
      * Prompt user database name
@@ -15,11 +15,13 @@ export class Reset extends BaseCommand {
     /**
      * Execute the command
      */
-    let command = `migration:reset ${dbName ? `--database=${dbName}` : ''}`
+    let command = `migration:rollback ${dbName ? `--database=${dbName}` : ''}`
     return this.handleExecCmd({
       command,
-      successMessage: this.runMigrationInBackground ? 'Migration:reset was successfully run.' : '',
-      errorMessage: 'Migration:reset command failed.',
+      successMessage: this.runMigrationInBackground
+        ? 'Migration:rollback was successfully run.'
+        : '',
+      errorMessage: 'Migration:rollback command failed.',
       background: this.runMigrationInBackground,
     })
   }

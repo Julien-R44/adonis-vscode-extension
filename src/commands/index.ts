@@ -20,6 +20,8 @@ import { RunTests } from './run-tests'
 import { EXTENSION_NAME } from '../utilities/constants'
 
 import { ExtensionContext, commands } from 'vscode'
+import { Run } from './migration/Run'
+import { Rollback } from './migration/Rollback'
 
 export const registerAceCommands = (context: ExtensionContext) => {
   const extName = EXTENSION_NAME
@@ -48,7 +50,9 @@ export const registerAceCommands = (context: ExtensionContext) => {
   context.subscriptions.push(
     registerCommand(`${extName}.migration.fresh`, () => Fresh.run()),
     registerCommand(`${extName}.migration.refresh`, () => Refresh.run()),
-    registerCommand(`${extName}.migration.reset`, () => Reset.run())
+    registerCommand(`${extName}.migration.reset`, () => Reset.run()),
+    registerCommand(`${extName}.migration.run`, () => Run.run()),
+    registerCommand(`${extName}.migration.rollback`, () => Rollback.run())
   )
 
   /**

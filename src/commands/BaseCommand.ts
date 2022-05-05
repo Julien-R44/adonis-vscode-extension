@@ -6,6 +6,7 @@ import { join } from 'path'
 import Config from '../utilities/config'
 import ProjectFinder, { AdonisProject } from '../services/ProjectFinder'
 import { capitalize } from '../utilities/functions'
+import ConfigWrapper from '../utilities/config'
 const exec = promisify(baseExec)
 
 let outputChannel = window.createOutputChannel('AdonisJS')
@@ -15,6 +16,13 @@ export enum ExtensionErrors {
 }
 
 export default class BaseCommand {
+  /**
+   * Should migration/seed commands be run in the background
+   */
+  protected static get runMigrationInBackground(): boolean {
+    return ConfigWrapper.misc.runMigrationInBackground
+  }
+
   /**
    * Show a message to the user
    */
@@ -127,20 +135,20 @@ export default class BaseCommand {
    */
   protected static async handleExecCmd({
     command,
-    successMessage,
+    successMessage = null,
     errorMessage,
     fileType = 'file',
     openCreatedFile = false,
     background = true,
   }: {
     command: string
-    successMessage?: string
+    successMessage?: string | null
     errorMessage?: string
     fileType?: string
     openCreatedFile?: boolean
     background?: boolean
   }) {
-    successMessage = successMessage || `${capitalize(fileType)} created successfully`
+    successMessage = successMessage ?? `${capitalize(fileType)} created successfully`
     errorMessage = errorMessage || `Failed to create ${fileType.toLowerCase()}`
 
     try {
@@ -150,6 +158,7 @@ export default class BaseCommand {
         this.openCreatedFile(res.adonisProject, res.result!.stdout)
       }
 
+      console.log(successMessage)
       if (successMessage) {
         this.showMessage(successMessage)
       }
