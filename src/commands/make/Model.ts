@@ -15,7 +15,7 @@ export class Model extends BaseCommand {
     }
 
     /**
-     * Prompt for generating migration and/or controller with the model
+     * Prompt for generating migration + controller + factory with the model
      */
     let generateMigration = await this.getYesNo(
       'Do you want to generate a migration for this model ?'
@@ -23,13 +23,14 @@ export class Model extends BaseCommand {
     let generateController = await this.getYesNo(
       'Do you want to generate a controller for this model ?'
     )
+    let generateFactory = await this.getYesNo('Do you want to generate a factory for this model ?')
 
     /**
      * Execute the command
      */
     let command = `make:model ${modelName} --migration=${
       generateMigration ? 'true' : 'false'
-    } --controller=${generateController ? 'true' : 'false'}`
+    } --controller=${generateController ? 'true' : 'false'} ${generateFactory ? '-f' : ''}`
 
     return this.handleExecCmd({
       command,
