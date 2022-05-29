@@ -19,6 +19,7 @@ import { Test } from './make/Test'
 import { RunTests } from './run-tests'
 import { Run } from './migration/Run'
 import { Rollback } from './migration/Rollback'
+import { Suite } from './make/Suite'
 
 export const commands = [
   {
@@ -91,6 +92,12 @@ export const commands = [
         description: 'Make a new test',
         commandIdentifier: `make.test`,
         handler: () => Test.run(),
+      },
+      {
+        aceCommand: 'make:suite',
+        description: 'Make a new test suite',
+        commandIdentifier: `make.suite`,
+        handler: () => Suite.run(),
       },
     ],
   },

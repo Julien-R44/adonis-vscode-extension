@@ -10,7 +10,7 @@ export class Controller extends BaseCommand {
      */
     let controllerName = await this.getInput('Controller name')
     if (!controllerName) {
-      this.showError('Command name is required.')
+      this.showError('Controller name is required.')
       return
     }
 
