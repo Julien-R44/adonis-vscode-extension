@@ -9,12 +9,7 @@ export const registerAceCommands = (context: ExtensionContext) => {
   const commandsDisposables = commandsExtension
     .map((group) => group.children)
     .flat()
-    .map((command) => {
-      return commands.registerCommand(
-        EXTENSION_NAME + '.' + command.commandIdentifier,
-        command.handler
-      )
-    })
+    .map((command) => commands.registerCommand(command.commandIdentifier, command.handler))
 
   return context.subscriptions.push(...commandsDisposables)
 }
