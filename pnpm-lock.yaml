@@ -24,6 +24,7 @@ specifiers:
   sinon: ^14.0.0
   ts-loader: ^9.3.0
   typescript: ^4.7.2
+  vscode-ext-help-and-feedback-view: ^1.0.1
   vscode-html-languageservice: ^5.0.0
   vscode-languageserver-types: ^3.17.1
   webpack: ^5.72.1
@@ -32,6 +33,7 @@ specifiers:
 dependencies:
   '@poppinss/module-methods-extractor': 1.0.5
   docblock: 0.4.5
+  vscode-ext-help-and-feedback-view: 1.0.1
   vscode-html-languageservice: 5.0.0
   vscode-languageserver-types: 3.17.1
 
@@ -4684,6 +4686,10 @@ packages:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
     dev: true
+
+  /vscode-ext-help-and-feedback-view/1.0.1:
+    resolution: {integrity: sha512-RZEx8+ULzC9z+34+xtFPhUM4hPq+NHfVZGpefPqXn5uuhC09uWYvlJvze2VrbL1VpP5nUMLFHnQF68QUCEg0Yw==}
+    dev: false
 
   /vscode-html-languageservice/5.0.0:
     resolution: {integrity: sha512-KJG13z54aLszskp3ETf8b1EKDypr2Sf5RUsfR6OXmKqEl2ZUfyIxsWz4gbJWjPzoJZx/bGH0ZXVwxJ1rg8OKRQ==}

@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, languages, workspace } from 'vscode'
+import { commands, ExtensionContext, languages } from 'vscode'
 import { registerAceCommands } from './commands'
 import EdgeCompletionProvider from './completion/edge/CompletionProvider'
 import EdgeHoverProvider from './completion/edge/HoverProvider'
@@ -10,9 +10,10 @@ import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
 import ProjectFinder from './services/ProjectFinder'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
+import { ViewContainer } from './services/ViewContainer'
 
 export async function activate(context: ExtensionContext) {
-  console.log('Activate AdonisJS extension...')
+  console.log('Activating AdonisJS extension...')
   await ProjectFinder.loadAdonisProjects()
 
   /**
@@ -21,13 +22,19 @@ export async function activate(context: ExtensionContext) {
   commands.executeCommand('setContext', CONTEXT_ADONIS_PROJECT_LOADED, true)
 
   /**
-   * Commands
+   * Register views
+   */
+  ViewContainer.createGetHelpView(context)
+  ViewContainer.createExplorerView(context)
+
+  /**
+   * Register commands
    */
   registerAceCommands(context)
   registerDocsCommands(context)
 
   /**
-   * Formatting and syntax
+   * Formatting and syntax setup
    */
   const edgeSelector = { language: 'edge', scheme: 'file' }
   const edgeFormatter = new EdgeFormatterProvider()

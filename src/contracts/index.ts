@@ -56,3 +56,28 @@ export type Controller = {
   fullPath: string
   method: string
 }
+
+/**
+ * Shape of a BaseNode that compose the tree view
+ */
+type BaseNode = {
+  label: string
+  description: string
+  icon?: string
+}
+
+/**
+ * Shape of a Group of commands node
+ */
+type CommandGroupNode = BaseNode & {
+  children: CommandNode[]
+}
+
+/**
+ * Shape of a Command Node
+ */
+type CommandNode = BaseNode & {
+  commandIdentifier: string
+}
+
+export type CommandGenericNode = CommandGroupNode | CommandNode

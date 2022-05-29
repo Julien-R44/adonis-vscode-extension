@@ -33,6 +33,29 @@
 	],
 	"main": "./dist/index.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "adonisjs",
+					"title": "AdonisJS",
+					"icon": "assets/adonis.svg"
+				}
+			]
+		},
+		"views": {
+			"adonisjs": [
+				{
+					"id": "adonisjs.home",
+					"name": "Commands",
+          "when": "adonisProjectLoaded == true"
+				},
+				{
+					"id": "adonisjs.help",
+					"name": "Get Help",
+					"visibility": "collapsed"
+				}
+			]
+		},
 		"configuration": {
 			"type": "object",
 			"title": "AdonisJS",
@@ -442,12 +465,15 @@
 	"dependencies": {
 		"@poppinss/module-methods-extractor": "^1.0.5",
 		"docblock": "^0.4.5",
+		"vscode-ext-help-and-feedback-view": "^1.0.1",
 		"vscode-html-languageservice": "^5.0.0",
 		"vscode-languageserver-types": "^3.17.1"
 	},
 	"pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": ["openapi-types"]
-    }
-  }
+		"peerDependencyRules": {
+			"ignoreMissing": [
+				"openapi-types"
+			]
+		}
+	}
 }
