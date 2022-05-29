@@ -193,6 +193,10 @@
 					"when": "adonisProjectLoaded == true"
 				},
 				{
+					"command": "adonis-vscode-extension.make.suite",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
 					"command": "adonis-vscode-extension.migration.fresh",
 					"when": "adonisProjectLoaded == true"
 				},
@@ -278,6 +282,10 @@
 			{
 				"command": "adonis-vscode-extension.make.test",
 				"title": "⌨️ AdonisJS(Ace) Make Test"
+			},
+			{
+				"command": "adonis-vscode-extension.make.suite",
+				"title": "⌨️ AdonisJS(Ace) Make Suite"
 			},
 			{
 				"command": "adonis-vscode-extension.migration.fresh",
