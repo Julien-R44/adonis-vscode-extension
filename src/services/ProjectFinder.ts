@@ -1,11 +1,6 @@
 import { basename } from 'path'
 import { Uri, workspace } from 'vscode'
-
-export interface AdonisProject {
-  path: string
-  name: string
-  uri: Uri
-}
+import { AdonisProject } from '../contracts'
 
 export default class ProjectFinder {
   /**

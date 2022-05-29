@@ -6,10 +6,12 @@ import {
   Hover,
   MarkdownString,
 } from 'vscode'
-import { parseControllerString, Controller } from '../../utilities/controller'
+import { parseControllerString } from '../../utilities/controller'
 import Config from '../../utilities/config'
 import { getExactPathMatch } from '../../utilities/pathMatching'
 import { DocumentationProvider } from '../../services/DocumentationProvider'
+import { Controller } from '../../contracts'
+
 const { controllersRegex, controllersDirectories, controllersExtensions } = Config.autocomplete
 
 class RouteControllerHoverProvider implements HoverProvider {

@@ -9,8 +9,9 @@ import {
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
-import { Suggestion, SuggestionProvider, SuggestionType } from '../../services/SuggestionProvider'
+import { SuggestionProvider } from '../../services/SuggestionProvider'
 import ProjectFinder from '../../services/ProjectFinder'
+import { Suggestion, SuggestionType } from '../../contracts'
 
 const {
   controllersDirectories,

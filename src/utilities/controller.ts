@@ -1,4 +1,5 @@
 import { Range, DocumentLink, Uri, Position } from 'vscode'
+import { Controller } from '../contracts'
 import { getLineNumber } from './functions'
 
 export class RouteControllerLink extends DocumentLink {
@@ -10,17 +11,6 @@ export class RouteControllerLink extends DocumentLink {
     this.filePath = path
     this.controller = controller
   }
-}
-
-/**
- * Destructured representation of a controller string.
- */
-export type Controller = {
-  name: string
-  fullname: string
-  parentDirectory: string
-  fullPath: string
-  method: string
 }
 
 /**

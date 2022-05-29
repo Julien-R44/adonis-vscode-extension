@@ -1,7 +1,8 @@
 import { Uri, TextDocument, workspace as vsWorkspace, WorkspaceFolder } from 'vscode'
 import { getDirectories } from './directory'
 import * as fs from 'fs'
-import ProjectFinder, { AdonisProject } from '../services/ProjectFinder'
+import ProjectFinder from '../services/ProjectFinder'
+import { AdonisProject } from '../contracts'
 
 /**
  * A minimal file path representation.

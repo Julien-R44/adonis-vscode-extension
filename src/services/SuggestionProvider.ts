@@ -1,25 +1,9 @@
 import * as glob from 'glob'
 import { relative } from 'path'
 import { MarkdownString, CompletionItem, CompletionItemKind } from 'vscode'
-import { AdonisProject } from './ProjectFinder'
+import { AdonisProject, Suggestion, SuggestionType } from '../contracts'
 import { getMethodsInSourceFile } from '../utilities/functions'
 import { DocumentationProvider } from './DocumentationProvider'
-
-/**
- * A code completion suggestion
- */
-export type Suggestion = {
-  text: string
-  detail: string
-  documentation: string | MarkdownString
-  filePath: string
-}
-
-export enum SuggestionType {
-  ControllerName,
-  ControllerMethod,
-  View,
-}
 
 export class SuggestionProvider {
   /**

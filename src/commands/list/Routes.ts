@@ -1,7 +1,7 @@
 import BaseCommand, { ExtensionErrors } from '../BaseCommand'
 import { HtmlTable } from '../../helpers/HtmlTable'
-import { AdonisProject } from '../../services/ProjectFinder'
 import { WebviewPanel } from 'vscode'
+import { AdonisProject } from '../../contracts'
 
 export class RouteList extends BaseCommand {
   private static readonly command = 'list:routes --json'

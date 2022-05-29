@@ -1,3 +1,5 @@
+import { EdgeFormatterContract } from '../../../contracts'
+
 /**
  * Format the content of an edge file.
  */
@@ -47,24 +49,6 @@ class EdgeFormatter {
     output = inputText.replace(/url\(\"(\s*)/g, 'url("')
     return output.trim()
   }
-}
-
-/**
- * Edge formatter configuration.
- */
-export interface EdgeFormatterContract {
-  /**
-   * Use spaces instead of tabs.
-   */
-  useSpaces?: boolean
-
-  /**
-   * The tab size to use for formatting.
-   *
-   * If spaces is preffered above tabs, the total number of spaces that
-   * will be used, will equal the tab size specified.
-   */
-  tabSize?: number
 }
 
 export default EdgeFormatter

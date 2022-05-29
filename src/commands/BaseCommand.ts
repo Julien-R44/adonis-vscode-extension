@@ -4,9 +4,10 @@ import { promisify } from 'util'
 import { exec as baseExec } from 'child_process'
 import { join } from 'path'
 import Config from '../utilities/config'
-import ProjectFinder, { AdonisProject } from '../services/ProjectFinder'
+import ProjectFinder from '../services/ProjectFinder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
+import { AdonisProject } from '../contracts'
 const exec = promisify(baseExec)
 
 let outputChannel = window.createOutputChannel('AdonisJS')
