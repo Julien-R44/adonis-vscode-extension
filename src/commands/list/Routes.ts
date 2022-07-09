@@ -8,8 +8,6 @@ export class RouteList extends BaseCommand {
 
   /**
    * Parse the return of `list:routes --json` command
-   *
-   * TODO: Handle multiples domains
    */
   private static parseRoutes(rawRoutes: any): {
     headers: string[]
@@ -18,14 +16,16 @@ export class RouteList extends BaseCommand {
     const jsonRoutes = JSON.parse(rawRoutes)
     const headers = ['Domain', 'Method', 'Path', 'Handler', 'Name', 'Middleware']
 
-    const rows = jsonRoutes.root.map((route: any) => [
-      '/',
-      route.methods.join(','),
-      route.pattern,
-      route.handler,
-      route.name,
-      route.middleware.join(','),
-    ])
+    const rows = Object.values(jsonRoutes)
+      .flat()
+      .map((route: any) => [
+        route.domain === 'root' ? '/' : route.domain,
+        route.methods.join(','),
+        route.pattern,
+        route.handler,
+        route.name,
+        route.middleware.join(','),
+      ])
 
     return { headers, rows }
   }
