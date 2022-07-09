@@ -201,6 +201,10 @@
 					"when": "adonisProjectLoaded == true"
 				},
 				{
+					"command": "adonis-vscode-extension.make.policy",
+					"when": "adonisProjectLoaded == true"
+				},
+				{
 					"command": "adonis-vscode-extension.migration.fresh",
 					"when": "adonisProjectLoaded == true"
 				},
@@ -294,6 +298,10 @@
 			{
 				"command": "adonis-vscode-extension.make.factory",
 				"title": "⌨️ AdonisJS(Ace) Make Factory"
+			},
+			{
+				"command": "adonis-vscode-extension.make.policy",
+				"title": "⌨️ AdonisJS(Ace) Make Bouncer Policy"
 			},
 			{
 				"command": "adonis-vscode-extension.migration.fresh",

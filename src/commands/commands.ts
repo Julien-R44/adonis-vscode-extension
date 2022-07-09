@@ -21,6 +21,7 @@ import { Run } from './migration/Run'
 import { Rollback } from './migration/Rollback'
 import { Suite } from './make/Suite'
 import { Factory } from './make/Factory'
+import { Policy } from './make/Policy'
 import { EXTENSION_NAME } from '../utilities/constants'
 
 const buildIdentifier = (identifier: string) => EXTENSION_NAME + '.' + identifier
@@ -108,6 +109,12 @@ export const commands = [
         description: 'Make a new factory',
         commandIdentifier: buildIdentifier(`make.factory`),
         handler: () => Factory.run(),
+      },
+      {
+        aceCommand: 'make:policy',
+        description: 'Make a new bouncer policy',
+        commandIdentifier: buildIdentifier(`make.policy`),
+        handler: () => Policy.run(),
       },
     ],
   },
