@@ -1,7 +1,7 @@
 import { Uri, workspace, WorkspaceFolder, TextDocument } from 'vscode'
 import * as path from 'path'
 import { test } from '@japa/runner'
-import { getPathMatches } from '../../../src/utilities/pathMatching'
+import { getPathMatches } from '../../../src/utilities/path_matching'
 
 let mainWorkspace: string
 let routesDoc: TextDocument

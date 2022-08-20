@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import { MarkdownString } from 'vscode'
 import { SuggestionType } from '../../../src/contracts'
-import ProjectFinder from '../../../src/services/ProjectFinder'
-import { SuggestionProvider } from '../../../src/services/SuggestionProvider'
+import ProjectFinder from '../../../src/services/project_finder'
+import { SuggestionProvider } from '../../../src/services/suggestion_provider'
 
 const project = ProjectFinder.getAdonisProjects()[0]
 

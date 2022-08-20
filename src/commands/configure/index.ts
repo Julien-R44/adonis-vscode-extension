@@ -1,4 +1,4 @@
-import BaseCommand from '../BaseCommand'
+import BaseCommand from '../base_command'
 
 /**
  * Handle ace configure command

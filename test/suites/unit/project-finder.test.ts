@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { Uri } from 'vscode'
-import ProjectFinder from '../../../src/services/ProjectFinder'
+import ProjectFinder from '../../../src/services/project_finder'
 import { resolve } from 'path'
 
 test.group('Project Finder', (group) => {

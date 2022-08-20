@@ -2,7 +2,7 @@ import * as path from 'path'
 import { assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { configure, run as runJapa } from '@japa/runner'
-import ProjectFinder from '../src/services/ProjectFinder'
+import ProjectFinder from '../src/services/project_finder'
 
 export async function run(): Promise<void> {
   const testsRoot = path.resolve(__dirname, '..')
