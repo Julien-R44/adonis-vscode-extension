@@ -1,16 +1,12 @@
 /* eslint-disable no-console */
 
-import { platform } from 'process'
-import { promisify } from 'util'
-import { exec as baseExec } from 'child_process'
 import { join } from 'path'
 import { commands, window, workspace } from 'vscode'
+import { AceExecutor } from 'src/services/ace_executor'
 import ProjectFinder from '../services/project_finder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
 import type { AdonisProject } from '../contracts'
-
-const exec = promisify(baseExec)
 
 const outputChannel = window.createOutputChannel('AdonisJS')
 
@@ -184,46 +180,6 @@ export default class BaseCommand {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
     }
 
-    const isWindows = platform === 'win32'
-    if (isWindows && adonisProject.path.startsWith('/')) {
-      adonisProject.path = adonisProject.path.substring(1)
-    }
-
-    /**
-     * Execute the final command in the background
-     */
-    const nodePath = ConfigWrapper.misc.nodePath || 'node'
-    command = `"${nodePath}" ace ${command}`
-    if (background) {
-      const result = await exec(command, { cwd: adonisProject.path })
-      return { result, adonisProject }
-    }
-
-    /**
-     * Since we are in the integrated terminal, we need to
-     * manually set the cwd to the adonis project path
-     */
-    const cmdWithCd =
-      platform === 'win32' && !ConfigWrapper.misc.useUnixCd
-        ? `cd /d "${adonisProject.path}" && ${command}`
-        : `cd "${adonisProject.path}" && ${command}`
-
-    this.sendTextToAdonisTerminal(cmdWithCd)
-
-    return { adonisProject }
-  }
-
-  /**
-   * Execute a command in the foreground, in the VSCode integrated terminal
-   */
-  protected static sendTextToAdonisTerminal(command: string) {
-    let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
-
-    if (!terminal) {
-      terminal = window.createTerminal(`AdonisJS Ace`)
-    }
-
-    terminal.show()
-    terminal.sendText(command)
+    return AceExecutor.exec({ adonisProject, command, background })
   }
 }

@@ -22,7 +22,7 @@ export interface Path {
  */
 export function getExactPathMatch(
   text: string,
-  doc: TextDocument,
+  doc: TextDocument | Uri,
   targetDirectories: string[],
   extensions: string[]
 ) {
@@ -38,11 +38,13 @@ export function getExactPathMatch(
  */
 export function getPathMatches(
   text: string,
-  doc: TextDocument,
+  doc: TextDocument | Uri,
   targetDirectories: string[],
   extensions: string[]
 ) {
-  const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
+  const project = ProjectFinder.getAdonisProjectFromFile(
+    doc instanceof Uri ? doc.path : doc.uri.path
+  )
   if (!project) return []
 
   const workspacePath = project.uri.fsPath

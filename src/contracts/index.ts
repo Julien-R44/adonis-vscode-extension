@@ -1,3 +1,4 @@
+import type { Path } from 'src/utilities/path_matching'
 import type { MarkdownString, Uri } from 'vscode'
 
 /**
@@ -69,15 +70,43 @@ interface BaseNode {
 /**
  * Shape of a Group of commands node
  */
-type CommandGroupNode = BaseNode & {
-  children: CommandNode[]
-}
+export type CommandGroupNode = BaseNode & { children: CommandNode[] }
 
 /**
  * Shape of a Command Node
  */
-type CommandNode = BaseNode & {
-  commandIdentifier: string
+export type CommandNode = BaseNode & { commandIdentifier: string }
+export type CommandGenericNode = CommandGroupNode | CommandNode
+
+export type RouteGroupNode = BaseNode & { children: (RouteNode | RouteGroupNode)[] }
+export type RouteDomainNode = BaseNode & { children: RouteGroupNode[] }
+export type RouteNode = BaseNode & RawRoute & { path: Path; filename: string }
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD' | 'ANY'
+
+/**
+ * Shape of raw route returned by node ace list:routes command
+ */
+export interface RawRoute {
+  domain: string
+  handler: string
+  methods: HttpMethod[]
+  middleware: string[]
+  name: string
+  pattern: string
 }
 
-export type CommandGenericNode = CommandGroupNode | CommandNode
+/**
+ * Shape of node ace list:routes result
+ */
+export interface AceListRoutesResult {
+  /**
+   * Main domain
+   */
+  root: RawRoute[]
+
+  /**
+   * Other domains
+   */
+  [key: string]: RawRoute[]
+}

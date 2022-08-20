@@ -1,4 +1,5 @@
 import { commands } from 'vscode'
+import { Extension } from 'src/services/extension'
 import { commands as commandsExtension } from './commands'
 import type { ExtensionContext } from 'vscode'
 
@@ -11,5 +12,12 @@ export const registerAceCommands = (context: ExtensionContext) => {
     .flat()
     .map((command) => commands.registerCommand(command.commandIdentifier, command.handler))
 
-  return context.subscriptions.push(...commandsDisposables)
+  context.subscriptions.push(...commandsDisposables)
+
+  // TODO: Move me
+  context.subscriptions.push(
+    commands.registerCommand('adonis-vscode-extension.view.routes.refresh', () => {
+      Extension.routesTreeDataProvider.getAllRoutes()
+    })
+  )
 }

@@ -10,7 +10,7 @@ import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
 import ProjectFinder from './services/project_finder'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
-import { ViewContainer } from './services/view_container'
+import { ViewContainer } from './tree_views/index'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -26,8 +26,7 @@ export async function activate(context: ExtensionContext) {
   /**
    * Register views
    */
-  ViewContainer.createGetHelpView(context)
-  ViewContainer.createExplorerView(context)
+  ViewContainer.initViews(context)
 
   /**
    * Register commands

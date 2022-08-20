@@ -6,6 +6,7 @@ specifiers:
   '@japa/spec-reporter': ^1.1.12
   '@julr/eslint-config': ^0.3.2
   '@poppinss/module-methods-extractor': ^1.0.5
+  '@types/lodash.groupby': ^4.6.7
   '@types/node': 14.x
   '@types/sinon': ^10.0.13
   '@types/vscode': ^1.70.0
@@ -13,9 +14,9 @@ specifiers:
   docblock: ^0.4.5
   eslint: ^8.22.0
   fast-glob: ^3.2.11
+  lodash.groupby: ^4.6.0
   prettier: ^2.7.1
   sinon: ^14.0.0
-  ts-loader: ^9.3.1
   tsup: ^6.2.2
   typescript: ^4.7.4
   vscode-ext-help-and-feedback-view: ^1.0.1
@@ -26,6 +27,7 @@ dependencies:
   '@poppinss/module-methods-extractor': 1.0.5
   docblock: 0.4.5
   fast-glob: 3.2.11
+  lodash.groupby: 4.6.0
   vscode-ext-help-and-feedback-view: 1.0.1
   vscode-html-languageservice: 5.0.1
   vscode-languageserver-types: 3.17.2
@@ -35,6 +37,7 @@ devDependencies:
   '@japa/runner': 2.0.9
   '@japa/spec-reporter': 1.1.12
   '@julr/eslint-config': 0.3.2_zczhdx677l6mw2hrju5deojgfm
+  '@types/lodash.groupby': 4.6.7
   '@types/node': 14.18.24
   '@types/sinon': 10.0.13
   '@types/vscode': 1.70.0
@@ -42,7 +45,6 @@ devDependencies:
   eslint: 8.22.0
   prettier: 2.7.1
   sinon: 14.0.0
-  ts-loader: 9.3.1_typescript@4.7.4
   tsup: 6.2.2_typescript@4.7.4
   typescript: 4.7.4
 
@@ -568,6 +570,16 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.groupby/4.6.7:
+    resolution: {integrity: sha512-dFUR1pqdMgjIBbgPJ/8axJX6M1C7zsL+HF4qdYMQeJ7XOp0Qbf37I3zh9gpXr/ks6tgEYPDRqyZRAnFYvewYHQ==}
+    dependencies:
+      '@types/lodash': 4.14.184
+    dev: true
+
+  /@types/lodash/4.14.184:
+    resolution: {integrity: sha512-RoZphVtHbxPZizt4IcILciSWiC6dcn+eZ8oX9IWEYfDMcocdd42f7NPI6fQj+6zI8y4E0L7gu2pcZKLGTRaV9Q==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -1492,14 +1504,6 @@ packages:
 
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
-    dev: true
-
-  /enhanced-resolve/5.9.3:
-    resolution: {integrity: sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow==}
-    engines: {node: '>=10.13.0'}
-    dependencies:
-      graceful-fs: 4.2.10
-      tapable: 2.2.1
     dev: true
 
   /entities/4.3.1:
@@ -3098,6 +3102,10 @@ packages:
     resolution: {integrity: sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=}
     dev: true
 
+  /lodash.groupby/4.6.0:
+    resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
+    dev: false
+
   /lodash.isequal/4.5.0:
     resolution: {integrity: sha1-QVxEePK8wwEgwizhDtMib30+GOA=}
     dev: true
@@ -4094,11 +4102,6 @@ packages:
     resolution: {integrity: sha1-cAcEaNbSl3ylI3suUZyn0Gouo/0=}
     dev: true
 
-  /tapable/2.2.1:
-    resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
-    engines: {node: '>=6'}
-    dev: true
-
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
@@ -4150,20 +4153,6 @@ packages:
 
   /ts-interface-checker/0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
-    dev: true
-
-  /ts-loader/9.3.1_typescript@4.7.4:
-    resolution: {integrity: sha512-OkyShkcZTsTwyS3Kt7a4rsT/t2qvEVQuKCTg4LJmpj9fhFR7ukGdZwV6Qq3tRUkqcXtfGpPR7+hFKHCG/0d3Lw==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      typescript: '*'
-      webpack: ^5.0.0
-    dependencies:
-      chalk: 4.1.2
-      enhanced-resolve: 5.9.3
-      micromatch: 4.0.5
-      semver: 7.3.7
-      typescript: 4.7.4
     dev: true
 
   /tsconfig-paths/3.14.1:

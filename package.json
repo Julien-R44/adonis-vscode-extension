@@ -47,14 +47,18 @@
     "views": {
       "adonisjs": [
         {
-          "id": "adonisjs.home",
+          "id": "adonisjs.commands",
           "name": "Commands",
+          "icon": "assets/adonis.svg"
+        },
+        {
+          "id": "adonisjs.routes",
+          "name": "Routes",
           "when": "adonisProjectLoaded == true"
         },
         {
           "id": "adonisjs.help",
-          "name": "Get Help",
-          "visibility": "collapsed"
+          "name": "Get Help"
         }
       ]
     },
@@ -149,6 +153,13 @@
       }
     },
     "menus": {
+      "view/title": [
+        {
+          "command": "adonis-vscode-extension.view.routes.refresh",
+          "when": "view == adonisjs.routes",
+          "group": "navigation"
+        }
+      ],
       "commandPalette": [
         {
           "command": "adonis-vscode-extension.make.command",
@@ -249,6 +260,11 @@
       ]
     },
     "commands": [
+      {
+        "command": "adonis-vscode-extension.view.routes.refresh",
+        "title": "Refresh Routes",
+        "icon": "$(refresh)"
+      },
       {
         "command": "adonis-vscode-extension.make.command",
         "title": "⌨️ AdonisJS(Ace) Make Command"
@@ -417,6 +433,7 @@
     "@poppinss/module-methods-extractor": "^1.0.5",
     "docblock": "^0.4.5",
     "fast-glob": "^3.2.11",
+    "lodash.groupby": "^4.6.0",
     "vscode-ext-help-and-feedback-view": "^1.0.1",
     "vscode-html-languageservice": "^5.0.1",
     "vscode-languageserver-types": "^3.17.2"
@@ -426,6 +443,7 @@
     "@japa/runner": "^2.0.9",
     "@japa/spec-reporter": "^1.1.12",
     "@julr/eslint-config": "^0.3.2",
+    "@types/lodash.groupby": "^4.6.7",
     "@types/node": "14.x",
     "@types/sinon": "^10.0.13",
     "@types/vscode": "^1.70.0",
