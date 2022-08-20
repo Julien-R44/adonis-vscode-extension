@@ -1,6 +1,6 @@
 import { relative } from 'path'
-import * as glob from 'glob'
 import { CompletionItem, CompletionItemKind, MarkdownString } from 'vscode'
+import fg from 'fast-glob'
 import { SuggestionType } from '../contracts'
 import { getMethodsInSourceFile } from '../utilities/functions'
 import { DocumentationProvider } from './documentation_provider'
@@ -58,22 +58,22 @@ export class SuggestionProvider {
    * @param text Fragment text to match for
    * @param extensions File extensions to match for
    */
-  private static getMatches(
+  private static async getMatches(
     project: AdonisProject,
     targetDirectories: string[],
     text: string,
     extensions: string[]
-  ): string[] {
+  ) {
     const result: string[] = []
     const fn = (rgx: string, cur: string) => `${rgx}|${cur}`
     const extensionRegex = extensions.reduce(fn, '')
     const textRegex = text.split("").map(c => `(?=.*${c})`).join(""); // prettier-ignore
 
-    const directory = project.uri.fsPath
+    const directory = project.uri.fsPath.replace(/\\/g, '/')
 
     for (const dir of targetDirectories) {
       const globPattern = `${directory}/${dir}/**/**(${extensionRegex})`
-      const files = glob.sync(globPattern, { nodir: true })
+      const files = await fg(globPattern, { onlyFiles: true, caseSensitiveMatch: false })
 
       const regexPattern = `${directory.replaceAll(
         '\\',
@@ -94,16 +94,16 @@ export class SuggestionProvider {
    *
    * @param text Text to match against
    */
-  public static getSuggestions(
+  public static async getSuggestions(
     text: string,
     project: AdonisProject,
     targetDirectories: string[],
     fileExtensions: string[],
     suggestionType: SuggestionType
-  ): Suggestion[] {
+  ) {
     text = text.replace(/\"|\'/g, '').replace(/\./g, '/').replace(/\s/g, '')
 
-    const matchedFiles = this.getMatches(project, targetDirectories, text, fileExtensions)
+    const matchedFiles = await this.getMatches(project, targetDirectories, text, fileExtensions)
 
     return this.createSuggestionsFromFilePaths(
       project.uri.fsPath,

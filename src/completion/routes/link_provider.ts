@@ -3,47 +3,42 @@ import { getLineNumber, getMaxLinesCount } from '../../utilities/functions'
 import ConfigWrapper from '../../utilities/config'
 import { DocumentLinker } from '../../services/document_linker'
 import type { RouteControllerLink } from '../../utilities/controller'
-import type { DocumentLink, DocumentLinkProvider, ProviderResult, TextDocument } from 'vscode'
+import type { DocumentLink, DocumentLinkProvider, TextDocument } from 'vscode'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
-  public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {
+  public async provideDocumentLinks(doc: TextDocument) {
     const config = ConfigWrapper.autocomplete
     const docLinks: DocumentLink[] = []
 
-    return new Promise(async (resolve) => {
-      if (config.quickJump) {
-        let currentLine = 0
-        const regex = new RegExp(config.controllersRegex, 'g')
-        const maxLinesCount = getMaxLinesCount(doc)
+    if (!config.quickJump) return docLinks
 
-        while (currentLine < maxLinesCount) {
-          const links = await DocumentLinker.createControllerDocumentLinks(
-            regex,
-            doc,
-            currentLine,
-            config.controllersDirectories,
-            config.controllersExtensions
-          )
+    let currentLine = 0
+    const regex = new RegExp(config.controllersRegex, 'g')
+    const maxLinesCount = getMaxLinesCount(doc)
 
-          docLinks.push(...links)
-          currentLine++
-        }
-      }
+    while (currentLine < maxLinesCount) {
+      const links = await DocumentLinker.createControllerDocumentLinks(
+        regex,
+        doc,
+        currentLine,
+        config.controllersDirectories,
+        config.controllersExtensions
+      )
 
-      resolve(docLinks)
-    })
+      docLinks.push(...links)
+      currentLine++
+    }
+
+    return docLinks
   }
 
-  public resolveDocumentLink(link: RouteControllerLink): ProviderResult<DocumentLink> {
+  public async resolveDocumentLink(link: RouteControllerLink) {
     const path = link.filePath.toString()
     const method = link.controller.method
+    const location = await getLineNumber(link.filePath.fsPath, method)
 
-    return new Promise(async (resolve) => {
-      const location = await getLineNumber(link.filePath.fsPath, method)
+    link.target = Uri.parse(location.lineno === -1 ? `${path}#1` : `${path}#${location.lineno}`)
 
-      link.target = Uri.parse(location.lineno === -1 ? `${path}#1` : `${path}#${location.lineno}`)
-
-      return resolve(link)
-    })
+    return link
   }
 }

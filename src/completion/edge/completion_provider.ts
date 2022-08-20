@@ -4,14 +4,10 @@ import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
 import { SuggestionProvider } from '../../services/suggestion_provider'
 import ProjectFinder from '../../services/project_finder'
 import { SuggestionType } from '../../contracts'
-import type { Suggestion } from '../../contracts'
-import type { CompletionItemProvider, Position, ProviderResult, TextDocument } from 'vscode'
+import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
-  public provideCompletionItems(
-    doc: TextDocument,
-    pos: Position
-  ): ProviderResult<CompletionItem[]> {
+  public async provideCompletionItems(doc: TextDocument, pos: Position) {
     /**
      * Create a completion item for each globals edge snippets
      */
@@ -38,7 +34,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
     if (!range) return
 
     const text = doc.getText(range)
-    const suggestions = this.getViewSuggestions(text, doc)
+    const suggestions = await this.getViewSuggestions(text, doc)
     return SuggestionProvider.toCompletionItems(suggestions, CompletionItemKind.Value)
   }
 
@@ -48,7 +44,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
    * @param text Text to get suggestions for
    * @param doc Document text belongs to
    */
-  private getViewSuggestions(text: string, doc: TextDocument): Suggestion[] {
+  private getViewSuggestions(text: string, doc: TextDocument) {
     const config = Config.autocomplete
 
     const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)

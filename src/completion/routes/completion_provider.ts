@@ -4,15 +4,7 @@ import { parseControllerString } from '../../utilities/controller'
 import { SuggestionProvider } from '../../services/suggestion_provider'
 import ProjectFinder from '../../services/project_finder'
 import { SuggestionType } from '../../contracts'
-import type { Suggestion } from '../../contracts'
-import type {
-  CompletionItem,
-  CompletionItemProvider,
-  Position,
-  ProviderResult,
-  Range,
-  TextDocument,
-} from 'vscode'
+import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
 const {
   controllersDirectories,
@@ -22,10 +14,7 @@ const {
 } = Config.autocomplete
 
 class RouteControllerCompletionProvider implements CompletionItemProvider {
-  public provideCompletionItems(
-    doc: TextDocument,
-    pos: Position
-  ): ProviderResult<CompletionItem[]> {
+  public async provideCompletionItems(doc: TextDocument, pos: Position) {
     let showMethodSuggestions = false
     let range = this.matchPatternInDocument(controllerNamePattern, doc, pos)
 
@@ -36,8 +25,8 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
 
     const text = doc.getText(range)
     const suggestions = showMethodSuggestions
-      ? this.getControllerMethodSuggestions(text, doc)
-      : this.getControllerNameSuggestions(text, doc)
+      ? await this.getControllerMethodSuggestions(text, doc)
+      : await this.getControllerNameSuggestions(text, doc)
 
     return SuggestionProvider.toCompletionItems(suggestions)
   }
@@ -49,11 +38,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
    * @param doc Document to match in
    * @param pos Postion in document to begin matching from
    */
-  private matchPatternInDocument(
-    pattern: string,
-    doc: TextDocument,
-    pos: Position
-  ): Range | undefined {
+  private matchPatternInDocument(pattern: string, doc: TextDocument, pos: Position) {
     const regex = new RegExp(pattern, 'gi')
     return doc.getWordRangeAtPosition(pos, regex)
   }
@@ -66,7 +51,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
    * @param text Text to get suggestions for
    * @param doc Document text belongs to
    */
-  private getControllerNameSuggestions(text: string, doc: TextDocument): Suggestion[] {
+  private async getControllerNameSuggestions(text: string, doc: TextDocument) {
     const controller = parseControllerString(text)
     if (controller) text = controller.name
 
@@ -90,8 +75,8 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
    * @param text Text to get suggestions for
    * @param doc Document text belongs to
    */
-  private getControllerMethodSuggestions(text: string, doc: TextDocument): Suggestion[] {
-    const suggestions = this.getControllerNameSuggestions(text, doc)[0]
+  private async getControllerMethodSuggestions(text: string, doc: TextDocument) {
+    const suggestions = (await this.getControllerNameSuggestions(text, doc))[0]
 
     if (!suggestions) return []
 

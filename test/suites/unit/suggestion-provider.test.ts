@@ -8,8 +8,8 @@ import type { MarkdownString } from 'vscode'
 const project = ProjectFinder.getAdonisProjects()[0]
 
 test.group('Suggestion Provider: Controllers Name', () => {
-  test('Empty text should return all controllers', ({ assert }) => {
-    const suggestions = SuggestionProvider.getSuggestions(
+  test('Empty text should return all controllers', async ({ assert }) => {
+    const suggestions = await SuggestionProvider.getSuggestions(
       '',
       project!,
       ['app/controllers'],
@@ -27,8 +27,8 @@ test.group('Suggestion Provider: Controllers Name', () => {
       { needle: 'Client', result: 'Features/Client/ClientController' },
       { needle: 'Order', result: 'Features/Order/OrderController' },
     ])
-    .run(({ assert }, { needle, result }) => {
-      const suggestions = SuggestionProvider.getSuggestions(
+    .run(async ({ assert }, { needle, result }) => {
+      const suggestions = await SuggestionProvider.getSuggestions(
         needle,
         project!,
         ['app/controllers'],
@@ -45,8 +45,8 @@ test.group('Suggestion Provider: Controllers Name', () => {
       { controller: 'UserController', doc: ['destroy', 'update'] },
       { controller: 'FooController', doc: ['methodA'] },
     ])
-    .run(({ assert }, { controller, doc }) => {
-      const suggestions = SuggestionProvider.getSuggestions(
+    .run(async ({ assert }, { controller, doc }) => {
+      const suggestions = await SuggestionProvider.getSuggestions(
         controller,
         project!,
         ['app/controllers'],
@@ -66,8 +66,8 @@ test.group('Suggestion Provider: Controllers Name', () => {
 })
 
 test.group('Suggestion Provider: Views', () => {
-  test('Empty text should return all views', ({ assert }) => {
-    const suggestions = SuggestionProvider.getSuggestions(
+  test('Empty text should return all views', async ({ assert }) => {
+    const suggestions = await SuggestionProvider.getSuggestions(
       '',
       project!,
       ['resources/views'],
@@ -85,8 +85,8 @@ test.group('Suggestion Provider: Views', () => {
       { needle: 'footer', path: 'partials/footer.edge', result: 'partials/footer' },
       { needle: 'button', path: 'components/button.edge', result: 'components/button' },
     ])
-    .run(({ assert }, { needle, path, result }) => {
-      const suggestions = SuggestionProvider.getSuggestions(
+    .run(async ({ assert }, { needle, path, result }) => {
+      const suggestions = await SuggestionProvider.getSuggestions(
         needle,
         project!,
         ['resources/views'],
