@@ -80,7 +80,7 @@ export type CommandGenericNode = CommandGroupNode | CommandNode
 
 export type RouteGroupNode = BaseNode & { children: (RouteNode | RouteGroupNode)[] }
 export type RouteDomainNode = BaseNode & { children: RouteGroupNode[] }
-export type RouteNode = BaseNode & RawRoute & { path: Path; filename: string }
+export type RouteNode = BaseNode & RawRoute & { path: Path | null; filename: string }
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD' | 'ANY'
 

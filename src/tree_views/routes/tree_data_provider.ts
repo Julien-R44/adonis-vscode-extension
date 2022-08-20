@@ -55,11 +55,16 @@ export class RoutesTreeDataProvider
     if ('pattern' in element) {
       return {
         label: element.label,
-        command: {
-          command: 'vscode.open',
-          title: 'Open File',
-          arguments: [element.path.uri],
-        },
+        ...(element.path
+          ? {
+              command: {
+                command: 'vscode.open',
+                title: 'Open File',
+                arguments: [element.path.uri],
+              },
+              resourceUri: element.path.uri,
+            }
+          : {}),
         description: element.description,
         tooltip: new MarkdownString(
           [
@@ -78,7 +83,6 @@ export class RoutesTreeDataProvider
             '---',
           ].join('\n\n')
         ),
-        resourceUri: element.path.uri,
         iconPath: new ThemeIcon('milestone'),
       }
     }

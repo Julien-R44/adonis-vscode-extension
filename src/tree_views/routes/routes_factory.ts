@@ -41,16 +41,18 @@ export class RouteFactory {
     const { name, method } = parseControllerString(route.handler)!
     const path = getExactPathMatch(name, adonisProject!.uri, ['app/controllers'], ['controller.ts'])
 
-    const number = await getLineNumber(path!.uri.fsPath, method)
-    path!.uri = path!.uri.with({ fragment: number.lineno.toString() })
+    if (path) {
+      const number = await getLineNumber(path.uri.fsPath, method)
+      path.uri = path.uri.with({ fragment: number.lineno.toString() })
+    }
 
     return {
       ...route,
       description: route.methods.join(', '),
       label: `${route.pattern}`,
       icon: '',
-      path: path!,
-      filename: relative(adonisProject!.uri.fsPath, path!.uri.fsPath),
+      path,
+      filename: relative(adonisProject!.uri.fsPath, path?.uri.fsPath || ''),
     }
   }
 
