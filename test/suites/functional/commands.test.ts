@@ -1,5 +1,6 @@
 import { test } from '@japa/runner'
 import sinon from 'sinon'
+import { AceExecutor } from '../../../src/services/ace_executor'
 import { Configure } from '../../../src/commands/configure'
 import { RunTests } from '../../../src/commands/run_tests'
 
@@ -8,7 +9,7 @@ test.group('Commands: Configure', (group) => {
 
   test('Package name should be escaped ', async ({ assert }) => {
     sinon.stub(Configure, <any>'getInput').returns('adonis framework')
-    const execCmdMock = sinon.stub(Configure, <any>'sendTextToAdonisTerminal')
+    const execCmdMock = sinon.stub(AceExecutor, <any>'sendTextToAdonisTerminal')
 
     await Configure.run()
 
@@ -18,7 +19,7 @@ test.group('Commands: Configure', (group) => {
 
   test('Command should be run in VSCode terminal', async ({ assert }) => {
     sinon.stub(Configure, <any>'getInput').returns('adonis framework')
-    const execCmdMock = sinon.stub(Configure, <any>'sendTextToAdonisTerminal')
+    const execCmdMock = sinon.stub(AceExecutor, <any>'sendTextToAdonisTerminal')
 
     await Configure.run()
 
@@ -32,7 +33,7 @@ test.group('Commands: RunTests', (group) => {
   test('Command should be run in VSCode terminal', async ({ assert }) => {
     sinon.stub(RunTests, <any>'getInput').returns('')
     sinon.stub(RunTests, <any>'getYesNo').returns(false)
-    const execCmdMock = sinon.stub(RunTests, <any>'sendTextToAdonisTerminal')
+    const execCmdMock = sinon.stub(AceExecutor, <any>'sendTextToAdonisTerminal')
 
     await RunTests.run()
 

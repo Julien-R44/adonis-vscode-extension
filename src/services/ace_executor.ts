@@ -1,9 +1,9 @@
 import { platform } from 'process'
 import { exec as baseExec } from 'child_process'
 import { promisify } from 'util'
-import ConfigWrapper from 'src/utilities/config'
 import { window } from 'vscode'
-import type { AdonisProject } from 'src/contracts'
+import ConfigWrapper from '../utilities/config'
+import type { AdonisProject } from '../contracts'
 
 const exec = promisify(baseExec)
 
@@ -17,7 +17,8 @@ export class AceExecutor {
   /**
    * Execute a command in the foreground, in the VSCode integrated terminal
    */
-  protected static sendTextToAdonisTerminal(command: string) {
+  private static sendTextToAdonisTerminal(command: string) {
+    console.log('send texttt')
     let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
 
     if (!terminal) {
@@ -36,6 +37,7 @@ export class AceExecutor {
     if (isWindows && adonisProject.path.startsWith('/')) {
       adonisProject.path = adonisProject.path.substring(1)
     }
+    console.log('execccc')
 
     /**
      * Execute the final command in the background

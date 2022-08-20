@@ -29,6 +29,8 @@ export class ViewContainer {
    * Initialize all tree views
    */
   public static initViews(context: ExtensionContext) {
+    if (process.env.NODE_ENV === 'test') return
+
     HelpTreeDataView.createView(context)
     this.createCommandsView()
     this.createRoutesView()

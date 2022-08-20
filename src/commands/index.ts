@@ -1,5 +1,5 @@
 import { commands } from 'vscode'
-import { Extension } from 'src/services/extension'
+import { Extension } from '../services/extension'
 import { commands as commandsExtension } from './commands'
 import type { ExtensionContext } from 'vscode'
 

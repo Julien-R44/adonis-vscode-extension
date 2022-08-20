@@ -2,7 +2,7 @@
 
 import { join } from 'path'
 import { commands, window, workspace } from 'vscode'
-import { AceExecutor } from 'src/services/ace_executor'
+import { AceExecutor } from '../services/ace_executor'
 import ProjectFinder from '../services/project_finder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
@@ -176,6 +176,7 @@ export default class BaseCommand {
   ) {
     adonisProject = adonisProject || (await this.pickAdonisProject())
 
+    console.log('exeeec lets go')
     if (!adonisProject) {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
     }

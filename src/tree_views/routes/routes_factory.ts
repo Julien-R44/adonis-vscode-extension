@@ -1,9 +1,10 @@
 import { relative } from 'path'
-import ProjectFinder from 'src/services/project_finder'
-import { parseControllerString } from 'src/utilities/controller'
-import { getLineNumber } from 'src/utilities/functions'
-import { getExactPathMatch } from 'src/utilities/path_matching'
 import groupBy from 'lodash.groupby'
+import ProjectFinder from '../../services/project_finder'
+import { parseControllerString } from '../../utilities/controller'
+import { getLineNumber } from '../../utilities/functions'
+import { getExactPathMatch } from '../../utilities/path_matching'
+
 import type {
   AceListRoutesResult,
   RawRoute,

@@ -1,4 +1,4 @@
-import type { Path } from 'src/utilities/path_matching'
+import type { Path } from '../utilities/path_matching'
 import type { MarkdownString, Uri } from 'vscode'
 
 /**

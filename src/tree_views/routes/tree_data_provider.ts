@@ -5,7 +5,7 @@ import {
   type TreeItem,
   TreeItemCollapsibleState,
 } from 'vscode'
-import { AceExecutor } from 'src/services/ace_executor'
+import { AceExecutor } from '../../services/ace_executor'
 import { Extension } from '../../services/extension'
 import ProjectFinder from '../../services/project_finder'
 import { RouteFactory } from './routes_factory'
