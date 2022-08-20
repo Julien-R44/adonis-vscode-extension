@@ -27,7 +27,7 @@ export function getExactPathMatch(
   extensions: string[]
 ): Path | null {
   const paths = getPathMatches(text, doc, targetDirectories, extensions)
-  return paths.length > 0 ? paths[0] : null
+  return paths.length > 0 ? paths[0]! : null
 }
 
 /**
@@ -69,7 +69,7 @@ function buildPaths(
       if (fs.existsSync(filePath)) {
         result.push({
           fullpath,
-          name: paths[path],
+          name: paths[path]!,
           uri: Uri.file(filePath),
         })
       }

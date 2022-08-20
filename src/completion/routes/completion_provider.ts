@@ -92,8 +92,10 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
    */
   private getControllerMethodSuggestions(text: string, doc: TextDocument): Suggestion[] {
     const suggestions = this.getControllerNameSuggestions(text, doc)[0]
-    const methods = getMethodsInSourceFile(suggestions.filePath)
 
+    if (!suggestions) return []
+
+    const methods = getMethodsInSourceFile(suggestions.filePath)
     return methods.map((method) => {
       const newSuggestion = Object.assign({}, suggestions)
       newSuggestion.text = method

@@ -91,8 +91,7 @@ class EdgeFormattingProvider
     Object.assign(formatOptions, ConfigWrapper.html.format)
 
     const htmlDoc = lst.TextDocument.create(document.uri.fsPath, 'html', 1, document.getText())
-
-    return HtmlLanguageService.format(htmlDoc, range, formatOptions)[0]
+    return HtmlLanguageService.format(htmlDoc, range, formatOptions)[0]!
   }
 }
 

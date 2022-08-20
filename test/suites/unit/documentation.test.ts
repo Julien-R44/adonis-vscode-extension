@@ -9,7 +9,7 @@ let mainWorkspace: string
 test.group('Autocomplete Markdown Documentation Generation', (group) => {
   group.setup(() => {
     const workspaceFolders = workspace.workspaceFolders as WorkspaceFolder[]
-    mainWorkspace = workspaceFolders[0].uri.fsPath
+    mainWorkspace = workspaceFolders[0]!.uri.fsPath
   })
 
   test('Documentation is returned for existing method in typescript file', ({ assert }) => {

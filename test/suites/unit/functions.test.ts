@@ -11,7 +11,7 @@ let mainWorkspace: string
 test.group('Autocomplete: Get All Functions In File', (group) => {
   group.setup(() => {
     const workspaceFolders = workspace.workspaceFolders as WorkspaceFolder[]
-    mainWorkspace = workspaceFolders[0].uri.fsPath
+    mainWorkspace = workspaceFolders[0]!.uri.fsPath
   })
 
   test('All functions in a file is returned', ({ assert }) => {

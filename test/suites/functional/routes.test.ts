@@ -13,7 +13,7 @@ let mainWorkspace: string
 test.group('Routes Link Provider', (group) => {
   group.setup(() => {
     const workspaceFolders = workspace.workspaceFolders as WorkspaceFolder[]
-    mainWorkspace = workspaceFolders[0].uri.fsPath
+    mainWorkspace = workspaceFolders[0]!.uri.fsPath
   })
 
   test('Simple flat links', async ({ assert }) => {

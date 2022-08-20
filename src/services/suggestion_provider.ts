@@ -29,7 +29,7 @@ export class SuggestionProvider {
       const matches = filePath.match(regex) || []
 
       if (matches.length < 2) continue
-      const extensionParts = matches[2].split('.')
+      const extensionParts = matches[2]!.split('.')
       const textSuffix = extensionParts[0] === '.' ? '' : extensionParts[0]
       let text = `${matches[1]}${textSuffix}`
 

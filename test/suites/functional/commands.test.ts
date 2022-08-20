@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import sinon from 'sinon'
 import { Configure } from '../../../src/commands/configure'
-import { RunTests } from '../../../src/commands/run-tests'
+import { RunTests } from '../../../src/commands/run_tests'
 
 test.group('Commands: Configure', (group) => {
   group.each.teardown(() => sinon.restore())

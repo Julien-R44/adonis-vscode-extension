@@ -11,7 +11,7 @@ test.group('Suggestion Provider: Controllers Name', () => {
   test('Empty text should return all controllers', ({ assert }) => {
     const suggestions = SuggestionProvider.getSuggestions(
       '',
-      project,
+      project!,
       ['app/controllers'],
       ['controller.ts', 'Controller.ts'],
       SuggestionType.ControllerName
@@ -30,7 +30,7 @@ test.group('Suggestion Provider: Controllers Name', () => {
     .run(({ assert }, { needle, result }) => {
       const suggestions = SuggestionProvider.getSuggestions(
         needle,
-        project,
+        project!,
         ['app/controllers'],
         ['controller.ts', 'Controller.ts'],
         SuggestionType.ControllerName
@@ -48,7 +48,7 @@ test.group('Suggestion Provider: Controllers Name', () => {
     .run(({ assert }, { controller, doc }) => {
       const suggestions = SuggestionProvider.getSuggestions(
         controller,
-        project,
+        project!,
         ['app/controllers'],
         ['controller.ts', 'Controller.ts'],
         SuggestionType.ControllerName
@@ -69,7 +69,7 @@ test.group('Suggestion Provider: Views', () => {
   test('Empty text should return all views', ({ assert }) => {
     const suggestions = SuggestionProvider.getSuggestions(
       '',
-      project,
+      project!,
       ['resources/views'],
       ['.edge'],
       SuggestionType.View
@@ -88,7 +88,7 @@ test.group('Suggestion Provider: Views', () => {
     .run(({ assert }, { needle, path, result }) => {
       const suggestions = SuggestionProvider.getSuggestions(
         needle,
-        project,
+        project!,
         ['resources/views'],
         ['.edge'],
         SuggestionType.View

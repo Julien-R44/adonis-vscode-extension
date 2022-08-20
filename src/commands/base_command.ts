@@ -94,7 +94,7 @@ export default class BaseCommand {
    * Parse stdout after generating command using adonis/assembler and returns
    * the freshly created file
    */
-  protected static parseCreatedFilename(stdout: string): string | null {
+  protected static parseCreatedFilename(stdout: string) {
     const matches = stdout.match(/(?<=CREATE: )(.+)/)
     return matches ? matches[0] : null
   }

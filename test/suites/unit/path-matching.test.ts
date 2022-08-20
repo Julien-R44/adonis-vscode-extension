@@ -12,7 +12,7 @@ let routesDoc: TextDocument
 test.group('Path Matching', (group) => {
   group.setup(async () => {
     const workspaceFolders = workspace.workspaceFolders as WorkspaceFolder[]
-    mainWorkspace = workspaceFolders[0].uri.fsPath
+    mainWorkspace = workspaceFolders[0]!.uri.fsPath
     routesDoc = await workspace.openTextDocument(
       Uri.file(path.join(mainWorkspace, 'start/routes.ts'))
     )
@@ -21,7 +21,7 @@ test.group('Path Matching', (group) => {
   test('Only controller name matching', async ({ assert }) => {
     const result = getPathMatches('User', routesDoc, ['app/controllers'], ['controller.ts'])
     assert.deepEqual(result.length, 1)
-    assert.deepEqual(result[0].fullpath, 'basic-app/app/controllers/Http/Usercontroller.ts')
+    assert.deepEqual(result[0]!.fullpath, 'basic-app/app/controllers/Http/Usercontroller.ts')
   })
 
   test('View matching', async ({ assert }) => {
@@ -31,7 +31,7 @@ test.group('Path Matching', (group) => {
 
     const result = getPathMatches('partials/footer', viewDoc, ['resources/views'], ['.edge'])
     assert.deepEqual(result.length, 1)
-    assert.deepEqual(result[0].fullpath, 'basic-app/resources/views/partials/footer.edge')
+    assert.deepEqual(result[0]!.fullpath, 'basic-app/resources/views/partials/footer.edge')
   })
 
   test('Flat view matching', async ({ assert }) => {
@@ -41,7 +41,7 @@ test.group('Path Matching', (group) => {
 
     const result = getPathMatches('flat', viewDoc, ['resources/views'], ['.edge'])
     assert.deepEqual(result.length, 1)
-    assert.deepEqual(result[0].fullpath, 'basic-app/resources/views/flat.edge')
+    assert.deepEqual(result[0]!.fullpath, 'basic-app/resources/views/flat.edge')
   })
 
   test('Nested view matching', async ({ assert }) => {
@@ -51,7 +51,7 @@ test.group('Path Matching', (group) => {
 
     const result = getPathMatches('partials/footer', viewDoc, ['resources/views'], ['.edge'])
     assert.deepEqual(result.length, 1)
-    assert.deepEqual(result[0].fullpath, 'basic-app/resources/views/partials/footer.edge')
+    assert.deepEqual(result[0]!.fullpath, 'basic-app/resources/views/partials/footer.edge')
   })
 
   test('Nested*2 view matching', async ({ assert }) => {
@@ -67,7 +67,7 @@ test.group('Path Matching', (group) => {
     )
     assert.deepEqual(result.length, 1)
     assert.deepEqual(
-      result[0].fullpath,
+      result[0]!.fullpath,
       'basic-app/resources/views/components/nested/nested-btn.edge'
     )
   })
