@@ -1,5 +1,6 @@
 import BaseCommand, { ExtensionErrors } from '../base_command'
 import { HtmlTable } from '../../helpers/html_table'
+import { Notifier } from '../../services/notifier'
 import type { WebviewPanel } from 'vscode'
 import type { AdonisProject } from '../../contracts'
 
@@ -56,7 +57,7 @@ export class RouteList extends BaseCommand {
       const { rows } = await this.execAndParseRoutes(project)
       panel.webview.postMessage({ command: 'refresh', rows })
     } catch (error) {
-      this.showError('Failed to refresh routes list', error)
+      Notifier.showError('Failed to refresh routes list', error)
       panel.webview.postMessage({ command: 'refresh-failed', error })
     }
   }
@@ -73,10 +74,12 @@ export class RouteList extends BaseCommand {
       )
     } catch (err: any) {
       if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
-        return this.showError('You must select an AdonisJS project on which to run your command.')
+        return Notifier.showError(
+          'You must select an AdonisJS project on which to run your command.'
+        )
       }
 
-      return this.showError('The route list could not be generated', err)
+      return Notifier.showError('The route list could not be generated', err)
     }
   }
 }

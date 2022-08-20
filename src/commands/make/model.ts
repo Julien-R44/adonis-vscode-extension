@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Model extends BaseCommand {
      */
     const modelName = await this.getInput('Model name')
     if (!modelName) {
-      this.showError('Model name is required.')
+      Notifier.showError('Model name is required.')
       return
     }
 

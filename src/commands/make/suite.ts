@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Suite extends BaseCommand {
      */
     const suiteName = await this.getInput('Suite name')
     if (!suiteName) {
-      this.showError('Suite name is required.')
+      Notifier.showError('Suite name is required.')
       return
     }
 

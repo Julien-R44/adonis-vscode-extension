@@ -1,5 +1,6 @@
 /* eslint-disable sonarjs/no-nested-template-literals */
 
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -12,7 +13,7 @@ export class Migration extends BaseCommand {
      */
     const migrationName = await this.getInput('Migration name')
     if (!migrationName) {
-      this.showError('Migration name is required.')
+      Notifier.showError('Migration name is required.')
       return
     }
 

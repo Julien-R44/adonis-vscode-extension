@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Validator extends BaseCommand {
      */
     const seederName = await this.getInput('Validator name')
     if (!seederName) {
-      this.showError('Validator name is required.')
+      Notifier.showError('Validator name is required.')
       return
     }
 

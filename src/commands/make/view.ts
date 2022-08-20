@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class View extends BaseCommand {
      */
     const viewName = await this.getInput('View name')
     if (!viewName) {
-      this.showError('View name is required.')
+      Notifier.showError('View name is required.')
       return
     }
 

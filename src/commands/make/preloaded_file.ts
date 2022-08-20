@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class PreloadedFile extends BaseCommand {
      */
     const prldName = await this.getInput('Preloaded file name')
     if (!prldName) {
-      this.showError('Preloaded file name is required.')
+      Notifier.showError('Preloaded file name is required.')
       return
     }
 
@@ -23,7 +24,7 @@ export class PreloadedFile extends BaseCommand {
      */
     const environment = await this.getListInput('Environment', ['console', 'web', 'repl'], true)
     if (!environment) {
-      this.showError('Environment is required.')
+      Notifier.showError('Environment is required.')
       return
     }
 

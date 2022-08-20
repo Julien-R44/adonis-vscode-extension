@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Exception extends BaseCommand {
      */
     const exceptionName = await this.getInput('Exception name')
     if (!exceptionName) {
-      this.showError('Exception name is required.')
+      Notifier.showError('Exception name is required.')
       return
     }
 

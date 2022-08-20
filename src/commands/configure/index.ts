@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Configure extends BaseCommand {
      */
     const packageName = await this.getInput('Package name to configure')
     if (!packageName) {
-      this.showError('Package name is required.')
+      Notifier.showError('Package name is required.')
       return
     }
 

@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Seeder extends BaseCommand {
      */
     const seederName = await this.getInput('Seeder name')
     if (!seederName) {
-      this.showError('Seeder name is required.')
+      Notifier.showError('Seeder name is required.')
       return
     }
 

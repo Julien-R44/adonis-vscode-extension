@@ -2,13 +2,12 @@
 
 import { join } from 'path'
 import { commands, window, workspace } from 'vscode'
+import { Notifier } from '../services/notifier'
 import { AceExecutor } from '../services/ace_executor'
 import ProjectFinder from '../services/project_finder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
 import type { AdonisProject } from '../contracts'
-
-const outputChannel = window.createOutputChannel('AdonisJS')
 
 export enum ExtensionErrors {
   ERR_ADONIS_PROJECT_SELECTION_NEEDED,
@@ -20,26 +19,6 @@ export default class BaseCommand {
    */
   protected static get runMigrationInBackground() {
     return ConfigWrapper.misc.runMigrationInBackground as boolean
-  }
-
-  /**
-   * Show a message to the user
-   */
-  protected static async showMessage(message: string) {
-    window.showInformationMessage(message)
-  }
-
-  /**
-   * Show an error message to the user
-   */
-  protected static async showError(message: string, consoleErr: any = null) {
-    if (consoleErr !== null) {
-      message += ' (See output console for more details)'
-      outputChannel.appendLine(consoleErr)
-      outputChannel.show()
-    }
-    window.showErrorMessage(message)
-    return false
   }
 
   /**
@@ -155,14 +134,16 @@ export default class BaseCommand {
 
       console.log(successMessage)
       if (successMessage) {
-        this.showMessage(successMessage)
+        Notifier.showMessage(successMessage)
       }
     } catch (err: any) {
       if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
-        return this.showError('You must select an AdonisJS project on which to run your command.')
+        return Notifier.showError(
+          'You must select an AdonisJS project on which to run your command.'
+        )
       }
 
-      this.showError(errorMessage, err)
+      Notifier.showError(errorMessage, err)
     }
   }
 

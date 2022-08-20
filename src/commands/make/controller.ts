@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Controller extends BaseCommand {
      */
     const controllerName = await this.getInput('Controller name')
     if (!controllerName) {
-      this.showError('Controller name is required.')
+      Notifier.showError('Controller name is required.')
       return
     }
 

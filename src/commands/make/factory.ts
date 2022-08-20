@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Factory extends BaseCommand {
      */
     const factoryName = await this.getInput('Name of the model for which you want the Factory')
     if (!factoryName) {
-      this.showError('Name is required.')
+      Notifier.showError('Name is required.')
       return
     }
 

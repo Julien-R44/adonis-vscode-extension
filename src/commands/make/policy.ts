@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Policy extends BaseCommand {
      */
     const policyName = await this.getInput('Policy name')
     if (!policyName) {
-      this.showError('Policy name is required.')
+      Notifier.showError('Policy name is required.')
       return
     }
 

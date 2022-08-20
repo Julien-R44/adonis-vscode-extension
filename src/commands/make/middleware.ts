@@ -1,3 +1,4 @@
+import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 
 /**
@@ -10,7 +11,7 @@ export class Middleware extends BaseCommand {
      */
     const name = await this.getInput('Middleware name')
     if (!name) {
-      this.showError('Middleware name is required.')
+      Notifier.showError('Middleware name is required.')
       return
     }
 
