@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import { Extractor } from '@poppinss/module-methods-extractor'
 import ConfigWrapper from './config'
-import type { ExtractorOutput } from '@poppinss/module-methods-extractor/build/src/contracts'
 import type { TextDocument } from 'vscode'
 
 /**
@@ -18,8 +17,8 @@ export interface Location {
  *
  * @param doc Document to resolve line count
  */
-export function getMaxLinesCount(doc: TextDocument): number {
-  const maxLinesCount = ConfigWrapper.autocomplete.maxLinesCount
+export function getMaxLinesCount(doc: TextDocument) {
+  const maxLinesCount = ConfigWrapper.autocomplete.maxLinesCount as number
   return doc.lineCount <= maxLinesCount ? doc.lineCount : maxLinesCount
 }
 
@@ -29,7 +28,7 @@ export function getMaxLinesCount(doc: TextDocument): number {
  * @param methodName Method name to locate
  * @param sourcePath Source file to extract from
  */
-export async function getLineNumber(sourcePath: string, methodName: string): Promise<Location> {
+export async function getLineNumber(sourcePath: string, methodName: string) {
   const notFound: Location = { lineno: -1, name: methodName }
   const methods = extractMethodsInSourceFile(sourcePath)
   if (!methods) return notFound
@@ -44,7 +43,7 @@ export async function getLineNumber(sourcePath: string, methodName: string): Pro
  *
  * @param sourcePath File path of the source file
  */
-export function getMethodsInSourceFile(sourcePath: string): string[] {
+export function getMethodsInSourceFile(sourcePath: string) {
   try {
     const output = extractMethodsInSourceFile(sourcePath)
     if (!output) return []
@@ -61,7 +60,7 @@ export function getMethodsInSourceFile(sourcePath: string): string[] {
  *
  * @param sourcePath File path of the source file
  */
-function extractMethodsInSourceFile(sourcePath: string): ExtractorOutput | null {
+function extractMethodsInSourceFile(sourcePath: string) {
   const source = fs.readFileSync(sourcePath.replace(/file:\/\//, '')).toString('ascii')
 
   const extractor = new Extractor()

@@ -25,7 +25,7 @@ export function getExactPathMatch(
   doc: TextDocument,
   targetDirectories: string[],
   extensions: string[]
-): Path | null {
+) {
   const paths = getPathMatches(text, doc, targetDirectories, extensions)
   return paths.length > 0 ? paths[0]! : null
 }
@@ -41,7 +41,7 @@ export function getPathMatches(
   doc: TextDocument,
   targetDirectories: string[],
   extensions: string[]
-): Path[] {
+) {
   const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
   if (!project) return []
 
@@ -57,7 +57,7 @@ function buildPaths(
   paths: string[],
   fileName: string,
   extensions: string[]
-): Path[] {
+) {
   const result: Path[] = []
 
   for (const path in paths) {

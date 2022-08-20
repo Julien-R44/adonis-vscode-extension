@@ -19,7 +19,7 @@ export class DocumentLinker {
     lineNo: number,
     targetDirectories: string[],
     fileExtensions: string[]
-  ): Promise<DocumentLink[]> {
+  ) {
     const docLinks: DocumentLink[] = []
     const line = doc.lineAt(lineNo)
     const matches = line.text.match(regex) || []

@@ -32,7 +32,7 @@ export default class ProjectFinder {
   /**
    * Return the AdonisProject where the file is
    */
-  public static getAdonisProjectFromFile(file: string): AdonisProject | null {
+  public static getAdonisProjectFromFile(file: string) {
     const adonisProjects = this.getAdonisProjects()
     const project = adonisProjects.find((adonisProject) =>
       file.toLowerCase().startsWith(adonisProject.path.toLowerCase())

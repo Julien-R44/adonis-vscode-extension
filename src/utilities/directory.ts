@@ -9,7 +9,7 @@ import * as fs from 'fs'
  * @param workspacePath Workspace for which the provided directories are located.
  * @param childDirectories Array of all possible directories to scan and match.
  */
-export function getDirectories(workspacePath: string, childDirectories: string[]): string[] {
+export function getDirectories(workspacePath: string, childDirectories: string[]) {
   const folders = Object.values(childDirectories)
   childDirectories = Object.values(childDirectories)
 

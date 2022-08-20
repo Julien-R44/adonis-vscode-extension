@@ -23,10 +23,7 @@ class EdgeFormattingProvider
    * @return A set of text edits or a thenable that resolves to such. The lack of a result can be
    * signaled by returning `undefined`, `null`, or an empty array.
    */
-  public provideDocumentFormattingEdits(
-    document: TextDocument,
-    options: FormattingOptions
-  ): TextEdit[] {
+  public provideDocumentFormattingEdits(document: TextDocument, options: FormattingOptions) {
     const range = new Range(
       new Position(0, 0),
       new Position(document.lineCount - 1, Number.MAX_VALUE)
@@ -52,7 +49,7 @@ class EdgeFormattingProvider
     document: TextDocument,
     range: Range,
     options: FormattingOptions
-  ): TextEdit[] {
+  ) {
     return this.format(document, range, options)
   }
 
@@ -63,7 +60,7 @@ class EdgeFormattingProvider
    * @param range The range in document to format
    * @param options Formatting options and configuration
    */
-  private format(document: TextDocument, range: Range, options: FormattingOptions): TextEdit[] {
+  private format(document: TextDocument, range: Range, options: FormattingOptions) {
     const htmlText = this.formatHtml(document, range, options)
 
     const formatter = new EdgeFormatter({
@@ -83,11 +80,7 @@ class EdgeFormattingProvider
    * @param range Range in document to perform formatting
    * @param formatOptions Basic options to use in formatting the document
    */
-  private formatHtml(
-    document: TextDocument,
-    range: Range,
-    formatOptions: FormattingOptions
-  ): html.TextEdit {
+  private formatHtml(document: TextDocument, range: Range, formatOptions: FormattingOptions) {
     Object.assign(formatOptions, ConfigWrapper.html.format)
 
     const htmlDoc = lst.TextDocument.create(document.uri.fsPath, 'html', 1, document.getText())

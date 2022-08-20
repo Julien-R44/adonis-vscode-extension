@@ -22,8 +22,8 @@ export default class BaseCommand {
   /**
    * Should migration/seed commands be run in the background
    */
-  protected static get runMigrationInBackground(): boolean {
-    return ConfigWrapper.misc.runMigrationInBackground
+  protected static get runMigrationInBackground() {
+    return ConfigWrapper.misc.runMigrationInBackground as boolean
   }
 
   /**
@@ -49,7 +49,7 @@ export default class BaseCommand {
   /**
    * Prompt the user to select Yes or No
    */
-  protected static async getYesNo(placeHolder: string): Promise<boolean> {
+  protected static async getYesNo(placeHolder: string) {
     const value = await window.showQuickPick(['Yes', 'No'], { placeHolder })
     return value?.toLowerCase() === 'yes'
   }
@@ -66,11 +66,7 @@ export default class BaseCommand {
   /**
    * Prompt the user to select one or multiple input from a list
    */
-  protected static async getListInput(
-    placeHolder: string,
-    list: string[],
-    canPickMany = false
-  ): Promise<string[]> {
+  protected static async getListInput(placeHolder: string, list: string[], canPickMany = false) {
     const name = (await window.showQuickPick(list, { placeHolder, canPickMany })) as
       | string[]
       | string
@@ -181,7 +177,7 @@ export default class BaseCommand {
     command: string,
     background = true,
     adonisProject?: AdonisProject
-  ): Promise<{ adonisProject: AdonisProject; result?: { stdout: string; stderr: string } }> {
+  ) {
     adonisProject = adonisProject || (await this.pickAdonisProject())
 
     if (!adonisProject) {

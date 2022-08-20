@@ -51,7 +51,7 @@ export async function createControllerLink(
   controller: Controller,
   file: Uri,
   useFallbackLink = true
-): Promise<RouteControllerLink | null> {
+) {
   const method = controller.method
   const range = new Range(start, end)
   if (range.isEmpty) return null

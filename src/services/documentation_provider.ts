@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import { MarkdownString } from 'vscode'
 import type { Path } from '../utilities/path_matching'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const DocBlock = require('docblock')
 
 export class DocumentationProvider {
@@ -9,7 +10,7 @@ export class DocumentationProvider {
    * Read the content of a file. If the file doesn't exist, a null value
    * is return instead of an IO exception.
    */
-  private static readFileSync(file: string): Buffer | null {
+  private static readFileSync(file: string) {
     try {
       return fs.readFileSync(file)
     } catch (err) {
@@ -20,7 +21,7 @@ export class DocumentationProvider {
   /**
    * Get DocBlock for the given method name in the given file
    */
-  public static getDocForMethodInFile(file: string, methodName: string): MarkdownString | null {
+  public static getDocForMethodInFile(file: string, methodName: string) {
     if (methodName.trim().length === 0) {
       return null
     }

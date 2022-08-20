@@ -4,7 +4,7 @@ import { specReporter } from '@japa/spec-reporter'
 import { configure, run as runJapa } from '@japa/runner'
 import ProjectFinder from '../src/services/project_finder'
 
-export async function run(): Promise<void> {
+export async function run() {
   const testsRoot = path.resolve(__dirname, '..')
 
   return new Promise((resolve) => {
@@ -22,7 +22,7 @@ export async function run(): Promise<void> {
       teardown: [
         (runner) => {
           runner.end()
-          resolve()
+          resolve(true)
         },
       ],
       importer: (filePath) => import(filePath),

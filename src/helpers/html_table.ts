@@ -4,7 +4,7 @@ export class HtmlTable {
   /**
    * CSS Styling of the table
    */
-  private static get tableStyle(): string {
+  private static get tableStyle() {
     return `
       <style>
         * { box-sizing: border-box; }

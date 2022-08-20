@@ -29,7 +29,7 @@ class EdgeFormatter {
    *
    * @param inputText Test to format
    */
-  public format(inputText: string): string {
+  public format(inputText: string) {
     let output: string = inputText
 
     // Block pattern

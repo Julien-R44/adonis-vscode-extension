@@ -16,7 +16,7 @@ export class SuggestionProvider {
     searchDirectories: string[],
     extensions: string[],
     suggestionType: SuggestionType
-  ): Suggestion[] {
+  ) {
     const suggestions: Set<Suggestion> = new Set()
 
     for (const filePath of filePaths) {
@@ -136,7 +136,7 @@ export class SuggestionProvider {
     text: string,
     filePath: string,
     suggestionType: SuggestionType
-  ): string | MarkdownString {
+  ) {
     if (suggestionType === SuggestionType.ControllerName) {
       const fileMethods = getMethodsInSourceFile(filePath)
       const bulletListMethods = fileMethods.map((item) => `- ${item}`).join('\n')

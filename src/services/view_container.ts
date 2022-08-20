@@ -2,7 +2,7 @@ import { ThemeIcon, TreeItemCollapsibleState, window } from 'vscode'
 import { HelpAndFeedbackView } from 'vscode-ext-help-and-feedback-view'
 import { commands } from '../commands/commands'
 import type { Command, Link } from 'vscode-ext-help-and-feedback-view'
-import type { ExtensionContext, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
+import type { ExtensionContext, ProviderResult, TreeDataProvider } from 'vscode'
 import type { CommandGenericNode } from '../contracts'
 
 /**
@@ -79,7 +79,7 @@ class CommandsTreeDataProvider implements TreeDataProvider<CommandGenericNode> {
   /**
    * Returns the UI state of the given walked node
    */
-  public getTreeItem(element: CommandGenericNode): TreeItem | Thenable<TreeItem> {
+  public getTreeItem(element: CommandGenericNode) {
     if ('children' in element) {
       return {
         collapsibleState: TreeItemCollapsibleState.Collapsed,
