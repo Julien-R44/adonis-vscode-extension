@@ -9,8 +9,7 @@
     "aliases",
     "preloads",
     "providers",
-    "aceProviders",
-    "metaFiles"
+    "aceProviders"
   ],
   "properties": {
     "additionalProperties": true,
