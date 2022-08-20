@@ -7,14 +7,14 @@ specifiers:
   '@julr/eslint-config': ^0.3.2
   '@poppinss/module-methods-extractor': ^1.0.5
   '@types/glob': ^7.2.0
-  '@types/node': ^14.18.24
+  '@types/node': 14.x
   '@types/sinon': ^10.0.13
   '@types/vscode': ^1.70.0
   '@vscode/test-electron': ^2.1.5
   docblock: ^0.4.5
   eslint: ^8.22.0
   github-label-sync: ^2.2.0
-  glob: ^7.2.3
+  glob: ^8.0.3
   prettier: ^2.7.1
   sinon: ^14.0.0
   ts-loader: ^9.3.1
@@ -44,7 +44,7 @@ devDependencies:
   '@vscode/test-electron': 2.1.5
   eslint: 8.22.0
   github-label-sync: 2.2.0
-  glob: 7.2.3
+  glob: 8.0.3
   prettier: 2.7.1
   sinon: 14.0.0
   ts-loader: 9.3.1_xnp4kzegbjokq62cajex2ovgkm
@@ -1265,6 +1265,12 @@ packages:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
+    dev: true
+
+  /brace-expansion/2.0.1:
+    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
+    dependencies:
+      balanced-match: 1.0.2
     dev: true
 
   /braces/3.0.2:
@@ -2743,6 +2749,17 @@ packages:
       path-is-absolute: 1.0.1
     dev: true
 
+  /glob/8.0.3:
+    resolution: {integrity: sha512-ull455NHSHI/Y1FqGaaYFaLGkNMMJbavMrEGFXG/PGrg6y7sutWHUHrz6gy6WEBH6akM1M414dWKCNs+IhKdiQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 5.1.0
+      once: 1.4.0
+    dev: true
+
   /globals/13.15.0:
     resolution: {integrity: sha512-bpzcOlgDhMG070Av0Vy5Owklpv1I6+j96GhUI7Rh7IzDCKLzboflLrrfqMu8NquDbiR4EOQk7XzJwqVJxicxog==}
     engines: {node: '>=8'}
@@ -3578,6 +3595,13 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
+
+  /minimatch/5.1.0:
+    resolution: {integrity: sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==}
+    engines: {node: '>=10'}
+    dependencies:
+      brace-expansion: 2.0.1
     dev: true
 
   /minimist/1.2.6:
