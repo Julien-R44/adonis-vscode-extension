@@ -176,7 +176,6 @@ export default class BaseCommand {
   ) {
     adonisProject = adonisProject || (await this.pickAdonisProject())
 
-    console.log('exeeec lets go')
     if (!adonisProject) {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })
     }

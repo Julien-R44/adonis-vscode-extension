@@ -18,7 +18,6 @@ export class AceExecutor {
    * Execute a command in the foreground, in the VSCode integrated terminal
    */
   private static sendTextToAdonisTerminal(command: string) {
-    console.log('send texttt')
     let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
 
     if (!terminal) {
@@ -37,7 +36,6 @@ export class AceExecutor {
     if (isWindows && adonisProject.path.startsWith('/')) {
       adonisProject.path = adonisProject.path.substring(1)
     }
-    console.log('execccc')
 
     /**
      * Execute the final command in the background
