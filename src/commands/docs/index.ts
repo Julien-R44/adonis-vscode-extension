@@ -1,5 +1,6 @@
-import { ExtensionContext, commands, window, ViewColumn } from "vscode";
+import { ViewColumn, commands, window } from "vscode";
 import { EXTENSION_NAME } from "../../utilities/constants";
+import type { ExtensionContext} from "vscode";
 
 /**
  * Open the given URL in a new panel as a webview
@@ -12,7 +13,7 @@ const openUrlAsWebview = (viewId: string, panelName: string, url: string) => {
   panel.webview.html = `<iframe width="100%" height="650px" src="${url}"></iframe>`
 }
 
-export const registerDocsCommands = (context: ExtensionContext) => {
+export const registerDocsCommands = (_context: ExtensionContext) => {
   commands.registerCommand(`${EXTENSION_NAME}.docs.adonis`, () => openUrlAsWebview('adonis', 'AdonisJS Docs', 'https://docs.adonisjs.com/'))
   commands.registerCommand(`${EXTENSION_NAME}.docs.japa`, () => openUrlAsWebview('japa', 'Japa Docs', 'https://japa.dev'))
 }

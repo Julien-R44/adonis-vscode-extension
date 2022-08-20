@@ -1,3 +1,4 @@
+import { EXTENSION_NAME } from '../utilities/constants'
 import { Command } from './make/command'
 import { Controller } from './make/controller'
 import { Exception } from './make/exception'
@@ -22,9 +23,8 @@ import { Rollback } from './migration/rollback'
 import { Suite } from './make/suite'
 import { Factory } from './make/factory'
 import { Policy } from './make/policy'
-import { EXTENSION_NAME } from '../utilities/constants'
 
-const buildIdentifier = (identifier: string) => EXTENSION_NAME + '.' + identifier
+const buildIdentifier = (identifier: string) => `${EXTENSION_NAME}.${identifier}`
 
 export const commands = [
   {

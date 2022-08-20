@@ -1,13 +1,14 @@
-import { Uri, TextDocument } from 'vscode'
-import { getDirectories } from './directory'
 import * as fs from 'fs'
+import { Uri } from 'vscode'
 import ProjectFinder from '../services/project_finder'
-import { AdonisProject } from '../contracts'
+import { getDirectories } from './directory'
+import type { AdonisProject } from '../contracts'
+import type { TextDocument } from 'vscode'
 
 /**
  * A minimal file path representation.
  */
-export type Path = {
+export interface Path {
   name: string
   fullpath: string
   uri: Uri
@@ -25,7 +26,7 @@ export function getExactPathMatch(
   targetDirectories: string[],
   extensions: string[]
 ): Path | null {
-  let paths = getPathMatches(text, doc, targetDirectories, extensions)
+  const paths = getPathMatches(text, doc, targetDirectories, extensions)
   return paths.length > 0 ? paths[0] : null
 }
 
@@ -57,10 +58,10 @@ function buildPaths(
   fileName: string,
   extensions: string[]
 ): Path[] {
-  let result: Path[] = []
+  const result: Path[] = []
 
   for (const path in paths) {
-    for (let extension of extensions) {
+    for (const extension of extensions) {
       const file = `${fileName}${extension}`
       const filePath = `${adonisProject.uri.fsPath}/${paths[path]}/${file}`
       const fullpath = `${adonisProject.name}/${paths[path]}/${file}`

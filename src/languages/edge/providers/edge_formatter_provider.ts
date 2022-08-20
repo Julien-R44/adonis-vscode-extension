@@ -1,16 +1,14 @@
-import {
-  Range,
-  Position,
-  TextEdit,
-  TextDocument,
-  FormattingOptions,
-  DocumentFormattingEditProvider,
-  DocumentRangeFormattingEditProvider,
-} from 'vscode'
-import ConfigWrapper from '../../../utilities/config'
+import { Position, Range, TextEdit } from 'vscode'
 import * as html from 'vscode-html-languageservice'
 import * as lst from 'vscode-languageserver-types'
+import ConfigWrapper from '../../../utilities/config'
 import EdgeFormatter from '../formatters/edge_formatter'
+import type {
+  DocumentFormattingEditProvider,
+  DocumentRangeFormattingEditProvider,
+  FormattingOptions,
+  TextDocument,
+} from 'vscode'
 
 const HtmlLanguageService = html.getLanguageService()
 

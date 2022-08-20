@@ -1,6 +1,7 @@
 import * as fs from 'fs'
-import { Path } from '../utilities/path_matching'
 import { MarkdownString } from 'vscode'
+import type { Path } from '../utilities/path_matching'
+
 const DocBlock = require('docblock')
 
 export class DocumentationProvider {
@@ -31,7 +32,7 @@ export class DocumentationProvider {
     const fileExtension = matches ? matches[0] : '.js'
 
     const docBlock = new DocBlock()
-    let result: any[any] = docBlock.parse(source, fileExtension).filter((doc: any) => {
+    const result: any[any] = docBlock.parse(source, fileExtension).filter((doc: any) => {
       const pattern = `.*${methodName}\\s*\\(.*\\)\\s*(:\\s*\\w+\\s*)?\\{((.[^\\}]|\\s)*)\\}`
       const regex = new RegExp(pattern, 'gm')
       return regex.test(doc.code)
@@ -46,8 +47,8 @@ export class DocumentationProvider {
   /**
    * Generate a markdown of all possible file paths provided.
    */
-  public static generateDocFromPath(path: Path, showFolderTip: boolean = false) {
-    let text: string = ''
+  public static generateDocFromPath(path: Path, showFolderTip = false) {
+    let text = ''
     text += showFolderTip ? `\`${path.name}\`` : ''
     text += ` [${path.fullpath}](${path.uri})  \r`
 

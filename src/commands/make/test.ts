@@ -8,7 +8,7 @@ export class Test extends BaseCommand {
     /**
      * Get the test suite name
      */
-    let suiteName = await this.getInput('Suite name')
+    const suiteName = await this.getInput('Suite name')
     if (!suiteName) {
       this.showError('Suite name is required.')
       return
@@ -17,7 +17,7 @@ export class Test extends BaseCommand {
     /**
      * Get the test suite name
      */
-    let testName = await this.getInput('Test name')
+    const testName = await this.getInput('Test name')
     if (!testName) {
       this.showError('Test name is required.')
       return

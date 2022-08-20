@@ -1,6 +1,6 @@
-import { ExtensionContext, commands } from 'vscode'
-import { EXTENSION_NAME } from '../utilities/constants'
+import { commands } from 'vscode'
 import { commands as commandsExtension } from './commands'
+import type { ExtensionContext } from 'vscode'
 
 /**
  * Register Ace commands to the extension context

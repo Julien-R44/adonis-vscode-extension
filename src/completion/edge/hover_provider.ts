@@ -1,7 +1,8 @@
-import { HoverProvider, TextDocument, Position, ProviderResult, Hover } from 'vscode'
+import { Hover } from 'vscode'
 import { DocumentationProvider } from '../../services/documentation_provider'
 import { getExactPathMatch } from '../../utilities/path_matching'
 import Config from '../../utilities/config'
+import type { HoverProvider, Position, ProviderResult, TextDocument } from 'vscode'
 
 class EdgeHoverProvider implements HoverProvider {
   public provideHover(doc: TextDocument, pos: Position): ProviderResult<Hover> {

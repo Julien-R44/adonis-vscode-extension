@@ -8,7 +8,7 @@ export class Controller extends BaseCommand {
     /**
      * Get the controller name
      */
-    let controllerName = await this.getInput('Controller name')
+    const controllerName = await this.getInput('Controller name')
     if (!controllerName) {
       this.showError('Controller name is required.')
       return
@@ -17,7 +17,7 @@ export class Controller extends BaseCommand {
     /**
      * Should controller be resourceful
      */
-    let resource = await this.getYesNo('Should the controller be a resource ?')
+    const resource = await this.getYesNo('Should the controller be a resource ?')
 
     /**
      * Execute the command

@@ -6,7 +6,9 @@ import { CONFIG_NAME } from './constants'
  *
  * See extension root `package.json` for for information.
  */
-type Config = { [key: string]: any }
+interface Config {
+  [key: string]: any
+}
 
 /**
  * A wrapper around vscode configuration for this extension

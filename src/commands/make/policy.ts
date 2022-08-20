@@ -8,7 +8,7 @@ export class Policy extends BaseCommand {
     /**
      * Get the policy name
      */
-    let policyName = await this.getInput('Policy name')
+    const policyName = await this.getInput('Policy name')
     if (!policyName) {
       this.showError('Policy name is required.')
       return
@@ -22,7 +22,7 @@ export class Policy extends BaseCommand {
     if (resourceModel) {
       command += ` --resource-model=${resourceModel}`
 
-      let userModel = await this.getInput(
+      const userModel = await this.getInput(
         'Enter the name of the user model to be authorized (Optional)'
       )
 
@@ -43,7 +43,7 @@ export class Policy extends BaseCommand {
      * Execute the command
      */
     return this.handleExecCmd({
-      command: command,
+      command,
       fileType: 'policy',
       openCreatedFile: true,
     })

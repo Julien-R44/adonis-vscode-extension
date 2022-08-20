@@ -66,7 +66,7 @@ export class HtmlTable {
     tableRows.forEach((row) => {
       html += '<tr>'
       row.forEach((item) => {
-        html += '<td>' + item + '</td>'
+        html += `<td>${item}</td>`
       })
       html += '</tr>'
     })

@@ -10,15 +10,15 @@ import * as fs from 'fs'
  * @param childDirectories Array of all possible directories to scan and match.
  */
 export function getDirectories(workspacePath: string, childDirectories: string[]): string[] {
-  let folders = Object.values(childDirectories)
+  const folders = Object.values(childDirectories)
   childDirectories = Object.values(childDirectories)
 
   for (const childDir of childDirectories) {
-    let directory = path.join(workspacePath, childDir)
+    const directory = path.join(workspacePath, childDir)
 
     if (fs.existsSync(directory)) {
       fs.readdirSync(directory).forEach((dirItem: string) => {
-        let fullPath = path.join(directory, dirItem)
+        const fullPath = path.join(directory, dirItem)
 
         if (fs.statSync(fullPath).isDirectory()) {
           const theDirectory = `${childDir}/${dirItem}`

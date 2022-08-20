@@ -1,15 +1,9 @@
-import {
-  ExtensionContext,
-  TreeDataProvider,
-  window,
-  ProviderResult,
-  TreeItem,
-  TreeItemCollapsibleState,
-  ThemeIcon,
-} from 'vscode'
-import { HelpAndFeedbackView, Link, Command } from 'vscode-ext-help-and-feedback-view'
+import { ThemeIcon, TreeItemCollapsibleState, window } from 'vscode'
+import { HelpAndFeedbackView } from 'vscode-ext-help-and-feedback-view'
 import { commands } from '../commands/commands'
-import { CommandGenericNode } from '../contracts'
+import type { Command, Link } from 'vscode-ext-help-and-feedback-view'
+import type { ExtensionContext, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
+import type { CommandGenericNode } from '../contracts'
 
 /**
  * Responsible for adding the AdonisJS logo on the VSCode Sidebar
@@ -71,7 +65,7 @@ export class ViewContainer {
   /**
    * Create the "Explorer" view with the different ace commands
    */
-  public static createExplorerView(context: ExtensionContext) {
+  public static createExplorerView(_context: ExtensionContext) {
     const treeDataProvider = new CommandsTreeDataProvider()
 
     window.createTreeView('adonisjs.home', { treeDataProvider })
@@ -127,7 +121,7 @@ class CommandsTreeDataProvider implements TreeDataProvider<CommandGenericNode> {
       }))
     }
 
-    // @ts-ignore
+    // @ts-expect-error TODO: fixme
     return element.children
   }
 }

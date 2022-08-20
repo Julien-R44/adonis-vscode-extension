@@ -8,7 +8,7 @@ export class View extends BaseCommand {
     /**
      * Get the view name
      */
-    let viewName = await this.getInput('View name')
+    const viewName = await this.getInput('View name')
     if (!viewName) {
       this.showError('View name is required.')
       return

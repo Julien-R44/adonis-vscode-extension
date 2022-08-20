@@ -8,7 +8,7 @@ export class Validator extends BaseCommand {
     /**
      * Get the validator name
      */
-    let seederName = await this.getInput('Validator name')
+    const seederName = await this.getInput('Validator name')
     if (!seederName) {
       this.showError('Validator name is required.')
       return

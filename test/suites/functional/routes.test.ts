@@ -1,8 +1,12 @@
-import * as vscode from 'vscode'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+
 import * as path from 'path'
-import { workspace, WorkspaceFolder } from 'vscode'
+import * as vscode from 'vscode'
+import { workspace } from 'vscode'
 import { test } from '@japa/runner'
-import { RouteControllerLinkProvider } from '../../../src/completion/routes/LinkProvider'
+import { RouteControllerLinkProvider } from '../../../src/completion/routes/link_provider'
+import type { WorkspaceFolder } from 'vscode'
 
 let mainWorkspace: string
 

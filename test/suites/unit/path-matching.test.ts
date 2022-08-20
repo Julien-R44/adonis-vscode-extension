@@ -1,7 +1,10 @@
-import { Uri, workspace, WorkspaceFolder, TextDocument } from 'vscode'
+/* eslint-disable sonarjs/no-duplicate-string */
+
 import * as path from 'path'
+import { Uri, workspace } from 'vscode'
 import { test } from '@japa/runner'
 import { getPathMatches } from '../../../src/utilities/path_matching'
+import type { TextDocument, WorkspaceFolder } from 'vscode'
 
 let mainWorkspace: string
 let routesDoc: TextDocument

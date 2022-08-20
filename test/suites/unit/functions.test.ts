@@ -1,7 +1,10 @@
-import { getMethodsInSourceFile, getLineNumber } from '../../../src/utilities/functions'
-import { workspace, WorkspaceFolder } from 'vscode'
+/* eslint-disable sonarjs/no-duplicate-string */
+
 import * as path from 'path'
+import { workspace } from 'vscode'
 import { test } from '@japa/runner'
+import { getLineNumber, getMethodsInSourceFile } from '../../../src/utilities/functions'
+import type { WorkspaceFolder } from 'vscode'
 
 let mainWorkspace: string
 

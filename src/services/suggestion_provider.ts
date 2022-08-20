@@ -1,9 +1,10 @@
-import * as glob from 'glob'
 import { relative } from 'path'
-import { MarkdownString, CompletionItem, CompletionItemKind } from 'vscode'
-import { AdonisProject, Suggestion, SuggestionType } from '../contracts'
+import * as glob from 'glob'
+import { CompletionItem, CompletionItemKind, MarkdownString } from 'vscode'
+import { SuggestionType } from '../contracts'
 import { getMethodsInSourceFile } from '../utilities/functions'
 import { DocumentationProvider } from './documentation_provider'
+import type { AdonisProject, Suggestion } from '../contracts'
 
 export class SuggestionProvider {
   /**
@@ -16,7 +17,7 @@ export class SuggestionProvider {
     extensions: string[],
     suggestionType: SuggestionType
   ): Suggestion[] {
-    let suggestions: Set<Suggestion> = new Set()
+    const suggestions: Set<Suggestion> = new Set()
 
     for (const filePath of filePaths) {
       const shortPath = relative(directory, filePath)
@@ -63,7 +64,7 @@ export class SuggestionProvider {
     text: string,
     extensions: string[]
   ): string[] {
-    let result: string[] = []
+    const result: string[] = []
     const fn = (rgx: string, cur: string) => `${rgx}|${cur}`
     const extensionRegex = extensions.reduce(fn, '')
     const textRegex = text.split("").map(c => `(?=.*${c})`).join(""); // prettier-ignore
@@ -121,7 +122,7 @@ export class SuggestionProvider {
    */
   public static toCompletionItems(suggestions: Suggestion[], itemKind = CompletionItemKind.Value) {
     return suggestions.map((suggestion) => {
-      let item = new CompletionItem(suggestion.text, itemKind)
+      const item = new CompletionItem(suggestion.text, itemKind)
       item.documentation = suggestion.documentation
       item.detail = suggestion.detail
       return item
@@ -139,7 +140,7 @@ export class SuggestionProvider {
     if (suggestionType === SuggestionType.ControllerName) {
       const fileMethods = getMethodsInSourceFile(filePath)
       const bulletListMethods = fileMethods.map((item) => `- ${item}`).join('\n')
-      return new MarkdownString(`**Available Methods**\n` + bulletListMethods)
+      return new MarkdownString(`**Available Methods**\n${bulletListMethods}`)
     }
 
     if (suggestionType === SuggestionType.ControllerMethod) {

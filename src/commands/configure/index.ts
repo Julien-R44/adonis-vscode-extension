@@ -8,7 +8,7 @@ export class Configure extends BaseCommand {
     /**
      * Get the package name to configure
      */
-    let packageName = await this.getInput('Package name to configure')
+    const packageName = await this.getInput('Package name to configure')
     if (!packageName) {
       this.showError('Package name is required.')
       return

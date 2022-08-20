@@ -1,18 +1,11 @@
-import {
-  TextDocument,
-  Position,
-  ProviderResult,
-  CompletionItemProvider,
-  CompletionItem,
-  CompletionItemKind,
-  workspace,
-  SnippetString,
-} from 'vscode'
+import { CompletionItem, CompletionItemKind, SnippetString } from 'vscode'
 import Config from '../../utilities/config'
 import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
 import { SuggestionProvider } from '../../services/suggestion_provider'
 import ProjectFinder from '../../services/project_finder'
-import { Suggestion, SuggestionType } from '../../contracts'
+import { SuggestionType } from '../../contracts'
+import type { Suggestion } from '../../contracts'
+import type { CompletionItemProvider, Position, ProviderResult, TextDocument } from 'vscode'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
   public provideCompletionItems(

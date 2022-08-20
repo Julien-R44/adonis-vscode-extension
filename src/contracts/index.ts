@@ -1,4 +1,4 @@
-import { Uri, MarkdownString } from 'vscode'
+import type { MarkdownString, Uri } from 'vscode'
 
 /**
  * Edge formatter configuration.
@@ -30,7 +30,7 @@ export interface AdonisProject {
 /**
  * A code completion suggestion
  */
-export type Suggestion = {
+export interface Suggestion {
   text: string
   detail: string
   documentation: string | MarkdownString
@@ -49,7 +49,7 @@ export enum SuggestionType {
 /**
  * Destructured representation of a controller string.
  */
-export type Controller = {
+export interface Controller {
   name: string
   fullname: string
   parentDirectory: string
@@ -60,7 +60,7 @@ export type Controller = {
 /**
  * Shape of a BaseNode that compose the tree view
  */
-type BaseNode = {
+interface BaseNode {
   label: string
   description: string
   icon?: string

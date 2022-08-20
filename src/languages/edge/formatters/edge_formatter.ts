@@ -1,4 +1,4 @@
-import { EdgeFormatterContract } from '../../../contracts'
+import type { EdgeFormatterContract } from '../../../contracts'
 
 /**
  * Format the content of an edge file.

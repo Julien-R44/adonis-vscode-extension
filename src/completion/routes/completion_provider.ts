@@ -1,17 +1,18 @@
-import {
-  TextDocument,
-  Position,
-  ProviderResult,
-  CompletionItemProvider,
-  CompletionItem,
-  Range,
-} from 'vscode'
 import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
 import { SuggestionProvider } from '../../services/suggestion_provider'
 import ProjectFinder from '../../services/project_finder'
-import { Suggestion, SuggestionType } from '../../contracts'
+import { SuggestionType } from '../../contracts'
+import type { Suggestion } from '../../contracts'
+import type {
+  CompletionItem,
+  CompletionItemProvider,
+  Position,
+  ProviderResult,
+  Range,
+  TextDocument,
+} from 'vscode'
 
 const {
   controllersDirectories,
@@ -94,7 +95,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const methods = getMethodsInSourceFile(suggestions.filePath)
 
     return methods.map((method) => {
-      let newSuggestion = Object.assign({}, suggestions)
+      const newSuggestion = Object.assign({}, suggestions)
       newSuggestion.text = method
       newSuggestion.documentation = SuggestionProvider.buildSuggestionDocumentation(
         method,

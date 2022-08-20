@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
-import { Configure } from '../../../src/commands/configure'
 import sinon from 'sinon'
+import { Configure } from '../../../src/commands/configure'
 import { RunTests } from '../../../src/commands/run-tests'
 
 test.group('Commands: Configure', (group) => {

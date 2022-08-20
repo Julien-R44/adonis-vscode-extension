@@ -1,13 +1,13 @@
 import * as fs from 'fs'
 import { Extractor } from '@poppinss/module-methods-extractor'
-import { ExtractorOutput } from '@poppinss/module-methods-extractor/build/src/contracts'
-import { TextDocument } from 'vscode'
 import ConfigWrapper from './config'
+import type { ExtractorOutput } from '@poppinss/module-methods-extractor/build/src/contracts'
+import type { TextDocument } from 'vscode'
 
 /**
  * Location of a method in a source file.
  */
-export type Location = {
+export interface Location {
   lineno: number
   name: string
   // column: number;

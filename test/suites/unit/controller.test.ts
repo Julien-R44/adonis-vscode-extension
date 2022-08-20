@@ -1,7 +1,9 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+
 import { test } from '@japa/runner'
 import { parseControllerString } from '../../../src/utilities/controller'
 
-test.group('Parse route controller strings', (group) => {
+test.group('Parse route controller strings', () => {
   test('Controller string is parsed', ({ assert }) => {
     const text = 'HomeController'
     const controller = parseControllerString(text)

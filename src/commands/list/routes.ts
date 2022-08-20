@@ -1,7 +1,7 @@
 import BaseCommand, { ExtensionErrors } from '../base_command'
 import { HtmlTable } from '../../helpers/html_table'
-import { WebviewPanel } from 'vscode'
-import { AdonisProject } from '../../contracts'
+import type { WebviewPanel } from 'vscode'
+import type { AdonisProject } from '../../contracts'
 
 export class RouteList extends BaseCommand {
   private static readonly command = 'list:routes --json'
@@ -71,8 +71,7 @@ export class RouteList extends BaseCommand {
       panel.webview.onDidReceiveMessage(
         this.onReceiveWebviewMessage.bind(this, panel, res.adonisProject)
       )
-    } catch (err) {
-      // @ts-ignore
+    } catch (err: any) {
       if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
         return this.showError('You must select an AdonisJS project on which to run your command.')
       }

@@ -8,12 +8,12 @@ export class RunTests extends BaseCommand {
     /**
      * Suites to runs
      */
-    let suites = await this.getInput('Suites to run. Leaves empty for running all tests')
+    const suites = await this.getInput('Suites to run. Leaves empty for running all tests')
 
     /**
      * Should run test in watch mode
      */
-    let watchMode = await this.getYesNo('Should run test in watch mode ?')
+    const watchMode = await this.getYesNo('Should run test in watch mode ?')
 
     /**
      * Execute the command

@@ -1,6 +1,7 @@
-import { Range, DocumentLink, Uri, Position } from 'vscode'
-import { Controller } from '../contracts'
+import { DocumentLink, Range } from 'vscode'
 import { getLineNumber } from './functions'
+import type { Position, Uri } from 'vscode'
+import type { Controller } from '../contracts'
 
 export class RouteControllerLink extends DocumentLink {
   public filePath: Uri

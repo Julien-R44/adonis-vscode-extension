@@ -1,16 +1,10 @@
-import {
-  HoverProvider,
-  TextDocument,
-  Position,
-  ProviderResult,
-  Hover,
-  MarkdownString,
-} from 'vscode'
+import { Hover } from 'vscode'
 import { parseControllerString } from '../../utilities/controller'
 import Config from '../../utilities/config'
 import { getExactPathMatch } from '../../utilities/path_matching'
 import { DocumentationProvider } from '../../services/documentation_provider'
-import { Controller } from '../../contracts'
+import type { HoverProvider, MarkdownString, Position, ProviderResult, TextDocument } from 'vscode'
+import type { Controller } from '../../contracts'
 
 const { controllersRegex, controllersDirectories, controllersExtensions } = Config.autocomplete
 
@@ -49,8 +43,7 @@ class RouteControllerHoverProvider implements HoverProvider {
     if (controllerPath) {
       const path = controllerPath.uri.fsPath
       const methodDoc = DocumentationProvider.getDocForMethodInFile(path, controller.method)
-      const markdown = methodDoc || DocumentationProvider.generateDocFromPath(controllerPath)
-      return markdown
+      return methodDoc || DocumentationProvider.generateDocFromPath(controllerPath)
     }
 
     return null

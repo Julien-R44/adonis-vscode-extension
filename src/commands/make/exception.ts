@@ -8,7 +8,7 @@ export class Exception extends BaseCommand {
     /**
      * Get the exception name
      */
-    let exceptionName = await this.getInput('Exception name')
+    const exceptionName = await this.getInput('Exception name')
     if (!exceptionName) {
       this.showError('Exception name is required.')
       return

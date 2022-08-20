@@ -8,7 +8,7 @@ export class Middleware extends BaseCommand {
     /**
      * Get the middleware name
      */
-    let name = await this.getInput('Middleware name')
+    const name = await this.getInput('Middleware name')
     if (!name) {
       this.showError('Middleware name is required.')
       return

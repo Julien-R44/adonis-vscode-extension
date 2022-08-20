@@ -1,16 +1,18 @@
-import { commands, window, workspace } from 'vscode'
+/* eslint-disable no-console */
+
 import { platform } from 'process'
 import { promisify } from 'util'
 import { exec as baseExec } from 'child_process'
 import { join } from 'path'
-import Config from '../utilities/config'
+import { commands, window, workspace } from 'vscode'
 import ProjectFinder from '../services/project_finder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
-import { AdonisProject } from '../contracts'
+import type { AdonisProject } from '../contracts'
+
 const exec = promisify(baseExec)
 
-let outputChannel = window.createOutputChannel('AdonisJS')
+const outputChannel = window.createOutputChannel('AdonisJS')
 
 export enum ExtensionErrors {
   ERR_ADONIS_PROJECT_SELECTION_NEEDED,
@@ -48,8 +50,8 @@ export default class BaseCommand {
    * Prompt the user to select Yes or No
    */
   protected static async getYesNo(placeHolder: string): Promise<boolean> {
-    let value = await window.showQuickPick(['Yes', 'No'], { placeHolder })
-    return value?.toLowerCase() === 'yes' ? true : false
+    const value = await window.showQuickPick(['Yes', 'No'], { placeHolder })
+    return value?.toLowerCase() === 'yes'
   }
 
   /**
@@ -67,9 +69,9 @@ export default class BaseCommand {
   protected static async getListInput(
     placeHolder: string,
     list: string[],
-    canPickMany: boolean = false
+    canPickMany = false
   ): Promise<string[]> {
-    let name = (await window.showQuickPick(list, { placeHolder: placeHolder, canPickMany })) as
+    const name = (await window.showQuickPick(list, { placeHolder, canPickMany })) as
       | string[]
       | string
     return typeof name === 'string' ? [name] : name
@@ -80,7 +82,7 @@ export default class BaseCommand {
    */
   protected static async openFile(path: string, filename: string) {
     try {
-      let doc = await workspace.openTextDocument(join(path, filename))
+      const doc = await workspace.openTextDocument(join(path, filename))
       window.showTextDocument(doc)
       commands.executeCommand('workbench.files.action.refreshFilesExplorer')
     } catch (e) {
@@ -163,8 +165,7 @@ export default class BaseCommand {
       if (successMessage) {
         this.showMessage(successMessage)
       }
-    } catch (err) {
-      // @ts-ignore
+    } catch (err: any) {
       if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
         return this.showError('You must select an AdonisJS project on which to run your command.')
       }
@@ -178,7 +179,7 @@ export default class BaseCommand {
    */
   protected static async execCmd(
     command: string,
-    background: boolean = true,
+    background = true,
     adonisProject?: AdonisProject
   ): Promise<{ adonisProject: AdonisProject; result?: { stdout: string; stderr: string } }> {
     adonisProject = adonisProject || (await this.pickAdonisProject())
@@ -195,7 +196,7 @@ export default class BaseCommand {
     /**
      * Execute the final command in the background
      */
-    const nodePath = Config.misc.nodePath || 'node'
+    const nodePath = ConfigWrapper.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
     if (background) {
       const result = await exec(command, { cwd: adonisProject.path })
@@ -206,8 +207,8 @@ export default class BaseCommand {
      * Since we are in the integrated terminal, we need to
      * manually set the cwd to the adonis project path
      */
-    let cmdWithCd =
-      platform === 'win32' && !Config.misc.useUnixCd
+    const cmdWithCd =
+      platform === 'win32' && !ConfigWrapper.misc.useUnixCd
         ? `cd /d "${adonisProject.path}" && ${command}`
         : `cd "${adonisProject.path}" && ${command}`
 

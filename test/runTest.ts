@@ -10,8 +10,7 @@ async function main() {
 
     const vscodeExecutablePath = await downloadAndUnzipVSCode('1.66.0')
 
-    // @ts-ignore
-    process.env.FORCE_COLOR = true
+    process.env.FORCE_COLOR = 'true'
 
     await runTests({
       launchArgs: [workspacePath, '--disable-extensions'],

@@ -8,7 +8,7 @@ export class Factory extends BaseCommand {
     /**
      * Get the factory name
      */
-    let factoryName = await this.getInput('Name of the model for which you want the Factory')
+    const factoryName = await this.getInput('Name of the model for which you want the Factory')
     if (!factoryName) {
       this.showError('Name is required.')
       return

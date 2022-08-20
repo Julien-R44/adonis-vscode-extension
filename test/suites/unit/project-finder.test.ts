@@ -1,9 +1,9 @@
+import { resolve } from 'path'
 import { test } from '@japa/runner'
 import { Uri } from 'vscode'
 import ProjectFinder from '../../../src/services/project_finder'
-import { resolve } from 'path'
 
-test.group('Project Finder', (group) => {
+test.group('Project Finder', () => {
   test('Find simple project', async ({ assert }) => {
     const ret = ProjectFinder.getAdonisProjects()
     const projectPath = resolve(__dirname, '../.././../../test/fixtures/basic-app')

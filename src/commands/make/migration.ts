@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
+
 import BaseCommand from '../base_command'
 
 /**
@@ -8,7 +10,7 @@ export class Migration extends BaseCommand {
     /**
      * Get the migration name
      */
-    let migrationName = await this.getInput('Migration name')
+    const migrationName = await this.getInput('Migration name')
     if (!migrationName) {
       this.showError('Migration name is required.')
       return
@@ -18,7 +20,7 @@ export class Migration extends BaseCommand {
     let modifyTable = false
     let tableName = ''
 
-    let dbName = await this.getInput(
+    const dbName = await this.getInput(
       'For which database do you want create a migration ? Leave empty for using the default.'
     )
 
@@ -45,7 +47,7 @@ export class Migration extends BaseCommand {
     const modifyPart = `${modifyTable ? `--table=${tableName}` : ''}`
     const connectionPart = `${dbName ? `--database=${dbName}` : ''}`
 
-    let command = `${basePart} ${createPart} ${modifyPart} ${connectionPart}`
+    const command = `${basePart} ${createPart} ${modifyPart} ${connectionPart}`
     return this.handleExecCmd({
       command,
       fileType: 'migration',

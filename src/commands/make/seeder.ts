@@ -8,7 +8,7 @@ export class Seeder extends BaseCommand {
     /**
      * Get the seeder name
      */
-    let seederName = await this.getInput('Seeder name')
+    const seederName = await this.getInput('Seeder name')
     if (!seederName) {
       this.showError('Seeder name is required.')
       return

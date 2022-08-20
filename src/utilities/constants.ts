@@ -6,7 +6,7 @@ export const EXTENSION_NAME = 'adonis-vscode-extension'
 /**
  * Prefix of the extension configuration keys
  */
-export const CONFIG_NAME: string = 'adonisjs'
+export const CONFIG_NAME = 'adonisjs'
 
 /**
  * Context key set when extension is activated

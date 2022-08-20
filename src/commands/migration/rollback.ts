@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
+
 import BaseCommand from '../base_command'
 
 /**
@@ -8,14 +10,14 @@ export class Rollback extends BaseCommand {
     /**
      * Prompt user database name
      */
-    let dbName = await this.getInput(
+    const dbName = await this.getInput(
       'Which database do you want to migrate ? Leave empty for using the default.'
     )
 
     /**
      * Execute the command
      */
-    let command = `migration:rollback ${dbName ? `--database=${dbName}` : ''}`
+    const command = `migration:rollback ${dbName ? `--database=${dbName}` : ''}`
     return this.handleExecCmd({
       command,
       successMessage: this.runMigrationInBackground

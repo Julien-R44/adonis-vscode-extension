@@ -8,7 +8,7 @@ export class Command extends BaseCommand {
     /**
      * Get the command name
      */
-    let commandName = await this.getInput('Command name')
+    const commandName = await this.getInput('Command name')
     if (!commandName) {
       this.showError('Command name is required.')
       return

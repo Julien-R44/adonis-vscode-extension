@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, languages } from 'vscode'
+import { commands, languages } from 'vscode'
 import { registerAceCommands } from './commands'
 import EdgeCompletionProvider from './completion/edge/completion_provider'
 import EdgeHoverProvider from './completion/edge/hover_provider'
@@ -11,8 +11,10 @@ import { EdgeFormatterProvider } from './languages'
 import ProjectFinder from './services/project_finder'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 import { ViewContainer } from './services/view_container'
+import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
+  // eslint-disable-next-line no-console
   console.log('Activating AdonisJS extension...')
   await ProjectFinder.loadAdonisProjects()
 

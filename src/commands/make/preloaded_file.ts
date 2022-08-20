@@ -8,7 +8,7 @@ export class PreloadedFile extends BaseCommand {
     /**
      * Get the preloaded file name
      */
-    let prldName = await this.getInput('Preloaded file name')
+    const prldName = await this.getInput('Preloaded file name')
     if (!prldName) {
       this.showError('Preloaded file name is required.')
       return
@@ -21,7 +21,7 @@ export class PreloadedFile extends BaseCommand {
      * TODO: Send PR -> Pass the environment as an argument doesn't work :
      * https://github.com/adonisjs/assembler/blob/28000dfc9a2a597e93699a4996f44e09bb0edd77/commands/Make/PreloadFile.ts#L73
      */
-    let environment = await this.getListInput('Environment', ['console', 'web', 'repl'], true)
+    const environment = await this.getListInput('Environment', ['console', 'web', 'repl'], true)
     if (!environment) {
       this.showError('Environment is required.')
       return

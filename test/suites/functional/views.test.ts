@@ -1,8 +1,9 @@
-import * as vscode from 'vscode'
 import * as path from 'path'
-import { workspace, WorkspaceFolder } from 'vscode'
+import * as vscode from 'vscode'
+import { workspace } from 'vscode'
 import { test } from '@japa/runner'
 import EdgeLinkProvider from '../../../src/completion/edge/LinkProvider'
+import type { WorkspaceFolder } from 'vscode'
 
 let mainWorkspace: string
 

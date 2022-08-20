@@ -1,7 +1,8 @@
 import * as path from 'path'
 import { test } from '@japa/runner'
-import { workspace, WorkspaceFolder, MarkdownString } from 'vscode'
+import { workspace } from 'vscode'
 import { DocumentationProvider } from '../../../src/services/documentation_provider'
+import type { MarkdownString, WorkspaceFolder } from 'vscode'
 
 let mainWorkspace: string
 
@@ -26,7 +27,7 @@ test.group('Autocomplete Markdown Documentation Generation', (group) => {
   }) => {
     const file = path.resolve(mainWorkspace, 'app/Controllers/Http/FooController.ts')
 
-    let documentation = DocumentationProvider.getDocForMethodInFile(file, 'notExisting')
+    const documentation = DocumentationProvider.getDocForMethodInFile(file, 'notExisting')
     assert.deepEqual(documentation, null)
   })
 })

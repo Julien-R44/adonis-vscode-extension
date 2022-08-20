@@ -1,7 +1,7 @@
-import { TextDocument, ProviderResult, DocumentLink, DocumentLinkProvider } from 'vscode'
 import Config from '../../utilities/config'
 import { getMaxLinesCount } from '../../utilities/functions'
 import { DocumentLinker } from '../../services/document_linker'
+import type { DocumentLink, DocumentLinkProvider, ProviderResult, TextDocument } from 'vscode'
 
 export default class EdgeLinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {

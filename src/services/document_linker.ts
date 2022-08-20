@@ -1,6 +1,7 @@
+import { DocumentLink, Position, Range } from 'vscode'
 import { getExactPathMatch } from '../utilities/path_matching'
-import { TextDocument, DocumentLink, Position, Range } from 'vscode'
-import { parseControllerString, createControllerLink } from '../utilities/controller'
+import { createControllerLink, parseControllerString } from '../utilities/controller'
+import type { TextDocument } from 'vscode'
 
 export class DocumentLinker {
   /**
@@ -73,18 +74,18 @@ export class DocumentLinker {
     targetDirectories: string[],
     fileExtensions: string[]
   ) {
-    let docLinks = []
-    let line = doc.lineAt(lineNo)
-    let matches = line.text.match(regex) || []
+    const docLinks = []
+    const line = doc.lineAt(lineNo)
+    const matches = line.text.match(regex) || []
     if (matches.length < 0) return []
 
-    for (let item of matches) {
-      let file = getExactPathMatch(item, doc, targetDirectories, fileExtensions)
+    for (const item of matches) {
+      const file = getExactPathMatch(item, doc, targetDirectories, fileExtensions)
 
       if (file !== null) {
-        let start = new Position(line.lineNumber, line.text.indexOf(item))
-        let end = start.translate(0, item.length)
-        let docLink = new DocumentLink(new Range(start, end), file.uri)
+        const start = new Position(line.lineNumber, line.text.indexOf(item))
+        const end = start.translate(0, item.length)
+        const docLink = new DocumentLink(new Range(start, end), file.uri)
         docLinks.push(docLink)
       }
     }

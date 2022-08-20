@@ -7,7 +7,7 @@ import ProjectFinder from '../src/services/project_finder'
 export async function run(): Promise<void> {
   const testsRoot = path.resolve(__dirname, '..')
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     configure({
       files: [`**/*.test.js`],
       cwd: testsRoot,

@@ -1,6 +1,6 @@
 import { basename } from 'path'
 import { Uri, workspace } from 'vscode'
-import { AdonisProject } from '../contracts'
+import type { AdonisProject } from '../contracts'
 
 export default class ProjectFinder {
   /**
@@ -12,7 +12,7 @@ export default class ProjectFinder {
    * Scan the whole workspace(s) for existing Adonis projects
    */
   public static async loadAdonisProjects() {
-    let files = await workspace.findFiles('**/ace', '**/node_modules/**', undefined)
+    const files = await workspace.findFiles('**/ace', '**/node_modules/**', undefined)
     this.adonisProjectPaths = files.map((file) => file.path.split('/').slice(0, -1).join('/'))
 
     return this.adonisProjectPaths
@@ -24,7 +24,7 @@ export default class ProjectFinder {
   public static getAdonisProjects(): AdonisProject[] {
     return this.adonisProjectPaths.map((path) => ({
       name: basename(path),
-      path: path,
+      path,
       uri: Uri.file(path),
     }))
   }

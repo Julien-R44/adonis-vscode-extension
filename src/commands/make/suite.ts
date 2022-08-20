@@ -8,7 +8,7 @@ export class Suite extends BaseCommand {
     /**
      * Get the suite name
      */
-    let suiteName = await this.getInput('Suite name')
+    const suiteName = await this.getInput('Suite name')
     if (!suiteName) {
       this.showError('Suite name is required.')
       return
@@ -17,14 +17,14 @@ export class Suite extends BaseCommand {
     /**
      * Get the suite location
      */
-    let suiteLocation = await this.getInput(
+    const suiteLocation = await this.getInput(
       'Path to the suite directory. Leave empty to use the default: "tests/{suiteName}/**/*.spec(.ts|.js)"'
     )
 
     /**
      * Should we add a sample test file
      */
-    let shouldAddSampleFile = await this.getYesNo('Should we add a sample test file ?')
+    const shouldAddSampleFile = await this.getYesNo('Should we add a sample test file ?')
 
     /**
      * Execute the command

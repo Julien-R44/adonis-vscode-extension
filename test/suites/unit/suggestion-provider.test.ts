@@ -1,8 +1,9 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { test } from '@japa/runner'
-import { MarkdownString } from 'vscode'
 import { SuggestionType } from '../../../src/contracts'
 import ProjectFinder from '../../../src/services/project_finder'
 import { SuggestionProvider } from '../../../src/services/suggestion_provider'
+import type { MarkdownString } from 'vscode'
 
 const project = ProjectFinder.getAdonisProjects()[0]
 

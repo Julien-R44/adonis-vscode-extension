@@ -1,8 +1,9 @@
-import { TextDocument, ProviderResult, DocumentLink, DocumentLinkProvider, Uri } from 'vscode'
+import { Uri } from 'vscode'
 import { getLineNumber, getMaxLinesCount } from '../../utilities/functions'
-import { RouteControllerLink } from '../../utilities/controller'
 import ConfigWrapper from '../../utilities/config'
 import { DocumentLinker } from '../../services/document_linker'
+import type { RouteControllerLink } from '../../utilities/controller'
+import type { DocumentLink, DocumentLinkProvider, ProviderResult, TextDocument } from 'vscode'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
   public provideDocumentLinks(doc: TextDocument): ProviderResult<DocumentLink[]> {
@@ -34,7 +35,7 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
   }
 
   public resolveDocumentLink(link: RouteControllerLink): ProviderResult<DocumentLink> {
-    let path = link.filePath.toString()
+    const path = link.filePath.toString()
     const method = link.controller.method
 
     return new Promise(async (resolve) => {

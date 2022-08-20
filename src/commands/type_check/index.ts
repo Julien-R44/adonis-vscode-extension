@@ -1,5 +1,4 @@
 import BaseCommand from '../base_command'
-import { window } from 'vscode'
 
 /**
  * Handle ace type-check command
