@@ -402,22 +402,21 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
-    "compile": "webpack",
-    "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "compile-tests": "tsc -p . --outDir out",
-    "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile",
+    "build": "tsup",
+    "dev": "tsup --watch src",
+    "watch": "pnpm dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "test": "node ./out/test/runTest.js",
-    "version": "npm run build"
+    "version": "npm run build",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "test": "tsc -p ./ && node ./out/test/runTest.js"
   },
   "dependencies": {
     "@poppinss/module-methods-extractor": "^1.0.5",
     "docblock": "^0.4.5",
+    "fast-glob": "^3.2.11",
     "vscode-ext-help-and-feedback-view": "^1.0.1",
     "vscode-html-languageservice": "^5.0.1",
     "vscode-languageserver-types": "^3.17.2"
@@ -427,20 +426,15 @@
     "@japa/runner": "^2.0.9",
     "@japa/spec-reporter": "^1.1.12",
     "@julr/eslint-config": "^0.3.2",
-    "@types/glob": "^7.2.0",
     "@types/node": "14.x",
     "@types/sinon": "^10.0.13",
     "@types/vscode": "^1.70.0",
     "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.22.0",
-    "github-label-sync": "^2.2.0",
-    "glob": "^8.0.3",
     "prettier": "^2.7.1",
     "sinon": "^14.0.0",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.7.4",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
+    "tsup": "^6.2.2",
+    "typescript": "^4.7.4"
   },
   "pnpm": {
     "peerDependencyRules": {
