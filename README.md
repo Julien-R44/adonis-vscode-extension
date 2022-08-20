@@ -23,6 +23,7 @@
 # Features
 * Use all Adonis Assembler commands ( make:\* )
 * Migrate and seed your database ( db:\*, migration:\* )
+* Run your commands from the Activity Bar just by clicking
 * View your routes within VSCode
 * Open and see docs within VSCode
 * .adonisrc.json file validation with JSON Schema
@@ -37,6 +38,11 @@ Launch ace commands directly from VScode.
 Files created by adonis/assembler are automatically opened after their creation.
 
 ![](https://i.imgur.com/BEb6Xpc.gif)
+
+## ActivityBar and Tree Views
+Run your commands without typing anything, See your routes and go the code just by clicking on the items in the Activity Bar.
+
+![](https://i.imgur.com/fwOdNWF.gif)
 
 ## List Routes
 List all routes in your project from VSCode and filter them.
