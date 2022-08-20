@@ -8,24 +8,29 @@ import {
 import { AceExecutor } from '../../services/ace_executor'
 import { Extension } from '../../services/extension'
 import ProjectFinder from '../../services/project_finder'
+import { Notifier } from '../../services/notifier'
 import { RouteFactory } from './routes_factory'
 import type {
   AceListRoutesResult,
+  BaseNode,
   RouteDomainNode,
   RouteGroupNode,
   RouteNode,
 } from '../../contracts'
 import type { Event, TreeDataProvider } from 'vscode'
 
+type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDomainNode | BaseNode
+
 /**
  * Provide the data to be displayed in the VSCode "Routes" Tree View
  */
 export class RoutesTreeDataProvider
-  implements TreeDataProvider<RouteNode | RouteGroupNode | RouteDomainNode>
+  implements TreeDataProvider<RouteTreeDataProviderPossiblesNodes>
 {
   private _onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>()
   public readonly onDidChangeTreeData: Event<any> = this._onDidChangeTreeData.event
   private routes: (RouteDomainNode | RouteGroupNode)[] = []
+  private errored = false
 
   constructor() {
     Extension.routesTreeDataProvider = this
@@ -39,9 +44,7 @@ export class RoutesTreeDataProvider
   /**
    * Returns the UI state of the given walked node
    */
-  public getTreeItem(
-    element: RouteNode | RouteGroupNode | RouteDomainNode
-  ): TreeItem | Thenable<TreeItem> {
+  public getTreeItem(element: RouteTreeDataProviderPossiblesNodes): TreeItem | Thenable<TreeItem> {
     if ('children' in element) {
       return {
         collapsibleState: TreeItemCollapsibleState.Collapsed,
@@ -87,14 +90,28 @@ export class RoutesTreeDataProvider
       }
     }
 
-    return {}
+    return {
+      label: element.label,
+      description: element.description,
+      iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
+    }
   }
 
   /**
    * Returns the children of the given node
    * If `element` is `undefined` then return the root node
    */
-  public getChildren(element?: RouteNode | RouteGroupNode | RouteDomainNode) {
+  public getChildren(element?: RouteTreeDataProviderPossiblesNodes) {
+    if (this.errored) {
+      return [
+        {
+          label: 'Error',
+          description: 'Error while fetching your routes. See the Output console for more details.',
+          icon: 'error',
+        },
+      ]
+    }
+
     if (!element) {
       return this.routes
     } else if ('children' in element) {
@@ -105,17 +122,24 @@ export class RoutesTreeDataProvider
   }
 
   public async getAllRoutes() {
+    this.errored = false
+
     // TODO: Here we need to store the adonis projet used in the route view instead
     const adonisProject = ProjectFinder.getAdonisProjects()[0]!
 
-    const { result } = await AceExecutor.exec({
-      command: 'list:routes --json',
-      adonisProject,
-      background: true,
-    })
+    try {
+      const { result } = await AceExecutor.exec({
+        command: 'list:routes --json',
+        adonisProject,
+        background: true,
+      })
 
-    const jsonRoutes = JSON.parse(result!.stdout) as AceListRoutesResult
-    this.routes = await RouteFactory.buildRoutesDomainTree(jsonRoutes)
-    this.refresh()
+      const jsonRoutes = JSON.parse(result!.stdout) as AceListRoutesResult
+      this.routes = await RouteFactory.buildRoutesDomainTree(jsonRoutes)
+      this.refresh()
+    } catch (err) {
+      this.errored = true
+      Notifier.showError('Error while fetching your routes !', err)
+    }
   }
 }

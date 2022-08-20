@@ -61,7 +61,7 @@ export interface Controller {
 /**
  * Shape of a BaseNode that compose the tree view
  */
-interface BaseNode {
+export interface BaseNode {
   label: string
   description: string
   icon?: string

@@ -132,7 +132,6 @@ export default class BaseCommand {
         this.openCreatedFile(res.adonisProject, res.result!.stdout)
       }
 
-      console.log(successMessage)
       if (successMessage) {
         Notifier.showMessage(successMessage)
       }
