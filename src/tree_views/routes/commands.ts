@@ -35,11 +35,22 @@ function copyLinkCommand(route: RouteNode) {
   Notifier.showMessage('Link was copied to your clipboard.')
 }
 
+function toggleFlatRouteViewCommand(value: boolean) {
+  Extension.routesTreeDataProvider.toggleFlatView()
+  commands.executeCommand(
+    'setContext',
+    `${EXTENSION_NAME}.view.routes.viewAsList`,
+    Extension.routesTreeDataProvider.flatView
+  )
+}
+
 export const registerRoutesTreeViewCommands = (context: ExtensionContext) => {
   const viewCommands: [string, Function][] = [
     [`${EXTENSION_NAME}.view.routes.refresh`, refreshRouteCommand],
     [`${EXTENSION_NAME}.view.routes.open-in-browser`, openInBrowserCommand],
     [`${EXTENSION_NAME}.view.routes.copy-link`, copyLinkCommand],
+    [`${EXTENSION_NAME}.view.routes.viewAsList`, toggleFlatRouteViewCommand],
+    [`${EXTENSION_NAME}.view.routes.viewAsTree`, toggleFlatRouteViewCommand],
   ]
 
   const commandsDisposables = viewCommands.map(([identifier, handler]) =>

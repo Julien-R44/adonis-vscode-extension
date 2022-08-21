@@ -16,17 +16,12 @@ export class RouteFactory {
   private static EXCLUDED_ROUTES = ['/uploads/*']
 
   /**
-   * Exclude nn-important routes
+   * Exclude nn-important routes and routes with handler that is a closure
    */
-  private static filterExcludedRoutes(route: RawRoute) {
-    return !this.EXCLUDED_ROUTES.includes(route.pattern)
-  }
-
-  /**
-   * Exclude routes with handler that is a closure
-   */
-  private static filterRoutesWithClosureHandler(route: RawRoute) {
-    return route.handler !== 'Closure'
+  private static filterExcludedAndClosureRoutes(routes: RawRoute[]) {
+    return routes
+      .filter((route) => !this.EXCLUDED_ROUTES.includes(route.pattern))
+      .filter((route) => route.handler !== 'Closure')
   }
 
   /**
@@ -60,9 +55,7 @@ export class RouteFactory {
    * of multiples routes grouped by their URL pattern.
    */
   private static async buildRoutesGroupTree(rawRoutes: RawRoute[]): Promise<RouteGroupNode[]> {
-    const filteredRoutes = rawRoutes
-      .filter(this.filterExcludedRoutes.bind(this))
-      .filter(this.filterRoutesWithClosureHandler.bind(this))
+    const filteredRoutes = this.filterExcludedAndClosureRoutes(rawRoutes)
 
     const routesGroups = groupBy(filteredRoutes, (route) => {
       /**
@@ -86,9 +79,26 @@ export class RouteFactory {
     return Promise.all(promises)
   }
 
+  private static buildFlattenedRouteNodeTree(rawRoutes: AceListRoutesResult) {
+    const flattenedRawRoutes = Object.entries(rawRoutes)
+      .map(([domain, domainRoutes]) => domainRoutes.map((route) => ({ ...route, domain })))
+      .flat()
+
+    const promises = this.filterExcludedAndClosureRoutes(flattenedRawRoutes).map((route) =>
+      this.buildRouteNode(route)
+    )
+
+    return Promise.all(promises)
+  }
+
   public static async buildRoutesDomainTree(
-    rawRoutes: AceListRoutesResult
-  ): Promise<RouteDomainNode[] | RouteGroupNode[]> {
+    rawRoutes: AceListRoutesResult,
+    flattened = false
+  ): Promise<RouteDomainNode[] | RouteGroupNode[] | RouteNode[]> {
+    if (flattened) {
+      return this.buildFlattenedRouteNodeTree(rawRoutes)
+    }
+
     if (Object.values(rawRoutes).length === 1) {
       return this.buildRoutesGroupTree(rawRoutes.root)
     }

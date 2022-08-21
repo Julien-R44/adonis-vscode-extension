@@ -158,6 +158,16 @@
     "menus": {
       "view/title": [
         {
+          "command": "adonis-vscode-extension.view.routes.viewAsList",
+          "when": "view == adonisjs.routes && !adonis-vscode-extension.view.routes.viewAsList",
+          "group": "navigation"
+        },
+        {
+          "command": "adonis-vscode-extension.view.routes.viewAsTree",
+          "when": "view == adonisjs.routes && adonis-vscode-extension.view.routes.viewAsList",
+          "group": "navigation"
+        },
+        {
           "command": "adonis-vscode-extension.view.routes.refresh",
           "when": "view == adonisjs.routes",
           "group": "navigation"
@@ -283,6 +293,18 @@
       ]
     },
     "commands": [
+      {
+        "command": "adonis-vscode-extension.view.routes.viewAsList",
+        "title": "See as list",
+        "icon": "$(list-flat)",
+        "enablement": "!adonis-vscode-extension.view.routes.viewAsList"
+      },
+      {
+        "command": "adonis-vscode-extension.view.routes.viewAsTree",
+        "title": "See as tree",
+        "icon": "$(list-tree)",
+        "enablement": "adonis-vscode-extension.view.routes.viewAsList"
+      },
       {
         "command": "adonis-vscode-extension.view.routes.refresh",
         "title": "Refresh Routes",

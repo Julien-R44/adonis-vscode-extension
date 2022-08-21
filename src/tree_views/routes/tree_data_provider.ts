@@ -29,8 +29,11 @@ export class RoutesTreeDataProvider
 {
   private _onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>()
   public readonly onDidChangeTreeData: Event<any> = this._onDidChangeTreeData.event
-  private routes: (RouteDomainNode | RouteGroupNode)[] = []
+
+  private rawRoutes: AceListRoutesResult | null = null
+  private routes: RouteTreeDataProviderPossiblesNodes[] = []
   private errored = false
+  public flatView = false
 
   constructor() {
     Extension.routesTreeDataProvider = this
@@ -122,6 +125,20 @@ export class RoutesTreeDataProvider
     return []
   }
 
+  public toggleFlatView() {
+    this.flatView = !this.flatView
+    this.buildTreeItems()
+  }
+
+  private async buildTreeItems() {
+    if (!this.rawRoutes) {
+      return
+    }
+
+    this.routes = await RouteFactory.buildRoutesDomainTree(this.rawRoutes, this.flatView)
+    this.refresh()
+  }
+
   public async getAllRoutes() {
     this.errored = false
 
@@ -135,9 +152,8 @@ export class RoutesTreeDataProvider
         background: true,
       })
 
-      const jsonRoutes = JSON.parse(result!.stdout) as AceListRoutesResult
-      this.routes = await RouteFactory.buildRoutesDomainTree(jsonRoutes)
-      this.refresh()
+      this.rawRoutes = JSON.parse(result!.stdout) as AceListRoutesResult
+      this.buildTreeItems()
     } catch (err) {
       this.errored = true
       Notifier.showError('Error while fetching your routes !', err)
