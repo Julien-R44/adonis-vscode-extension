@@ -61,7 +61,7 @@ export class RouteFactory {
       /**
        * We ignore the /api/\d+ pattern to make the groups
        */
-      const pattern = route.pattern.replace(/^\/api\/v\d+\//, '/')
+      const pattern = route.pattern.replace(/^(\/api)?\/v\d+/, '/')
       return pattern.split('/').filter(Boolean)[0] || '/'
     })
 

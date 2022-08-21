@@ -116,6 +116,22 @@ const rawRoutes: AceListRoutesResult = {
       handler: 'PollsController.destroy',
       middleware: ['auth'],
     },
+    {
+      domain: 'root',
+      name: '',
+      pattern: '/v1/hey/:id',
+      methods: ['DELETE'],
+      handler: 'PollsController.destroy',
+      middleware: ['auth'],
+    },
+    {
+      domain: 'root',
+      name: '',
+      pattern: '/v1/test/:id',
+      methods: ['DELETE'],
+      handler: 'PollsController.destroy',
+      middleware: ['auth'],
+    },
   ],
 }
 
@@ -173,6 +189,8 @@ test.group('RoutesFactory', () => {
         { label: 'me', description: '2 routes' },
         { label: 'polls', description: '5 routes' },
         { label: 'xapolls', description: '2 routes' },
+        { label: 'hey', description: '1 routes' },
+        { label: 'test', description: '1 routes' },
       ]
     )
   })
