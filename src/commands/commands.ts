@@ -23,6 +23,7 @@ import { Rollback } from './migration/rollback'
 import { Suite } from './make/suite'
 import { Factory } from './make/factory'
 import { Policy } from './make/policy'
+import { Serve } from './serve'
 
 const buildIdentifier = (identifier: string) => `${EXTENSION_NAME}.${identifier}`
 
@@ -160,6 +161,13 @@ export const commands = [
     icon: 'symbol-misc',
     description: 'Miscellaneous commands',
     children: [
+      {
+        aceCommand: 'serve',
+        description:
+          'Start the AdonisJS HTTP server, along with the file watcher. Also starts the webpack dev server when webpack encore is installed',
+        commandIdentifier: buildIdentifier(`serve`),
+        handler: () => Serve.run(),
+      },
       {
         aceCommand: 'generate:manifest',
         description: 'Generate ace commands manifest file. Manifest file speeds up commands lookup',

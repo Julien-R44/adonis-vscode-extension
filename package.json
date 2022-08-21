@@ -421,6 +421,10 @@
         "title": "⌨️ AdonisJS(Ace) Type Check"
       },
       {
+        "command": "adonis-vscode-extension.serve",
+        "title": "⌨️ AdonisJS(Ace) Serve"
+      },
+      {
         "command": "adonis-vscode-extension.list.routes",
         "title": "⌨️ AdonisJS(Ace) List Routes"
       },
