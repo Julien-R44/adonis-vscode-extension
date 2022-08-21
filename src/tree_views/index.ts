@@ -2,6 +2,7 @@ import { window } from 'vscode'
 import { CommandsTreeDataProvider } from './commands/tree_data_provider'
 import { RoutesTreeDataProvider } from './routes/tree_data_provider'
 import { HelpTreeDataView } from './help'
+import { registerRoutesTreeViewCommands } from './routes/commands'
 import type { ExtensionContext } from 'vscode'
 
 /**
@@ -20,7 +21,8 @@ export class ViewContainer {
   /**
    * Create the "Routes" view
    */
-  private static createRoutesView() {
+  private static createRoutesView(context: ExtensionContext) {
+    registerRoutesTreeViewCommands(context)
     const treeDataProvider = new RoutesTreeDataProvider()
     window.createTreeView('adonisjs.routes', { treeDataProvider })
   }
@@ -33,6 +35,6 @@ export class ViewContainer {
 
     HelpTreeDataView.createView(context)
     this.createCommandsView()
-    this.createRoutesView()
+    this.createRoutesView(context)
   }
 }

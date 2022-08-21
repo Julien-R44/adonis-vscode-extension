@@ -69,6 +69,7 @@ export class RoutesTreeDataProvider
             }
           : {}),
         description: element.description,
+        contextValue: 'route',
         tooltip: new MarkdownString(
           [
             '#### Endpoint',

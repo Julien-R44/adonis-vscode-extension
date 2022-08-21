@@ -163,6 +163,26 @@
           "group": "navigation"
         }
       ],
+      "view/item/context": [
+        {
+          "command": "adonis-vscode-extension.view.routes.open-in-browser",
+          "when": "view == adonisjs.routes && viewItem == route",
+          "group": "inline"
+        },
+        {
+          "command": "adonis-vscode-extension.view.routes.copy-link",
+          "when": "view == adonisjs.routes && viewItem == route",
+          "group": "inline"
+        },
+        {
+          "command": "adonis-vscode-extension.view.routes.open-in-browser",
+          "when": "view == adonisjs.routes && viewItem == route"
+        },
+        {
+          "command": "adonis-vscode-extension.view.routes.copy-link",
+          "when": "view == adonisjs.routes && viewItem == route"
+        }
+      ],
       "commandPalette": [
         {
           "command": "adonis-vscode-extension.make.command",
@@ -267,6 +287,16 @@
         "command": "adonis-vscode-extension.view.routes.refresh",
         "title": "Refresh Routes",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "adonis-vscode-extension.view.routes.open-in-browser",
+        "title": "Open in Browser",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "adonis-vscode-extension.view.routes.copy-link",
+        "title": "Copy link",
+        "icon": "$(clippy)"
       },
       {
         "command": "adonis-vscode-extension.make.command",
