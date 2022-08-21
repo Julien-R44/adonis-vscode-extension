@@ -433,8 +433,8 @@
     "test": "tsc -p ./ && node ./out/test/runTest.js",
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
-    "vscode:package": "pnpm vsce package --no-dependencies",
-    "vscode:publish": "pnpm vsce publish --no-dependencies"
+    "vscode:package": "vsce package",
+    "vscode:publish": "vsce publish"
   },
   "dependencies": {
     "@poppinss/module-methods-extractor": "^1.0.5",
