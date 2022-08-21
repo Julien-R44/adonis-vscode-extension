@@ -10,7 +10,7 @@ import type {
   RouteDomainNode,
   RouteGroupNode,
   RouteNode,
-} from 'src/contracts'
+} from '../../contracts'
 
 export class RouteFactory {
   private static EXCLUDED_ROUTES = ['/uploads/*']
