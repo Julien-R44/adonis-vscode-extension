@@ -70,7 +70,7 @@ export class RouteFactory {
         return {
           label: groupName,
           description: `${routes.length} routes`,
-          icon: 'symbol-folder',
+          icon: 'debug-breakpoint-unverified',
           children: await Promise.all(routes.map(this.buildRouteNode.bind(this))),
         }
       })

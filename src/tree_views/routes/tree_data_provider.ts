@@ -1,15 +1,10 @@
-import {
-  EventEmitter,
-  MarkdownString,
-  ThemeIcon,
-  type TreeItem,
-  TreeItemCollapsibleState,
-} from 'vscode'
+import { EventEmitter, ThemeIcon, type TreeItem, TreeItemCollapsibleState } from 'vscode'
 import { AceExecutor } from '../../services/ace_executor'
 import { Extension } from '../../services/extension'
 import { Notifier } from '../../services/notifier'
 import ProjectManager from '../../services/adonis_project/manager'
 import { RouteFactory } from './routes_factory'
+import { RouteNodeItemFactory } from './route_node_item_factory'
 import type {
   AceListRoutesResult,
   BaseNode,
@@ -59,39 +54,7 @@ export class RoutesTreeDataProvider
     }
 
     if ('pattern' in element) {
-      return {
-        label: element.label,
-        ...(element.path
-          ? {
-              command: {
-                command: 'vscode.open',
-                title: 'Open File',
-                arguments: [element.path.uri],
-              },
-              resourceUri: element.path.uri,
-            }
-          : {}),
-        description: element.description,
-        contextValue: 'route',
-        tooltip: new MarkdownString(
-          [
-            '#### Endpoint',
-            `${element.pattern}`,
-            '---',
-            '#### Methods',
-            `${element.methods.join(' | ')}`,
-            '---',
-            '#### Handler',
-            `Controller: ${element.handler}`,
-            `Filename: ${element.filename}`,
-            '---',
-            '#### Middlewares',
-            element.middleware.join(',') || 'None',
-            '---',
-          ].join('\n\n')
-        ),
-        iconPath: new ThemeIcon('milestone'),
-      }
+      return RouteNodeItemFactory.createItem(element)
     }
 
     return {
@@ -125,11 +88,17 @@ export class RoutesTreeDataProvider
     return []
   }
 
+  /**
+   * Toggle the flat view
+   */
   public toggleFlatView() {
     this.flatView = !this.flatView
     this.buildTreeItems()
   }
 
+  /**
+   * Convert the raw routes to a tree structure
+   */
   private async buildTreeItems() {
     if (!this.rawRoutes) {
       return
@@ -139,6 +108,9 @@ export class RoutesTreeDataProvider
     this.refresh()
   }
 
+  /**
+   * Exec list:routes to get the application routes, then convert it to a tree structure
+   */
   public async getAllRoutes() {
     this.errored = false
 
