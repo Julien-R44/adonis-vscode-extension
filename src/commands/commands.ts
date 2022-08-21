@@ -166,7 +166,7 @@ export const commands = [
         aceCommand: '__custom',
         description: 'Run a custom command',
         commandIdentifier: buildIdentifier(`run-custom-command`),
-        handler: () => RunCustomCommand.run(),
+        handler: RunCustomCommand.run.bind(RunCustomCommand),
         hiddenFromTreeView: true,
       },
       {

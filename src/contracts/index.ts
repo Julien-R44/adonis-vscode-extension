@@ -66,7 +66,7 @@ export type CommandGroupNode = BaseNode & { children: CommandNode[] }
 /**
  * Shape of a Command Node
  */
-export type CommandNode = BaseNode & { commandIdentifier: string }
+export type CommandNode = BaseNode & { commandIdentifier: string; commandArguments?: any[] }
 export type CommandGenericNode = CommandGroupNode | CommandNode
 
 export type RouteGroupNode = BaseNode & { children: (RouteNode | RouteGroupNode)[] }

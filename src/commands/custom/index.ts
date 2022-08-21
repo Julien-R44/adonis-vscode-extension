@@ -2,7 +2,7 @@ import ProjectManager from '../../services/adonis_project/manager'
 import { Notifier } from '../../services/notifier'
 import BaseCommand from '../base_command'
 import { ArgType } from '../../services/adonis_project/contracts'
-import type { Arg } from '../../services/adonis_project/contracts'
+import type { AceManifestEntry, Arg } from '../../services/adonis_project/contracts'
 import type { AdonisProject } from '../../services/adonis_project'
 
 /**
@@ -27,7 +27,11 @@ export class RunCustomCommand extends BaseCommand {
   /**
    * Ask user to pick a custom command to run
    */
-  private static async pickCommand(project: AdonisProject) {
+  private static async pickCommand(project: AdonisProject, preSelectedCommand?: AceManifestEntry) {
+    if (preSelectedCommand) {
+      return preSelectedCommand
+    }
+
     const customCommands = project.getCustomAceCommands()
     const commandInput = await this.getListInput(
       'Select the command to run',
@@ -35,7 +39,7 @@ export class RunCustomCommand extends BaseCommand {
       false
     )
 
-    return customCommands.find((command) => command.name === commandInput[0])
+    return customCommands.find((command) => command.name === commandInput[0])!.command
   }
 
   /**
@@ -108,13 +112,13 @@ export class RunCustomCommand extends BaseCommand {
     return `${commandName} ${args} ${flags}`
   }
 
-  public static async run(preSelectedProject?: AdonisProject) {
-    const project = await this.pickProject(preSelectedProject)
+  public static async run(selectedProject?: AdonisProject, selectedCommand?: AceManifestEntry) {
+    const project = await this.pickProject(selectedProject)
     if (!project) {
       return Notifier.showError('You must select a project.')
     }
 
-    const command = await this.pickCommand(project)
+    const command = await this.pickCommand(project, selectedCommand)
     if (!command) {
       return Notifier.showError('You must select a command.')
     }
@@ -123,7 +127,7 @@ export class RunCustomCommand extends BaseCommand {
      * Ask for arguments
      */
     const argsResult = []
-    for (const arg of command.command.args) {
+    for (const arg of command.args) {
       const argResult = await this.askForArgumentValue(arg)
 
       if (!argResult.value && arg.required) {
@@ -137,7 +141,7 @@ export class RunCustomCommand extends BaseCommand {
      * Ask for flags
      */
     const flagsResults = []
-    for (const flag of command.command.flags) {
+    for (const flag of command.flags) {
       const flagResult = await this.askForFlagValue(flag)
       flagsResults.push(flagResult)
     }
@@ -151,7 +155,7 @@ export class RunCustomCommand extends BaseCommand {
      * Build the final command to pass to the terminal
      */
     const finalCommand = RunCustomCommand.buildFinalCommand(
-      command.command.commandName,
+      command.commandName,
       argsResult,
       flagsResults
     )
@@ -161,7 +165,7 @@ export class RunCustomCommand extends BaseCommand {
      */
     return this.handleExecCmd({
       command: finalCommand,
-      successMessage: `'${command.name}' command executed successfully`,
+      successMessage: `'${command.commandName}' command executed successfully`,
       errorMessage: 'Failed to execute the command.',
       background,
     })
