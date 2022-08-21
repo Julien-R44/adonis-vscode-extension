@@ -35,7 +35,7 @@ function copyLinkCommand(route: RouteNode) {
   Notifier.showMessage('Link was copied to your clipboard.')
 }
 
-function toggleFlatRouteViewCommand(value: boolean) {
+function toggleFlatRouteViewCommand() {
   Extension.routesTreeDataProvider.toggleFlatView()
   commands.executeCommand(
     'setContext',
