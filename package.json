@@ -25,6 +25,9 @@
     "Snippets",
     "Other"
   ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/Julien-R44"
+  },
   "main": "./dist/index.js",
   "icon": "assets/adonis.png",
   "engines": {
