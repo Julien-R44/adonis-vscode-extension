@@ -3,7 +3,7 @@ import { exec as baseExec } from 'child_process'
 import { promisify } from 'util'
 import { window } from 'vscode'
 import ConfigWrapper from '../utilities/config'
-import type { AdonisProject } from '../contracts'
+import type { AdonisProject } from './adonis_project'
 
 const exec = promisify(baseExec)
 
@@ -33,8 +33,9 @@ export class AceExecutor {
    */
   public static async exec({ adonisProject, command, background = true }: ExecOptions) {
     const isWindows = platform === 'win32'
-    if (isWindows && adonisProject.path.startsWith('/')) {
-      adonisProject.path = adonisProject.path.substring(1)
+    let path = adonisProject.uri.fsPath
+    if (isWindows && path.startsWith('/')) {
+      path = path.substring(1)
     }
 
     /**
@@ -43,7 +44,7 @@ export class AceExecutor {
     const nodePath = ConfigWrapper.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
     if (background) {
-      const result = await exec(command, { cwd: adonisProject.path })
+      const result = await exec(command, { cwd: path })
       return { result, adonisProject }
     }
 
@@ -53,8 +54,8 @@ export class AceExecutor {
      */
     const cmdWithCd =
       platform === 'win32' && !ConfigWrapper.misc.useUnixCd
-        ? `cd /d "${adonisProject.path}" && ${command}`
-        : `cd "${adonisProject.path}" && ${command}`
+        ? `cd /d "${path}" && ${command}`
+        : `cd "${path}" && ${command}`
 
     this.sendTextToAdonisTerminal(cmdWithCd)
 

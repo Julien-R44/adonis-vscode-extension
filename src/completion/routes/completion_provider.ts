@@ -2,8 +2,8 @@ import Config from '../../utilities/config'
 import { getMethodsInSourceFile } from '../../utilities/functions'
 import { parseControllerString } from '../../utilities/controller'
 import { SuggestionProvider } from '../../services/suggestion_provider'
-import ProjectFinder from '../../services/project_finder'
 import { SuggestionType } from '../../contracts'
+import ProjectManager from '../../services/adonis_project/manager'
 import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
 const {
@@ -55,7 +55,7 @@ class RouteControllerCompletionProvider implements CompletionItemProvider {
     const controller = parseControllerString(text)
     if (controller) text = controller.name
 
-    const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
+    const project = ProjectManager.getProjectFromFile(doc.uri.path)
     if (!project) return []
 
     return SuggestionProvider.getSuggestions(

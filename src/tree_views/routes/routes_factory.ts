@@ -1,10 +1,9 @@
 import { relative } from 'path'
 import groupBy from 'lodash.groupby'
-import ProjectFinder from '../../services/project_finder'
 import { parseControllerString } from '../../utilities/controller'
 import { getLineNumber } from '../../utilities/functions'
 import { getExactPathMatch } from '../../utilities/path_matching'
-
+import ProjectManager from '../../services/adonis_project/manager'
 import type {
   AceListRoutesResult,
   RawRoute,
@@ -36,7 +35,7 @@ export class RouteFactory {
    */
   private static async buildRouteNode(route: RawRoute): Promise<RouteNode> {
     // TODO: Here we need to store the adonis projet used in the route view instead
-    const adonisProject = ProjectFinder.getAdonisProjects()[0]
+    const adonisProject = ProjectManager.getProjects()[0]
 
     const { name, method } = parseControllerString(route.handler)!
     const path = getExactPathMatch(name, adonisProject!.uri, ['app/controllers'], ['controller.ts'])

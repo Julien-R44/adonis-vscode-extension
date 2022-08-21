@@ -7,8 +7,8 @@ import {
 } from 'vscode'
 import { AceExecutor } from '../../services/ace_executor'
 import { Extension } from '../../services/extension'
-import ProjectFinder from '../../services/project_finder'
 import { Notifier } from '../../services/notifier'
+import ProjectManager from '../../services/adonis_project/manager'
 import { RouteFactory } from './routes_factory'
 import type {
   AceListRoutesResult,
@@ -125,7 +125,7 @@ export class RoutesTreeDataProvider
     this.errored = false
 
     // TODO: Here we need to store the adonis projet used in the route view instead
-    const adonisProject = ProjectFinder.getAdonisProjects()[0]!
+    const adonisProject = ProjectManager.getProjects()[0]!
 
     try {
       const { result } = await AceExecutor.exec({

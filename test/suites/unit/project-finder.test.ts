@@ -1,19 +1,15 @@
 import { resolve } from 'path'
 import { test } from '@japa/runner'
 import { Uri } from 'vscode'
-import ProjectFinder from '../../../src/services/project_finder'
+import ProjectManager from '../../../src/services/adonis_project/manager'
 
 test.group('Project Finder', () => {
   test('Find simple project', async ({ assert }) => {
-    const ret = ProjectFinder.getAdonisProjects()
+    const ret = ProjectManager.getProjects()
     const projectPath = resolve(__dirname, '../.././../../test/fixtures/basic-app')
-    assert.deepEqual(ret, [
-      {
-        name: 'basic-app',
-        path: Uri.file(projectPath).path,
-        uri: Uri.file(projectPath),
-      },
-    ])
+
+    assert.deepEqual(ret[0]?.uri.fsPath, projectPath)
+    assert.deepEqual(ret[0]?.name, 'basic-app')
   })
 
   /**
@@ -29,7 +25,7 @@ test.group('Project Finder', () => {
       )
     )
 
-    const project = ProjectFinder.getAdonisProjectFromFile(filePath.path)
+    const project = ProjectManager.getProjectFromFile(filePath.path)
     assert.isNotNull(project)
     assert.deepInclude(project, { name: 'basic-app' })
   })

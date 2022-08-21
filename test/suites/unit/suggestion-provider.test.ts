@@ -1,11 +1,11 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { test } from '@japa/runner'
 import { SuggestionType } from '../../../src/contracts'
-import ProjectFinder from '../../../src/services/project_finder'
 import { SuggestionProvider } from '../../../src/services/suggestion_provider'
+import ProjectManager from '../../../src/services/adonis_project/manager'
 import type { MarkdownString } from 'vscode'
 
-const project = ProjectFinder.getAdonisProjects()[0]
+const project = ProjectManager.getProjects()[0]
 
 test.group('Suggestion Provider: Controllers Name', () => {
   test('Empty text should return all controllers', async ({ assert }) => {

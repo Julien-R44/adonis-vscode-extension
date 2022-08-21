@@ -22,4 +22,14 @@ export class Notifier {
     window.showErrorMessage(message)
     return false
   }
+
+  /**
+   * Add error message to the output console
+   */
+  public static async logError(message: string, consoleErr: any = null) {
+    this.outputChannel.appendLine(message)
+    if (consoleErr !== null) {
+      this.outputChannel.appendLine(consoleErr)
+    }
+  }
 }

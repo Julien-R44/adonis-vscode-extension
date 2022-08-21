@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import { Uri } from 'vscode'
-import ProjectFinder from '../services/project_finder'
+import ProjectManager from '../services/adonis_project/manager'
 import { getDirectories } from './directory'
-import type { AdonisProject } from '../contracts'
+import type { AdonisProject } from '../services/adonis_project'
 import type { TextDocument } from 'vscode'
 
 /**
@@ -42,9 +42,7 @@ export function getPathMatches(
   targetDirectories: string[],
   extensions: string[]
 ) {
-  const project = ProjectFinder.getAdonisProjectFromFile(
-    doc instanceof Uri ? doc.path : doc.uri.path
-  )
+  const project = ProjectManager.getProjectFromFile(doc instanceof Uri ? doc.path : doc.uri.path)
   if (!project) return []
 
   const workspacePath = project.uri.fsPath

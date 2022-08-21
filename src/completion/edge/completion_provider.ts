@@ -2,8 +2,8 @@ import { CompletionItem, CompletionItemKind, SnippetString } from 'vscode'
 import Config from '../../utilities/config'
 import GlobalEdgeSnippets from '../../../snippets/edge/globals.json'
 import { SuggestionProvider } from '../../services/suggestion_provider'
-import ProjectFinder from '../../services/project_finder'
 import { SuggestionType } from '../../contracts'
+import ProjectManager from '../../services/adonis_project/manager'
 import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
 class EdgeCompletionProvider implements CompletionItemProvider {
@@ -47,7 +47,7 @@ class EdgeCompletionProvider implements CompletionItemProvider {
   private getViewSuggestions(text: string, doc: TextDocument) {
     const config = Config.autocomplete
 
-    const project = ProjectFinder.getAdonisProjectFromFile(doc.uri.path)
+    const project = ProjectManager.getProjectFromFile(doc.uri.path)
     if (!project) return []
 
     return SuggestionProvider.getSuggestions(

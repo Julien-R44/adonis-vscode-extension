@@ -4,10 +4,10 @@ import { join } from 'path'
 import { commands, window, workspace } from 'vscode'
 import { Notifier } from '../services/notifier'
 import { AceExecutor } from '../services/ace_executor'
-import ProjectFinder from '../services/project_finder'
 import { capitalize } from '../utilities/functions'
 import ConfigWrapper from '../utilities/config'
-import type { AdonisProject } from '../contracts'
+import ProjectManager from '../services/adonis_project/manager'
+import type { AdonisProject } from '../services/adonis_project'
 
 export enum ExtensionErrors {
   ERR_ADONIS_PROJECT_SELECTION_NEEDED,
@@ -78,30 +78,8 @@ export default class BaseCommand {
 
     const filename = this.parseCreatedFilename(stdout)
     if (filename) {
-      await this.openFile(adonisProject.path, filename)
+      await this.openFile(adonisProject.uri.fsPath, filename)
     }
-  }
-
-  /**
-   * Prompt the user to select an AdonisJS project when multiple
-   * are present in the workspace
-   */
-  protected static async pickAdonisProject() {
-    const adonisProjects = ProjectFinder.getAdonisProjects()
-
-    if (adonisProjects.length === 1) {
-      return adonisProjects[0]
-    }
-
-    const target = await window.showQuickPick(
-      adonisProjects.map((project) => ({
-        label: project.name,
-        description: project.path,
-      })),
-      { placeHolder: 'Select the project in which you want to run this command' }
-    )
-
-    return adonisProjects.find((project) => project.path === target?.description)
   }
 
   /**
@@ -154,7 +132,7 @@ export default class BaseCommand {
     background = true,
     adonisProject?: AdonisProject
   ) {
-    adonisProject = adonisProject || (await this.pickAdonisProject())
+    adonisProject = adonisProject || (await ProjectManager.quickPickProject())
 
     if (!adonisProject) {
       return Promise.reject({ errorCode: ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED })

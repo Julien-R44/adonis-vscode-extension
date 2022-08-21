@@ -4,7 +4,8 @@ import fg from 'fast-glob'
 import { SuggestionType } from '../contracts'
 import { getMethodsInSourceFile } from '../utilities/functions'
 import { DocumentationProvider } from './documentation_provider'
-import type { AdonisProject, Suggestion } from '../contracts'
+import type { AdonisProject } from './adonis_project'
+import type { Suggestion } from '../contracts'
 
 export class SuggestionProvider {
   /**

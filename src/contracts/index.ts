@@ -1,5 +1,5 @@
 import type { Path } from '../utilities/path_matching'
-import type { MarkdownString, Uri } from 'vscode'
+import type { MarkdownString } from 'vscode'
 
 /**
  * Edge formatter configuration.
@@ -17,15 +17,6 @@ export interface EdgeFormatterContract {
    * will be used, will equal the tab size specified.
    */
   tabSize?: number
-}
-
-/**
- * Represent an Adonis Project in the current workspace
- */
-export interface AdonisProject {
-  path: string
-  name: string
-  uri: Uri
 }
 
 /**

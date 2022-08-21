@@ -8,15 +8,15 @@ import RouteControllerHoverProvider from './completion/routes/hover_provider'
 import { RouteControllerLinkProvider } from './completion/routes/link_provider'
 import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
-import ProjectFinder from './services/project_finder'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 import { ViewContainer } from './tree_views/index'
+import ProjectManager from './services/adonis_project/manager'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
   // eslint-disable-next-line no-console
   console.log('Activating AdonisJS extension...')
-  await ProjectFinder.loadAdonisProjects()
+  await ProjectManager.load()
 
   /**
    * Set commands visibility
