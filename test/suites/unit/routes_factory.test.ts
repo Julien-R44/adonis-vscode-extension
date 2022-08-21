@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+
 import { test } from '@japa/runner'
 import { RouteFactory } from '../../../src/tree_views/routes/routes_factory'
 import type { AceListRoutesResult } from '../../../src/contracts'

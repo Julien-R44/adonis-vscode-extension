@@ -1,9 +1,9 @@
 import { Uri, commands } from 'vscode'
-import ProjectManager from 'src/services/adonis_project/manager'
+import ProjectManager from '../../services/adonis_project/manager'
 import { Extension } from '../../services/extension'
 import { EXTENSION_NAME } from '../../utilities/constants'
 import { Notifier } from '../../services/notifier'
-import type { RouteNode } from 'src/contracts'
+import type { RouteNode } from '../../contracts'
 import type { ExtensionContext } from 'vscode'
 
 function refreshRouteCommand() {
