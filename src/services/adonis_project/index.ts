@@ -56,4 +56,15 @@ export class AdonisProject {
     const manifest = readFileSync(manifestPath, 'utf8')
     return JSON.parse(manifest) as AceManifest
   }
+
+  /**
+   * Get the custom commands for the project
+   */
+  public getCustomAceCommands() {
+    if (!this.manifest) return []
+
+    return Object.entries(this.manifest.commands)
+      .filter(([, command]) => command.commandPath.startsWith('./commands'))
+      .map(([name, command]) => ({ name, command }))
+  }
 }

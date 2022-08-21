@@ -27,7 +27,7 @@ export interface AceManifestEntry {
   commandPath: string
   commandName: string
   description: string
-  args: Arg[] & { required: boolean }
+  args: (Arg & { required: boolean })[]
   flags: Arg[]
 }
 

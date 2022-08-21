@@ -425,6 +425,10 @@
         "title": "⌨️ AdonisJS(Ace) Serve"
       },
       {
+        "command": "adonis-vscode-extension.run-custom-command",
+        "title": "⌨️ AdonisJS(Ace) Run custom command"
+      },
+      {
         "command": "adonis-vscode-extension.list.routes",
         "title": "⌨️ AdonisJS(Ace) List Routes"
       },

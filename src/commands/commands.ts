@@ -24,6 +24,7 @@ import { Suite } from './make/suite'
 import { Factory } from './make/factory'
 import { Policy } from './make/policy'
 import { Serve } from './serve'
+import { RunCustomCommand } from './custom'
 
 const buildIdentifier = (identifier: string) => `${EXTENSION_NAME}.${identifier}`
 
@@ -161,6 +162,13 @@ export const commands = [
     icon: 'symbol-misc',
     description: 'Miscellaneous commands',
     children: [
+      {
+        aceCommand: '__custom',
+        description: 'Run a custom command',
+        commandIdentifier: buildIdentifier(`run-custom-command`),
+        handler: () => RunCustomCommand.run(),
+        hiddenFromTreeView: true,
+      },
       {
         aceCommand: 'serve',
         description:

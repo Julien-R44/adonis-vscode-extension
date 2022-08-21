@@ -32,9 +32,14 @@ export default class BaseCommand {
   /**
    * Prompt the user for an input
    */
-  protected static async getInput(placeHolder: string) {
-    let name = await window.showInputBox({ placeHolder: placeHolder.replace(/\s\s+/g, ' ').trim() })
+  protected static async getInput(placeHolder: string, title?: string) {
+    let name = await window.showInputBox({
+      title,
+      placeHolder: placeHolder.replace(/\s\s+/g, ' ').trim(),
+    })
+
     name = name === undefined ? '' : name
+
     return name
   }
 
@@ -92,6 +97,7 @@ export default class BaseCommand {
     fileType = 'file',
     openCreatedFile = false,
     background = true,
+    project,
   }: {
     command: string
     successMessage?: string | null
@@ -99,12 +105,13 @@ export default class BaseCommand {
     fileType?: string
     openCreatedFile?: boolean
     background?: boolean
+    project?: AdonisProject
   }) {
     successMessage = successMessage ?? `${capitalize(fileType)} created successfully`
     errorMessage = errorMessage || `Failed to create ${fileType.toLowerCase()}`
 
     try {
-      const res = await this.execCmd(command, background)
+      const res = await this.execCmd(command, background, project)
 
       if (openCreatedFile) {
         this.openCreatedFile(res.adonisProject, res.result!.stdout)

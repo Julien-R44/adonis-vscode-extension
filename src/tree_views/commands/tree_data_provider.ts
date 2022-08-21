@@ -44,11 +44,13 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
         label: group.groupName,
         description: group.description,
         icon: group.icon,
-        children: group.children.map((command) => ({
-          commandIdentifier: command.commandIdentifier,
-          label: command.aceCommand,
-          description: command.description,
-        })),
+        children: group.children
+          .filter((command) => command.hiddenFromTreeView !== true)
+          .map((command) => ({
+            commandIdentifier: command.commandIdentifier,
+            label: command.aceCommand,
+            description: command.description,
+          })),
       }))
     }
 
