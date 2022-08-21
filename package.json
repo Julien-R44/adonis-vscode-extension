@@ -30,11 +30,20 @@
   "engines": {
     "vscode": "^1.65.0"
   },
+  "extensionDependencies": [
+    "vscode.html-language-features"
+  ],
   "activationEvents": [
     "workspaceContains:**/ace",
     "onLanguage:edge"
   ],
   "contributes": {
+    "htmlLanguageParticipants": [
+      {
+        "languageId": "edge",
+        "autoInsert": true
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
