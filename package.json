@@ -432,8 +432,8 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "test": "tsc -p ./ && node ./out/test/runTest.js",
     "vscode:prepublish": "pnpm build",
-    "package": "pnpm vsce package --no-dependencies",
-    "publish": "pnpm vsce publish --no-dependencies"
+    "vscode:package": "pnpm vsce package --no-dependencies",
+    "vscode:publish": "pnpm vsce publish --no-dependencies"
   },
   "dependencies": {
     "@poppinss/module-methods-extractor": "^1.0.5",
