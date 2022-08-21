@@ -40,7 +40,8 @@
         {
           "id": "adonisjs",
           "title": "AdonisJS",
-          "icon": "assets/adonis.svg"
+          "icon": "assets/adonis.svg",
+          "when": "adonisProjectLoaded == true"
         }
       ]
     },
@@ -49,7 +50,8 @@
         {
           "id": "adonisjs.commands",
           "name": "Commands",
-          "icon": "assets/adonis.svg"
+          "icon": "assets/adonis.svg",
+          "when": "adonisProjectLoaded == true"
         },
         {
           "id": "adonisjs.routes",
@@ -58,7 +60,8 @@
         },
         {
           "id": "adonisjs.help",
-          "name": "Get Help"
+          "name": "Get Help",
+          "when": "adonisProjectLoaded == true"
         }
       ]
     },
