@@ -481,7 +481,8 @@
         "path": "./syntaxes/edge.tmLanguage.json",
         "embeddedLanguages": {
           "source.css": "css",
-          "source.js": "javascript"
+          "source.js": "javascript",
+          "meta.embedded.block.javascript": "javascript"
         }
       }
     ],
