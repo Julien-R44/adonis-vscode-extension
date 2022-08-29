@@ -16,12 +16,10 @@ export class RouteFactory {
   private static EXCLUDED_ROUTES = ['/uploads/*']
 
   /**
-   * Exclude nn-important routes and routes with handler that is a closure
+   * Exclude non-important routes
    */
-  private static filterExcludedAndClosureRoutes(routes: RawRoute[]) {
-    return routes
-      .filter((route) => !this.EXCLUDED_ROUTES.includes(route.pattern))
-      .filter((route) => route.handler !== 'Closure')
+  private static filterExcludedRoutes(routes: RawRoute[]) {
+    return routes.filter((route) => !this.EXCLUDED_ROUTES.includes(route.pattern))
   }
 
   /**
@@ -32,21 +30,22 @@ export class RouteFactory {
     // TODO: Here we need to store the adonis projet used in the route view instead
     const adonisProject = ProjectManager.getProjects()[0]
 
-    const { name, method } = parseControllerString(route.handler)!
-    const path = getExactPathMatch(name, adonisProject!.uri, ['app/controllers'], ['controller.ts'])
+    const name: string =
+      route.handler === 'Closure' ? 'Closure' : parseControllerString(route.handler)!.name
 
+    const path = getExactPathMatch(name, adonisProject!.uri, ['app/controllers'], ['controller.ts'])
     if (path) {
-      const number = await getLineNumber(path.uri.fsPath, method)
+      const number = await getLineNumber(path.uri.fsPath, route.methods.join(', '))
       path.uri = path.uri.with({ fragment: number.lineno.toString() })
     }
 
     return {
       ...route,
       description: route.methods.join(', '),
-      label: `${route.pattern}`,
+      label: route.pattern === '/*' ? '*' : `${route.pattern}`,
       icon: '',
       path,
-      filename: relative(adonisProject!.uri.fsPath, path?.uri.fsPath || ''),
+      filename: path ? relative(adonisProject!.uri.fsPath, path?.uri.fsPath || '') : 'Closure',
     }
   }
 
@@ -55,7 +54,7 @@ export class RouteFactory {
    * of multiples routes grouped by their URL pattern.
    */
   private static async buildRoutesGroupTree(rawRoutes: RawRoute[]): Promise<RouteGroupNode[]> {
-    const filteredRoutes = this.filterExcludedAndClosureRoutes(rawRoutes)
+    const filteredRoutes = this.filterExcludedRoutes(rawRoutes)
 
     const routesGroups = groupBy(filteredRoutes, (route) => {
       /**
@@ -84,7 +83,7 @@ export class RouteFactory {
       .map(([domain, domainRoutes]) => domainRoutes.map((route) => ({ ...route, domain })))
       .flat()
 
-    const promises = this.filterExcludedAndClosureRoutes(flattenedRawRoutes).map((route) =>
+    const promises = this.filterExcludedRoutes(flattenedRawRoutes).map((route) =>
       this.buildRouteNode(route)
     )
 
