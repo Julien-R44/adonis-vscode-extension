@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import { Extractor } from '@poppinss/module-methods-extractor'
+import { Extractor } from '@julr/module-methods-extractor'
 import ConfigWrapper from './config'
 import type { TextDocument } from 'vscode'
 

@@ -510,7 +510,7 @@
     "vscode:publish": "vsce publish"
   },
   "dependencies": {
-    "@poppinss/module-methods-extractor": "^1.0.5",
+    "@julr/module-methods-extractor": "^0.0.1",
     "docblock": "^0.4.5",
     "fast-glob": "^3.2.11",
     "lodash.groupby": "^4.6.0",
