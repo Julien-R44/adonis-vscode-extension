@@ -9,7 +9,7 @@ export async function run() {
 
   return new Promise((resolve) => {
     configure({
-      files: [`**/*.test.js`],
+      files: [`**/*/(functional|unit)/**/*.test.js`],
       cwd: testsRoot,
       forceExit: false,
       plugins: [assert()],

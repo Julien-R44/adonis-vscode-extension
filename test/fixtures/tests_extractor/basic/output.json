@@ -1,0 +1,33 @@
+{
+  "tests": [],
+  "groups": [
+    {
+      "title": "My super group",
+      "location": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 2
+        }
+      },
+      "tests": [
+        {
+          "title": "My Test",
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 2
+            },
+            "end": {
+              "line": 8,
+              "column": 4
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
