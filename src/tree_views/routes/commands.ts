@@ -1,8 +1,8 @@
 import { Uri, commands } from 'vscode'
 import ProjectManager from '../../services/adonis_project/manager'
 import { Extension } from '../../services/extension'
-import { EXTENSION_NAME } from '../../utilities/constants'
 import { Notifier } from '../../services/notifier'
+import ExtConfig from '../../utilities/config'
 import type { RouteNode } from '../../contracts'
 import type { ExtensionContext } from 'vscode'
 
@@ -39,18 +39,18 @@ function toggleFlatRouteViewCommand() {
   Extension.routesTreeDataProvider.toggleFlatView()
   commands.executeCommand(
     'setContext',
-    `${EXTENSION_NAME}.view.routes.viewAsList`,
+    ExtConfig.buildCommandId('view.routes.viewAsList'),
     Extension.routesTreeDataProvider.flatView
   )
 }
 
 export const registerRoutesTreeViewCommands = (context: ExtensionContext) => {
   const viewCommands: [string, Function][] = [
-    [`${EXTENSION_NAME}.view.routes.refresh`, refreshRouteCommand],
-    [`${EXTENSION_NAME}.view.routes.open-in-browser`, openInBrowserCommand],
-    [`${EXTENSION_NAME}.view.routes.copy-link`, copyLinkCommand],
-    [`${EXTENSION_NAME}.view.routes.viewAsList`, toggleFlatRouteViewCommand],
-    [`${EXTENSION_NAME}.view.routes.viewAsTree`, toggleFlatRouteViewCommand],
+    [ExtConfig.buildCommandId('view.routes.refresh'), refreshRouteCommand],
+    [ExtConfig.buildCommandId('view.routes.open-in-browser'), openInBrowserCommand],
+    [ExtConfig.buildCommandId('view.routes.copy-link'), copyLinkCommand],
+    [ExtConfig.buildCommandId('view.routes.viewAsList'), toggleFlatRouteViewCommand],
+    [ExtConfig.buildCommandId('view.routes.viewAsTree'), toggleFlatRouteViewCommand],
   ]
 
   const commandsDisposables = viewCommands.map(([identifier, handler]) =>

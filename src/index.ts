@@ -8,10 +8,10 @@ import RouteControllerHoverProvider from './completion/routes/hover_provider'
 import { RouteControllerLinkProvider } from './completion/routes/link_provider'
 import { registerDocsCommands } from './commands/docs'
 import { EdgeFormatterProvider } from './languages'
-import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 import { ViewContainer } from './tree_views/index'
 import ProjectManager from './services/adonis_project/manager'
 import { TestsCodeLensProvider } from './completion/tests/code_lens_provider'
+import ExtConfig from './utilities/config'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -22,7 +22,7 @@ export async function activate(context: ExtensionContext) {
   /**
    * Set commands visibility
    */
-  commands.executeCommand('setContext', CONTEXT_ADONIS_PROJECT_LOADED, true)
+  commands.executeCommand('setContext', ExtConfig.CONTEXT_ADONIS_PROJECT_LOADED, true)
 
   /**
    * Register views
@@ -63,12 +63,17 @@ export async function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links for Edge files
+   * Autocompletion, hover and links for Views
    */
-  const edgeLink = languages.registerDocumentLinkProvider(['edge'], new EdgeLinkProvider())
-  const edgeHover = languages.registerHoverProvider(['edge'], new EdgeHoverProvider())
+  const viewSelector = [
+    { language: 'edge', scheme: 'file' },
+    { language: 'typescript', scheme: 'file' },
+  ]
+
+  const edgeLink = languages.registerDocumentLinkProvider(viewSelector, new EdgeLinkProvider())
+  const edgeHover = languages.registerHoverProvider(viewSelector, new EdgeHoverProvider())
   const edgeCompletion = languages.registerCompletionItemProvider(
-    ['edge'],
+    viewSelector,
     new EdgeCompletionProvider()
   )
 

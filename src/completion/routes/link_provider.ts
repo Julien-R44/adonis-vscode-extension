@@ -1,13 +1,13 @@
 import { Uri } from 'vscode'
 import { getLineNumber, getMaxLinesCount } from '../../utilities/functions'
-import ConfigWrapper from '../../utilities/config'
+import ExtConfig from '../../utilities/config'
 import { DocumentLinker } from '../../services/document_linker'
 import type { RouteControllerLink } from '../../utilities/controller'
 import type { DocumentLink, DocumentLinkProvider, TextDocument } from 'vscode'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
   public async provideDocumentLinks(doc: TextDocument) {
-    const config = ConfigWrapper.autocomplete
+    const config = ExtConfig.autocomplete
     const docLinks: DocumentLink[] = []
 
     if (!config.quickJump) return docLinks

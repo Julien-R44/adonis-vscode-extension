@@ -1,7 +1,7 @@
 import { ThemeIcon, TreeItemCollapsibleState } from 'vscode'
 import { commands } from '../../commands/commands'
 import ProjectManager from '../../services/adonis_project/manager'
-import { EXTENSION_NAME } from '../../utilities/constants'
+import ExtConfig from '../../utilities/config'
 import type { ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
 import type { CommandGenericNode } from '../../contracts'
 
@@ -38,7 +38,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
       description: 'Run your custom commands',
       icon: 'terminal',
       children: adonisProject.getCustomAceCommands().map((command) => ({
-        commandIdentifier: `${EXTENSION_NAME}.run-custom-command`,
+        commandIdentifier: ExtConfig.buildCommandId('run-custom-command'),
         commandArguments: [adonisProject, command.command],
         description: command.command.description,
         label: command.name,

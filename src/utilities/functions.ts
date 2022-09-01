@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { Extractor } from '@julr/module-methods-extractor'
-import ConfigWrapper from './config'
+import ExtConfig from './config'
 import type { TextDocument } from 'vscode'
 
 /**
@@ -18,7 +18,7 @@ export interface Location {
  * @param doc Document to resolve line count
  */
 export function getMaxLinesCount(doc: TextDocument) {
-  const maxLinesCount = ConfigWrapper.autocomplete.maxLinesCount as number
+  const maxLinesCount = ExtConfig.autocomplete.maxLinesCount as number
   return doc.lineCount <= maxLinesCount ? doc.lineCount : maxLinesCount
 }
 

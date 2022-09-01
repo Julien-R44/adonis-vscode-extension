@@ -2,7 +2,7 @@ import { platform } from 'process'
 import { exec as baseExec } from 'child_process'
 import { promisify } from 'util'
 import { window } from 'vscode'
-import ConfigWrapper from '../utilities/config'
+import ExtConfig from '../utilities/config'
 import type { AdonisProject } from './adonis_project'
 
 const exec = promisify(baseExec)
@@ -41,7 +41,7 @@ export class AceExecutor {
     /**
      * Execute the final command in the background
      */
-    const nodePath = ConfigWrapper.misc.nodePath || 'node'
+    const nodePath = ExtConfig.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
     if (background) {
       const result = await exec(command, { cwd: path })
@@ -53,7 +53,7 @@ export class AceExecutor {
      * manually set the cwd to the adonis project path
      */
     const cmdWithCd =
-      platform === 'win32' && !ConfigWrapper.misc.useUnixCd
+      platform === 'win32' && !ExtConfig.misc.useUnixCd
         ? `cd /d "${path}" && ${command}`
         : `cd "${path}" && ${command}`
 

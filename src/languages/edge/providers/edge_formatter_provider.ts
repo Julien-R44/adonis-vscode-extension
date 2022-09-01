@@ -1,7 +1,7 @@
 import { Position, Range, TextEdit } from 'vscode'
 import * as html from 'vscode-html-languageservice'
 import * as lst from 'vscode-languageserver-types'
-import ConfigWrapper from '../../../utilities/config'
+import ExtConfig from '../../../utilities/config'
 import EdgeFormatter from '../formatters/edge_formatter'
 import type {
   DocumentFormattingEditProvider,
@@ -81,7 +81,7 @@ class EdgeFormattingProvider
    * @param formatOptions Basic options to use in formatting the document
    */
   private formatHtml(document: TextDocument, range: Range, formatOptions: FormattingOptions) {
-    Object.assign(formatOptions, ConfigWrapper.html.format)
+    Object.assign(formatOptions, ExtConfig.html.format)
 
     const htmlDoc = lst.TextDocument.create(document.uri.fsPath, 'html', 1, document.getText())
     return HtmlLanguageService.format(htmlDoc, range, formatOptions)[0]!

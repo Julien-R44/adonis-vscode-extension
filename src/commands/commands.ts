@@ -1,4 +1,4 @@
-import { EXTENSION_NAME } from '../utilities/constants'
+import ExtConfig from '../utilities/config'
 import { Command } from './make/command'
 import { Controller } from './make/controller'
 import { Exception } from './make/exception'
@@ -26,8 +26,6 @@ import { Policy } from './make/policy'
 import { Serve } from './serve'
 import { RunCustomCommand } from './custom'
 
-const buildIdentifier = (identifier: string) => `${EXTENSION_NAME}.${identifier}`
-
 export const commands = [
   {
     groupName: 'Make',
@@ -37,85 +35,85 @@ export const commands = [
       {
         aceCommand: 'make:command',
         description: 'Make a new ace command',
-        commandIdentifier: buildIdentifier(`make.command`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.command`),
         handler: () => Command.run(),
       },
       {
         aceCommand: 'make:controller',
         description: 'Make a new HTTP controller',
-        commandIdentifier: buildIdentifier(`make.controller`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.controller`),
         handler: () => Controller.run(),
       },
       {
         aceCommand: 'make:exception',
         description: 'Make a new exception',
-        commandIdentifier: buildIdentifier(`make.exception`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.exception`),
         handler: () => Exception.run(),
       },
       {
         aceCommand: 'make:middleware',
         description: 'Make a new middleware',
-        commandIdentifier: buildIdentifier(`make.middleware`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.middleware`),
         handler: () => Middleware.run(),
       },
       {
         aceCommand: 'make:migration',
         description: 'Make a new migration',
-        commandIdentifier: buildIdentifier(`make.migration`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.migration`),
         handler: () => Migration.run(),
       },
       {
         aceCommand: 'make:model',
         description: 'Make a new model',
-        commandIdentifier: buildIdentifier(`make.model`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.model`),
         handler: () => Model.run(),
       },
       {
         aceCommand: 'make:seeder',
         description: 'Make a new seeder',
-        commandIdentifier: buildIdentifier(`make.seeder`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.seeder`),
         handler: () => Seeder.run(),
       },
       {
         aceCommand: 'make:view',
         description: 'Make a new view',
-        commandIdentifier: buildIdentifier(`make.view`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.view`),
         handler: () => View.run(),
       },
       {
         aceCommand: 'make:validator',
         description: 'Make a new validator',
-        commandIdentifier: buildIdentifier(`make.validator`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.validator`),
         handler: () => Validator.run(),
       },
       {
         aceCommand: 'make:prldfile',
         description: 'Make a new preloaded file',
-        commandIdentifier: buildIdentifier(`make.prldfile`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.prldfile`),
         handler: () => PreloadedFile.run(),
       },
       {
         aceCommand: 'make:test',
         description: 'Make a new test',
-        commandIdentifier: buildIdentifier(`make.test`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.test`),
         handler: () => Test.run(),
       },
       {
         aceCommand: 'make:suite',
         description: 'Make a new test suite',
-        commandIdentifier: buildIdentifier(`make.suite`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.suite`),
         handler: () => Suite.run(),
       },
       {
         aceCommand: 'make:factory',
         description: 'Make a new factory',
-        commandIdentifier: buildIdentifier(`make.factory`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.factory`),
         handler: () => Factory.run(),
       },
       {
         aceCommand: 'make:policy',
         description: 'Make a new bouncer policy',
-        commandIdentifier: buildIdentifier(`make.policy`),
+        commandIdentifier: ExtConfig.buildCommandId(`make.policy`),
         handler: () => Policy.run(),
       },
     ],
@@ -128,31 +126,31 @@ export const commands = [
       {
         aceCommand: 'migration:fresh',
         description: 'Drop all tables and re-migrate the database',
-        commandIdentifier: buildIdentifier(`migration.fresh`),
+        commandIdentifier: ExtConfig.buildCommandId(`migration.fresh`),
         handler: () => Fresh.run(),
       },
       {
         aceCommand: 'migration:refresh',
         description: 'Rollback and migrate database',
-        commandIdentifier: buildIdentifier(`migration.refresh`),
+        commandIdentifier: ExtConfig.buildCommandId(`migration.refresh`),
         handler: () => Refresh.run(),
       },
       {
         aceCommand: 'migration:reset',
         description: 'Rollback all migrations',
-        commandIdentifier: buildIdentifier(`migration.reset`),
+        commandIdentifier: ExtConfig.buildCommandId(`migration.reset`),
         handler: () => Reset.run(),
       },
       {
         aceCommand: 'migration:run',
         description: 'Migrate database by running pending migrations',
-        commandIdentifier: buildIdentifier(`migration.run`),
+        commandIdentifier: ExtConfig.buildCommandId(`migration.run`),
         handler: () => Run.run(),
       },
       {
         aceCommand: 'migration:rollback',
         description: 'Rollback migrations to a specific batch number',
-        commandIdentifier: buildIdentifier(`migration.rollback`),
+        commandIdentifier: ExtConfig.buildCommandId(`migration.rollback`),
         handler: () => Rollback.run(),
       },
     ],
@@ -165,7 +163,7 @@ export const commands = [
       {
         aceCommand: '__custom',
         description: 'Run a custom command',
-        commandIdentifier: buildIdentifier(`run-custom-command`),
+        commandIdentifier: ExtConfig.buildCommandId(`run-custom-command`),
         handler: RunCustomCommand.run.bind(RunCustomCommand),
         hiddenFromTreeView: true,
       },
@@ -173,37 +171,37 @@ export const commands = [
         aceCommand: 'serve',
         description:
           'Start the AdonisJS HTTP server, along with the file watcher. Also starts the webpack dev server when webpack encore is installed',
-        commandIdentifier: buildIdentifier(`serve`),
+        commandIdentifier: ExtConfig.buildCommandId(`serve`),
         handler: () => Serve.run(),
       },
       {
         aceCommand: 'generate:manifest',
         description: 'Generate ace commands manifest file. Manifest file speeds up commands lookup',
-        commandIdentifier: buildIdentifier(`generate.manifest`),
+        commandIdentifier: ExtConfig.buildCommandId(`generate.manifest`),
         handler: () => Manifest.run(),
       },
       {
         aceCommand: 'configure [invoke]',
         description: 'Configure one or more AdonisJS packages',
-        commandIdentifier: buildIdentifier(`configure`),
+        commandIdentifier: ExtConfig.buildCommandId(`configure`),
         handler: () => Configure.run(),
       },
       {
         aceCommand: 'type-check',
         description: 'Type check TypeScript source without writing the compiled output on disk',
-        commandIdentifier: buildIdentifier(`type-check`),
+        commandIdentifier: ExtConfig.buildCommandId(`type-check`),
         handler: () => TypeCheck.run(),
       },
       {
         aceCommand: 'list:routes',
         description: 'List application routes',
-        commandIdentifier: buildIdentifier(`list.routes`),
+        commandIdentifier: ExtConfig.buildCommandId(`list.routes`),
         handler: () => RouteList.run(),
       },
       {
         aceCommand: 'test',
         description: 'Run AdonisJS tests',
-        commandIdentifier: buildIdentifier(`test`),
+        commandIdentifier: ExtConfig.buildCommandId(`test`),
         handler: RunTests.run.bind(RunTests),
       },
     ],

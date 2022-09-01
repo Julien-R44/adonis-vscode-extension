@@ -1,5 +1,5 @@
 import { ViewColumn, commands, window } from "vscode";
-import { EXTENSION_NAME } from "../../utilities/constants";
+import ExtConfig from "../../utilities/config";
 import type { ExtensionContext} from "vscode";
 
 /**
@@ -14,6 +14,6 @@ const openUrlAsWebview = (viewId: string, panelName: string, url: string) => {
 }
 
 export const registerDocsCommands = (_context: ExtensionContext) => {
-  commands.registerCommand(`${EXTENSION_NAME}.docs.adonis`, () => openUrlAsWebview('adonis', 'AdonisJS Docs', 'https://docs.adonisjs.com/'))
-  commands.registerCommand(`${EXTENSION_NAME}.docs.japa`, () => openUrlAsWebview('japa', 'Japa Docs', 'https://japa.dev'))
+  commands.registerCommand(ExtConfig.buildCommandId('docs.adonis'), () => openUrlAsWebview('adonis', 'AdonisJS Docs', 'https://docs.adonisjs.com/'))
+  commands.registerCommand(ExtConfig.buildCommandId('docs.japa'), () => openUrlAsWebview('japa', 'Japa Docs', 'https://japa.dev'))
 }

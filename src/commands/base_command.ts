@@ -5,7 +5,7 @@ import { commands, window, workspace } from 'vscode'
 import { Notifier } from '../services/notifier'
 import { AceExecutor } from '../services/ace_executor'
 import { capitalize } from '../utilities/functions'
-import ConfigWrapper from '../utilities/config'
+import ExtConfig from '../utilities/config'
 import ProjectManager from '../services/adonis_project/manager'
 import type { AdonisProject } from '../services/adonis_project'
 
@@ -18,7 +18,7 @@ export default class BaseCommand {
    * Should migration/seed commands be run in the background
    */
   protected static get runMigrationInBackground() {
-    return ConfigWrapper.misc.runMigrationInBackground as boolean
+    return ExtConfig.misc.runMigrationInBackground as boolean
   }
 
   /**

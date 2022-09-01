@@ -1,7 +1,6 @@
 import { basename } from 'path'
 import { Range } from 'vscode'
-import { EXTENSION_NAME } from '../../utilities/constants'
-import ConfigWrapper from '../../utilities/config'
+import ExtConfig from '../../utilities/config'
 import { TestsExtractor } from '../../services/tests_extractor'
 import type {
   CancellationToken,
@@ -23,7 +22,7 @@ export class TestsCodeLensProvider implements CodeLensProvider {
   }) {
     const codeLensLine = Math.min(options.line - 1, 0)
     const baseCommandArguments = [
-      ConfigWrapper.tests?.watchMode ? '--watch' : '',
+      ExtConfig.tests?.watchMode ? '--watch' : '',
       `--files "${basename(options.filename)}"`,
     ]
 
@@ -31,7 +30,7 @@ export class TestsCodeLensProvider implements CodeLensProvider {
       range: new Range(codeLensLine, 0, codeLensLine, 0),
       isResolved: true,
       command: {
-        command: `${EXTENSION_NAME}.test`,
+        command: ExtConfig.buildCommandId('test'),
         title: options.title,
         arguments: [
           { arguments: baseCommandArguments.concat(options.commandArguments || []).join(' ') },
