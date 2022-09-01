@@ -11,6 +11,7 @@ import { EdgeFormatterProvider } from './languages'
 import { CONTEXT_ADONIS_PROJECT_LOADED } from './utilities/constants'
 import { ViewContainer } from './tree_views/index'
 import ProjectManager from './services/adonis_project/manager'
+import { TestsCodeLensProvider } from './completion/tests/code_lens_provider'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -69,6 +70,15 @@ export async function activate(context: ExtensionContext) {
   const edgeCompletion = languages.registerCompletionItemProvider(
     ['edge'],
     new EdgeCompletionProvider()
+  )
+
+  languages.registerCodeLensProvider(
+    {
+      language: 'typescript',
+      scheme: 'file',
+      pattern: '**/*.{spec,test}.ts',
+    },
+    new TestsCodeLensProvider()
   )
 
   context.subscriptions.push(

@@ -4,22 +4,24 @@ import BaseCommand from '../base_command'
  * Handle node ace test command
  */
 export class RunTests extends BaseCommand {
-  public static async run() {
-    /**
-     * Suites to runs
-     */
-    const suites = await this.getInput('Suites to run. Leaves empty for running all tests')
+  public static async run(options: { arguments?: string } = {}) {
+    let commandArguments = options.arguments || ''
 
     /**
-     * Should run test in watch mode
+     * Prompt for arguments when not passed
      */
-    const watchMode = await this.getYesNo('Should run test in watch mode ?')
+    if (!commandArguments) {
+      const suites = await this.getInput('Suites to run. Leaves empty for running all tests')
+      const watchMode = await this.getYesNo('Should run test in watch mode ?')
+
+      commandArguments = `${suites} ${watchMode ? '-w' : ''}`
+    }
 
     /**
      * Execute the command
      */
     return this.handleExecCmd({
-      command: `test ${suites} ${watchMode ? '-w' : ''}`,
+      command: `test ${commandArguments}`,
       successMessage: '',
       errorMessage: 'Could not run tests.',
       background: false,

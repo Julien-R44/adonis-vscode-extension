@@ -204,7 +204,7 @@ export const commands = [
         aceCommand: 'test',
         description: 'Run AdonisJS tests',
         commandIdentifier: buildIdentifier(`test`),
-        handler: () => RunTests.run(),
+        handler: RunTests.run.bind(RunTests),
       },
     ],
   },

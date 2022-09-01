@@ -3,11 +3,34 @@ import { CONFIG_NAME } from './constants'
 
 /**
  * A configuration value set by a user (default provided by extension).
- *
- * See extension root `package.json` for for information.
+ * See extension root `package.json` for default values.
  */
 interface Config {
   [key: string]: any
+}
+
+interface ConfigMisc extends Config {
+  /**
+   * Should migration/seeds commands run in background ?
+   */
+  runMigrationInBackground: boolean
+
+  /**
+   * The path to the node executable
+   */
+  nodePath: string
+
+  /**
+   * Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )
+   */
+  useUnixCd: boolean
+}
+
+interface ConfigTests extends Config {
+  /**
+   * Run tests in watch mode when executed via shortcut/codelens
+   */
+  runTestsInWatchMode: boolean
 }
 
 /**
@@ -31,8 +54,15 @@ class ConfigWrapper {
   /**
    * Configuration for misc options
    */
-  public static get misc(): Config {
+  public static get misc(): ConfigMisc {
     return workspace.getConfiguration(CONFIG_NAME).misc
+  }
+
+  /**
+   * Configuration for the tests
+   */
+  public static get tests(): ConfigTests {
+    return workspace.getConfiguration(CONFIG_NAME).tests
   }
 }
 
