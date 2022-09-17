@@ -22,10 +22,3 @@ export interface ConfigMisc extends Config {
    */
   useUnixCd: boolean
 }
-
-export interface ConfigTests extends Config {
-  /**
-   * Run tests in watch mode when executed via shortcut/codelens
-   */
-  runTestsInWatchMode: boolean
-}

@@ -81,11 +81,6 @@
       "type": "object",
       "title": "AdonisJS",
       "properties": {
-        "adonisjs.tests.watchMode": {
-          "type": "boolean",
-          "default": false,
-          "description": "Run tests in watch mode when executed via shortcut/codelens"
-        },
         "adonisjs.misc.runMigrationInBackground": {
           "type": "boolean",
           "description": "Should migration/seeds commands run in background ?",

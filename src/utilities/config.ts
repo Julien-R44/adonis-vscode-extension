@@ -1,5 +1,5 @@
 import { workspace } from 'vscode'
-import type { Config, ConfigMisc, ConfigTests } from '../contracts/config'
+import type { Config, ConfigMisc } from '../contracts/config'
 
 /**
  * A wrapper around vscode configuration for this extension
@@ -46,13 +46,6 @@ class ExtConfig {
    */
   public static get misc(): ConfigMisc {
     return workspace.getConfiguration(this.CONFIG_NAME).misc
-  }
-
-  /**
-   * Configuration for the tests
-   */
-  public static get tests(): ConfigTests {
-    return workspace.getConfiguration(this.CONFIG_NAME).tests
   }
 }
 
