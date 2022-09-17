@@ -203,6 +203,11 @@
         {
           "command": "adonis-vscode-extension.view.routes.copy-link",
           "when": "view == adonisjs.routes && viewItem == route"
+        },
+        {
+          "command": "adonis-vscode-extension.run-command",
+          "when": "view == adonisjs.commands && viewItem == command",
+          "group": "inline"
         }
       ],
       "commandPalette": [
@@ -305,6 +310,11 @@
       ]
     },
     "commands": [
+      {
+        "command": "adonis-vscode-extension.run-command",
+        "title": "Run command",
+        "icon": "$(notebook-execute)"
+      },
       {
         "command": "adonis-vscode-extension.view.routes.viewAsList",
         "title": "See as list",

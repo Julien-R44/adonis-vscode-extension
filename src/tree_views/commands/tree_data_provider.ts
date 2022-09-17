@@ -72,11 +72,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
       description: element.description,
       tooltip: element.description,
       iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
-      command: {
-        command: element.commandIdentifier,
-        arguments: element.commandArguments || [],
-        title: element.label,
-      },
+      contextValue: 'command',
     }
   }
 

@@ -1,3 +1,4 @@
+import * as vscode from 'vscode'
 import ExtConfig from '../utilities/config'
 import { Command } from './make/command'
 import { Controller } from './make/controller'
@@ -25,6 +26,7 @@ import { Factory } from './make/factory'
 import { Policy } from './make/policy'
 import { Serve } from './serve'
 import { RunCustomCommand } from './custom'
+import type { CommandNode } from '../contracts/index.js'
 
 export const commands = [
   {
@@ -165,6 +167,18 @@ export const commands = [
         description: 'Run a custom command',
         commandIdentifier: ExtConfig.buildCommandId(`run-custom-command`),
         handler: RunCustomCommand.run.bind(RunCustomCommand),
+        hiddenFromTreeView: true,
+      },
+      {
+        aceCommand: '__custom',
+        description: 'Run a command',
+        commandIdentifier: ExtConfig.buildCommandId(`run-command`),
+        handler: (command: CommandNode) => {
+          vscode.commands.executeCommand(
+            command.commandIdentifier,
+            ...(command.commandArguments || [])
+          )
+        },
         hiddenFromTreeView: true,
       },
       {
