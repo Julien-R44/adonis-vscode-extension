@@ -14,6 +14,9 @@ interface ExecOptions {
 }
 
 export class AceExecutor {
+  private static isWindows = platform === 'win32'
+  private static shellPath = AceExecutor.isWindows ? 'cmd.exe' : undefined
+
   /**
    * Execute a command in the foreground, in the VSCode integrated terminal
    */
@@ -21,7 +24,7 @@ export class AceExecutor {
     let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
 
     if (!terminal) {
-      terminal = window.createTerminal(`AdonisJS Ace`)
+      terminal = window.createTerminal(`AdonisJS Ace`, this.shellPath)
     }
 
     terminal.show()
@@ -32,9 +35,8 @@ export class AceExecutor {
    * Execute a `node ace x` command
    */
   public static async exec({ adonisProject, command, background = true }: ExecOptions) {
-    const isWindows = platform === 'win32'
     let path = adonisProject.uri.fsPath
-    if (isWindows && path.startsWith('/')) {
+    if (this.isWindows && path.startsWith('/')) {
       path = path.substring(1)
     }
 
@@ -44,7 +46,7 @@ export class AceExecutor {
     const nodePath = ExtConfig.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
     if (background) {
-      const result = await exec(command, { cwd: path })
+      const result = await exec(command, { cwd: path, shell: this.shellPath })
       return { result, adonisProject }
     }
 
