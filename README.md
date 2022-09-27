@@ -33,7 +33,7 @@
 * Go To Controller 
 * Go To View
 
-> I recommend you to take a look at the Japa extension for an even better experience :
+> **Note**: I recommend you to take a look at the Japa extension for an even better experience :
 >
 > https://github.com/Julien-R44/japa-vscode
 
