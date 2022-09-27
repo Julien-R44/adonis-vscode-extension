@@ -463,10 +463,6 @@
       {
         "language": "edge",
         "path": "./snippets/edge/tags.jsonc"
-      },
-      {
-        "language": "typescript",
-        "path": "./snippets/japa/index.json"
       }
     ],
     "languages": [
