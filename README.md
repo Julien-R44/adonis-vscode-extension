@@ -29,9 +29,13 @@
 * .adonisrc.json file validation with JSON Schema
 * Edge Support, syntax highlighting + formatting
 * Multiple Workspaces and Monorepos support 
-* Edge, AdonisJS, and Japa Snippets
+* Edge and AdonisJS Snippets
 * Go To Controller 
 * Go To View
+
+> I recommend you to take a look at the Japa extension for an even better experience :
+>
+> https://github.com/Julien-R44/japa-vscode
 
 ## Ace commands
 Launch ace commands directly from VScode. 
@@ -69,7 +73,7 @@ Syntax highlighting, auto-completion of the tags that includes partials/componen
 ![](https://i.imgur.com/eDYb9fK.gif)
 
 ## Snippets
-Snippets for Edge, Japa, and AdonisJS are defined, take a look [here](./snippets/) to see the list of snippets.
+Snippets for Edge and AdonisJS are defined, take a look [here](./snippets/) to see the list of snippets.
 
 _Since I'm not a big snippet user, feel free to propose a PR with snippets you think are useful._
 
