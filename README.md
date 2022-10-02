@@ -33,18 +33,18 @@
 * Go To Controller 
 * Go To View
 
-> **Note**: I recommend you to take a look at the Japa extension for an even better experience :
+> **Note**: I recommend you to take a look at the Japa extension for an even better experience:
 >
 > https://github.com/Julien-R44/japa-vscode
 
 ## Ace commands
-Launch ace commands directly from VScode. 
+Launch `ace` commands directly from VScode. 
 Files created by adonis/assembler are automatically opened after their creation.
 
 ![](https://i.imgur.com/BEb6Xpc.gif)
 
 ## ActivityBar and Tree Views
-Run your commands without typing anything, See your routes and go the code just by clicking on the items in the Activity Bar.
+Run your commands without typing anything, See your routes and go to its code just by clicking on the items in the Activity Bar.
 
 ![](https://i.imgur.com/fwOdNWF.gif)
 
@@ -62,13 +62,13 @@ Consult and search the Adonis and Japa documentation directly from VSCode.
 ![](https://i.imgur.com/6K5wnvE.gif)
 
 ## Route controller completion + Go To
-Autocompletion for the name and handler of the controllers, alt+click to open the file, and the docblock documentation of the method that is displayed in hover.
+Autocompletion for the name and the handler of controllers. <kbd>Ctrl</kbd> + <kbd>Click</kbd> to open the file. Hovering the handler will show its documentation.
 
 ![](https://i.imgur.com/ZvnOtN3.gif)
 
 ## Edge support
-Syntax highlighting, auto-completion of the tags that includes partials/components/layouts, alt+click to open an included file, many snippets...
-**No automatic formatting for the moment**
+Syntax highlighting, auto-completion of tags including partials, components, layouts. <kbd>Ctrl</kbd> + <kbd>Click</kbd> to open an included file.
+**No automatic formatting for the moment.**
 
 ![](https://i.imgur.com/eDYb9fK.gif)
 
@@ -81,19 +81,19 @@ _Since I'm not a big snippet user, feel free to propose a PR with snippets you t
 # Configuration
 
 - `nodePath`: The path to the node executable.
-- `useUnixCd`: Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )
-- `quickJump`: Enable quick jump by using Ctrl + Click
+- `useUnixCd`: Use Unix-style `cd` for windows terminals (Useful when using Cygwin or Git Bash)
+- `quickJump`: Enable quick jump by using <kbd>Ctrl</kbd> + <kbd>Click</kbd>
 - `runMigrationInBackground`: Run migration/seeds commands in background. By default, they are executed in the built-in terminal of VSCode so that you can see the output.
 
 # Known Issues
-Below is the list of unsupported features (for the moment), feel free to make a PR if you want them to be delivered faster: 
+Below is the list of unsupported features (for the moment) by the extension, feel free to make a PR if you'd like to contribute to the project: 
 - Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
 
 ## IntelliSense while typing
-In the context of controller and view autocompletion, we are inside strings. By default, VSCode totally disables the display of IntelliSense suggestions inside strings. So if you want to see the autocompletion of your controllers and views, you will have to press CTRL+Space to manually trigger IntelliSense.
+In the context of controller and view autocompletion, we are inside strings. By default, VSCode totally disables the display of IntelliSense suggestions inside strings. If you want to see the autocompletion of your controllers and views, you will have to press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to manually trigger IntelliSense.
 
-If you want the suggestions while typing, you can add this to your VSCode configuration :
+If you want the suggestions while typing, you can add this to your VSCode settings:
 
 ```json
 "editor.quickSuggestions": {
@@ -105,8 +105,9 @@ If you want the suggestions while typing, you can add this to your VSCode config
 
 But be warned, this will automatically display intellisense even in "traditional" strings
 
-## Emmet doesn't working in edge files
-Just add this in your VSCode settings : 
+## Emmet doesn't work in Edge files
+
+Just add this in your VSCode settings: 
 ```json
 "emmet.includeLanguages": {
   "edge": "html"
@@ -115,8 +116,8 @@ Just add this in your VSCode settings :
 
 # Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)
-* Clone the project and open it in VS Code
+* Clone the project and open it in VSCode
 * Run `npm install`
-* Press `F5` to open a new VSCode window with your extension loaded.
+* Press `F5` to open a new VSCode window with your extensions loaded.
 * You can relaunch the extension from the debug toolbar after changing code in `src/extension.ts`.
 * You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with your extension to load your changes.
