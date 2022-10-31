@@ -75,7 +75,7 @@ test.group('Suggestion Provider: Views', () => {
       SuggestionType.View
     )
 
-    assert.deepEqual(suggestions.length, 7)
+    assert.deepEqual(suggestions.length, 9)
   })
 
   test('Should return the correct view - "{result}"')
