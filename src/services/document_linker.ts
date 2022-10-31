@@ -23,6 +23,7 @@ export class DocumentLinker {
     const docLinks: DocumentLink[] = []
     const line = doc.lineAt(lineNo)
     const matches = line.text.match(regex) || []
+
     if (matches.length < 0) return []
 
     for (const text of matches) {
@@ -77,6 +78,7 @@ export class DocumentLinker {
     const docLinks = []
     const line = doc.lineAt(lineNo)
     const matches = line.text.match(regex) || []
+
     if (matches.length < 0) return []
 
     for (const item of matches) {

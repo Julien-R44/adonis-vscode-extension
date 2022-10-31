@@ -25,7 +25,7 @@ export class SuggestionProvider {
 
       const searchDirRegex = searchDirectories.join('|')
       const extensionRegex = extensions.join('|')
-      const fullRegex = `${searchDirRegex}/([\\w\/]*)(${extensionRegex})`
+      const fullRegex = `${searchDirRegex}/([\\w\/-]*)(${extensionRegex})`
       const regex = new RegExp(fullRegex, 'i')
       const matches = filePath.match(regex) || []
 

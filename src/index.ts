@@ -11,6 +11,8 @@ import { EdgeFormatterProvider } from './languages'
 import { ViewContainer } from './tree_views/index'
 import ProjectManager from './services/adonis_project/manager'
 import ExtConfig from './utilities/config'
+import { ViewsLinkProvider } from './completion/views/link_provider'
+import { ViewsCompletionProvider } from './completion/views/completion_provider'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -62,12 +64,9 @@ export async function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links for Views
+   * Autocompletion, hover and links for Views in edge files
    */
-  const viewSelector = [
-    { language: 'edge', scheme: 'file' },
-    { language: 'typescript', scheme: 'file' },
-  ]
+  const viewSelector = [{ language: 'edge', scheme: 'file' }]
 
   const edgeLink = languages.registerDocumentLinkProvider(viewSelector, new EdgeLinkProvider())
   const edgeHover = languages.registerHoverProvider(viewSelector, new EdgeHoverProvider())
@@ -76,13 +75,24 @@ export async function activate(context: ExtensionContext) {
     new EdgeCompletionProvider()
   )
 
+  /**
+   * Autocompletion, hover and links for Views in Ts files
+   */
+  const viewTsLink = languages.registerDocumentLinkProvider(tsSelector, new ViewsLinkProvider())
+  const viewsCompletion = languages.registerCompletionItemProvider(
+    tsSelector,
+    new ViewsCompletionProvider()
+  )
+
   context.subscriptions.push(
     routeLink,
     routeHover,
     routeCompletion,
     edgeLink,
     edgeHover,
-    edgeCompletion
+    edgeCompletion,
+    viewTsLink,
+    viewsCompletion
   )
 }
 
