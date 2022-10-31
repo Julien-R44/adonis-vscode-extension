@@ -26,6 +26,8 @@ import { Factory } from './make/factory'
 import { Policy } from './make/policy'
 import { Serve } from './serve'
 import { RunCustomCommand } from './custom'
+import { Seed } from './database/seed'
+import { Wipe } from './database/wipe'
 import type { CommandNode } from '../contracts/index.js'
 
 export const commands = [
@@ -121,7 +123,7 @@ export const commands = [
     ],
   },
   {
-    groupName: 'Migration',
+    groupName: 'Migration & Database',
     description: 'Manage database migrations',
     icon: 'database',
     children: [
@@ -154,6 +156,18 @@ export const commands = [
         description: 'Rollback migrations to a specific batch number',
         commandIdentifier: ExtConfig.buildCommandId(`migration.rollback`),
         handler: () => Rollback.run(),
+      },
+      {
+        aceCommand: 'db:seed',
+        description: 'Execute database seeders',
+        commandIdentifier: ExtConfig.buildCommandId(`db.seed`),
+        handler: () => Seed.run(),
+      },
+      {
+        aceCommand: 'db:wipe',
+        description: 'Drop all tables, views and types in database',
+        commandIdentifier: ExtConfig.buildCommandId(`db.wipe`),
+        handler: () => Wipe.run(),
       },
     ],
   },

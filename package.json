@@ -288,6 +288,14 @@
           "when": "adonisProjectLoaded == true"
         },
         {
+          "command": "adonis-vscode-extension.db.seed",
+          "when": "adonisProjectLoaded == true"
+        },
+        {
+          "command": "adonis-vscode-extension.db.wipe",
+          "when": "adonisProjectLoaded == true"
+        },
+        {
           "command": "adonis-vscode-extension.generate.manifest",
           "when": "adonisProjectLoaded == true"
         },
@@ -417,6 +425,14 @@
       {
         "command": "adonis-vscode-extension.migration.rollback",
         "title": "⌨️ AdonisJS(Ace) Migration Rollback"
+      },
+      {
+        "command": "adonis-vscode-extension.db.seed",
+        "title": "⌨️ AdonisJS(Ace) Seed Database"
+      },
+      {
+        "command": "adonis-vscode-extension.db.wipe",
+        "title": "⌨️ AdonisJS(Ace) Wipe Database"
       },
       {
         "command": "adonis-vscode-extension.generate.manifest",
