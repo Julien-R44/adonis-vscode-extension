@@ -28,6 +28,7 @@ import { Serve } from './serve'
 import { RunCustomCommand } from './custom'
 import { Seed } from './database/seed'
 import { Wipe } from './database/wipe'
+import { Mailer } from './make/mailer'
 import type { CommandNode } from '../contracts/index.js'
 
 export const commands = [
@@ -119,6 +120,12 @@ export const commands = [
         description: 'Make a new bouncer policy',
         commandIdentifier: ExtConfig.buildCommandId(`make.policy`),
         handler: () => Policy.run(),
+      },
+      {
+        aceCommand: 'make:mailer',
+        description: 'Make a new mailer',
+        commandIdentifier: ExtConfig.buildCommandId(`make.mailer`),
+        handler: () => Mailer.run(),
       },
     ],
   },
