@@ -128,7 +128,7 @@
         "adonisjs.autocomplete.tsViewsCompletionRegex": {
           "type": "string",
           "description": "Regular expression to match handle autocomplete views rendering in Ts files",
-          "default": "(?<=View\\.render\\()(['\"])[^'\"]*\\1"
+          "default": "(?<=[Vv]iew\\.render\\()(['\"])[^'\"]*\\1"
         },
         "adonisjs.autocomplete.viewsRegex": {
           "type": "string",
