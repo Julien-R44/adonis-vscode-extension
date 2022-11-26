@@ -549,7 +549,8 @@
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
     "vscode:package": "vsce package",
-    "vscode:publish": "vsce publish"
+    "vscode:publish": "vsce publish",
+    "publish": "ts-node scripts/publish.ts"
   },
   "dependencies": {
     "@julr/module-methods-extractor": "^0.0.1",
@@ -570,7 +571,10 @@
     "@types/sinon": "^10.0.13",
     "@types/vscode": "^1.65.0",
     "@vscode/test-electron": "^2.2.0",
+    "dotenv": "^16.0.3",
     "eslint": "^8.26.0",
+    "execa": "^5.1.1",
+    "ovsx": "^0.5.2",
     "prettier": "^2.7.1",
     "sinon": "^14.0.1",
     "ts-loader": "^9.4.1",
