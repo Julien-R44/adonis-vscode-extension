@@ -9,12 +9,14 @@ export class AdonisProject {
   public uri: Uri
   public env?: AdonisEnv
   public manifest?: AceManifest
+  public packageJson?: Record<string, any>
 
   constructor(uri: Uri) {
     this.uri = uri
     this.name = basename(this.uri.fsPath)
 
     this.tryParse('.env', () => (this.env = this.parseEnvFile()))
+    this.tryParse('package.json', () => (this.packageJson = this.parsePackageJsonFile()))
     this.tryParse('ace-manifest.json', () => (this.manifest = this.parseManifestFile()))
   }
 
@@ -27,6 +29,16 @@ export class AdonisProject {
     } catch (err) {
       Notifier.logError(`Failed to parse ${filename} file for project ${this.name}`, err)
     }
+  }
+
+  /**
+   * Parse the package.json file as Record<string, any>
+   */
+  private parsePackageJsonFile() {
+    const packageJsonPath = join(this.uri.fsPath, 'package.json')
+    const packageJson = readFileSync(packageJsonPath, 'utf8')
+
+    return JSON.parse(packageJson) as Record<string, any>
   }
 
   /**
@@ -66,5 +78,20 @@ export class AdonisProject {
     return Object.entries(this.manifest.commands)
       .filter(([, command]) => command.commandPath.startsWith('./commands'))
       .map(([name, command]) => ({ name, command }))
+  }
+
+  /**
+   * Get the Adonis version from the package.json file
+   */
+  public get adonisVersion() {
+    return this.packageJson?.dependencies?.['@adonisjs/core']
+  }
+
+  /**
+   * Returns a boolean indicating if the project is using the given Adonis version
+   * @param version The version to check
+   */
+  public isAdonisX(version: number) {
+    return this.adonisVersion?.startsWith(version)
   }
 }
