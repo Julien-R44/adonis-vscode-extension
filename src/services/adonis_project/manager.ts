@@ -9,8 +9,13 @@ export default class ProjectManager {
    * Scan the whole workspace(s) for existing Adonis projects
    */
   public static async load() {
-    const aceUris = await workspace.findFiles('**/ace', '**/node_modules/**', undefined)
-    const projectsUris = aceUris.map((file) => Uri.parse(dirname(file.path)))
+    const adonisRcUris = await workspace.findFiles(
+      '**/.adonisrc.json',
+      '**/node_modules/**',
+      undefined
+    )
+
+    const projectsUris = adonisRcUris.map((file) => Uri.parse(dirname(file.path)))
 
     this.projects = projectsUris.map((uri) => new AdonisProject(uri))
     return this.projects
