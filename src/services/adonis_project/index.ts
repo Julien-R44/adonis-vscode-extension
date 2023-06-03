@@ -1,40 +1,40 @@
 import { readFileSync } from 'fs'
 import { basename, join } from 'path'
-import { Notifier } from '../notifier'
+import { Logger } from '../logger'
 import type { Uri } from 'vscode'
 import type { AceManifest, AdonisEnv } from './contracts'
 
 export class AdonisProject {
-  public name: string
-  public uri: Uri
-  public env?: AdonisEnv
-  public manifest?: AceManifest
-  public packageJson?: Record<string, any>
+  name: string
+  uri: Uri
+  env?: AdonisEnv
+  manifest?: AceManifest
+  packageJson?: Record<string, any>
 
   constructor(uri: Uri) {
     this.uri = uri
     this.name = basename(this.uri.fsPath)
 
-    this.tryParse('.env', () => (this.env = this.parseEnvFile()))
-    this.tryParse('package.json', () => (this.packageJson = this.parsePackageJsonFile()))
-    this.tryParse('ace-manifest.json', () => (this.manifest = this.parseManifestFile()))
+    this.#tryParse('.env', () => (this.env = this.#parseEnvFile()))
+    this.#tryParse('package.json', () => (this.packageJson = this.#parsePackageJsonFile()))
+    this.#tryParse('ace-manifest.json', () => (this.manifest = this.#parseManifestFile()))
   }
 
   /**
    * Try to parse the given file. If it fails, output the error to the console
    */
-  private tryParse(filename: string, cb: () => void) {
+  #tryParse(filename: string, cb: () => void) {
     try {
       cb()
-    } catch (err) {
-      Notifier.logError(`Failed to parse ${filename} file for project ${this.name}`, err)
+    } catch (err: any) {
+      Logger.error(`Failed to parse ${filename} file for project ${this.name}\n${err.toString()}`)
     }
   }
 
   /**
    * Parse the package.json file as Record<string, any>
    */
-  private parsePackageJsonFile() {
+  #parsePackageJsonFile() {
     const packageJsonPath = join(this.uri.fsPath, 'package.json')
     const packageJson = readFileSync(packageJsonPath, 'utf8')
 
@@ -44,7 +44,7 @@ export class AdonisProject {
   /**
    * Parse the .env file as Record<string, string>
    */
-  private parseEnvFile() {
+  #parseEnvFile() {
     const envPath = join(this.uri.fsPath, '.env')
     const lines = readFileSync(envPath, 'utf8').split('\n').filter(Boolean)
 
@@ -63,7 +63,7 @@ export class AdonisProject {
   /**
    * Parse the ace-manifest.json file
    */
-  private parseManifestFile() {
+  #parseManifestFile() {
     const manifestPath = join(this.uri.fsPath, 'ace-manifest.json')
     const manifest = readFileSync(manifestPath, 'utf8')
     return JSON.parse(manifest) as AceManifest
@@ -72,7 +72,7 @@ export class AdonisProject {
   /**
    * Get the custom commands for the project
    */
-  public getCustomAceCommands() {
+  getCustomAceCommands() {
     if (!this.manifest) return []
 
     return Object.entries(this.manifest.commands)
@@ -83,7 +83,7 @@ export class AdonisProject {
   /**
    * Get the Adonis version from the package.json file
    */
-  public get adonisVersion() {
+  get adonisVersion() {
     return this.packageJson?.dependencies?.['@adonisjs/core']
   }
 
@@ -91,7 +91,21 @@ export class AdonisProject {
    * Returns a boolean indicating if the project is using the given Adonis version
    * @param version The version to check
    */
-  public isAdonisX(version: number) {
+  isAdonisX(version: number) {
     return this.adonisVersion?.startsWith(version)
+  }
+
+  /**
+   * Check if the project is using Adonis 5
+   */
+  isAdonis5() {
+    return this.isAdonisX(5)
+  }
+
+  /**
+   * Check if the project is using Adonis 6
+   */
+  isAdonis6() {
+    return this.isAdonisX(6)
   }
 }
