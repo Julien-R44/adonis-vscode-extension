@@ -15,7 +15,9 @@ export default class ProjectManager {
       undefined
     )
 
-    const projectsUris = adonisRcUris.map((file) => Uri.parse(dirname(file.path)))
+    const projectsUris = adonisRcUris
+      .filter((file) => file.path.endsWith('build/.adonisrc.json') === false)
+      .map((file) => Uri.parse(dirname(file.path)))
 
     this.projects = projectsUris.map((uri) => new AdonisProject(uri))
     return this.projects
