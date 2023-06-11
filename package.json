@@ -47,6 +47,27 @@
         "autoInsert": true
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "AdonisJS",
+      "properties": {
+        "adonisjs.misc.runMigrationInBackground": {
+          "type": "boolean",
+          "description": "Should migration/seeds commands run in background ?",
+          "default": false
+        },
+        "adonisjs.misc.nodePath": {
+          "type": "string",
+          "description": "The path to the node executable",
+          "default": "node"
+        },
+        "adonisjs.misc.useUnixCd": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )"
+        }
+      }
+    },
     "viewsContainers": {
       "activitybar": [
         {
@@ -77,106 +98,6 @@
         }
       ]
     },
-    "configuration": {
-      "type": "object",
-      "title": "AdonisJS",
-      "properties": {
-        "adonisjs.misc.runMigrationInBackground": {
-          "type": "boolean",
-          "description": "Should migration/seeds commands run in background ?",
-          "default": false
-        },
-        "adonisjs.misc.nodePath": {
-          "type": "string",
-          "description": "The path to the node executable",
-          "default": "node"
-        },
-        "adonisjs.autocomplete.quickJump": {
-          "type": "boolean",
-          "default": true,
-          "description": "Quick jump between files using 'Ctrl' + Click"
-        },
-        "adonisjs.autocomplete.folderTip": {
-          "type": "boolean",
-          "default": true,
-          "description": "Display file path name on hover"
-        },
-        "adonisjs.autocomplete.maxLinesCount": {
-          "type": "integer",
-          "default": 1200,
-          "description": "Maximum lines of text to scan for autocompletion"
-        },
-        "adonisjs.autocomplete.viewsDirectories": {
-          "type": "array",
-          "description": "Paths to the directory containing edge views",
-          "default": [
-            "resources/views"
-          ]
-        },
-        "adonisjs.autocomplete.viewsExtensions": {
-          "type": "array",
-          "description": "Supported file extension for view completion",
-          "default": [
-            ".edge"
-          ]
-        },
-        "adonisjs.autocomplete.tsViewsRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle views rendering in Ts files",
-          "default": "[Vv]iew\\.render(?:Sync)?\\(['\"](.*)['\"]"
-        },
-        "adonisjs.autocomplete.tsViewsCompletionRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle autocomplete views rendering in Ts files",
-          "default": "(?<=[Vv]iew\\.render\\()(['\"])[^'\"]*\\1"
-        },
-        "adonisjs.autocomplete.viewsRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle edge includes",
-          "default": "(?<=@include\\(['\\\"]|@layout\\(['\\\"]|@!component\\(['\\\"]|@component\\(['\\\"])([^'\">]+)"
-        },
-        "adonisjs.autocomplete.viewsCompletionRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle edge includes",
-          "default": "(?<=[@include|@component|@layout|@!component]\\()(['\"])[^'\"]*\\1"
-        },
-        "adonisjs.autocomplete.controllersDirectories": {
-          "type": "array",
-          "description": "Paths to the directory containing AdonisJS controllers",
-          "default": [
-            "app/controllers"
-          ]
-        },
-        "adonisjs.autocomplete.controllersExtensions": {
-          "type": "array",
-          "description": "Supported file extension for controller completion",
-          "default": [
-            "controller.ts",
-            "Controller.ts"
-          ]
-        },
-        "adonisjs.autocomplete.controllersRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle route controllers",
-          "default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^'\"]*)\\.?([^'\"]*)\\1"
-        },
-        "adonisjs.autocomplete.controllersNameCompletionRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle route controllers",
-          "default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^\\.'\"]*)\\1"
-        },
-        "adonisjs.autocomplete.controllersMethodCompletionRegex": {
-          "type": "string",
-          "description": "Regular expression to match handle route controllers",
-          "default": "(?<=Route\\.[a-zA-Z]*\\(['\"][^'\"]*['\"]\\s*,\\s*)(['\"])([^'\"]*)\\.([^'\"]*)\\1"
-        },
-        "adonisjs.misc.useUnixCd": {
-          "type": "boolean",
-          "default": false,
-          "description": "Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )"
-        }
-      }
-    },
     "menus": {
       "view/title": [
         {
@@ -193,25 +114,34 @@
           "command": "adonis-vscode-extension.view.routes.refresh",
           "when": "view == adonisjs.routes",
           "group": "navigation"
+        },
+        {
+          "command": "adonis-vscode-extension.pickProject",
+          "when": "view == adonisjs.routes",
+          "group": "navigation"
         }
       ],
       "view/item/context": [
         {
           "command": "adonis-vscode-extension.view.routes.open-in-browser",
-          "when": "view == adonisjs.routes && viewItem == route",
+          "when": "view == adonisjs.routes && viewItem == route/has-get",
           "group": "inline"
         },
         {
           "command": "adonis-vscode-extension.view.routes.copy-link",
-          "when": "view == adonisjs.routes && viewItem == route",
+          "when": "view == adonisjs.routes && viewItem =~ /route/",
           "group": "inline"
         },
         {
           "command": "adonis-vscode-extension.view.routes.open-in-browser",
-          "when": "view == adonisjs.routes && viewItem == route"
+          "when": "view == adonisjs.routes && viewItem == route/has-get"
         },
         {
           "command": "adonis-vscode-extension.view.routes.copy-link",
+          "when": "view == adonisjs.routes && viewItem =~ /route/"
+        },
+        {
+          "command": "adonis-vscode-extension.view.routes.open-controller",
           "when": "view == adonisjs.routes && viewItem == route"
         },
         {
@@ -221,6 +151,10 @@
         }
       ],
       "commandPalette": [
+        {
+          "command": "adonis-vscode-extension.pickProject",
+          "when": "adonisProjectLoaded == true"
+        },
         {
           "command": "adonis-vscode-extension.make.command",
           "when": "adonisProjectLoaded == true"
@@ -334,34 +268,43 @@
     "commands": [
       {
         "command": "adonis-vscode-extension.run-command",
-        "title": "Run command",
+        "title": "AdonisJS: Run command",
         "icon": "$(notebook-execute)"
       },
       {
+        "command": "adonis-vscode-extension.pickProject",
+        "title": "AdonisJS: Pick project",
+        "icon": "$(file-directory)"
+      },
+      {
         "command": "adonis-vscode-extension.view.routes.viewAsList",
-        "title": "See as list",
+        "title": "AdonisJS: See as list",
         "icon": "$(list-flat)",
         "enablement": "!adonis-vscode-extension.view.routes.viewAsList"
       },
       {
         "command": "adonis-vscode-extension.view.routes.viewAsTree",
-        "title": "See as tree",
+        "title": "AdonisJS: See as tree",
         "icon": "$(list-tree)",
         "enablement": "adonis-vscode-extension.view.routes.viewAsList"
       },
       {
         "command": "adonis-vscode-extension.view.routes.refresh",
-        "title": "Refresh Routes",
+        "title": "AdonisJS: Refresh Routes",
         "icon": "$(refresh)"
       },
       {
+        "command": "adonis-vscode-extension.view.routes.open-controller",
+        "title": "AdonisJS: Open Controller File"
+      },
+      {
         "command": "adonis-vscode-extension.view.routes.open-in-browser",
-        "title": "Open in Browser",
+        "title": "AdonisJS: Open in Browser",
         "icon": "$(link-external)"
       },
       {
         "command": "adonis-vscode-extension.view.routes.copy-link",
-        "title": "Copy link",
+        "title": "AdonisJS: Copy link",
         "icon": "$(clippy)"
       },
       {
@@ -546,6 +489,8 @@
     "test:electron": "tsc -p ./ && node ./out/test/run_electron_tests.js",
     "test:pure": "ts-node test/run_pure_tests.ts",
     "test": "npm run test:electron && npm run test:pure",
+    "quick:test": "ts-node test/run_pure_tests.ts",
+    "coverage": "c8 npm run quick:test",
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
     "vscode:package": "vsce package",
@@ -558,13 +503,16 @@
     "docblock": "^0.4.5",
     "fast-glob": "^3.2.12",
     "lodash.groupby": "^4.6.0",
+    "slash": "^3.0.0",
     "vscode-ext-help-and-feedback-view": "^1.0.1",
     "vscode-html-languageservice": "^5.0.4",
     "vscode-languageserver-types": "^3.17.3"
   },
   "devDependencies": {
     "@japa/assert": "^1.4.1",
+    "@japa/file-system": "^1.0.1",
     "@japa/runner": "^2.5.1",
+    "@japa/snapshot": "^1.0.1-2",
     "@japa/spec-reporter": "^1.3.3",
     "@julr/eslint-config": "^0.3.2",
     "@types/dedent": "^0.7.0",
@@ -572,7 +520,9 @@
     "@types/node": "14.x",
     "@types/sinon": "^10.0.13",
     "@types/vscode": "^1.65.0",
-    "@vscode/test-electron": "^2.3.0",
+    "@vscode/test-electron": "^2.3.2",
+    "c8": "^7.14.0",
+    "change-case": "^4.1.2",
     "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
     "execa": "^5.1.1",
@@ -585,6 +535,16 @@
     "typescript": "^4.9.5",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.0.1"
+  },
+  "c8": {
+    "exclude": [
+      "test",
+      "out"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ]
   },
   "pnpm": {
     "peerDependencyRules": {

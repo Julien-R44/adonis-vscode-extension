@@ -1,18 +1,17 @@
 import { commands, languages } from 'vscode'
-import { registerAceCommands } from './commands'
-import EdgeCompletionProvider from './completion/edge/completion_provider'
-import EdgeHoverProvider from './completion/edge/hover_provider'
-import EdgeLinkProvider from './completion/edge/link_provider'
-import RouteControllerCompletionProvider from './completion/routes/completion_provider'
-import RouteControllerHoverProvider from './completion/routes/hover_provider'
-import { RouteControllerLinkProvider } from './completion/routes/link_provider'
-import { registerDocsCommands } from './commands/docs'
-import { EdgeFormatterProvider } from './languages'
-import { ViewContainer } from './tree_views/index'
-import ProjectManager from './services/adonis_project/manager'
-import ExtConfig from './utilities/config'
-import { ViewsLinkProvider } from './completion/views/link_provider'
-import { ViewsCompletionProvider } from './completion/views/completion_provider'
+import { registerAceCommands } from './vscode/commands'
+import EdgeCompletionProvider from './vscode/providers/edge/completion_provider'
+import EdgeLinkProvider from './vscode/providers/edge/link_provider'
+import RouteControllerCompletionProvider from './vscode/providers/routes/completion_provider'
+import { RouteControllerLinkProvider } from './vscode/providers/routes/link_provider'
+import { registerDocsCommands } from './vscode/commands/docs'
+import { EdgeFormatterProvider } from './vscode/languages'
+import { ViewContainer } from './vscode/tree_views/index'
+import ProjectManager from './vscode/project_manager'
+import ExtConfig from './vscode/utilities/config'
+import { ViewsLinkProvider } from './vscode/providers/views/link_provider'
+import { ViewsCompletionProvider } from './vscode/providers/views/completion_provider'
+import { Extension } from './vscode/extension'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -36,6 +35,15 @@ export async function activate(context: ExtensionContext) {
   registerAceCommands(context)
   registerDocsCommands(context)
 
+  commands.registerCommand('adonis-vscode-extension.pickProject', async () => {
+    const project = await ProjectManager.quickPickProject()
+
+    if (project) {
+      ProjectManager.setCurrentProject(project)
+      Extension.routesTreeDataProvider.getAllRoutes()
+    }
+  })
+
   /**
    * Formatting and syntax setup
    */
@@ -57,7 +65,6 @@ export async function activate(context: ExtensionContext) {
     new RouteControllerLinkProvider()
   )
 
-  const routeHover = languages.registerHoverProvider(tsSelector, new RouteControllerHoverProvider())
   const routeCompletion = languages.registerCompletionItemProvider(
     tsSelector,
     new RouteControllerCompletionProvider()
@@ -69,7 +76,6 @@ export async function activate(context: ExtensionContext) {
   const viewSelector = [{ language: 'edge', scheme: 'file' }]
 
   const edgeLink = languages.registerDocumentLinkProvider(viewSelector, new EdgeLinkProvider())
-  const edgeHover = languages.registerHoverProvider(viewSelector, new EdgeHoverProvider())
   const edgeCompletion = languages.registerCompletionItemProvider(
     viewSelector,
     new EdgeCompletionProvider()
@@ -86,10 +92,8 @@ export async function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     routeLink,
-    routeHover,
     routeCompletion,
     edgeLink,
-    edgeHover,
     edgeCompletion,
     viewTsLink,
     viewsCompletion

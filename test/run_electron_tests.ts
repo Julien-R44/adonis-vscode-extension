@@ -1,12 +1,12 @@
-import * as path from 'path'
+import { resolve } from 'path'
 import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron'
 
 async function main() {
   try {
-    const workspacePath = path.resolve(__dirname, '../../test/fixtures/basic-app')
+    const workspacePath = resolve(__dirname, '../../test/fixtures/basic-app')
 
-    const extensionDevelopmentPath = path.resolve(__dirname, '../../')
-    const extensionTestsPath = path.resolve(__dirname, './japa_electron')
+    const extensionDevelopmentPath = resolve(__dirname, '../../')
+    const extensionTestsPath = resolve(__dirname, './japa_electron')
 
     const vscodeExecutablePath = await downloadAndUnzipVSCode('1.66.0')
 

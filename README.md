@@ -82,7 +82,6 @@ _Since I'm not a big snippet user, feel free to propose a PR with snippets you t
 
 - `nodePath`: The path to the node executable.
 - `useUnixCd`: Use Unix-style `cd` for windows terminals (Useful when using Cygwin or Git Bash)
-- `quickJump`: Enable quick jump by using <kbd>Ctrl</kbd> + <kbd>Click</kbd>
 - `runMigrationInBackground`: Run migration/seeds commands in background. By default, they are executed in the built-in terminal of VSCode so that you can see the output.
 
 # Known Issues

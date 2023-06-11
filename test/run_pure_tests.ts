@@ -1,6 +1,9 @@
 import { assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { configure, processCliArgs, run } from '@japa/runner'
+import { snapshot } from '@japa/snapshot'
+import { fileSystem } from '@japa/file-system'
+import { BASE_URL } from '../test_helpers/index'
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +20,17 @@ import { configure, processCliArgs, run } from '@japa/runner'
 */
 configure({
   ...processCliArgs(process.argv.slice(2)),
-  ...{
-    files: ['./test/suites/pure/**/*.test.ts'],
-    plugins: [assert()],
-    reporters: [specReporter()],
-    importer: (filePath) => import(filePath),
-  },
+  files: ['./test/suites/pure/**/*.test.ts'],
+  plugins: [
+    assert(),
+    snapshot(),
+    fileSystem({
+      autoClean: true,
+      basePath: BASE_URL,
+    }),
+  ],
+  reporters: [specReporter()],
+  importer: (filePath) => import(filePath),
 })
 
 /*
