@@ -8,7 +8,7 @@ import {
   TreeItemCollapsibleState,
   Uri,
 } from 'vscode'
-import { RoutesOutputConverter } from 'src/routes_tree/routes_output_converter'
+import { RoutesOutputConverter } from '../../../routes_tree/routes_output_converter'
 import { AceExecutor } from '../../ace_executor'
 import { Extension } from '../../extension'
 import { Notifier } from '../../notifier'
