@@ -3,6 +3,7 @@ import { test } from '@japa/runner'
 import dedent from 'dedent'
 import { AdonisProject } from '../../../../src/adonis_project'
 import { ViewsLinker } from '../../../../src/linkers/views_linker'
+import { createAdonis5Project } from '../../../../test_helpers'
 
 test.group('Pure Edge Template Matcher', () => {
   test('edge source type', async ({ assert, fs }) => {
@@ -49,6 +50,90 @@ test.group('Pure Edge Template Matcher', () => {
       join(project.path, 'resources/views/components/button.edge'),
       join(project.path, 'resources/views/layouts/base.edge'),
     ])
+  })
+
+  test('components as tags', async ({ assert, fs }) => {
+    const project = createAdonis5Project(join(fs.basePath, 'my-project'))
+
+    await fs.create('my-project/resources/views/components/button.edge', '')
+    await fs.create('my-project/resources/views/components/checkout_form/input.edge', '')
+
+    const template = dedent`
+    @!button({
+      type: 'primary',
+      text: 'Login'
+    })
+
+    @!checkoutForm.input({
+      type: 'email',
+      name: 'email',
+    })
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    const positions = result.map((r) => r.position)
+
+    assert.snapshot(positions).matchInline(`
+      [
+        {
+          "colEnd": 8,
+          "colStart": 2,
+          "line": 0,
+        },
+        {
+          "colEnd": 20,
+          "colStart": 2,
+          "line": 5,
+        },
+      ]
+    `)
+  })
+
+  test('component as tags without !', async ({ assert, fs }) => {
+    const project = createAdonis5Project(join(fs.basePath, 'my-project'))
+
+    await fs.create('my-project/resources/views/components/button.edge', '')
+    await fs.create('my-project/resources/views/components/checkout_form/input.edge', '')
+
+    const template = dedent`
+    @button({
+      type: 'primary',
+      text: 'Login'
+    })
+
+    @checkoutForm.input({
+      type: 'email',
+      name: 'email',
+    })
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    const positions = result.map((r) => r.position)
+
+    assert.snapshot(positions).matchInline(`
+      [
+        {
+          "colEnd": 7,
+          "colStart": 1,
+          "line": 0,
+        },
+        {
+          "colEnd": 19,
+          "colStart": 1,
+          "line": 5,
+        },
+      ]
+    `)
   })
 
   test('ts source type', async ({ assert, fs }) => {

@@ -1,7 +1,8 @@
 import { join } from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
-import { edgeRegex, tsRegex } from '../utilities/regexes'
+import { edgeComponentsAsTagsRegex, edgeRegex, tsRegex } from '../utilities/regexes'
+import { EdgeComponentsFinder } from '../edge_components_finder'
 import type { AdonisProject } from '../adonis_project'
 
 export interface ViewLink {
@@ -20,7 +21,7 @@ export interface ViewLink {
  * - And return a Link, that will be used to create DocumentLink in the editor
  */
 export class ViewsLinker {
-  static async #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {
+  static #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {
     const lines = options.fileContent.split('\n')
 
     const line = lines.findIndex((line) => line.includes(options.match[1]!))
@@ -31,9 +32,10 @@ export class ViewsLinker {
   }
 
   /**
-   * Get all the links from a .edge file
+   * Get all links from a .edge or .ts file.
+   * i.e. ones from @include or @layout tags or from view.render() calls
    */
-  public static async getLinks(options: {
+  static async #getBasicLinks(options: {
     fileContent: string
     sourceType: 'edge' | 'ts'
     project: AdonisProject
@@ -57,7 +59,7 @@ export class ViewsLinker {
         return
       }
 
-      const position = await ViewsLinker.#matchIndexToPosition({
+      const position = ViewsLinker.#matchIndexToPosition({
         fileContent: options.fileContent,
         match,
       })
@@ -68,7 +70,53 @@ export class ViewsLinker {
       }
     })
 
-    const results = await Promise.all(promises)
-    return results.filter(Boolean) as unknown as ViewLink[]
+    const result = await Promise.all(promises)
+    return result.filter(Boolean) as ViewLink[]
+  }
+
+  /**
+   * Get all links from components used as tags in a .edge file
+   */
+  static async #getComponentAsTagsLinks(options: {
+    fileContent: string
+    project: AdonisProject
+  }): Promise<ViewLink[]> {
+    const matches = options.fileContent.matchAll(edgeComponentsAsTagsRegex) || []
+
+    const matchesArray = Array.from(matches)
+    if (!matchesArray.length) {
+      return []
+    }
+
+    const components = await EdgeComponentsFinder.find(options.project)
+    return matchesArray
+      .map((match) => {
+        const component = components.find((component) => component.name === match[1]!)
+
+        if (!component) return
+
+        const position = ViewsLinker.#matchIndexToPosition({
+          fileContent: options.fileContent,
+          match,
+        })
+
+        return { templatePath: component.path, position }
+      })
+      .filter(Boolean) as ViewLink[]
+  }
+
+  /**
+   * Get all the links from a .edge file
+   */
+  public static async getLinks(options: {
+    fileContent: string
+    sourceType: 'edge' | 'ts'
+    project: AdonisProject
+  }): Promise<ViewLink[]> {
+    const basicLinksPromise = this.#getBasicLinks(options)
+    const componentsAsTagsPromise = this.#getComponentAsTagsLinks(options)
+
+    const results = await Promise.all([basicLinksPromise, componentsAsTagsPromise])
+    return results.flat()
   }
 }

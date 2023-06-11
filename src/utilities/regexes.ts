@@ -3,7 +3,16 @@
  * Find all the views that are being used inside an Edge template
  */
 export const edgeRegex = new RegExp(
-  /(?<=@include\(['\"]|@layout\(['\"]|@!component\(['\"]|@component\(['\"])([^'">]+)/,
+  /(?<=@include\(['\"]|@layout\(['\"]|@!?component\(['\"])([^'">]+)/,
+  'g'
+)
+
+/**
+ * Used by edge linker
+ * Find all components as tags
+ */
+export const edgeComponentsAsTagsRegex = new RegExp(
+  /@!?(?!include|set|!component|each|section|layout|component)(.+)\(/,
   'g'
 )
 
