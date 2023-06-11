@@ -1,10 +1,30 @@
 import { join, normalize, relative } from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
+import { EdgeComponentsFinder } from '../edge_components_finder'
 import type { Suggestion } from '../types'
 import type { AdonisProject } from '../adonis_project'
 
 export class ViewSuggester {
+  public static async getComponentsAsTagsSuggestions(options: {
+    text: string
+    project: AdonisProject
+  }): Promise<Suggestion[]> {
+    const text = options.text.replaceAll(/[@|!|(|)]/g, '')
+
+    const components = await EdgeComponentsFinder.find(options.project)
+    return components
+      .filter((component) => component.name.startsWith(text))
+      .map((component) => {
+        return {
+          text: component.name,
+          detail: component.relativePath,
+          documentation: '',
+          filePath: normalize(component.path),
+        }
+      })
+  }
+
   public static async getViewSuggestions(options: {
     text: string
     project: AdonisProject

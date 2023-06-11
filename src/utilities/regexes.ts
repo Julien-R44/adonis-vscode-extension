@@ -12,7 +12,7 @@ export const edgeRegex = new RegExp(
  * Find all components as tags
  */
 export const edgeComponentsAsTagsRegex = new RegExp(
-  /@!?(?!include|set|!component|each|section|layout|component)(.+)\(/,
+  /@!?(?!include|set|!component|each|section|layout|component)(.+)?\(/,
   'g'
 )
 
@@ -22,6 +22,15 @@ export const edgeComponentsAsTagsRegex = new RegExp(
  */
 export const viewsCompletionRegex = new RegExp(
   /(?<=[@include|@component|@layout|@!component]\()(['"])[^'"]*\1/,
+  'g'
+)
+
+/**
+ * Used by edge linker
+ * Find all components as tags
+ */
+export const edgeComponentsAsTagsCompletionRegex = new RegExp(
+  /@!?(?!include|set|!component|each|section|layout|component)(.+?)?\(?/,
   'g'
 )
 

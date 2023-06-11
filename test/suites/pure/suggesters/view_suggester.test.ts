@@ -110,4 +110,58 @@ test.group('View Suggester', () => {
       },
     ])
   })
+
+  test('component as tags suggester', async ({ fs, assert }) => {
+    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+
+    await fs.create('my-project/resources/views/components/button.edge', '')
+
+    const suggestions = await ViewSuggester.getComponentsAsTagsSuggestions({
+      text: 'bu',
+      project,
+    })
+
+    assert.deepEqual(suggestions, [
+      {
+        text: 'button',
+        detail: 'button.edge',
+        documentation: '',
+        filePath: join(fs.basePath, 'my-project/resources/views/components/button.edge'),
+      },
+    ])
+  })
+
+  test('component as tags empty should return all', async ({ fs, assert }) => {
+    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+
+    await fs.create('my-project/resources/views/components/button.edge', '')
+    await fs.create('my-project/resources/views/components/form/input.edge', '')
+    await fs.create('my-project/resources/views/components/form/select_input.edge', '')
+
+    const suggestions = await ViewSuggester.getComponentsAsTagsSuggestions({
+      text: '@!',
+      project,
+    })
+
+    assert.deepEqual(suggestions, [
+      {
+        text: 'button',
+        detail: 'button.edge',
+        documentation: '',
+        filePath: join(fs.basePath, 'my-project/resources/views/components/button.edge'),
+      },
+      {
+        text: 'form.input',
+        detail: 'form/input.edge',
+        documentation: '',
+        filePath: join(fs.basePath, 'my-project/resources/views/components/form/input.edge'),
+      },
+      {
+        text: 'form.selectInput',
+        detail: 'form/select_input.edge',
+        documentation: '',
+        filePath: join(fs.basePath, 'my-project/resources/views/components/form/select_input.edge'),
+      },
+    ])
+  })
 })

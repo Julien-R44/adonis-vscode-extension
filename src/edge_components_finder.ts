@@ -28,6 +28,7 @@ export class EdgeComponentsFinder {
       return {
         name,
         path: slash(join(project.path, file)),
+        relativePath,
       }
     })
   }
