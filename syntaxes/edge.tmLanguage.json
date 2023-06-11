@@ -359,7 +359,7 @@
           ]
         },
         {
-          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\\!?\n(?: # Ordering not important as we everything will be matched up to word boundary\n (?i)append\n|(?i)auth\n|(?i)break\n|(?i)continue\n|(?i)default\n|(?i)else\n|(?i)empty\n|(?i)endauth\n|(?i)endcan\n|(?i)endcannot\n|(?i)endcomponent\n|(?i)endeach\n|(?i)endempty\n|(?i)endfor\n|(?i)endforeach\n|(?i)endforelse\n|(?i)endguest\n|(?i)endif\n|(?i)endisset\n|(?i)endlang\n|(?i)endprepend\n|(?i)endpush\n|(?i)endsection\n|(?i)endyield\n|(?i)endslot\n|(?i)endswitch\n|(?i)endunless\n|endverbatim\n|(?i)endwhile\n|(?i)guest\n|(?i)lang\n|(?i)overwrite\n|(?i)parent\n|(?i)show\n|(?i)stop\n|(?i)super\n|(?i)loggedIn\n|(?i)endloggedIn\n|(?i)debugger\n|(?i)endtask\n|(?i)endstory\n|(?i)finished\n|(?i)endfinished\n|verbatim\n|csrf\n)\n\\b",
+          "match": "(?x)\n(?<![A-Za-z0-9_@]) # Prepended @ or literal character escapes the sequence\n@\\!?\n(?: # Ordering not important as we everything will be matched up to word boundary\n (?i)append\n|(?i)auth\n|(?i)break\n|(?i)continue\n|(?i)default\n|(?i)else\n|(?i)empty\n|(?i)endauth\n|(?i)endcan\n|(?i)endcannot\n|(?i)endcomponent\n|(?i)endeach\n|(?i)endempty\n|(?i)endfor\n|(?i)endforeach\n|(?i)endforelse\n|(?i)endguest\n|(?i)endif\n|(?i)endisset\n|(?i)endlang\n|(?i)endprepend\n|(?i)endpush\n|(?i)endsection\n|(?i)endyield\n|(?i)endslot\n|(?i)endswitch\n|(?i)end\n|(?i)endunless\n|endverbatim\n|(?i)endwhile\n|(?i)guest\n|(?i)lang\n|(?i)overwrite\n|(?i)parent\n|(?i)show\n|(?i)stop\n|(?i)super\n|(?i)loggedIn\n|(?i)endloggedIn\n|(?i)debugger\n|(?i)endtask\n|(?i)endstory\n|(?i)finished\n|(?i)endfinished\n|verbatim\n|csrf\n)\n\\b",
           "name": "keyword.edge"
         },
         {
