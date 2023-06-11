@@ -69,7 +69,6 @@ _Since I'm not a big snippet user, feel free to propose a PR with snippets you t
 
 # Known Issues
 Below is the list of unsupported features (for the moment) by the extension, feel free to make a PR if you'd like to contribute to the project: 
-- Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
 - Edge Links Provider for `@includeIf` tag
 
 ## IntelliSense while typing
