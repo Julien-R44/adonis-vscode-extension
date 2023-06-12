@@ -17,24 +17,28 @@ export class RouteControllerLink extends DocumentLink {
 
 export class DocumentLinkFactory {
   static fromViewLink(links: ViewLink[]) {
-    return links.map((link) => {
-      const templateUri = Uri.parse(pathToFileURL(link.templatePath).href)
+    return links
+      .filter((link) => link.templatePath !== null)
+      .map((link) => {
+        const templateUri = Uri.parse(pathToFileURL(link.templatePath).href)
 
-      const start = new Position(link.position.line, link.position.colStart)
-      const end = new Position(link.position.line, link.position.colEnd)
+        const start = new Position(link.position.line, link.position.colStart)
+        const end = new Position(link.position.line, link.position.colEnd)
 
-      return new DocumentLink(new Range(start, end), templateUri)
-    })
+        return new DocumentLink(new Range(start, end), templateUri)
+      })
   }
 
   static fromControllerLink(links: RouteLink[]) {
-    return links.map((link) => {
-      const templateUri = Uri.parse(pathToFileURL(link.controllerPath).href)
+    return links
+      .filter((link) => link.controllerPath !== null)
+      .map((link) => {
+        const templateUri = Uri.parse(pathToFileURL(link.controllerPath!).href)
 
-      const start = new Position(link.position.line, link.position.colStart)
-      const end = new Position(link.position.line, link.position.colEnd)
+        const start = new Position(link.position.line, link.position.colStart)
+        const end = new Position(link.position.line, link.position.colEnd)
 
-      return new RouteControllerLink(new Range(start, end), templateUri, link.controller)
-    })
+        return new RouteControllerLink(new Range(start, end), templateUri, link.controller!)
+      })
   }
 }

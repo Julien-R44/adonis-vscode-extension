@@ -155,4 +155,24 @@ test.group('Controller Linker', () => {
       join(project.path, 'app/controllers/foo/posts_controller.ts'),
     ])
   })
+
+  test('should returns empty links when no controller found', async ({ fs, assert }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const code = dedent`
+      router.get('/users', '#controllers/admin/users_controller.index')
+    `
+
+    const result = await ControllersLinker.getLinks({
+      fileContent: code,
+      project,
+    })
+
+    assert.deepEqual(result[0]!.controllerPath, null)
+    assert.deepEqual(result[0]!.position, {
+      colEnd: 63,
+      colStart: 22,
+      line: 0,
+    })
+  })
 })

@@ -1,9 +1,12 @@
 import { ViewsLinker } from '../../../linkers/views_linker'
 import ProjectManager from '../../project_manager'
 import { DocumentLinkFactory } from '../../factories/document_link_factory'
+import { DiagnosticCollection } from '../../file_diagnostics'
 import type { DocumentLinkProvider, TextDocument } from 'vscode'
 
 export default class EdgeLinkProvider implements DocumentLinkProvider {
+  #collection = new DiagnosticCollection('adonisjs-edge')
+
   async provideDocumentLinks(doc: TextDocument) {
     const project = ProjectManager.getProjectFromFile(doc.uri.fsPath)
     const links = await ViewsLinker.getLinks({
@@ -12,6 +15,7 @@ export default class EdgeLinkProvider implements DocumentLinkProvider {
       sourceType: 'edge',
     })
 
+    this.#collection.setNew(doc, links)
     return DocumentLinkFactory.fromViewLink(links)
   }
 }

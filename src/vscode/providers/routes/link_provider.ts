@@ -3,9 +3,12 @@ import ProjectManager from '../../project_manager'
 import { ControllersLinker } from '../../../linkers/controllers_linker'
 import { getLineNumber } from '../../../utilities/misc'
 import { DocumentLinkFactory } from '../../factories/document_link_factory'
+import { DiagnosticCollection } from '../../file_diagnostics'
 import type { RouteControllerLink } from '../../factories/document_link_factory'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
+  #collection = new DiagnosticCollection('adonisjs-routes')
+
   public async provideDocumentLinks(doc: TextDocument) {
     const project = ProjectManager.getProjectFromFile(doc.uri.fsPath)
     const links = await ControllersLinker.getLinks({
@@ -13,6 +16,7 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
       project: project!,
     })
 
+    this.#collection.setNew(doc, links)
     return DocumentLinkFactory.fromControllerLink(links)
   }
 

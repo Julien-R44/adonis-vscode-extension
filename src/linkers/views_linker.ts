@@ -55,14 +55,14 @@ export class ViewsLinker {
         cwd: slash(options.project.path),
       })
 
-      if (!edgeFiles.length) {
-        return
-      }
-
       const position = ViewsLinker.#matchIndexToPosition({
         fileContent: options.fileContent,
         match,
       })
+
+      if (!edgeFiles.length) {
+        return { templatePath: null, position }
+      }
 
       return {
         templatePath: join(options.project.path, edgeFiles[0]!),
@@ -92,14 +92,12 @@ export class ViewsLinker {
     return matchesArray
       .map((match) => {
         const component = components.find((component) => component.name === match[1]!)
-
-        if (!component) return
-
         const position = ViewsLinker.#matchIndexToPosition({
           fileContent: options.fileContent,
           match,
         })
 
+        if (!component) return { templatePath: null, position }
         return { templatePath: component.path, position }
       })
       .filter(Boolean) as ViewLink[]

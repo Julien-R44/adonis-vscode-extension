@@ -1,12 +1,13 @@
 import { join } from 'node:path'
+import { existsSync } from 'node:fs'
 import { parseMagicString } from '../utilities'
 import { controllersRegex } from '../utilities/regexes'
 import type { Controller } from '../types'
 import type { AdonisProject } from '../adonis_project'
 
 export interface RouteLink {
-  controllerPath: string
-  controller: Controller
+  controllerPath: string | null
+  controller: Controller | null
   position: {
     line: number
     colStart: number
@@ -36,7 +37,14 @@ export class ControllersLinker {
       const controllerString = match[0]!.replace(/\"|\'/g, '')
 
       const controller = parseMagicString(controllerString)
-      if (!controller) return
+      const position = await this.#matchIndexToPosition({
+        fileContent: options.fileContent,
+        match,
+      })
+
+      if (!controller) {
+        return { controllerPath: null, controller: null, position }
+      }
 
       let controllersDirectory = ''
 
@@ -49,10 +57,9 @@ export class ControllersLinker {
       const absPath = join(options.project.path, controllersDirectory)
       const filePath = `${join(absPath, controller.namespace || '', controller.name)}.ts`
 
-      const position = await this.#matchIndexToPosition({
-        fileContent: options.fileContent,
-        match,
-      })
+      if (!existsSync(filePath)) {
+        return { controller, controllerPath: null, position }
+      }
 
       return {
         controller,
@@ -61,7 +68,6 @@ export class ControllersLinker {
       }
     })
 
-    const result = await Promise.all(promises)
-    return result.filter(Boolean) as RouteLink[]
+    return Promise.all(promises)
   }
 }

@@ -3,7 +3,7 @@ import { test } from '@japa/runner'
 import dedent from 'dedent'
 import { AdonisProject } from '../../../../src/adonis_project'
 import { ViewsLinker } from '../../../../src/linkers/views_linker'
-import { createAdonis5Project } from '../../../../test_helpers'
+import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
 
 test.group('Pure Edge Template Matcher', () => {
   test('edge source type', async ({ assert, fs }) => {
@@ -180,5 +180,73 @@ test.group('Pure Edge Template Matcher', () => {
       join(project.path, 'resources/views/components/button.edge'),
       join(project.path, 'resources/views/pages/admin.edge'),
     ])
+  })
+
+  test('should return empty link when no view found TS', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const template = dedent`
+      return view.render('components/button', {
+        props: 42
+      })
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'ts',
+    })
+
+    assert.deepEqual(result[0]?.templatePath, null)
+    assert.deepEqual(result[0]?.position, {
+      line: 0,
+      colStart: 20,
+      colEnd: 37,
+    })
+  })
+
+  test('should return empty link when no view found edge', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const template = dedent`
+      @!component('components/button', {})
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    assert.deepEqual(result[0]?.templatePath, null)
+    assert.deepEqual(result[0]?.position, {
+      line: 0,
+      colStart: 13,
+      colEnd: 30,
+    })
+  })
+
+  test('should return empty links when no component as tags found', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const template = dedent`
+      @!button({
+        type: 'primary',
+        text: 'Login'
+      })
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    assert.deepEqual(result[0]?.templatePath, null)
+    assert.deepEqual(result[0]?.position, {
+      line: 0,
+      colStart: 2,
+      colEnd: 8,
+    })
   })
 })
