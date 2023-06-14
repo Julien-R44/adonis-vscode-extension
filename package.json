@@ -2,7 +2,7 @@
   "publisher": "jripouteau",
   "name": "adonis-vscode-extension",
   "displayName": "AdonisJS Extension",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "The official VSCode extension of AdonisJS",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
   "license": "MIT",
@@ -65,6 +65,11 @@
           "type": "boolean",
           "default": false,
           "description": "Use Unix-style cd for windows terminals ( Useful when using Cygwin or Git Bash )"
+        },
+        "adonisjs.inertia.pagesDirectory": {
+          "type": "string",
+          "description": "The path to the directory containing your Inertia pages. Relative to the project root.",
+          "default": "resources/js/Pages"
         }
       }
     },

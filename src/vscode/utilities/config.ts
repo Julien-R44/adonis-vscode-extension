@@ -40,6 +40,13 @@ class ExtConfig {
   public static get misc(): ConfigMisc {
     return workspace.getConfiguration(this.CONFIG_NAME).misc
   }
+
+  /**
+   * Inertia configuration
+   */
+  public static get inertia(): { pagesDirectory: string } {
+    return workspace.getConfiguration(this.CONFIG_NAME).inertia
+  }
 }
 
 export default ExtConfig

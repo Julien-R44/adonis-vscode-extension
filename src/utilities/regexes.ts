@@ -8,6 +8,11 @@ export const edgeRegex = new RegExp(
 )
 
 /**
+ * Used by inertia linker
+ */
+export const inertiaRegex = new RegExp(/inertia\.render\(['"](.*)['"]/, 'g')
+
+/**
  * Used by edge linker
  * Find all components as tags
  */

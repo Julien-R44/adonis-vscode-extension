@@ -12,6 +12,7 @@ import ExtConfig from './vscode/utilities/config'
 import { ViewsLinkProvider } from './vscode/providers/views/link_provider'
 import { ViewsCompletionProvider } from './vscode/providers/views/completion_provider'
 import { Extension } from './vscode/extension'
+import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -56,7 +57,7 @@ export async function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links for TS files
+   * Autocompletion and links for TS files
    */
   const tsSelector = { language: 'typescript', scheme: 'file' }
 
@@ -71,7 +72,7 @@ export async function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links for Views in edge files
+   * Autocompletion and links for Views in edge files
    */
   const viewSelector = [{ language: 'edge', scheme: 'file' }]
 
@@ -82,7 +83,12 @@ export async function activate(context: ExtensionContext) {
   )
 
   /**
-   * Autocompletion, hover and links for Views in Ts files
+   * Autocompletion and links for Inertia in TS files
+   */
+  const inertiaLink = languages.registerDocumentLinkProvider(tsSelector, new InertiaLinkProvider())
+
+  /**
+   * Autocompletion and links for Views in Ts files
    */
   const viewTsLink = languages.registerDocumentLinkProvider(tsSelector, new ViewsLinkProvider())
   const viewsCompletion = languages.registerCompletionItemProvider(
@@ -96,7 +102,8 @@ export async function activate(context: ExtensionContext) {
     edgeLink,
     edgeCompletion,
     viewTsLink,
-    viewsCompletion
+    viewsCompletion,
+    inertiaLink
   )
 }
 
