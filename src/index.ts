@@ -13,6 +13,7 @@ import { ViewsLinkProvider } from './vscode/providers/views/link_provider'
 import { ViewsCompletionProvider } from './vscode/providers/views/completion_provider'
 import { Extension } from './vscode/extension'
 import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
+import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -86,6 +87,10 @@ export async function activate(context: ExtensionContext) {
    * Autocompletion and links for Inertia in TS files
    */
   const inertiaLink = languages.registerDocumentLinkProvider(tsSelector, new InertiaLinkProvider())
+  const inertiaCompletion = languages.registerCompletionItemProvider(
+    tsSelector,
+    new InertiaCompletionProvider()
+  )
 
   /**
    * Autocompletion and links for Views in Ts files
@@ -103,7 +108,8 @@ export async function activate(context: ExtensionContext) {
     edgeCompletion,
     viewTsLink,
     viewsCompletion,
-    inertiaLink
+    inertiaLink,
+    inertiaCompletion
   )
 }
 
