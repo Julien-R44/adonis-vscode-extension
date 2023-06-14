@@ -249,4 +249,28 @@ test.group('Pure Edge Template Matcher', () => {
       colEnd: 8,
     })
   })
+
+  test('should not detect internal tags as components', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const template = dedent`
+      @if(true)
+      @inject('foo')
+
+      @elseif
+      @endif
+      @!section
+      @vite
+      @entryPointScripts
+      @entryPointStyles
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    assert.deepEqual(result, [])
+  })
 })
