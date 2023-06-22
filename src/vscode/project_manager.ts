@@ -1,14 +1,36 @@
-import { dirname } from 'path'
+import { basename, dirname, relative } from 'path'
 import { window, workspace } from 'vscode'
 import dedent from 'dedent'
+import commonPathPrefix from 'common-path-prefix'
 import { AdonisProject } from '../adonis_project'
 import { Logger } from './logger'
 
 export default class ProjectManager {
+  /**
+   * List of callbacks to call when the current project changes
+   */
+  static #changeProjectListeners: ((project: AdonisProject) => any)[] = []
+
+  /**
+   * List of all Adonis projects found in the current workspace
+   */
   static #projects: AdonisProject[] = []
 
+  /**
+   * Current selected project. TreeViews are based on this adonis project.
+   */
   static currentProject: AdonisProject
 
+  /**
+   * Register a callback to call when the current project changes
+   */
+  static onDidChangeProject(callback: (project: AdonisProject) => any) {
+    this.#changeProjectListeners.push(callback)
+  }
+
+  /**
+   * Log all found projects in the output channel
+   */
   static #logFoundProjects() {
     const projetsDetails = this.#projects
       .map((project) => {
@@ -25,12 +47,46 @@ export default class ProjectManager {
     )
   }
 
+  /**
+   * Set the current project and call all callbacks
+   */
   static setCurrentProject(project: AdonisProject) {
     this.currentProject = project
+    this.#changeProjectListeners.forEach((callback) => callback(project))
   }
 
+  /**
+   * Get the current project
+   */
   static getCurrentProject() {
     return this.currentProject
+  }
+
+  /**
+   * Check if the given project is the current project
+   */
+  static isCurrentProject(project: AdonisProject) {
+    return this.currentProject === project
+  }
+
+  /**
+   * Get the most common path of all projects
+   */
+  static getMostCommonPath() {
+    return commonPathPrefix(this.#projects.map((project) => project.path))
+  }
+
+  /**
+   * Get the shortest path of the given project relative to
+   * the most common path of all projects
+   */
+  static getShortPath(project: AdonisProject) {
+    const mostCommonPath = this.getMostCommonPath()
+
+    if (!mostCommonPath) {
+      return basename(project.path)
+    }
+    return relative(mostCommonPath, project.path)
   }
 
   /**

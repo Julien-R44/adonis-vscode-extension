@@ -14,6 +14,7 @@ import { ViewsCompletionProvider } from './vscode/providers/views/completion_pro
 import { Extension } from './vscode/extension'
 import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
 import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
+import type { AdonisProject } from './adonis_project'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
@@ -37,14 +38,16 @@ export async function activate(context: ExtensionContext) {
   registerAceCommands(context)
   registerDocsCommands(context)
 
-  commands.registerCommand('adonis-vscode-extension.pickProject', async () => {
-    const project = await ProjectManager.quickPickProject()
+  commands.registerCommand(
+    'adonis-vscode-extension.pickProject',
+    async (project?: AdonisProject) => {
+      project = project || (await ProjectManager.quickPickProject())
+      if (!project) return
 
-    if (project) {
       ProjectManager.setCurrentProject(project)
       Extension.routesTreeDataProvider.getAllRoutes()
     }
-  })
+  )
 
   /**
    * Formatting and syntax setup

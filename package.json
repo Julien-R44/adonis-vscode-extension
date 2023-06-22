@@ -86,20 +86,28 @@
     "views": {
       "adonisjs": [
         {
+          "id": "adonisjs.projects",
+          "name": "Projects",
+          "initialSize": 0.1
+        },
+        {
           "id": "adonisjs.commands",
           "name": "Commands",
           "icon": "assets/adonis.svg",
-          "when": "adonisProjectLoaded == true"
+          "when": "adonisProjectLoaded == true",
+          "initialSize": 0.3
         },
         {
           "id": "adonisjs.routes",
           "name": "Routes",
-          "when": "adonisProjectLoaded == true"
+          "when": "adonisProjectLoaded == true",
+          "initialSize": 0.3
         },
         {
           "id": "adonisjs.help",
           "name": "Get Help",
-          "when": "adonisProjectLoaded == true"
+          "when": "adonisProjectLoaded == true",
+          "initialSize": 0.1
         }
       ]
     },
@@ -117,11 +125,6 @@
         },
         {
           "command": "adonis-vscode-extension.view.routes.refresh",
-          "when": "view == adonisjs.routes",
-          "group": "navigation"
-        },
-        {
-          "command": "adonis-vscode-extension.pickProject",
           "when": "view == adonisjs.routes",
           "group": "navigation"
         }
@@ -272,14 +275,14 @@
     },
     "commands": [
       {
+        "command": "adonis-vscode-extension.pickProject",
+        "title": "AdonisJS: Pick project",
+        "icon": "$(file-code)"
+      },
+      {
         "command": "adonis-vscode-extension.run-command",
         "title": "AdonisJS: Run command",
         "icon": "$(notebook-execute)"
-      },
-      {
-        "command": "adonis-vscode-extension.pickProject",
-        "title": "AdonisJS: Pick project",
-        "icon": "$(file-directory)"
       },
       {
         "command": "adonis-vscode-extension.view.routes.viewAsList",
@@ -504,6 +507,7 @@
   },
   "dependencies": {
     "@julr/module-methods-extractor": "^0.0.1",
+    "common-path-prefix": "^3.0.0",
     "dedent": "^0.7.0",
     "docblock": "^0.4.5",
     "fast-glob": "^3.2.12",

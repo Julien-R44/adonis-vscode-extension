@@ -3,6 +3,7 @@ import { CommandsTreeDataProvider } from './commands/tree_data_provider'
 import { RoutesTreeDataProvider } from './routes/tree_data_provider'
 import { HelpTreeDataView } from './help'
 import { registerRoutesTreeViewCommands } from './routes/commands'
+import { ProjectsTreeDataProvider } from './projects/tree_data_provider'
 import type { ExtensionContext } from 'vscode'
 
 /**
@@ -28,6 +29,14 @@ export class ViewContainer {
   }
 
   /**
+   * Create the "Projects" view
+   */
+  private static createProjectsView(_context: ExtensionContext) {
+    const treeDataProvider = new ProjectsTreeDataProvider()
+    window.createTreeView('adonisjs.projects', { treeDataProvider })
+  }
+
+  /**
    * Initialize all tree views
    */
   public static initViews(context: ExtensionContext) {
@@ -36,5 +45,6 @@ export class ViewContainer {
     HelpTreeDataView.createView(context)
     this.createCommandsView()
     this.createRoutesView(context)
+    this.createProjectsView(context)
   }
 }
