@@ -47,6 +47,9 @@ class EdgeFormatter {
     )
 
     output = inputText.replace(/url\(\"(\s*)/g, 'url("')
+
+    output = output.replace(/route\((\"|\')(\s*)/g, 'route($1')
+
     return output.trim()
   }
 }
