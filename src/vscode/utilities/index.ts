@@ -6,7 +6,8 @@ import type { SymbolInformation, SymbolKind } from 'vscode'
  * Open a text document at the given line
  */
 export async function showDocumentAtLine(uri: Uri) {
-  const doc = await window.showTextDocument(uri)
+  const uriWithoutFragment = uri.with({ fragment: '' })
+  const doc = await window.showTextDocument(uriWithoutFragment)
 
   // Focus at the line in the uri fragment
   const lineNumber = Number(uri.fragment) - 1
