@@ -509,7 +509,8 @@
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
     "vscode:package": "vsce package",
-    "vscode:publish": "vsce publish",
+    "vscode:publish": "bumpp --commit --push --tag && vsce publish",
+    "vscode:publish-prerelease": "bumpp --commit --push --tag && vsce publish --pre-release",
     "publish": "ts-node scripts/publish.ts"
   },
   "dependencies": {
@@ -537,6 +538,7 @@
     "@types/sinon": "^10.0.15",
     "@types/vscode": "^1.65.0",
     "@vscode/test-electron": "^2.3.2",
+    "bumpp": "^9.1.1",
     "c8": "^7.14.0",
     "change-case": "^4.1.2",
     "dotenv": "^16.1.4",
