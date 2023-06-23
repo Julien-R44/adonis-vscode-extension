@@ -15,13 +15,19 @@ import { Extension } from './vscode/extension'
 import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
 import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
 import { CreateMissingViewAction } from './vscode/code_actions/create_missing_view'
+import { Logger } from './vscode/logger'
 import type { AdonisProject } from './adonis_project'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {
   // eslint-disable-next-line no-console
   console.log('Activating AdonisJS extension...')
-  await ProjectManager.load()
+  const projects = await ProjectManager.load()
+
+  if (!projects.length) {
+    Logger.info('No AdonisJS project found')
+    return
+  }
 
   /**
    * Set commands visibility

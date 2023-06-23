@@ -83,6 +83,13 @@
         }
       ]
     },
+    "viewsWelcome": [
+      {
+        "contents": "We didn't find any AdonisJS project in this workspace. In order to use the extension you need to have at least one AdonisJS project in your workspace.\nYou can open a project by clicking on the button below.\n[Open Folder](command:vscode.openFolder)\nTo learn more about the extension, [read our docs](https://github.com/Julien-R44/adonis-vscode-extension)",
+        "enablement": "adonisProjectLoaded == false",
+        "view": "adonisjs.projects"
+      }
+    ],
     "views": {
       "adonisjs": [
         {
