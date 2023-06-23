@@ -10,7 +10,17 @@ export class DiagnosticCollection {
     this.#collection = languages.createDiagnosticCollection(collectionName)
   }
 
-  setNew(doc: TextDocument, links: ViewLink[] | RouteLink[]) {
+  setNew({
+    doc,
+    links,
+    code,
+    message,
+  }: {
+    doc: TextDocument
+    links: ViewLink[] | RouteLink[]
+    code?: string
+    message?: string
+  }) {
     this.#collection.delete(doc.uri)
 
     if (links.length === 0) {
@@ -33,8 +43,9 @@ export class DiagnosticCollection {
         link.position.colEnd
       )
 
-      const message = 'Could not resolve document link'
+      message = message || 'Could not resolve document link'
       const diagnostic = new Diagnostic(range, message, DiagnosticSeverity.Error)
+      diagnostic.code = `adonisjs.${code}`
 
       const alreadySet = this.#collection.get(doc.uri)
       this.#collection.set(doc.uri, alreadySet ? [...alreadySet, diagnostic] : [diagnostic])

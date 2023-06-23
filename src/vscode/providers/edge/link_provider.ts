@@ -15,7 +15,7 @@ export default class EdgeLinkProvider implements DocumentLinkProvider {
       sourceType: 'edge',
     })
 
-    this.#collection.setNew(doc, links)
+    this.#collection.setNew({ doc, links, code: 'missing-view', message: 'Missing view' })
     return DocumentLinkFactory.fromViewLink(links)
   }
 }

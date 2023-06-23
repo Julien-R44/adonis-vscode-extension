@@ -16,7 +16,7 @@ export class RouteControllerLinkProvider implements DocumentLinkProvider {
       project: project!,
     })
 
-    this.#collection.setNew(doc, links)
+    this.#collection.setNew({ doc, links, message: 'Missing controller' })
     return DocumentLinkFactory.fromControllerLink(links)
   }
 

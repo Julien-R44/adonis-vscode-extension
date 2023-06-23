@@ -14,6 +14,7 @@ import { ViewsCompletionProvider } from './vscode/providers/views/completion_pro
 import { Extension } from './vscode/extension'
 import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
 import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
+import { CreateMissingViewAction } from './vscode/code_actions/create_missing_view'
 import type { AdonisProject } from './adonis_project'
 import type { ExtensionContext } from 'vscode'
 
@@ -114,6 +115,11 @@ export async function activate(context: ExtensionContext) {
     inertiaLink,
     inertiaCompletion
   )
+
+  /**
+   * Code actions
+   */
+  CreateMissingViewAction.register()
 }
 
 export function deactivate() {}

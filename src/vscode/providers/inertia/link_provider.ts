@@ -16,7 +16,7 @@ export default class InertiaLinkProvider implements DocumentLinkProvider {
       pagesDirectory: ExtConfig.inertia.pagesDirectory,
     })
 
-    this.#collection.setNew(doc, links)
+    this.#collection.setNew({ doc, links, message: 'Missing inertia page' })
     return DocumentLinkFactory.fromViewLink(links)
   }
 }

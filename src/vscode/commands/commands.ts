@@ -83,7 +83,7 @@ export const commands = [
         aceCommand: 'make:view',
         description: 'Make a new view',
         commandIdentifier: ExtConfig.buildCommandId(`make.view`),
-        handler: () => View.run(),
+        handler: View.run.bind(View),
       },
       {
         aceCommand: 'make:validator',

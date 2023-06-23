@@ -19,7 +19,7 @@ export class ViewsLinkProvider implements DocumentLinkProvider {
       sourceType: 'ts',
     })
 
-    this.#collection.setNew(doc, links)
+    this.#collection.setNew({ doc, links, code: 'missing-view', message: 'Missing view' })
     return DocumentLinkFactory.fromViewLink(links)
   }
 }
