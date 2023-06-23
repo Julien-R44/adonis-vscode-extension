@@ -32,7 +32,7 @@ type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDom
 export class RoutesTreeDataProvider
   implements TreeDataProvider<RouteTreeDataProviderPossiblesNodes>
 {
-  #onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>()
+  #onDidChangeTreeData = new EventEmitter()
 
   #routes: RouteTreeDataProviderPossiblesNodes[] = []
   #rawRoutes: AceListRoutesResultV6 = []

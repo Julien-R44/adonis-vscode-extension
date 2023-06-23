@@ -1,14 +1,24 @@
-import { ThemeIcon, TreeItemCollapsibleState } from 'vscode'
+import { EventEmitter, ThemeIcon, TreeItemCollapsibleState } from 'vscode'
 import { commands } from '../../commands/commands'
 import ProjectManager from '../../project_manager'
 import ExtConfig from '../../utilities/config'
-import type { ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
-import type { CommandGenericNode } from '../../../types'
+import { AceExecutor } from '../../ace_executor'
+import type { Event, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
+import type { AceListCommandsResult, CommandGenericNode } from '../../../types'
 
 /**
  * Provide the data to be displayed in the VSCode "Commands" Tree View
  */
 export class CommandsTreeDataProvider implements TreeDataProvider<CommandGenericNode> {
+  #onDidChangeTreeData = new EventEmitter()
+  public readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
+
+  constructor() {
+    ProjectManager.onDidChangeProject(() => {
+      this.#onDidChangeTreeData.fire(undefined)
+    })
+  }
+
   /**
    * Build the list of built-in commands
    */
@@ -73,6 +83,16 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
       iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
       contextValue: 'command',
     }
+  }
+
+  async #listCommandsJson() {
+    const { result } = await AceExecutor.exec({
+      command: 'list --json',
+      adonisProject: ProjectManager.getCurrentProject(),
+      background: true,
+    })
+
+    return JSON.parse(result!.stdout) as AceListCommandsResult
   }
 
   /**

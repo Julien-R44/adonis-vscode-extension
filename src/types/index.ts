@@ -90,7 +90,7 @@ export interface RawRouteV6 {
 }
 
 /**
- * Shape of node ace list:routes result
+ * Output of node ace list:routes command
  */
 export interface AceListRoutesResultV5 {
   /**
@@ -107,4 +107,35 @@ export interface AceListRoutesResultV5 {
 export type AceListRoutesResultV6 = {
   domain: string
   routes: RawRouteV6[]
+}[]
+
+/**
+ * Output of node ace list --json command
+ */
+export type AceListCommandsResult = {
+  commandName: string
+  description: string
+  help: string
+  namespace: string
+  aliases: string[]
+  flags: {
+    name: string
+    flagName: string
+    required: boolean
+    type: string
+    description: string
+    alias: string
+  }[]
+
+  args: {
+    name: string
+    argumentName: string
+    required: boolean
+    description: string
+    type: string
+  }[]
+  options: {
+    allowUnknownFlags: boolean
+  }
+  filePath: string
 }[]
