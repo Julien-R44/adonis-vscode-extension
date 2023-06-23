@@ -23,13 +23,13 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
    * Build the list of built-in commands
    */
   private buildBuiltinCommands() {
-    return commands.map((group) => ({
+    return commands.map((group: any) => ({
       label: group.groupName,
       description: group.description,
       icon: group.icon,
       children: group.children
-        .filter((command) => command.hiddenFromTreeView !== true)
-        .map((command) => ({
+        .filter((command: any) => command.hiddenFromTreeView !== true)
+        .map((command: any) => ({
           commandIdentifier: command.commandIdentifier,
           label: command.aceCommand,
           description: command.description,
@@ -85,7 +85,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
     }
   }
 
-  async #listCommandsJson() {
+  async listCommandsJson() {
     const { result } = await AceExecutor.exec({
       command: 'list --json',
       adonisProject: ProjectManager.getCurrentProject(),
