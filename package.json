@@ -107,7 +107,7 @@
           "id": "adonisjs.help",
           "name": "Get Help",
           "when": "adonisProjectLoaded == true",
-          "initialSize": 0.1
+          "initialSize": 0.2
         }
       ]
     },

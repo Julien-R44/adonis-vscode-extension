@@ -16,8 +16,6 @@ export default class InertiaLinkProvider implements DocumentLinkProvider {
       pagesDirectory: ExtConfig.inertia.pagesDirectory,
     })
 
-    console.log('links', links)
-
     this.#collection.setNew(doc, links)
     return DocumentLinkFactory.fromViewLink(links)
   }
