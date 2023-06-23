@@ -576,7 +576,8 @@
       "@julr/eslint-config-prettier"
     ],
     "rules": {
-      "no-useless-escape": "off"
+      "no-useless-escape": "off",
+      "sonarjs/no-duplicate-string": "off"
     }
   },
   "prettier": {
