@@ -273,4 +273,23 @@ test.group('Pure Edge Template Matcher', () => {
 
     assert.deepEqual(result, [])
   })
+
+  test('should not mark emails as components', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+    const template = `
+      router.get('/send-email', async ({ response, session }) => {
+          message.from('jul@adonisjs.com')
+            .text('Hello world')
+            .to('foo@bar.com').subject('My subject')
+      })
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'ts',
+    })
+
+    assert.deepEqual(result, [])
+  })
 })

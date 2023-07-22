@@ -79,8 +79,13 @@ export class ViewsLinker {
    */
   static async #getComponentAsTagsLinks(options: {
     fileContent: string
+    sourceType: 'edge' | 'ts'
     project: AdonisProject
   }): Promise<ViewLink[]> {
+    if (options.sourceType === 'ts') {
+      return []
+    }
+
     const matches = options.fileContent.matchAll(edgeComponentsAsTagsRegex) || []
 
     const matchesArray = Array.from(matches)
