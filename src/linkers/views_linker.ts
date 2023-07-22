@@ -14,6 +14,12 @@ export interface ViewLink {
   }
 }
 
+interface GetLinksOptions {
+  fileContent: string
+  sourceType: 'edge' | 'ts'
+  project: AdonisProject
+}
+
 /**
  * Purpose of this class is :
  * - Scan a .edge or .ts file for linked templates with some regexes
@@ -35,11 +41,7 @@ export class ViewsLinker {
    * Get all links from a .edge or .ts file.
    * i.e. ones from @include or @layout tags or from view.render() calls
    */
-  static async #getBasicLinks(options: {
-    fileContent: string
-    sourceType: 'edge' | 'ts'
-    project: AdonisProject
-  }): Promise<ViewLink[]> {
+  static async #getBasicLinks(options: GetLinksOptions): Promise<ViewLink[]> {
     const regex = options.sourceType === 'edge' ? edgeRegex : tsRegex
     const matches = options.fileContent.matchAll(regex) || []
 
@@ -77,14 +79,8 @@ export class ViewsLinker {
   /**
    * Get all links from components used as tags in a .edge file
    */
-  static async #getComponentAsTagsLinks(options: {
-    fileContent: string
-    sourceType: 'edge' | 'ts'
-    project: AdonisProject
-  }): Promise<ViewLink[]> {
-    if (options.sourceType === 'ts') {
-      return []
-    }
+  static async #getComponentAsTagsLinks(options: GetLinksOptions): Promise<ViewLink[]> {
+    if (options.sourceType === 'ts') return []
 
     const matches = options.fileContent.matchAll(edgeComponentsAsTagsRegex) || []
 
@@ -111,11 +107,7 @@ export class ViewsLinker {
   /**
    * Get all the links from a .edge file
    */
-  public static async getLinks(options: {
-    fileContent: string
-    sourceType: 'edge' | 'ts'
-    project: AdonisProject
-  }): Promise<ViewLink[]> {
+  public static async getLinks(options: GetLinksOptions): Promise<ViewLink[]> {
     const basicLinksPromise = this.#getBasicLinks(options)
     const componentsAsTagsPromise = this.#getComponentAsTagsLinks(options)
 
