@@ -29,7 +29,6 @@ import { RunCustomCommand } from './custom'
 import { Seed } from './database/seed'
 import { Wipe } from './database/wipe'
 import { Mailer } from './make/mailer'
-import type { CommandNode } from '../../types/index.js'
 
 export const commands = [
   {
@@ -194,7 +193,7 @@ export const commands = [
         aceCommand: '__custom',
         description: 'Run a command',
         commandIdentifier: ExtConfig.buildCommandId(`run-command`),
-        handler: (command: CommandNode) => {
+        handler: (command: any) => {
           vscode.commands.executeCommand(
             command.commandIdentifier,
             ...(command.commandArguments || [])
@@ -241,4 +240,15 @@ export const commands = [
       },
     ],
   },
-]
+] as {
+  groupName: string
+  description: string
+  icon: string
+  children: {
+    aceCommand: string
+    description: string
+    commandIdentifier: string
+    handler: (...args: any[]) => any
+    hiddenFromTreeView?: boolean
+  }[]
+}[]

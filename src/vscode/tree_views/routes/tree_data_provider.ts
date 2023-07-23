@@ -8,15 +8,12 @@ import {
   TreeItemCollapsibleState,
   Uri,
 } from 'vscode'
-import { RoutesOutputConverter } from '../../../routes_tree/routes_output_converter'
-import { AceExecutor } from '../../ace_executor'
 import { Extension } from '../../extension'
 import { Notifier } from '../../notifier'
 import ProjectManager from '../../project_manager'
 import { TreeRoutesBuilder } from '../../../routes_tree/tree_routes_builder'
 import type { RouteNode } from '../../../routes_tree/nodes/route_node_factory'
 import type {
-  AceListRoutesResultV5,
   AceListRoutesResultV6,
   BaseNode,
   RouteDomainNode,
@@ -131,21 +128,6 @@ export class RoutesTreeDataProvider
     return []
   }
 
-  async #listRoutesJson() {
-    const { result } = await AceExecutor.exec({
-      command: 'list:routes --json',
-      adonisProject: ProjectManager.currentProject,
-      background: true,
-    })
-
-    const rawResult = JSON.parse(result!.stdout) as AceListRoutesResultV5 | AceListRoutesResultV6
-    if (ProjectManager.currentProject!.isAdonis5()) {
-      return RoutesOutputConverter.convert(rawResult as AceListRoutesResultV5)
-    }
-
-    return rawResult as AceListRoutesResultV6
-  }
-
   public async toggleFlatView() {
     this.flatView = !this.flatView
 
@@ -164,11 +146,8 @@ export class RoutesTreeDataProvider
     this.flatView = false
 
     try {
-      const rawRoutes = await this.#listRoutesJson()
-      this.#rawRoutes = rawRoutes
-
-      const routes = await TreeRoutesBuilder.build(ProjectManager.currentProject, rawRoutes)
-      this.#routes = routes
+      this.#rawRoutes = await ProjectManager.currentProject.getRoutes()
+      this.#routes = await TreeRoutesBuilder.build(ProjectManager.currentProject, this.#rawRoutes)
 
       this.refresh()
     } catch (err) {

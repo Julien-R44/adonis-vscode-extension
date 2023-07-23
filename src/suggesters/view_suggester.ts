@@ -3,7 +3,7 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import { EdgeComponentsFinder } from '../edge_components_finder'
 import type { Suggestion } from '../types'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 export class ViewSuggester {
   public static async getComponentsAsTagsSuggestions(options: {

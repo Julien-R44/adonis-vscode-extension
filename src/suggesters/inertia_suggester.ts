@@ -2,7 +2,7 @@ import { join, normalize, relative } from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
 import type { Suggestion } from '../types'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 export class InertiaSuggester {
   public static async getInertiaSuggestions(options: {

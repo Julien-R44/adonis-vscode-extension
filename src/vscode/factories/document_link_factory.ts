@@ -1,8 +1,7 @@
 import { pathToFileURL } from 'url'
 import { DocumentLink, Position, Range, Uri } from 'vscode'
+import type { RouteLink, ViewLink } from '../../types/linkers'
 import type { Controller } from '../../types'
-import type { RouteLink } from '../../linkers/controllers_linker'
-import type { ViewLink } from '../../linkers/views_linker'
 
 export class RouteControllerLink extends DocumentLink {
   public filePath: Uri

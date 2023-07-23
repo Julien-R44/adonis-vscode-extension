@@ -1,12 +1,8 @@
 /**
- * Env file of an Adonis project
+ * -------------------------------------------------------
+ * Types for Adonis V5 projects
+ * -------------------------------------------------------
  */
-export interface AdonisEnv {
-  PORT: string
-  HOST: string
-  NODE_ENV: string
-  [key: string]: string
-}
 
 /**
  * ace-manifest.json shape

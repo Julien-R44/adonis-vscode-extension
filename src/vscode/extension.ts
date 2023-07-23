@@ -1,3 +1,4 @@
+import type { CommandsTreeDataProvider } from './tree_views/commands/tree_data_provider'
 import type { RoutesTreeDataProvider } from './tree_views/routes/tree_data_provider'
 
 /**
@@ -5,4 +6,5 @@ import type { RoutesTreeDataProvider } from './tree_views/routes/tree_data_provi
  */
 export class Extension {
   public static routesTreeDataProvider: RoutesTreeDataProvider
+  public static commandsTreeDataProvider: CommandsTreeDataProvider
 }

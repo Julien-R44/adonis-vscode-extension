@@ -3,7 +3,7 @@ import { exec as baseExec } from 'child_process'
 import { promisify } from 'util'
 import { window } from 'vscode'
 import ExtConfig from './utilities/config'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 const exec = promisify(baseExec)
 

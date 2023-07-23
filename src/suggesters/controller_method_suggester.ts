@@ -1,6 +1,6 @@
 import { getMethodsInSourceFile } from '../utilities/misc'
 import { ControllerSuggester } from './controller_suggester'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 export class ControllerMethodSuggester {
   public static async getControllerMethodSuggestions(options: {

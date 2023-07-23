@@ -1,6 +1,6 @@
 import { Notifier } from '../../notifier'
 import BaseCommand from '../../commands/base_command'
-import type { AdonisProject } from '../../../adonis_project'
+import type { AdonisProject } from '../../../types/projects'
 
 /**
  * Handle make:view command

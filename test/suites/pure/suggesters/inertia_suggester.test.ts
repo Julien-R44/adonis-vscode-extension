@@ -1,11 +1,11 @@
 import { join } from 'path'
 import { test } from '@japa/runner'
-import { AdonisProject } from '../../../../src/adonis_project'
 import { InertiaSuggester } from '../../../../src/suggesters/inertia_suggester'
+import { Adonis6Project } from '../../../../src/adonis_project/adonis6_project'
 
 test.group('View Suggester', () => {
   test('basic', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/js/pages/Users/Index.vue', '')
 

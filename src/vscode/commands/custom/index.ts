@@ -1,71 +1,37 @@
-import ProjectManager from '../../project_manager'
 import { Notifier } from '../../notifier'
 import BaseCommand from '../../commands/base_command'
-import { ArgType } from '../../../adonis_project/types'
-import type { AceManifestEntry, Arg } from '../../../adonis_project/types'
-import type { AdonisProject } from '../../../adonis_project'
+import { ArgType } from '../../../types/projects/v5'
+import type { CommandEntry } from '../../../types/projects/v6'
+import type { AdonisProject } from '../../../types/projects'
 
 /**
  * Generic class to run custom commands
  */
 export class RunCustomCommand extends BaseCommand {
   /**
-   * Pick a project
-   */
-  private static async pickProject(project?: AdonisProject) {
-    let selectedProject = project
-
-    if (!selectedProject) {
-      selectedProject = await ProjectManager.quickPickProject(
-        'Select an Adonis Project on which you want to run the custom command'
-      )
-    }
-
-    return selectedProject
-  }
-
-  /**
-   * Ask user to pick a custom command to run
-   */
-  private static async pickCommand(project: AdonisProject, preSelectedCommand?: AceManifestEntry) {
-    if (preSelectedCommand) {
-      return preSelectedCommand
-    }
-
-    const customCommands = project.getCustomAceCommands()
-    const commandInput = await this.getListInput(
-      'Select the command to run',
-      customCommands.map((command) => command.name),
-      false
-    )
-
-    return customCommands.find((command) => command.name === commandInput[0])!.command
-  }
-
-  /**
    * Ask the user for a command argument value
    */
-  private static async askForArgumentValue(arg: Arg & { required: boolean }) {
-    let placeholder = `Enter the value for the argument '${arg.name || arg.propertyName}'`
+  private static async askForArgumentValue(arg: CommandEntry['args'][number]) {
+    let placeholder = `Enter the value for the argument '${arg.name || arg.argumentName}'`
     if (!arg.required) {
       placeholder += ' (optional)'
     }
 
     const argInput = await this.getInput(placeholder, arg.description)
 
-    return { name: arg.propertyName, value: argInput }
+    return { name: arg.argumentName, value: argInput }
   }
 
   /**
    * Ask the user for a flag value
    */
-  private static async askForFlagValue(flag: Arg) {
+  private static async askForFlagValue(flag: CommandEntry['flags'][number]) {
     /**
      * Ask for boolean flag type
      */
     if (flag.type === ArgType.Boolean) {
       const flagInput = await this.getYesNo(
-        `Do you want to set the flag '${flag.name || flag.propertyName}' ?`
+        `Do you want to set the flag '${flag.name || flag.flagName}' ?`
       )
 
       return { name: flag.name, value: flagInput }
@@ -75,10 +41,10 @@ export class RunCustomCommand extends BaseCommand {
      * Ask for Strings, Number and Array flag types
      */
     const flagInput = await this.getInput(
-      `Enter the value for the flag '${flag.name || flag.propertyName}'`,
+      `Enter the value for the flag '${flag.name || flag.flagName}'`,
       flag.description
     )
-    return { name: flag.propertyName, value: flagInput }
+    return { name: flag.flagName, value: flagInput }
   }
 
   /**
@@ -112,17 +78,7 @@ export class RunCustomCommand extends BaseCommand {
     return `${commandName} ${args} ${flags}`
   }
 
-  public static async run(selectedProject?: AdonisProject, selectedCommand?: AceManifestEntry) {
-    const project = await this.pickProject(selectedProject)
-    if (!project) {
-      return Notifier.showError('You must select a project.')
-    }
-
-    const command = await this.pickCommand(project, selectedCommand)
-    if (!command) {
-      return Notifier.showError('You must select a command.')
-    }
-
+  public static async run(project: AdonisProject, command: CommandEntry) {
     /**
      * Ask for arguments
      */
@@ -131,7 +87,7 @@ export class RunCustomCommand extends BaseCommand {
       const argResult = await this.askForArgumentValue(arg)
 
       if (!argResult.value && arg.required) {
-        return Notifier.showError(`You must enter a value for '${arg.name || arg.propertyName}'`)
+        return Notifier.showError(`You must enter a value for '${arg.name || arg.argumentName}'`)
       }
 
       argsResult.push(argResult)
@@ -168,6 +124,7 @@ export class RunCustomCommand extends BaseCommand {
       successMessage: `'${command.commandName}' command executed successfully`,
       errorMessage: 'Failed to execute the command.',
       background,
+      project,
     })
   }
 }

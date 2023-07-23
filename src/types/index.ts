@@ -48,17 +48,6 @@ export interface BaseNode {
   icon?: string
 }
 
-/**
- * Shape of a Group of commands node
- */
-export type CommandGroupNode = BaseNode & { children: CommandNode[] }
-
-/**
- * Shape of a Command Node
- */
-export type CommandNode = BaseNode & { commandIdentifier: string; commandArguments?: any[] }
-export type CommandGenericNode = CommandGroupNode | CommandNode
-
 export type RouteGroupNode = BaseNode & { children: (RouteNode | RouteGroupNode)[] }
 export type RouteDomainNode = BaseNode & { children: RouteGroupNode[] }
 export type RouteNode = BaseNode & RawRoute & { path: any | null; filename: string }
@@ -138,4 +127,5 @@ export type AceListCommandsResult = {
     allowUnknownFlags: boolean
   }
   filePath: string
+  absoluteFilePath: string
 }[]

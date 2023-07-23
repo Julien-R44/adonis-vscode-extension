@@ -2,16 +2,8 @@ import { join } from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
 import { inertiaRegex } from '../utilities/regexes'
-import type { AdonisProject } from '../adonis_project'
-
-export interface InertiaLink {
-  templatePath: string
-  position: {
-    line: number
-    colStart: number
-    colEnd: number
-  }
-}
+import type { InertiaLink } from '../types/linkers'
+import type { AdonisProject } from '../types/projects'
 
 export class InertiaLinker {
   static #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {

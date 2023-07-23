@@ -1,7 +1,7 @@
-import BaseCommand, { ExtensionErrors } from '../../commands/base_command'
+import BaseCommand from '../../commands/base_command'
 import { HtmlTable } from '../../helpers/html_table'
 import { Notifier } from '../../notifier'
-import type { AdonisProject } from '../../../adonis_project'
+import type { AdonisProject } from '../../../types/projects'
 import type { WebviewPanel } from 'vscode'
 
 export class RouteList extends BaseCommand {
@@ -73,12 +73,6 @@ export class RouteList extends BaseCommand {
         this.onReceiveWebviewMessage.bind(this, panel, res.adonisProject)
       )
     } catch (err: any) {
-      if (err.errorCode === ExtensionErrors.ERR_ADONIS_PROJECT_SELECTION_NEEDED) {
-        return Notifier.showError(
-          'You must select an AdonisJS project on which to run your command.'
-        )
-      }
-
       return Notifier.showError('The route list could not be generated', err)
     }
   }

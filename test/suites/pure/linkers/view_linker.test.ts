@@ -1,13 +1,13 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 import dedent from 'dedent'
-import { AdonisProject } from '../../../../src/adonis_project'
 import { ViewsLinker } from '../../../../src/linkers/views_linker'
 import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
+import { Adonis6Project } from '../../../../src/adonis_project/adonis6_project'
 
 test.group('Pure Edge Template Matcher', () => {
   test('edge source type', async ({ assert, fs }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/components/button.edge', '')
     await fs.create('my-project/resources/views/layouts/base.edge', '')
@@ -137,7 +137,7 @@ test.group('Pure Edge Template Matcher', () => {
   })
 
   test('ts source type', async ({ assert, fs }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/components/button.edge', '')
     await fs.create('my-project/resources/views/pages/admin.edge', '')

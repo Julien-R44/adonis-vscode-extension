@@ -2,7 +2,7 @@ import { join, relative } from 'node:path'
 import fg from 'fast-glob'
 import slash from 'slash'
 import { camelCase } from 'change-case'
-import type { AdonisProject } from './adonis_project'
+import type { AdonisProject } from './types/projects'
 
 /**
  * Scan a project for Edge components that can be used

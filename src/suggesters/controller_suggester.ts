@@ -3,7 +3,7 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import { getMethodsInSourceFile } from '../utilities/misc'
 import type { Suggestion } from '../types'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 export class ControllerSuggester {
   /**

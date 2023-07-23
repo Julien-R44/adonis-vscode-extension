@@ -1,6 +1,6 @@
 import groupBy from 'lodash.groupby'
 import { RouteNodeFactory } from './nodes/route_node_factory'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 import type { AceListRoutesResultV6, RawRouteV6 } from '../types'
 
 export class TreeRoutesBuilder {

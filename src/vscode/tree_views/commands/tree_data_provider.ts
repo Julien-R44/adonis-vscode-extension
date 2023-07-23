@@ -1,71 +1,38 @@
 import { EventEmitter, ThemeIcon, TreeItemCollapsibleState } from 'vscode'
-import { commands } from '../../commands/commands'
 import ProjectManager from '../../project_manager'
-import ExtConfig from '../../utilities/config'
-import { AceExecutor } from '../../ace_executor'
+import { Extension } from '../../extension'
+import type { AceCommandNode } from '../../../types/projects'
 import type { Event, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
-import type { AceListCommandsResult, CommandGenericNode } from '../../../types'
 
 /**
  * Provide the data to be displayed in the VSCode "Commands" Tree View
  */
-export class CommandsTreeDataProvider implements TreeDataProvider<CommandGenericNode> {
+export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode> {
   #onDidChangeTreeData = new EventEmitter()
+  #tree: AceCommandNode[] = []
+
   public readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
 
   constructor() {
+    Extension.commandsTreeDataProvider = this
     ProjectManager.onDidChangeProject(() => {
-      this.#onDidChangeTreeData.fire(undefined)
+      this.buildTree()
+      this.refresh()
     })
+    this.buildTree()
   }
 
   /**
-   * Build the list of built-in commands
+   * Refresh the tree view
    */
-  private buildBuiltinCommands() {
-    return commands.map((group: any) => ({
-      label: group.groupName,
-      description: group.description,
-      icon: group.icon,
-      children: group.children
-        .filter((command: any) => command.hiddenFromTreeView !== true)
-        .map((command: any) => ({
-          commandIdentifier: command.commandIdentifier,
-          label: command.aceCommand,
-          description: command.description,
-        })),
-    }))
-  }
-
-  /**
-   * Build the list of custom user commands
-   */
-  private buildUserCommands() {
-    const adonisProject = ProjectManager.getCurrentProject()
-    return {
-      label: 'Custom commands',
-      description: 'Run your custom commands',
-      icon: 'terminal',
-      children: adonisProject.getCustomAceCommands().map((command) => ({
-        commandIdentifier: ExtConfig.buildCommandId('run-custom-command'),
-        commandArguments: [adonisProject, command.command],
-        description: command.command.description,
-        label: command.name,
-      })),
-    }
-  }
-
-  private buildRootItems() {
-    const builtinCommands = this.buildBuiltinCommands()
-    const userCommands = this.buildUserCommands()
-
-    return [...builtinCommands, userCommands]
+  public refresh() {
+    this.#onDidChangeTreeData.fire(undefined)
   }
 
   /**
    * Returns the UI state of the given walked node
    */
-  public getTreeItem(element: CommandGenericNode): TreeItem | Thenable<TreeItem> {
+  public getTreeItem(element: AceCommandNode): TreeItem | Thenable<TreeItem> {
     if ('children' in element) {
       return {
         collapsibleState: TreeItemCollapsibleState.Collapsed,
@@ -85,27 +52,24 @@ export class CommandsTreeDataProvider implements TreeDataProvider<CommandGeneric
     }
   }
 
-  async listCommandsJson() {
-    const { result } = await AceExecutor.exec({
-      command: 'list --json',
-      adonisProject: ProjectManager.getCurrentProject(),
-      background: true,
-    })
-
-    return JSON.parse(result!.stdout) as AceListCommandsResult
-  }
-
   /**
    * Returns the children of the given node
    * If `element` is `undefined` then return the root node
    */
-  public getChildren(element?: CommandGenericNode): ProviderResult<CommandGenericNode[]> {
+  public getChildren(element?: AceCommandNode): ProviderResult<AceCommandNode[]> {
     if (!element) {
-      return this.buildRootItems()
-    } else if ('children' in element) {
-      return element.children
+      return this.#tree
+    }
+
+    if ('children' in element) {
+      return element.children as any
     }
 
     return []
+  }
+
+  public async buildTree() {
+    this.#tree = await ProjectManager.currentProject.getCommands()
+    this.refresh()
   }
 }

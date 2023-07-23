@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { test } from '@japa/runner'
-import { AdonisProject } from '../../../src/adonis_project'
+import { Adonis6Project } from '../../../src/adonis_project/adonis6_project'
 
 test.group('Adonis Project', () => {
   test('should set name from package.json', async ({ fs, assert }) => {
@@ -8,7 +8,7 @@ test.group('Adonis Project', () => {
 
     await fs.create('my-project/package.json', JSON.stringify({ name: '@acme/my-adonis-backend' }))
 
-    const project = new AdonisProject(projectUrl)
+    const project = new Adonis6Project(projectUrl)
     assert.equal(project.name, '@acme/my-adonis-backend')
   })
 
@@ -17,7 +17,7 @@ test.group('Adonis Project', () => {
 
     await fs.create('my-project/.env', 'PORT=3333\nHOST=localhost')
 
-    const project = new AdonisProject(projectUrl)
+    const project = new Adonis6Project(projectUrl)
     assert.deepEqual(project.env, { PORT: '3333', HOST: 'localhost' })
   })
 
@@ -26,7 +26,7 @@ test.group('Adonis Project', () => {
 
     await fs.create('my-project/ace-manifest.json', JSON.stringify({ foo: ['foo'] }))
 
-    const project = new AdonisProject(projectUrl)
+    const project = new Adonis6Project(projectUrl)
     assert.deepEqual(project.manifest, { foo: ['foo'] })
   })
 
@@ -35,8 +35,8 @@ test.group('Adonis Project', () => {
 
     await fs.create('my-project/package.json', JSON.stringify({ name: '@acme/my-adonis-backend' }))
 
-    const project = new AdonisProject(projectUrl)
-    assert.deepEqual(project.packageJson, { name: '@acme/my-adonis-backend' })
+    const project = new Adonis6Project(projectUrl)
+    assert.deepEqual(project.packageJson?.name, '@acme/my-adonis-backend')
   })
 
   test('check adonis version', async ({ fs, assert }) => {
@@ -46,7 +46,7 @@ test.group('Adonis Project', () => {
       'my-project/package.json',
       JSON.stringify({ dependencies: { '@adonisjs/core': '5.0.0' } })
     )
-    const project = new AdonisProject(projectUrl)
+    const project = new Adonis6Project(projectUrl)
 
     assert.isTrue(project.isAdonis5())
     assert.isFalse(project.isAdonis6())

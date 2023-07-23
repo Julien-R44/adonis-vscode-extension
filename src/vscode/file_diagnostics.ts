@@ -1,7 +1,6 @@
 import { Diagnostic, DiagnosticSeverity, Range, languages } from 'vscode'
+import type { RouteLink, ViewLink } from '../types/linkers'
 import type { TextDocument, DiagnosticCollection as VscodeDiagnosticCollection } from 'vscode'
-import type { RouteLink } from '../linkers/controllers_linker'
-import type { ViewLink } from '../linkers/views_linker'
 
 export class DiagnosticCollection {
   #collection: VscodeDiagnosticCollection

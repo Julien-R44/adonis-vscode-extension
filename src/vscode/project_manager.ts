@@ -1,9 +1,13 @@
-import { basename, dirname, relative } from 'path'
+import { basename, dirname, join, relative } from 'path'
+import { existsSync } from 'fs'
 import { window, workspace } from 'vscode'
 import dedent from 'dedent'
 import commonPathPrefix from 'common-path-prefix'
-import { AdonisProject } from '../adonis_project'
+import { PkgJson } from '../adonis_project/pkg_json'
+import { Adonis6Project } from '../adonis_project/adonis6_project'
+import { Adonis5Project } from '../adonis_project/adonis5_project'
 import { Logger } from './logger'
+import type { AdonisProject } from '../types/projects'
 
 export default class ProjectManager {
   /**
@@ -103,7 +107,24 @@ export default class ProjectManager {
       .filter((file) => file.path.endsWith('build/.adonisrc.json') === false)
       .map((file) => dirname(file.fsPath))
 
-    this.#projects = projectsPaths.map((path) => new AdonisProject(path))
+    /**
+     * Create an instance of Adonis6Project or Adonis5Project
+     * depending on the major version of @adonisjs/core
+     */
+    this.#projects = projectsPaths
+      .map((path) => {
+        const hasPkgJson = existsSync(join(path, 'package.json'))
+        if (!hasPkgJson) return null
+
+        const pkgJson = new PkgJson(join(path, 'package.json'))
+        const major = pkgJson.getMajorOf('@adonisjs/core')
+
+        if (!major) return null
+
+        if (major >= 6) return new Adonis6Project(path)
+        return new Adonis5Project(path)
+      })
+      .filter(Boolean) as AdonisProject[]
 
     this.#logFoundProjects()
 

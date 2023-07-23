@@ -1,11 +1,11 @@
 import { join } from 'path'
 import { test } from '@japa/runner'
 import { ViewSuggester } from '../../../../src/suggesters/view_suggester'
-import { AdonisProject } from '../../../../src/adonis_project'
+import { Adonis6Project } from '../../../../src/adonis_project/adonis6_project'
 
 test.group('View Suggester', () => {
   test('basic', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/button.edge', '')
 
@@ -25,7 +25,7 @@ test.group('View Suggester', () => {
   })
 
   test('nested', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/admin/button.edge', '')
 
@@ -45,7 +45,7 @@ test.group('View Suggester', () => {
   })
 
   test('multiple results', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/button.edge', '')
     await fs.create('my-project/resources/views/admin/button.edge', '')
@@ -72,7 +72,7 @@ test.group('View Suggester', () => {
   })
 
   test('should sanitize input text', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/button.edge', '')
 
@@ -92,7 +92,7 @@ test.group('View Suggester', () => {
   })
 
   test('should works if using slash as separator', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/components/button.edge', '')
 
@@ -112,7 +112,7 @@ test.group('View Suggester', () => {
   })
 
   test('component as tags suggester', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/components/button.edge', '')
 
@@ -132,7 +132,7 @@ test.group('View Suggester', () => {
   })
 
   test('component as tags empty should return all', async ({ fs, assert }) => {
-    const project = new AdonisProject(join(fs.basePath, 'my-project'))
+    const project = new Adonis6Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/resources/views/components/button.edge', '')
     await fs.create('my-project/resources/views/components/form/input.edge', '')

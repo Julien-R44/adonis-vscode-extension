@@ -134,6 +134,11 @@
           "command": "adonis-vscode-extension.view.routes.refresh",
           "when": "view == adonisjs.routes",
           "group": "navigation"
+        },
+        {
+          "command": "adonis-vscode-extension.view.commands.refresh",
+          "when": "view == adonisjs.commands",
+          "group": "navigation"
         }
       ],
       "view/item/context": [
@@ -306,6 +311,11 @@
       {
         "command": "adonis-vscode-extension.view.routes.refresh",
         "title": "AdonisJS: Refresh Routes",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "adonis-vscode-extension.view.commands.refresh",
+        "title": "AdonisJS: Refresh Commands",
         "icon": "$(refresh)"
       },
       {
@@ -535,6 +545,7 @@
     "@types/dedent": "^0.7.0",
     "@types/lodash.groupby": "^4.6.7",
     "@types/node": "14.x",
+    "@types/semver": "^7.5.0",
     "@types/sinon": "^10.0.15",
     "@types/vscode": "^1.65.0",
     "@vscode/test-electron": "^2.3.2",
@@ -546,6 +557,7 @@
     "execa": "^5.1.1",
     "ovsx": "^0.8.1",
     "prettier": "^2.8.8",
+    "semver": "^7.5.4",
     "sinon": "^15.1.0",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",

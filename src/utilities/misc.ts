@@ -3,7 +3,7 @@ import { join } from 'path'
 import { Extractor } from '@julr/module-methods-extractor'
 import slash from 'slash'
 import type { Controller } from '../types'
-import type { AdonisProject } from '../adonis_project'
+import type { AdonisProject } from '../types/projects'
 
 export function controllerMagicStringToPath(project: AdonisProject, controller: Controller) {
   let controllersDirectory = ''

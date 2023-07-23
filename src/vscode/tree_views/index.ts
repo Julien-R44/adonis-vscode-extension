@@ -4,6 +4,7 @@ import { RoutesTreeDataProvider } from './routes/tree_data_provider'
 import { HelpTreeDataView } from './help'
 import { registerRoutesTreeViewCommands } from './routes/commands'
 import { ProjectsTreeDataProvider } from './projects/tree_data_provider'
+import { registerCommandsTreeViewCommands } from './commands/commands'
 import type { ExtensionContext } from 'vscode'
 
 /**
@@ -14,7 +15,8 @@ export class ViewContainer {
   /**
    * Create the "Commands" view with the different ace commands
    */
-  private static createCommandsView() {
+  private static createCommandsView(context: ExtensionContext) {
+    registerCommandsTreeViewCommands(context)
     const treeDataProvider = new CommandsTreeDataProvider()
     window.createTreeView('adonisjs.commands', { treeDataProvider })
   }
@@ -43,7 +45,7 @@ export class ViewContainer {
     if (process.env.NODE_ENV === 'test') return
 
     HelpTreeDataView.createView(context)
-    this.createCommandsView()
+    this.createCommandsView(context)
     this.createRoutesView(context)
     this.createProjectsView(context)
   }

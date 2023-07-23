@@ -1,22 +1,33 @@
 import { readFileSync } from 'fs'
 import { basename, join } from 'path'
-import type { AceManifest, AdonisEnv } from './types'
+import { PkgJson } from './pkg_json'
+import type { AdonisEnv } from '../types/projects'
+import type { AceManifest } from '../types/projects/v5'
 
-export class AdonisProject {
+export abstract class BaseAdonisProject {
   name: string
   path: string
   env?: AdonisEnv
   manifest?: AceManifest
-  packageJson?: Record<string, any>
+  packageJson?: PkgJson
 
   constructor(path: string) {
     this.path = path
-
-    this.#tryParse('.env', () => (this.env = this.#parseEnvFile()))
-    this.#tryParse('package.json', () => (this.packageJson = this.#parsePackageJsonFile()))
-    this.#tryParse('ace-manifest.json', () => (this.manifest = this.#parseManifestFile()))
+    this.#parseProjectFiles()
 
     this.name = this.packageJson?.name ?? basename(this.path)
+  }
+
+  /**
+   * Parse .env, package.json and ace-manifest.json files
+   */
+  #parseProjectFiles() {
+    this.#tryParse('.env', () => (this.env = this.#parseEnvFile()))
+    this.#tryParse(
+      'package.json',
+      () => (this.packageJson = new PkgJson(join(this.path, 'package.json')))
+    )
+    this.#tryParse('ace-manifest.json', () => (this.manifest = this.#parseManifestFile()))
   }
 
   /**
@@ -26,18 +37,8 @@ export class AdonisProject {
     try {
       cb()
     } catch (err: any) {
-      // console.error(`Failed to parse ${filename} file`, err)
+      // console.error(`Failed to parse ${_filename} file`, err)
     }
-  }
-
-  /**
-   * Parse the package.json file as Record<string, any>
-   */
-  #parsePackageJsonFile() {
-    const packageJsonPath = join(this.path, 'package.json')
-    const packageJson = readFileSync(packageJsonPath, 'utf8')
-
-    return JSON.parse(packageJson) as Record<string, any>
   }
 
   /**
@@ -69,14 +70,10 @@ export class AdonisProject {
   }
 
   /**
-   * Get the custom commands for the project
+   * Reload the project files
    */
-  getCustomAceCommands() {
-    if (!this.manifest) return []
-
-    return Object.entries(this.manifest.commands)
-      .filter(([, command]) => command.commandPath.startsWith('./commands'))
-      .map(([name, command]) => ({ name, command }))
+  reload() {
+    this.#parseProjectFiles()
   }
 
   /**

@@ -3,16 +3,8 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import { edgeComponentsAsTagsRegex, edgeRegex, tsRegex } from '../utilities/regexes'
 import { EdgeComponentsFinder } from '../edge_components_finder'
-import type { AdonisProject } from '../adonis_project'
-
-export interface ViewLink {
-  templatePath: string
-  position: {
-    line: number
-    colStart: number
-    colEnd: number
-  }
-}
+import type { ViewLink } from '../types/linkers'
+import type { AdonisProject } from '../types/projects'
 
 interface GetLinksOptions {
   fileContent: string

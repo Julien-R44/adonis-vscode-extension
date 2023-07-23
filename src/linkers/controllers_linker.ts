@@ -2,18 +2,8 @@ import { join } from 'node:path'
 import { existsSync } from 'node:fs'
 import { parseMagicString } from '../utilities'
 import { controllersRegex } from '../utilities/regexes'
-import type { Controller } from '../types'
-import type { AdonisProject } from '../adonis_project'
-
-export interface RouteLink {
-  controllerPath: string | null
-  controller: Controller | null
-  position: {
-    line: number
-    colStart: number
-    colEnd: number
-  }
-}
+import type { RouteLink } from '../types/linkers'
+import type { AdonisProject } from '../types/projects'
 
 export class ControllersLinker {
   static async #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {

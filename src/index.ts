@@ -16,7 +16,7 @@ import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
 import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
 import { CreateMissingViewAction } from './vscode/code_actions/create_missing_view'
 import { Logger } from './vscode/logger'
-import type { AdonisProject } from './adonis_project'
+import type { AdonisProject } from './types/projects'
 import type { ExtensionContext } from 'vscode'
 
 export async function activate(context: ExtensionContext) {

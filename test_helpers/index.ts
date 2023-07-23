@@ -1,7 +1,9 @@
 import { join } from 'path'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { pascalCase } from 'change-case'
-import { AdonisProject } from '../src/adonis_project'
+import { Adonis6Project } from '../src/adonis_project/adonis6_project'
+import { Adonis5Project } from '../src/adonis_project/adonis5_project'
+import type { AdonisProject } from '../src/types/projects'
 import type { FileSystem } from '@japa/file-system/build/src/file_system'
 
 export const BASE_URL = join(__dirname, '..', 'test', 'suites', 'pure', '__app_fs')
@@ -41,7 +43,7 @@ export function createAdonis6Project(path: string) {
     })
   )
 
-  return new AdonisProject(path)
+  return new Adonis6Project(path)
 }
 
 export function createAdonis5Project(path: string) {
@@ -59,5 +61,5 @@ export function createAdonis5Project(path: string) {
     })
   )
 
-  return new AdonisProject(path)
+  return new Adonis5Project(path)
 }
