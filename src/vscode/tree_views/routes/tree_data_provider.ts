@@ -152,6 +152,7 @@ export class RoutesTreeDataProvider
       this.refresh()
     } catch (err) {
       this.#errored = true
+      this.refresh()
       Notifier.showError('Error while fetching your routes !', err)
     }
   }

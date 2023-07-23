@@ -48,7 +48,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode
       description: element.description,
       tooltip: element.description,
       iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
-      contextValue: 'command',
+      contextValue: element.absoluteFilePath ? 'custom-command' : 'command',
     }
   }
 

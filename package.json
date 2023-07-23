@@ -162,11 +162,17 @@
         },
         {
           "command": "adonis-vscode-extension.view.routes.open-controller",
-          "when": "view == adonisjs.routes && viewItem == route"
+          "when": "view == adonisjs.routes && viewItem == route",
+          "group": "inline"
         },
         {
           "command": "adonis-vscode-extension.run-command",
-          "when": "view == adonisjs.commands && viewItem == command",
+          "when": "view == adonisjs.commands && (viewItem == command || viewItem == custom-command)",
+          "group": "inline"
+        },
+        {
+          "command": "adonis-vscode-extension.view.commands.open-command",
+          "when": "view == adonisjs.commands && (viewItem == custom-command)",
           "group": "inline"
         }
       ],
@@ -320,7 +326,13 @@
       },
       {
         "command": "adonis-vscode-extension.view.routes.open-controller",
-        "title": "AdonisJS: Open Controller File"
+        "title": "AdonisJS: Open Controller File",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "adonis-vscode-extension.view.commands.open-command",
+        "title": "AdonisJS: Open Command File",
+        "icon": "$(go-to-file)"
       },
       {
         "command": "adonis-vscode-extension.view.routes.open-in-browser",

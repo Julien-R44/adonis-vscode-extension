@@ -41,6 +41,7 @@ export class Adonis6Project extends BaseAdonisProject implements AdonisProject {
           commandArguments: [this, command],
           description: command.description,
           label: command.commandName,
+          absoluteFilePath: command.absoluteFilePath.replace('.js', '.ts'),
         })),
       },
     ]

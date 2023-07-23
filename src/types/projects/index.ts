@@ -19,12 +19,14 @@ export interface AceCommandNode {
   label: string
   description: string
   icon: string
+  absoluteFilePath?: string
   children?: {
     label: string
     description: string
     icon?: string
     commandIdentifier: string
     commandArguments?: any[]
+    absoluteFilePath?: string
   }[]
 }
 
