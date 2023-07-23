@@ -1,11 +1,8 @@
 import { platform } from 'process'
-import { exec as baseExec } from 'child_process'
-import { promisify } from 'util'
 import { window } from 'vscode'
+import { node as execaNode } from 'execa'
 import ExtConfig from './utilities/config'
 import type { AdonisProject } from '../types/projects'
-
-const exec = promisify(baseExec)
 
 interface ExecOptions {
   adonisProject: AdonisProject
@@ -40,15 +37,20 @@ export class AceExecutor {
       path = path.substring(1)
     }
 
+    if (background) {
+      const result = await execaNode(`ace`, command.split(' '), {
+        cwd: path,
+        nodePath: ExtConfig.misc.nodePath,
+      })
+
+      return { result, adonisProject }
+    }
+
     /**
      * Execute the final command in the background
      */
     const nodePath = ExtConfig.misc.nodePath || 'node'
     command = `"${nodePath}" ace ${command}`
-    if (background) {
-      const result = await exec(command, { cwd: path, shell: this.shellPath })
-      return { result, adonisProject }
-    }
 
     /**
      * Since we are in the integrated terminal, we need to
