@@ -92,6 +92,7 @@ export const commands = [
       },
       {
         aceCommand: 'make:prldfile',
+        v6Name: 'make:preload',
         description: 'Make a new preloaded file',
         commandIdentifier: ExtConfig.buildCommandId(`make.prldfile`),
         handler: () => PreloadedFile.run(),
@@ -246,6 +247,7 @@ export const commands = [
   icon: string
   children: {
     aceCommand: string
+    v6Name?: string
     description: string
     commandIdentifier: string
     handler: (...args: any[]) => any

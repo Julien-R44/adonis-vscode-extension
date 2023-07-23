@@ -1,5 +1,6 @@
 import { Notifier } from '../../notifier'
 import BaseCommand from '../../commands/base_command'
+import ProjectManager from '../../project_manager'
 
 /**
  * Handle make:prldfile command
@@ -9,8 +10,8 @@ export class PreloadedFile extends BaseCommand {
     /**
      * Get the preloaded file name
      */
-    const prldName = await this.getInput('Preloaded file name')
-    if (!prldName) {
+    const preloadName = await this.getInput('Preloaded file name')
+    if (!preloadName) {
       Notifier.showError('Preloaded file name is required.')
       return
     }
@@ -18,9 +19,6 @@ export class PreloadedFile extends BaseCommand {
     /**
      * Prompt the user to select the environment in which
      * the preloaded file will be loaded
-     *
-     * TODO: Send PR -> Pass the environment as an argument doesn't work :
-     * https://github.com/adonisjs/assembler/blob/28000dfc9a2a597e93699a4996f44e09bb0edd77/commands/Make/PreloadFile.ts#L73
      */
     const environment = await this.getListInput('Environment', ['console', 'web', 'repl'], true)
     if (!environment) {
@@ -28,11 +26,13 @@ export class PreloadedFile extends BaseCommand {
       return
     }
 
+    const aceCommand = ProjectManager.currentProject.isAdonis5() ? 'make:prldfile' : 'make:preload'
+
     /**
      * Execute the command
      */
     return this.handleExecCmd({
-      command: `make:prldfile ${prldName} --environment=${environment.join(',')}`,
+      command: `${aceCommand} ${preloadName} --environments=${environment.join(',')}`,
       fileType: 'preloaded file',
       openCreatedFile: true,
     })

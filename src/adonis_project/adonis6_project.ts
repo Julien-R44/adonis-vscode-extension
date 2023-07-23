@@ -55,8 +55,13 @@ export class Adonis6Project extends BaseAdonisProject implements AdonisProject {
       ...group,
       label: group.groupName,
       children: group.children
-        .filter((command) => commands.find(({ commandName }) => commandName === command.aceCommand))
-        .map((command) => ({ ...command, label: command.aceCommand })),
+        .filter((command) =>
+          commands.find(({ commandName }) => {
+            if (commandName === command.aceCommand) return true
+            return command.v6Name && commandName === command.v6Name
+          })
+        )
+        .map((command) => ({ ...command, label: command.v6Name || command.aceCommand })),
     })) as AceCommandNode[]
   }
 

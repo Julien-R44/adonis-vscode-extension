@@ -101,7 +101,7 @@ export default class BaseCommand {
       const res = await this.execCmd(command, background, project)
 
       if (openCreatedFile) {
-        this.openCreatedFile(res.adonisProject, res.result!.stdout)
+        await this.openCreatedFile(res.adonisProject, res.result!.stdout)
       }
 
       if (successMessage) {
