@@ -51,4 +51,21 @@ test.group('Adonis Project', () => {
     assert.isTrue(project.isAdonis5())
     assert.isFalse(project.isAdonis6())
   })
+
+  test('should parse rc file', async ({ fs, assert }) => {
+    const projectUrl = join(fs.basePath, 'my-project')
+
+    await fs.create(
+      'my-project/.adonisrc.json',
+      JSON.stringify({
+        directories: { controllers: 'app/Controllers' },
+        providers: ['@adonisjs/core', '@adonisjs/session'],
+      })
+    )
+
+    const project = new Adonis6Project(projectUrl)
+
+    assert.deepEqual(project.rcFile.directories(), { controllers: 'app/Controllers' })
+    assert.deepEqual(project.rcFile.providers(), ['@adonisjs/core', '@adonisjs/session'])
+  })
 })

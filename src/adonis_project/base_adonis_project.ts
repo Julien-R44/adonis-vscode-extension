@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs'
 import { basename, join } from 'path'
 import { PkgJson } from './pkg_json'
+import { RcFile } from './rc_file'
 import type { AdonisEnv } from '../types/projects'
 import type { AceManifest } from '../types/projects/v5'
 
@@ -10,6 +11,7 @@ export abstract class BaseAdonisProject {
   env?: AdonisEnv
   manifest?: AceManifest
   packageJson?: PkgJson
+  rcFile!: RcFile
 
   constructor(path: string) {
     this.path = path
@@ -19,15 +21,22 @@ export abstract class BaseAdonisProject {
   }
 
   /**
-   * Parse .env, package.json and ace-manifest.json files
+   * Parse .env, package.json, ace-manifest.json and .adonisrc files
    */
   #parseProjectFiles() {
     this.#tryParse('.env', () => (this.env = this.#parseEnvFile()))
-    this.#tryParse(
-      'package.json',
-      () => (this.packageJson = new PkgJson(join(this.path, 'package.json')))
-    )
-    this.#tryParse('ace-manifest.json', () => (this.manifest = this.#parseManifestFile()))
+
+    this.#tryParse('package.json', () => {
+      this.packageJson = new PkgJson(join(this.path, 'package.json'))
+    })
+
+    this.#tryParse('ace-manifest.json', () => {
+      this.manifest = this.#parseManifestFile()
+    })
+
+    this.#tryParse('.adonisrc.json', () => {
+      this.rcFile = new RcFile(join(this.path, '.adonisrc.json'))
+    })
   }
 
   /**
