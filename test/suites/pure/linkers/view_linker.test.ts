@@ -293,6 +293,27 @@ test.group('Pure Edge Template Matcher', () => {
     assert.deepEqual(result, [])
   })
 
+  test('should not mark slot or section as missing views', async ({ assert, fs }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    const template = `
+      <div>
+        @!section('body')
+
+        @slot('logo')
+        @end
+      </div>
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    assert.deepEqual(result, [])
+  })
+
   test('edge source type with custom view directory', async ({ assert, fs }) => {
     await fs.create(
       'my-project/.adonisrc.json',
