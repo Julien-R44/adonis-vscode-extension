@@ -33,7 +33,7 @@ export class ViewSuggester {
     const text = options.text.replaceAll(/\"|\'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
 
     // Search all file with .edge extension
-    const viewsDirectory = join(options.project.path, 'resources/views')
+    const viewsDirectory = join(options.project.path, options.project.getViewsDirectory())
     const globPattern = slash(`${viewsDirectory}/**/**.edge`)
     const matchedFiles = await fg(globPattern, {
       onlyFiles: true,

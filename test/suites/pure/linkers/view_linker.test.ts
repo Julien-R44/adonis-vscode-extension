@@ -292,4 +292,55 @@ test.group('Pure Edge Template Matcher', () => {
 
     assert.deepEqual(result, [])
   })
+
+  test('edge source type with custom view directory', async ({ assert, fs }) => {
+    await fs.create(
+      'my-project/.adonisrc.json',
+      JSON.stringify({ directories: { views: 'templates' } })
+    )
+
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+
+    await fs.create('my-project/templates/components/button.edge', '')
+    await fs.create('my-project/templates/layouts/base.edge', '')
+
+    const template = dedent`
+      @!component('components/button', {
+        text: 'Login',
+        type: 'submit'
+      })
+
+      @layout('layouts/base')
+      @end
+    `
+
+    const result = await ViewsLinker.getLinks({
+      fileContent: template,
+      project,
+      sourceType: 'edge',
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.snapshot(positions).matchInline(`
+      [
+        {
+          "colEnd": 30,
+          "colStart": 13,
+          "line": 0,
+        },
+        {
+          "colEnd": 21,
+          "colStart": 9,
+          "line": 5,
+        },
+      ]
+    `)
+
+    const paths = result.map((r) => r.templatePath)
+
+    assert.sameDeepMembers(paths, [
+      join(project.path, 'templates/components/button.edge'),
+      join(project.path, 'templates/layouts/base.edge'),
+    ])
+  })
 })

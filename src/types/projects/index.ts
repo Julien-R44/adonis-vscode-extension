@@ -42,6 +42,7 @@ export interface AdonisProject {
   reload(): void
   getRoutes(): Promise<Routes>
   getCommands(): Promise<AceCommandNode[]>
+  getViewsDirectory(): string
 
   /**
    * Parse stdout after generating command using adonis/assembler and returns

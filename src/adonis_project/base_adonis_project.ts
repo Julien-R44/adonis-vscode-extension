@@ -79,6 +79,13 @@ export abstract class BaseAdonisProject {
   }
 
   /**
+   * Returns the directory where the views are stored
+   */
+  getViewsDirectory() {
+    return this.rcFile?.directories().views ?? 'resources/views'
+  }
+
+  /**
    * Reload the project files
    */
   reload() {

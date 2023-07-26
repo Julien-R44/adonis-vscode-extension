@@ -41,7 +41,7 @@ export class ViewsLinker {
 
     const promises = matchesArray.map(async (match) => {
       const fileName = match[1]!.replace(/\"|\'/g, '').replace(/\./g, '/')
-      const pattern = slash(`resources/views/${fileName}.edge`)
+      const pattern = slash(`${options.project.getViewsDirectory()}/${fileName}.edge`)
 
       const edgeFiles = await fg(pattern, {
         onlyFiles: true,

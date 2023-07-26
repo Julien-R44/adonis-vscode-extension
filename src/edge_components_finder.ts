@@ -10,14 +10,14 @@ import type { AdonisProject } from './types/projects'
  */
 export class EdgeComponentsFinder {
   static async find(project: AdonisProject) {
-    const components = await fg(`resources/views/components/**/*.edge`, {
+    const components = await fg(`${project.getViewsDirectory()}/components/**/*.edge`, {
       onlyFiles: true,
       caseSensitiveMatch: false,
       cwd: project.path,
     })
 
     return components.map((file) => {
-      const relativePath = slash(relative('resources/views/components', file))
+      const relativePath = slash(relative(`${project.getViewsDirectory()}/components`, file))
 
       const name = relativePath
         .replace('.edge', '')
