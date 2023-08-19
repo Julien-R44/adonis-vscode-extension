@@ -263,6 +263,10 @@ test.group('Pure Edge Template Matcher', () => {
       @vite
       @entryPointScripts
       @entryPointStyles
+
+      @unless(true)
+        <p>hey</>
+      @end
     `
 
     const result = await ViewsLinker.getLinks({
