@@ -3,7 +3,7 @@ import { existsSync } from 'fs'
 import { window, workspace } from 'vscode'
 import dedent from 'dedent'
 import commonPathPrefix from 'common-path-prefix'
-import { PkgJson } from '../adonis_project/pkg_json'
+import { PkgJson } from '../adonis_project/files/pkg_json'
 import { Adonis6Project } from '../adonis_project/adonis6_project'
 import { Adonis5Project } from '../adonis_project/adonis5_project'
 import { Logger } from './logger'
@@ -98,13 +98,14 @@ export default class ProjectManager {
    */
   static async load() {
     const adonisRcUris = await workspace.findFiles(
-      '**/.adonisrc.json',
+      '{**/.adonisrc.json,**/adonisrc.ts}',
       '**/node_modules/**',
       undefined
     )
 
     const projectsPaths = adonisRcUris
       .filter((file) => file.path.endsWith('build/.adonisrc.json') === false)
+      .filter((file) => file.path.endsWith('build/adonisrc.ts') === false)
       .map((file) => dirname(file.fsPath))
 
     /**

@@ -1,7 +1,9 @@
 import { readFileSync } from 'fs'
 import { basename, join } from 'path'
-import { PkgJson } from './pkg_json'
-import { RcFile } from './rc_file'
+import { PkgJson } from './files/pkg_json'
+import { RcJsonFile } from './files/rc_json_file'
+import { RcTsFile } from './files/rc_ts_file'
+import type { RcFile } from '../types'
 import type { AdonisEnv } from '../types/projects'
 import type { AceManifest } from '../types/projects/v5'
 
@@ -35,7 +37,11 @@ export abstract class BaseAdonisProject {
     })
 
     this.#tryParse('.adonisrc.json', () => {
-      this.rcFile = new RcFile(join(this.path, '.adonisrc.json'))
+      this.rcFile = new RcJsonFile(join(this.path, '.adonisrc.json'))
+    })
+
+    this.#tryParse('adonisrc.ts', () => {
+      this.rcFile = new RcTsFile(join(this.path, 'adonisrc.ts'))
     })
   }
 

@@ -52,7 +52,7 @@ test.group('Adonis Project', () => {
     assert.isFalse(project.isAdonis6())
   })
 
-  test('should parse rc file', async ({ fs, assert }) => {
+  test('should parse json rc file', async ({ fs, assert }) => {
     const projectUrl = join(fs.basePath, 'my-project')
 
     await fs.create(
@@ -67,5 +67,47 @@ test.group('Adonis Project', () => {
 
     assert.deepEqual(project.rcFile.directories(), { controllers: 'app/Controllers' })
     assert.deepEqual(project.rcFile.providers(), ['@adonisjs/core', '@adonisjs/session'])
+  })
+
+  test('should parse ts rc file', async ({ fs, assert }) => {
+    const projectUrl = join(fs.basePath, 'my-project')
+
+    await fs.create(
+      'my-project/adonisrc.ts',
+      `
+      export default defineConfig({
+        directories: {
+          'factories': 'App/Factories',
+          'views': 'resources/views',
+        },
+
+        providers: [
+          () => import('@adonisjs/core/providers/app_provider'),
+          () => import('@adonisjs/core/providers/http_provider'),
+          () => import('@adonisjs/core/providers/hash_provider'),
+          {
+            file: () => import('@adonisjs/core/providers/repl_provider'),
+            environment: ['repl', 'test'],
+          },
+          () => import('./providers/app_provider.js'),
+        ],
+      })
+      `
+    )
+
+    const project = new Adonis6Project(projectUrl)
+
+    assert.deepEqual(project.rcFile.directories(), {
+      factories: 'App/Factories',
+      views: 'resources/views',
+    })
+
+    assert.deepEqual(project.rcFile.providers(), [
+      '@adonisjs/core/providers/app_provider',
+      '@adonisjs/core/providers/http_provider',
+      '@adonisjs/core/providers/hash_provider',
+      '@adonisjs/core/providers/repl_provider',
+      './providers/app_provider.js',
+    ])
   })
 })

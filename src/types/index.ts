@@ -129,3 +129,8 @@ export type AceListCommandsResult = {
   filePath: string
   absoluteFilePath: string
 }[]
+
+export interface RcFile {
+  directories(): Record<string, string>
+  providers(): string[]
+}

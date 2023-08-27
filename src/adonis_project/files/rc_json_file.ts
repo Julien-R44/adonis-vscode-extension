@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs'
+import type { RcFile } from '../../types'
 
-export class RcFile {
+/**
+ * Parser of RC File defined using JSON
+ */
+export class RcJsonFile implements RcFile {
   #content: Record<string, any>
 
   constructor(path: string) {
