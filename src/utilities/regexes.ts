@@ -18,7 +18,7 @@ export const inertiaCompletionRegex = new RegExp(/(?<=inertia\.render\()(['"])[^
  * Find all components as tags
  */
 export const edgeComponentsAsTagsRegex = new RegExp(
-  /@!?(?!include|set|unless|let|!component|if|elseif|inject|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?\(/,
+  /@!?(?!include|set|unless|let|eval|inject|!component|if|elseif|vite|entryPointScripts|entryPointStyles|each|click|section|layout|component|slot|!section)(.+)?\(/,
   'g'
 )
 
@@ -36,7 +36,7 @@ export const viewsCompletionRegex = new RegExp(
  * Find all components as tags
  */
 export const edgeComponentsAsTagsCompletionRegex = new RegExp(
-  /@!?(?!include|set|unless|let|!component|each|section|layout|component)(.+?)?\(?/,
+  /@!?(?!include|set|unless|let|eval|inject|!component|each|section|layout|component)(.+?)?\(?/,
   'g'
 )
 
