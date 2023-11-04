@@ -1,11 +1,16 @@
-import { normalize } from 'path'
+import { join, normalize } from 'path'
 import { BaseAdonisProject } from './base_adonis_project'
+import { RcTsFile } from './files/rc_ts_file'
 import type { AceListCommandsResult } from '../types'
 import type { AceCommandNode, AdonisProject, Routes } from '../types/projects'
 
 export class Adonis6Project extends BaseAdonisProject implements AdonisProject {
   constructor(path: string) {
     super(path)
+
+    this.tryParse('adonisrc.ts', () => {
+      this.rcFile = new RcTsFile(join(this.path, 'adonisrc.ts'))
+    })
   }
 
   /**

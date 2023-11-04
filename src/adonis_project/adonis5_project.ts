@@ -1,5 +1,7 @@
+import { join } from 'node:path'
 import { RoutesOutputConverter } from '../routes_tree/routes_output_converter'
 import { BaseAdonisProject } from './base_adonis_project'
+import { RcJsonFile } from './files/rc_json_file'
 import type { CommandEntry } from '../types/projects/v6'
 import type { AceCommandNode, AdonisProject, Routes } from '../types/projects'
 import type { AceManifestEntry } from '../types/projects/v5'
@@ -7,6 +9,10 @@ import type { AceManifestEntry } from '../types/projects/v5'
 export class Adonis5Project extends BaseAdonisProject implements AdonisProject {
   constructor(path: string) {
     super(path)
+
+    this.tryParse('.adonisrc.json', () => {
+      this.rcFile = new RcJsonFile(join(this.path, '.adonisrc.json'))
+    })
   }
 
   /**

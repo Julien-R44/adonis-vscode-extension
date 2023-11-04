@@ -1,8 +1,6 @@
 import { readFileSync } from 'fs'
 import { basename, join } from 'path'
 import { PkgJson } from './files/pkg_json'
-import { RcJsonFile } from './files/rc_json_file'
-import { RcTsFile } from './files/rc_ts_file'
 import type { RcFile } from '../types'
 import type { AdonisEnv } from '../types/projects'
 import type { AceManifest } from '../types/projects/v5'
@@ -26,29 +24,21 @@ export abstract class BaseAdonisProject {
    * Parse .env, package.json, ace-manifest.json and .adonisrc files
    */
   #parseProjectFiles() {
-    this.#tryParse('.env', () => (this.env = this.#parseEnvFile()))
+    this.tryParse('.env', () => (this.env = this.#parseEnvFile()))
 
-    this.#tryParse('package.json', () => {
+    this.tryParse('package.json', () => {
       this.packageJson = new PkgJson(join(this.path, 'package.json'))
     })
 
-    this.#tryParse('ace-manifest.json', () => {
+    this.tryParse('ace-manifest.json', () => {
       this.manifest = this.#parseManifestFile()
-    })
-
-    this.#tryParse('.adonisrc.json', () => {
-      this.rcFile = new RcJsonFile(join(this.path, '.adonisrc.json'))
-    })
-
-    this.#tryParse('adonisrc.ts', () => {
-      this.rcFile = new RcTsFile(join(this.path, 'adonisrc.ts'))
     })
   }
 
   /**
    * Try to parse the given file. If it fails, output the error to the console
    */
-  #tryParse(_filename: string, cb: () => void) {
+  protected tryParse(_filename: string, cb: () => void) {
     try {
       cb()
     } catch (err: any) {
