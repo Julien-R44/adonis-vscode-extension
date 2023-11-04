@@ -324,7 +324,7 @@ test.group('Pure Edge Template Matcher', () => {
       JSON.stringify({ directories: { views: 'templates' } })
     )
 
-    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+    const project = createAdonis5Project(join(fs.basePath, 'my-project'))
 
     await fs.create('my-project/templates/components/button.edge', '')
     await fs.create('my-project/templates/layouts/base.edge', '')

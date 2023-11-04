@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { test } from '@japa/runner'
 import { Adonis6Project } from '../../../src/adonis_project/adonis6_project'
+import { Adonis5Project } from '../../../src/adonis_project/adonis5_project'
 
 test.group('Adonis Project', () => {
   test('should set name from package.json', async ({ fs, assert }) => {
@@ -63,7 +64,7 @@ test.group('Adonis Project', () => {
       })
     )
 
-    const project = new Adonis6Project(projectUrl)
+    const project = new Adonis5Project(projectUrl)
 
     assert.deepEqual(project.rcFile.directories(), { controllers: 'app/Controllers' })
     assert.deepEqual(project.rcFile.providers(), ['@adonisjs/core', '@adonisjs/session'])
@@ -109,5 +110,28 @@ test.group('Adonis Project', () => {
       '@adonisjs/core/providers/repl_provider',
       './providers/app_provider.js',
     ])
+  })
+
+  test('should parse directories even if not quoted', async ({ fs, assert }) => {
+    const projectUrl = join(fs.basePath, 'my-project')
+
+    await fs.create(
+      'my-project/adonisrc.ts',
+      `
+      export default defineConfig({
+        directories: {
+          'factories': 'App/Factories',
+          views: 'resources/views',
+        },
+      })
+      `
+    )
+
+    const project = new Adonis6Project(projectUrl)
+
+    assert.deepEqual(project.rcFile.directories(), {
+      factories: 'App/Factories',
+      views: 'resources/views',
+    })
   })
 })

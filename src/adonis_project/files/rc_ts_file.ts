@@ -25,11 +25,17 @@ export class RcTsFile implements RcFile {
 
     node.traverse({
       ObjectProperty(dirPath) {
-        if (!isStringLiteral(dirPath.node.key) || !isStringLiteral(dirPath.node.value)) {
-          return
+        let keyName = ''
+
+        if (isStringLiteral(dirPath.node.key)) {
+          keyName = dirPath.node.key.value
+        } else if (isIdentifier(dirPath.node.key)) {
+          keyName = dirPath.node.key.name
         }
 
-        const key = dirPath.node.key.value
+        if (!isStringLiteral(dirPath.node.value)) return
+
+        const key = keyName
         const value = dirPath.node.value.value
         directories[key] = value
       },
