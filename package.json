@@ -489,10 +489,7 @@
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
     "vscode:package": "vsce package",
-    "checks": "npm run lint && npm run typecheck && npm run test",
-    "vscode:publish": "bumpp --commit --push --tag && vsce publish",
-    "vscode:publish-prerelease": "bumpp --commit --push --tag && vsce publish --pre-release",
-    "publish": "ts-node scripts/publish.ts"
+    "checks": "npm run lint && npm run typecheck && npm run test"
   },
   "dependencies": {
     "@babel/parser": "^7.23.0",
@@ -522,12 +519,10 @@
     "@types/sinon": "^10.0.20",
     "@types/vscode": "^1.65.0",
     "@vscode/test-electron": "^2.3.6",
-    "bumpp": "^9.2.0",
     "c8": "^8.0.1",
     "change-case": "^4.1.2",
     "dotenv": "^16.3.1",
     "eslint": "^8.42.0",
-    "ovsx": "^0.8.3",
     "prettier": "^2.8.8",
     "semver": "^7.5.4",
     "sinon": "^15.2.0",
