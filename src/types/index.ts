@@ -1,24 +1,6 @@
 import type { MarkdownString } from 'vscode'
 
 /**
- * Edge formatter configuration.
- */
-export interface EdgeFormatterContract {
-  /**
-   * Use spaces instead of tabs.
-   */
-  useSpaces?: boolean
-
-  /**
-   * The tab size to use for formatting.
-   *
-   * If spaces is preffered above tabs, the total number of spaces that
-   * will be used, will equal the tab size specified.
-   */
-  tabSize?: number
-}
-
-/**
  * A code completion suggestion
  */
 export interface Suggestion {

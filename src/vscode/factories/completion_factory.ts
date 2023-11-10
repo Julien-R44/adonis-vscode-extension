@@ -11,3 +11,18 @@ export class CompletionFactory {
     })
   }
 }
+
+export class SuperCompletionItem {
+  constructor(options: {
+    label: string
+    documentation?: string
+    detail?: string
+    kind?: CompletionItemKind
+  }) {
+    const { label, documentation, detail, kind } = options
+    const item = new CompletionItem(label, kind)
+    item.documentation = new MarkdownString(documentation as string)
+    item.detail = detail
+    return item
+  }
+}

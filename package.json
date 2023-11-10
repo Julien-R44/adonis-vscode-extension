@@ -15,9 +15,7 @@
     "AdonisJS",
     "Adonis.js",
     "Ace",
-    "Node.js",
-    "Japa",
-    "Edge"
+    "Node.js"
   ],
   "categories": [
     "Programming Languages",
@@ -33,20 +31,11 @@
   "engines": {
     "vscode": "^1.65.0"
   },
-  "extensionDependencies": [
-    "vscode.html-language-features"
-  ],
   "activationEvents": [
     "workspaceContains:**/.adonisrc.json",
-    "onLanguage:edge"
+    "workspaceContains:**/adonisrc.ts"
   ],
   "contributes": {
-    "htmlLanguageParticipants": [
-      {
-        "languageId": "edge",
-        "autoInsert": true
-      }
-    ],
     "configuration": {
       "type": "object",
       "title": "AdonisJS",
@@ -473,37 +462,6 @@
       {
         "language": "typescript",
         "path": "./snippets/adonis/routes.json"
-      },
-      {
-        "language": "edge",
-        "path": "./snippets/edge/tags.jsonc"
-      }
-    ],
-    "languages": [
-      {
-        "id": "edge",
-        "aliases": [
-          "Edge Template",
-          "Edge",
-          "edge"
-        ],
-        "extensions": [
-          ".edge",
-          ".edge.html"
-        ],
-        "configuration": "./syntaxes/edge.configuration.jsonc"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "edge",
-        "scopeName": "text.html.edge",
-        "path": "./syntaxes/edge.tmLanguage.json",
-        "embeddedLanguages": {
-          "source.css": "css",
-          "source.js": "javascript",
-          "meta.embedded.block.javascript": "javascript"
-        }
       }
     ],
     "jsonValidation": [
@@ -531,6 +489,7 @@
     "build:webpack": "webpack --mode production --devtool hidden-source-map",
     "vscode:prepublish": "pnpm build:webpack",
     "vscode:package": "vsce package",
+    "checks": "npm run lint && npm run typecheck && npm run test",
     "vscode:publish": "bumpp --commit --push --tag && vsce publish",
     "vscode:publish-prerelease": "bumpp --commit --push --tag && vsce publish --pre-release",
     "publish": "ts-node scripts/publish.ts"
@@ -545,9 +504,7 @@
     "fast-glob": "^3.3.1",
     "lodash.groupby": "^4.6.0",
     "slash": "^3.0.0",
-    "vscode-ext-help-and-feedback-view": "^1.0.1",
-    "vscode-html-languageservice": "^5.1.1",
-    "vscode-languageserver-types": "^3.17.5"
+    "vscode-ext-help-and-feedback-view": "^1.0.1"
   },
   "devDependencies": {
     "@babel/types": "^7.23.0",
