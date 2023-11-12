@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.12
+
+- Fix bundling issue that prevented the extension from starting
+
 ## 1.1.11
 
 This version remove all Edge related features :
