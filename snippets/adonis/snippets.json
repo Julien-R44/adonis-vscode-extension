@@ -365,7 +365,7 @@
     "description": "Listen for emitter event once"
   },
   "Define string command argument": {
-    "prefix": "co:arg:string",
+    "prefix": "cm:arg:string",
     "body": [
       "@args.string()",
       "declare ${1}: string"
@@ -373,7 +373,7 @@
     "description": "Define string command argument"
   },
   "Define spread command argument": {
-    "prefix": "co:arg:spread",
+    "prefix": "cm:arg:spread",
     "body": [
       "@args.spread()",
       "declare ${1}: string[]"
@@ -381,7 +381,7 @@
     "description": "Define spread command argument"
   },
   "Define string command flag": {
-    "prefix": "co:flag:string",
+    "prefix": "cm:flag:string",
     "body": [
       "@flags.string()",
       "declare ${1}?: string"
@@ -389,7 +389,7 @@
     "description": "Define string command flag"
   },
   "Define boolean command flag": {
-    "prefix": "co:flag:boolean",
+    "prefix": "cm:flag:boolean",
     "body": [
       "@flags.boolean()",
       "declare ${1}?: boolean"
@@ -397,7 +397,7 @@
     "description": "Define boolean command flag"
   },
   "Define number command flag": {
-    "prefix": "co:flag:number",
+    "prefix": "cm:flag:number",
     "body": [
       "@flags.number()",
       "declare ${1}?: number"
@@ -405,7 +405,7 @@
     "description": "Define number command flag"
   },
   "Define array command flag": {
-    "prefix": "co:flag:array",
+    "prefix": "cm:flag:array",
     "body": [
       "@flags.array()",
       "declare ${1}?: string[]"
