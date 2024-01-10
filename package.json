@@ -461,7 +461,7 @@
     "snippets": [
       {
         "language": "typescript",
-        "path": "./snippets/adonis/routes.json"
+        "path": "./snippets/adonis/snippets.json"
       }
     ],
     "jsonValidation": [
