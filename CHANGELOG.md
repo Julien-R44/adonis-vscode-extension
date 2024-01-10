@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.2.0
+
+Official release of the extension. All previous versions ( 1.1.x ) were pre-releases.
+
+**This version supports Adonis 5 and Adonis 6. If you ever want to continue supporting both via the extension, then make sure to keep this version. Future ones will only support Adonis 6.**.
+
+Read the previous changelogs just below for more information on the changes in this new release.
+
 ## 1.1.12
 
 - Fix bundling issue that prevented the extension from starting
