@@ -4,21 +4,18 @@
 </div>
 
 # Features
+* Command palette for Ace
 * Use all Adonis Assembler commands ( make:\* )
 * Migrate and seed your database ( db:\*, migration:\* )
-* Run your commands from the Activity Bar just by clicking
+* Run your commands from the Activity Bar
 * View your routes within VSCode
 * Open and see docs within VSCode
 * .adonisrc.json file validation with JSON Schema
-* Edge Support, syntax highlighting + formatting
 * Multiple Workspaces and Monorepos support 
-* Edge and AdonisJS Snippets
 * Go To Controller 
-* Go To View
 
-> **Note**: I recommend you to take a look at the Japa extension for an even better experience:
->
-> https://github.com/Julien-R44/japa-vscode
+> [!NOTE]
+> Make sure to also download [Edge](https://marketplace.visualstudio.com/items?itemName=AdonisJS.vscode-edge) and [Japa](https://marketplace.visualstudio.com/items?itemName=jripouteau.japa-vscode) extension for a better experience !
 
 ## Ace commands
 Launch `ace` commands directly from VScode. 
@@ -49,29 +46,12 @@ Autocompletion for the name and the handler of controllers. <kbd>Ctrl</kbd> + <k
 
 ![](https://i.imgur.com/ZvnOtN3.gif)
 
-## Edge support
-Syntax highlighting, auto-completion of tags including partials, components, layouts. <kbd>Ctrl</kbd> + <kbd>Click</kbd> to open an included file.
-**No automatic formatting for the moment.**
-
-![](https://i.imgur.com/eDYb9fK.gif)
-
-## Snippets
-Snippets for Edge and AdonisJS are defined, take a look [here](./snippets/) to see the list of snippets.
-
-_Since I'm not a big snippet user, feel free to propose a PR with snippets you think are useful._
-
-
 # Configuration
 
 - `nodePath`: The path to the node executable.
 - `useUnixCd`: Use Unix-style `cd` for windows terminals (Useful when using Cygwin or Git Bash)
 - `quickJump`: Enable quick jump by using <kbd>Ctrl</kbd> + <kbd>Click</kbd>
 - `runMigrationInBackground`: Run migration/seeds commands in background. By default, they are executed in the built-in terminal of VSCode so that you can see the output.
-
-# Known Issues
-Below is the list of unsupported features (for the moment) by the extension, feel free to make a PR if you'd like to contribute to the project: 
-- Edge Links Provider for [Component as tags](https://docs.adonisjs.com/guides/views/components#components-as-tags)
-- Edge Links Provider for `@includeIf` tag
 
 ## IntelliSense while typing
 In the context of controller and view autocompletion, we are inside strings. By default, VSCode totally disables the display of IntelliSense suggestions inside strings. If you want to see the autocompletion of your controllers and views, you will have to press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to manually trigger IntelliSense.
@@ -87,15 +67,6 @@ If you want the suggestions while typing, you can add this to your VSCode settin
 ```
 
 But be warned, this will automatically display intellisense even in "traditional" strings
-
-## Emmet doesn't work in Edge files
-
-Just add this in your VSCode settings: 
-```json
-"emmet.includeLanguages": {
-  "edge": "html"
-}
-```
 
 # Contributing
 * See [contributing guide](./.github/CONTRIBUTING.md)

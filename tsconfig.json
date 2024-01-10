@@ -27,7 +27,8 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "out"
+    "outDir": "out",
+    "paths": {}
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

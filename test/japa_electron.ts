@@ -2,17 +2,18 @@ import * as path from 'path'
 import { assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { configure, run as runJapa } from '@japa/runner'
-import ProjectManager from '../src/services/adonis_project/manager'
+import { snapshot } from '@japa/snapshot'
+import ProjectManager from '../src/vscode/project_manager'
 
 export async function run() {
   const testsRoot = path.resolve(__dirname, '..')
 
   return new Promise((resolve) => {
     configure({
-      files: [`**/*/(functional|unit)/**/*.test.js`],
+      files: [`**/*/e2e/**/routes_factory.test.js`],
       cwd: testsRoot,
       forceExit: false,
-      plugins: [assert()],
+      plugins: [assert(), snapshot()],
       reporters: [specReporter()],
       setup: [async () => await ProjectManager.load()],
       teardown: [

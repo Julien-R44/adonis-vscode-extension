@@ -15,6 +15,7 @@ dist
 shrinkwrap.yaml
 out/
 .vscode-test/
+todo.md
 
 *.vsix
 .env
