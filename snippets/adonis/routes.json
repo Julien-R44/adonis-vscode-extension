@@ -1,40 +1,509 @@
 {
-  "route": {
-      "body": "Route.${1|get,put,post,patch,delete,any|}('$2', $3, $4)",
-      "description": "Adonis Route",
-      "prefix": "route"
+  "Create GET route": {
+    "prefix": "ro:get",
+    "body": [
+      "router.get('${1:/}', ${2:[$3]})"
+    ],
+    "description": "Create GET route"
   },
-  "route: on(...).render('view')": {
-      "body": "Route.on($1).render($2)",
-      "description": "Adonis Route: on",
-      "prefix": "route-on"
+  "Create POST route": {
+    "prefix": "ro:post",
+    "body": [
+      "router.post('${1:/}', ${2:[$3]})"
+    ],
+    "description": "Create POST route"
   },
-  "route: named route": {
-      "body": "Route.${1|get,put,post,patch,delete,any|}('$2', $3, $4).as('$7')",
-      "description": "Adonis Route: Name a route with a unique value.",
-      "prefix": "route-named"
+  "Create PUT route": {
+    "prefix": "ro:put",
+    "body": [
+      "router.put('${1:/}', ${2:[$3]})"
+    ],
+    "description": "Create PUT route"
   },
-  "route: inline": {
-      "body": [
-          "Route.${1|get,put,post,patch,delete,any|}('$2', ($5) => {",
-          "  $7",
-          "\\})"
-      ],
-      "description": "Adonis Route: Map route to inline function.",
-      "prefix": "route-inline"
+  "Create PATCH route": {
+    "prefix": "ro:patch",
+    "body": [
+      "router.patch('${1:/}', ${2:[$3]})"
+    ],
+    "description": "Create PATCH route"
   },
-  "route: resource": {
-      "body": "Route.resource('$1', $2).${3|apiOnly,only,except,middleware,formats|}($4)",
-      "description": "Adonis Route: Resources",
-      "prefix": "route-resource"
+  "Create DELETE route": {
+    "prefix": "ro:delete",
+    "body": [
+      "router.delete('${1:/}', ${2:[$3]})"
+    ],
+    "description": "Create DELETE route"
   },
-  "Route.group": {
-      "body": [
-          "Route.group(() => {",
-          "  $1",
-          "}).${2|domain,prefix,middleware,namespace,formats|}($3)"
-      ],
-      "description": "Adonis Route: Group",
-      "prefix": "route-group"
+  "Create route resource": {
+    "prefix": "ro:resource",
+    "body": [
+      "router.resource('${1:resourceName}', ${2})"
+    ],
+    "description": "Create route resource"
+  },
+  "Create route group": {
+    "prefix": "ro:group",
+    "body": [
+      "router.group(() => {",
+      "\t$1",
+      "})"
+    ],
+    "description": "Create route group"
+  },
+  "Define controller method": {
+    "prefix": "co:method",
+    "body": [
+      "${1|index,create,store,show,edit,update,delete|}({ $2 }: HttpContext) {",
+      "\t$3",
+      "}"
+    ],
+    "description": "Define controller method"
+  },
+  "Define model column": {
+    "prefix": "mo:col",
+    "body": [
+      "@column(${1:{\\}})",
+      "declare ${2:name}: ${3:string}"
+    ],
+    "description": "Define model column"
+  },
+  "Define date model column": {
+    "prefix": "mo:date",
+    "body": [
+      "@column.date(${1:{\\}})",
+      "declare ${2:name}: DateTime"
+    ],
+    "description": "Define date model column"
+  },
+  "Define datetime model column": {
+    "prefix": "mo:datetime",
+    "body": [
+      "@column.dateTime(${1:{\\}})",
+      "declare ${2:name}: DateTime"
+    ],
+    "description": "Define datetime model column"
+  },
+  "Define hasOne model relation": {
+    "prefix": "mo:hasOne",
+    "body": [
+      "@hasOne(() => ${1:Model})",
+      "declare ${2:${1/(.*)/${1:/camelcase}/}}: HasOne<typeof $1>"
+    ],
+    "description": "Define hasOne model relation"
+  },
+  "Define hasMany model relation": {
+    "prefix": "mo:hasMany",
+    "body": [
+      "@hasMany(() => ${1:Model})",
+      "declare ${2:${1/(.*)/${1:/camelcase}/}}: HasMany<typeof $1>"
+    ],
+    "description": "Define hasMany model relation"
+  },
+  "Define belongsTo model relation": {
+    "prefix": "mo:belongsTo",
+    "body": [
+      "@belongsTo(() => ${1:Model})",
+      "declare ${2:${1/(.*)/${1:/camelcase}/}}: BelongsTo<typeof $1>"
+    ],
+    "description": "Define belongsTo model relation"
+  },
+  "Define manyToMany model relation": {
+    "prefix": "mo:manyToMany",
+    "body": [
+      "@manyToMany(() => ${1:Model})",
+      "declare ${2:${1/(.*)/${1:/camelcase}/}}: ManyToMany<typeof $1>"
+    ],
+    "description": "Define manyToMany model relation"
+  },
+  "Define hasManyThrough model relation": {
+    "prefix": "mo:hasManyThrough",
+    "body": [
+      "@hasManyThrough(() => ${1:Model})",
+      "declare ${2:${1/(.*)/${1:/camelcase}/}}: HasManyThrough<typeof $1>"
+    ],
+    "description": "Define hasManyThrough model relation"
+  },
+  "Define beforeSave model hook": {
+    "prefix": "mo:beforeSave",
+    "body": [
+      "/**",
+      " * Runs before creating and updating the model",
+      " */",
+      "@beforeSave()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define beforeSave model hook"
+  },
+  "Define beforeCreate model hook": {
+    "prefix": "mo:beforeCreate",
+    "body": [
+      "/**",
+      " * Runs before creating a new record",
+      " */",
+      "@beforeCreate()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define beforeCreate model hook"
+  },
+  "Define beforeUpdate model hook": {
+    "prefix": "mo:beforeUpdate",
+    "body": [
+      "/**",
+      " * Runs before updating an existing record",
+      " */",
+      "@beforeUpdate()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define beforeUpdate model hook"
+  },
+  "Define beforeDelete model hook": {
+    "prefix": "mo:beforeDelete",
+    "body": [
+      "/**",
+      " * Runs before deleting an existing record",
+      " */",
+      "@beforeDelete()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define beforeDelete model hook"
+  },
+  "Define beforeFind model hook": {
+    "prefix": "mo:beforeFind",
+    "body": [
+      "/**",
+      " * Runs before finding a single record from the database",
+      " */",
+      "@beforeFind()",
+      "static ${1:hookName}(query: ModelQueryBuilderContract<typeof ${2:Model}>) {",
+      "\t${3}",
+      "}"
+    ],
+    "description": "Define beforeFind model hook"
+  },
+  "Define afterFind model hook": {
+    "prefix": "mo:afterFind",
+    "body": [
+      "/**",
+      " * Runs after finding a single record",
+      " */",
+      "@afterFind()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define afterFind model hook"
+  },
+  "Define beforeFetch model hook": {
+    "prefix": "mo:beforeFetch",
+    "body": [
+      "/**",
+      " * Runs before finding multiple records from the database",
+      " */",
+      "@beforeFetch()",
+      "static ${1:hookName}(query: ModelQueryBuilderContract<typeof ${2:Model}>) {",
+      "\t${3}",
+      "}"
+    ],
+    "description": "Define beforeFetch model hook"
+  },
+  "Define afterFetch model hook": {
+    "prefix": "mo:afterFetch",
+    "body": [
+      "/**",
+      " * Runs after finding multiple records from the database",
+      " */",
+      "@afterFetch()",
+      "static async ${1:hookName}(${2:model}: ${3:${2/(\\w)/${1:/upcase}/}}[]) {",
+      "\t${4}",
+      "}"
+    ],
+    "description": "Define afterFetch model hook"
+  },
+  "Define beforePaginate model hook": {
+    "prefix": "mo:beforePaginate",
+    "body": [
+      "/**",
+      " * Runs before finding multiple records using pagination",
+      " */",
+      "@beforePaginate()",
+      "static ${1:hookName}([countQuery, query]: [",
+      "\tModelQueryBuilderContract<typeof ${2:Model}>",
+      "\tModelQueryBuilderContract<typeof ${2}>",
+      "]) {",
+      "\t${3}",
+      "}"
+    ],
+    "description": "Define beforePaginate model hook"
+  },
+  "Define afterPaginate model hook": {
+    "prefix": "mo:afterPaginate",
+    "body": [
+      "/**",
+      " * Runs after finding multiple records using pagination",
+      " */",
+      "@afterPaginate()",
+      "static async ${1:hookName}(paginator: ModelPaginatorContract<${2:Model}>) {",
+      "\t${3}",
+      "}"
+    ],
+    "description": "Define afterPaginate model hook"
+  },
+  "Define VineJS validator": {
+    "prefix": "vi:validator",
+    "body": [
+      "const ${1:validatorName} = vine.compile(",
+      "\tvine.object({",
+      "\t\t${2:field}: vine.${3|string,number,boolean,date,enum|}().$4",
+      "\t})",
+      ")"
+    ],
+    "description": "Define VineJS validator"
+  },
+  "Send email": {
+    "prefix": "ma:send",
+    "body": [
+      "mail.send(${1:(message) => {",
+      "\tmessage",
+      "\t\t.to($2)",
+      "\t\t.subject('$3')",
+      "\t\t.htmlView('$4', ${5:{\\}})",
+      "\\}})"
+    ],
+    "description": "Send email"
+  },
+  "Queue email": {
+    "prefix": "ma:queue",
+    "body": [
+      "mail.sendLater(${1:(message) => {",
+      "\tmessage",
+      "\t\t.to($2)",
+      "\t\t.subject('$3')",
+      "\t\t.htmlView('$4', ${5:{\\}})",
+      "\\}})"
+    ],
+    "description": "Queue email"
+  },
+  "Define bouncer ability": {
+    "prefix": "bo:ability",
+    "body": [
+      "export const ${1:abilityName} = Bouncer.ability((user: ${2:User}, $3) => {",
+      "\treturn ${4:false}",
+      "})"
+    ],
+    "description": "Define bouncer ability"
+  },
+  "Define public bouncer ability": {
+    "prefix": "bo:guest:ability",
+    "body": [
+      "export const ${1:abilityName} = Bouncer.ability({ allowGuest: true }, (user: ${2:User}, $3) => {",
+      "\treturn ${4:false}",
+      "})"
+    ],
+    "description": "Define public bouncer ability"
+  },
+  "Define bouncer policy action": {
+    "prefix": "po:action",
+    "body": [
+      "${1|view,create,edit,update,destroy|}(user: ${2:User}, ${3}) {",
+      "\treturn ${4:false}",
+      "}"
+    ],
+    "description": "Define bouncer policy action"
+  },
+  "Define public bouncer policy action": {
+    "prefix": "po:guest:action",
+    "body": [
+      "@allowGuest()",
+      "${1|view,create,edit,update,destroy|}(user: ${2:User}, ${3}) {",
+      "\treturn ${4:false}",
+      "}"
+    ],
+    "description": "Define bouncer policy action"
+  },
+  "Define bouncer before hook": {
+    "prefix": "po:before:hook",
+    "body": [
+      "before(user: ${1:User} | null, action: string, ...params: any[]) {",
+      "\t$return ${2}",
+      "}"
+    ],
+    "description": "Define bouncer before hook"
+  },
+  "Define bouncer after hook": {
+    "prefix": "po:after:hook",
+    "body": [
+      "after(user: ${1:User} | null, action: string, response: AuthorizerResponse, ...params: any[]) {",
+      "\\t$return ${2}",
+      "}"
+    ],
+    "description": "Define bouncer after hook"
+  },
+  "Listen for emitter event": {
+    "prefix": "em:listen",
+    "body": [
+      "emitter.on('${1:eventName}', (event) => {",
+      "\t${2:console.log(event)}",
+      "})"
+    ],
+    "description": "Listen for emitter event"
+  },
+  "Listen for emitter event once": {
+    "prefix": "em:listen:once",
+    "body": [
+      "emitter.once('${1:eventName}', (event) => {",
+      "\t${2:console.log(event)}",
+      "})"
+    ],
+    "description": "Listen for emitter event once"
+  },
+  "Define string command argument": {
+    "prefix": "co:arg:string",
+    "body": [
+      "@args.string()",
+      "declare ${1}: string"
+    ],
+    "description": "Define string command argument"
+  },
+  "Define spread command argument": {
+    "prefix": "co:arg:spread",
+    "body": [
+      "@args.spread()",
+      "declare ${1}: string[]"
+    ],
+    "description": "Define spread command argument"
+  },
+  "Define string command flag": {
+    "prefix": "co:flag:string",
+    "body": [
+      "@flags.string()",
+      "declare ${1}?: string"
+    ],
+    "description": "Define string command flag"
+  },
+  "Define boolean command flag": {
+    "prefix": "co:flag:boolean",
+    "body": [
+      "@flags.boolean()",
+      "declare ${1}?: boolean"
+    ],
+    "description": "Define boolean command flag"
+  },
+  "Define number command flag": {
+    "prefix": "co:flag:number",
+    "body": [
+      "@flags.number()",
+      "declare ${1}?: number"
+    ],
+    "description": "Define number command flag"
+  },
+  "Define array command flag": {
+    "prefix": "co:flag:array",
+    "body": [
+      "@flags.array()",
+      "declare ${1}?: string[]"
+    ],
+    "description": "Define array command flag"
+  },
+  "Define increments column": {
+    "prefix": "mi:increments",
+    "body": [
+      "table.increments('${1:columnName}').notNullable()"
+    ],
+    "description": "Define increments column"
+  },
+  "Define integer column": {
+    "prefix": "mi:integer",
+    "body": [
+      "table.integer('${1:columnName}').notNullable()"
+    ],
+    "description": "Define integer column"
+  },
+  "Define bigInteger column": {
+    "prefix": "mi:bigInteger",
+    "body": [
+      "table.bigInteger('${1:columnName}').notNullable()"
+    ],
+    "description": "Define bigInteger column"
+  },
+  "Define text column": {
+    "prefix": "mi:text",
+    "body": [
+      "table.text('${1:columnName}', '${2|mediumtext,longtext|}').notNullable()"
+    ],
+    "description": "Define text column"
+  },
+  "Define string column": {
+    "prefix": "mi:string",
+    "body": [
+      "table.string('${1:columnName}').notNullable()"
+    ],
+    "description": "Define string column"
+  },
+  "Define boolean column": {
+    "prefix": "mi:boolean",
+    "body": [
+      "table.boolean('${1:columnName}').notNullable()"
+    ],
+    "description": "Define boolean column"
+  },
+  "Define date column": {
+    "prefix": "mi:date",
+    "body": [
+      "table.date('${1:columnName}').notNullable()"
+    ],
+    "description": "Define date column"
+  },
+  "Define dateTime column": {
+    "prefix": "mi:dateTime",
+    "body": [
+      "table.dateTime('${1:columnName}').notNullable()"
+    ],
+    "description": "Define dateTime column"
+  },
+  "Define timestamp column": {
+    "prefix": "mi:timestamp",
+    "body": [
+      "table.timestamp('${1:columnName}').notNullable()"
+    ],
+    "description": "Define timestamp column"
+  },
+  "Define unique column": {
+    "prefix": "mi:unique",
+    "body": [
+      "table.${2:string}('${1:columnName}').notNullable().unique()"
+    ],
+    "description": "Define unique column"
+  },
+  "Define foreign key column": {
+    "prefix": "mi:fk",
+    "body": [
+      "table",
+      "\t.integer('${1:columnName}')",
+      "\t.unsigned()",
+      "\t.notNullable()",
+      "\t.references('${2:otherColumnName}')",
+      "\t.inTable('${3:otherTableName}')"
+    ],
+    "description": "Define foreign key column"
+  },
+  "Define bigInteger foreign key column": {
+    "prefix": "mi:bigInt:fk",
+    "body": [
+      "table",
+      "\t.bigInteger('${1:columnName}')",
+      "\t.unsigned()",
+      "\t.notNullable()",
+      "\t.references('${2:otherColumnName}')",
+      "\t.inTable('${3:otherTableName}')"
+    ],
+    "description": "Define bigInteger foreign key column"
   }
 }
