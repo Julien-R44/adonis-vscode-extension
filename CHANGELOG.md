@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.1 
+
+Inertia suggestions were only working for Vue. Now they also work for React and svelte and is able by picking up `.jsx`, `.tsx` and `.svelte` files in the `resources/js/pages` directory.
+
 ## 1.2.0
 
 Official release of the extension. All previous versions ( 1.1.x ) were pre-releases.
