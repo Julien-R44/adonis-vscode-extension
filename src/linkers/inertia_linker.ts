@@ -9,7 +9,11 @@ export class InertiaLinker {
   static #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {
     const lines = options.fileContent.split('\n')
 
-    const line = lines.findIndex((line) => line.includes(options.match[1]!))
+    // we have to lookup the line with the render( prefix because there could be multiple appearances of the same file name
+    // e.g. if you declare a route with the path /about and have your page called about.vue etc., it would highlight the wrong line
+    const line = lines.findIndex(
+      (line) => line.includes('render(') && line.includes(options.match[1]!)
+    )
     const colStart = lines[line]!.indexOf(options.match[1]!)
     const colEnd = colStart + options.match[1]!.length
 
@@ -27,7 +31,12 @@ export class InertiaLinker {
 
     const promises = matchesArray.map(async (match) => {
       const fileName = match[1]!.replace(/\"|\'/g, '').replace(/\./g, '/')
-      const fullName = join(options.project.path, options.pagesDirectory, `${fileName}.vue`)
+
+      const fullName = join(
+        options.project.path,
+        options.pagesDirectory,
+        `${fileName}.{vue,jsx,tsx,svelte}`
+      )
 
       const pattern = slash(fullName)
 
