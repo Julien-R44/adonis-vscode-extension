@@ -13,12 +13,16 @@ test.group('Inertia Linker', () => {
     await fs.create('my-project/resources/js/pages/Users/Show.svelte', '')
     await fs.create('my-project/resources/js/pages/Users/Create.tsx', '')
     await fs.create('my-project/resources/js/pages/Users/Update.jsx', '')
+    await fs.create('my-project/resources/js/pages/test.vue', '')
 
     const code = dedent`
       inertia.render('Users/Index')
       inertia.render('Users/Show')
       inertia.render('Users/Create')
       inertia.render('Users/Update')
+      router.get('/test', (ctx) => {
+        return ctx.inertia.render('test')
+      })
     `
 
     const result = await InertiaLinker.getLinks({
@@ -50,6 +54,11 @@ test.group('Inertia Linker', () => {
           "colStart": 16,
           "line": 3,
         },
+        {
+          "colEnd": 33,
+          "colStart": 29,
+          "line": 5,
+        },
       ]
       `)
 
@@ -59,6 +68,7 @@ test.group('Inertia Linker', () => {
       slash(join(project.path, 'resources/js/pages/Users/Show.svelte')),
       slash(join(project.path, 'resources/js/pages/Users/Create.tsx')),
       slash(join(project.path, 'resources/js/pages/Users/Update.jsx')),
+      slash(join(project.path, 'resources/js/pages/test.vue')),
     ])
   })
 })
