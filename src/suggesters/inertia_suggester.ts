@@ -13,20 +13,24 @@ export class InertiaSuggester {
     const text = options.text.replaceAll(/\"|\'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
 
     const pagesDirectory = join(options.project.path, options.pagesDirectory)
-    const globPattern = slash(`${pagesDirectory}/**/**.vue`)
+    const globPattern = slash(`${pagesDirectory}/**/**.{vue,jsx,tsx,svelte}`)
     const matchedFiles = await fg(globPattern, {
       onlyFiles: true,
       caseSensitiveMatch: false,
     })
 
     // Check if the filename includes the text
-    const regexPattern = `${pagesDirectory}/(.*)${text}(.*).vue`.replaceAll('\\', '/')
+    const regexPattern = `${pagesDirectory}/(.*)${text}(.*).(vue|jsx|tsx|svelte)`.replaceAll(
+      '\\',
+      '/'
+    )
+
     const regex = new RegExp(regexPattern, 'i')
     const foundFiles = matchedFiles.filter((file) => regex.test(file))
 
     return foundFiles.map((file) => {
       return {
-        text: slash(relative(pagesDirectory, file).replace('.vue', '')),
+        text: slash(relative(pagesDirectory, file).replace(/\.(vue|jsx|tsx|svelte)$/, '')),
         detail: slash(relative(options.project.path, file)),
         documentation: '',
         filePath: normalize(file),

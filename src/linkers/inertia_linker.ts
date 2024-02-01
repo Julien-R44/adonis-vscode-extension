@@ -27,7 +27,12 @@ export class InertiaLinker {
 
     const promises = matchesArray.map(async (match) => {
       const fileName = match[1]!.replace(/\"|\'/g, '').replace(/\./g, '/')
-      const fullName = join(options.project.path, options.pagesDirectory, `${fileName}.vue`)
+
+      const fullName = join(
+        options.project.path,
+        options.pagesDirectory,
+        `${fileName}.{vue,jsx,tsx,svelte}`
+      )
 
       const pattern = slash(fullName)
 
