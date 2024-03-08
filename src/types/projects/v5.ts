@@ -5,7 +5,7 @@
  */
 
 /**
- * ace-manifest.json shape
+ * Ace-manifest.json shape
  */
 export interface AceManifest {
   commands: { [key: string]: AceManifestEntry }
@@ -42,7 +42,7 @@ export interface Arg {
  */
 export enum ArgType {
   Array = 'array',
-  Boolean = 'boolean',
   Number = 'number',
   String = 'string',
+  Boolean = 'boolean',
 }

@@ -1,20 +1,20 @@
 import { commands, languages } from 'vscode'
-import { registerAceCommands } from './vscode/commands'
-import RouteControllerCompletionProvider from './vscode/providers/routes/completion_provider'
-import { RouteControllerLinkProvider } from './vscode/providers/routes/link_provider'
-import { registerDocsCommands } from './vscode/commands/docs'
-import { ViewContainer } from './vscode/tree_views/index'
-import ProjectManager from './vscode/project_manager'
-import ExtConfig from './vscode/utilities/config'
-import { Extension } from './vscode/extension'
-import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
-import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
-import { Logger } from './vscode/logger'
-import type { AdonisProject } from './types/projects'
 import type { ExtensionContext } from 'vscode'
 
+import { Logger } from './vscode/logger'
+import { Extension } from './vscode/extension'
+import ExtConfig from './vscode/utilities/config'
+import ProjectManager from './vscode/project_manager'
+import type { AdonisProject } from './types/projects'
+import { registerAceCommands } from './vscode/commands'
+import { ViewContainer } from './vscode/tree_views/index'
+import { registerDocsCommands } from './vscode/commands/docs'
+import InertiaLinkProvider from './vscode/providers/inertia/link_provider'
+import { RouteControllerLinkProvider } from './vscode/providers/routes/link_provider'
+import { InertiaCompletionProvider } from './vscode/providers/inertia/completion_provider'
+import RouteControllerCompletionProvider from './vscode/providers/routes/completion_provider'
+
 export async function activate(context: ExtensionContext) {
-  // eslint-disable-next-line no-console
   console.log('Activating AdonisJS extension...')
   const projects = await ProjectManager.load()
 
@@ -74,12 +74,7 @@ export async function activate(context: ExtensionContext) {
     new InertiaCompletionProvider()
   )
 
-  context.subscriptions.push(
-    routeLink,
-    routeCompletion,
-    inertiaLink,
-    inertiaCompletion
-  )
+  context.subscriptions.push(routeLink, routeCompletion, inertiaLink, inertiaCompletion)
 }
 
 export function deactivate() {}

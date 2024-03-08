@@ -1,12 +1,12 @@
 import { Notifier } from '../../notifier'
-import BaseCommand from '../../commands/base_command'
 import ProjectManager from '../../project_manager'
+import BaseCommand from '../../commands/base_command'
 
 /**
  * Handle make:prldfile command
  */
 export class PreloadedFile extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the preloaded file name
      */

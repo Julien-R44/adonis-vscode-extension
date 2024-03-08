@@ -1,6 +1,7 @@
-import { ViewColumn, commands, window } from "vscode";
-import ExtConfig from "../../utilities/config";
 import type { ExtensionContext} from "vscode";
+import { ViewColumn, commands, window } from "vscode";
+
+import ExtConfig from "../../utilities/config";
 
 /**
  * Open the given URL in a new panel as a webview

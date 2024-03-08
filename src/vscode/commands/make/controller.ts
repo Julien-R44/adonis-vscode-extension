@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:controller command
  */
 export class Controller extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the controller name
      */

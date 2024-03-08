@@ -1,8 +1,9 @@
-import * as path from 'path'
+import * as path from 'node:path'
 import { assert } from '@japa/assert'
+import { snapshot } from '@japa/snapshot'
 import { specReporter } from '@japa/spec-reporter'
 import { configure, run as runJapa } from '@japa/runner'
-import { snapshot } from '@japa/snapshot'
+
 import ProjectManager from '../src/vscode/project_manager'
 
 export async function run() {

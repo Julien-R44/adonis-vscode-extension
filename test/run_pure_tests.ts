@@ -1,8 +1,9 @@
 import { assert } from '@japa/assert'
-import { specReporter } from '@japa/spec-reporter'
-import { configure, processCliArgs, run } from '@japa/runner'
 import { snapshot } from '@japa/snapshot'
 import { fileSystem } from '@japa/file-system'
+import { specReporter } from '@japa/spec-reporter'
+import { configure, processCliArgs, run } from '@japa/runner'
+
 import { BASE_URL } from '../test_helpers/index'
 
 /*

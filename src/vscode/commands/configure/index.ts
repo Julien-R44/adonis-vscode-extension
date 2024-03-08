@@ -5,7 +5,7 @@ import BaseCommand from '../base_command'
  * Handle ace configure command
  */
 export class Configure extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the package name to configure
      */

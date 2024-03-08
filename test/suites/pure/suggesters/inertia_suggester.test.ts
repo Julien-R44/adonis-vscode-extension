@@ -1,5 +1,6 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { test } from '@japa/runner'
+
 import { InertiaSuggester } from '../../../../src/suggesters/inertia_suggester'
 import { Adonis6Project } from '../../../../src/adonis_project/adonis6_project'
 

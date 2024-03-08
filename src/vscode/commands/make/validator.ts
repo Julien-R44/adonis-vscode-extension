@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:validator command
  */
 export class Validator extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the validator name
      */

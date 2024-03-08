@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:policy command
  */
 export class Policy extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the policy name
      */

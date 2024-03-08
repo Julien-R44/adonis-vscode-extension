@@ -1,9 +1,10 @@
 import { join } from 'node:path'
 import { existsSync } from 'node:fs'
+
 import { parseMagicString } from '../utilities'
-import { controllersRegex } from '../utilities/regexes'
 import type { RouteLink } from '../types/linkers'
 import type { AdonisProject } from '../types/projects'
+import { controllersRegex } from '../utilities/regexes'
 
 export class ControllersLinker {
   static async #matchIndexToPosition(options: { fileContent: string; match: RegExpMatchArray }) {
@@ -16,7 +17,7 @@ export class ControllersLinker {
     return { line, colStart, colEnd }
   }
 
-  public static async getLinks(options: {
+  static async getLinks(options: {
     fileContent: string
     project: AdonisProject
   }): Promise<RouteLink[]> {
@@ -24,7 +25,7 @@ export class ControllersLinker {
     const matchesArray = Array.from(matches)
 
     const promises = matchesArray.map(async (match) => {
-      const controllerString = match[0]!.replace(/\"|\'/g, '')
+      const controllerString = match[0]!.replace(/"|'/g, '')
 
       const controller = parseMagicString(controllerString)
       const position = await this.#matchIndexToPosition({

@@ -1,10 +1,11 @@
-import { join } from 'path'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { join } from 'node:path'
 import { pascalCase } from 'change-case'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import type { FileSystem } from '@japa/file-system/build/src/file_system'
+
+import type { AdonisProject } from '../src/types/projects'
 import { Adonis6Project } from '../src/adonis_project/adonis6_project'
 import { Adonis5Project } from '../src/adonis_project/adonis5_project'
-import type { AdonisProject } from '../src/types/projects'
-import type { FileSystem } from '@japa/file-system/build/src/file_system'
 
 export const BASE_URL = join(__dirname, '..', 'test', 'suites', 'pure', '__app_fs')
 

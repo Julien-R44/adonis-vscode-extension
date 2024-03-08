@@ -1,8 +1,8 @@
 import { Notifier } from '../../notifier'
-import BaseCommand from '../../commands/base_command'
 import { ArgType } from '../../../types/projects/v5'
-import type { CommandEntry } from '../../../types/projects/v6'
+import BaseCommand from '../../commands/base_command'
 import type { AdonisProject } from '../../../types/projects'
+import type { CommandEntry } from '../../../types/projects/v6'
 
 /**
  * Generic class to run custom commands
@@ -78,7 +78,7 @@ export class RunCustomCommand extends BaseCommand {
     return `${commandName} ${args} ${flags}`
   }
 
-  public static async run(project: AdonisProject, command: CommandEntry) {
+  static async run(project: AdonisProject, command: CommandEntry) {
     /**
      * Ask for arguments
      */

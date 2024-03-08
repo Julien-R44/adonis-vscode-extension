@@ -1,11 +1,12 @@
 import { window } from 'vscode'
-import { CommandsTreeDataProvider } from './commands/tree_data_provider'
-import { RoutesTreeDataProvider } from './routes/tree_data_provider'
+import type { ExtensionContext } from 'vscode'
+
 import { HelpTreeDataView } from './help'
 import { registerRoutesTreeViewCommands } from './routes/commands'
-import { ProjectsTreeDataProvider } from './projects/tree_data_provider'
+import { RoutesTreeDataProvider } from './routes/tree_data_provider'
 import { registerCommandsTreeViewCommands } from './commands/commands'
-import type { ExtensionContext } from 'vscode'
+import { CommandsTreeDataProvider } from './commands/tree_data_provider'
+import { ProjectsTreeDataProvider } from './projects/tree_data_provider'
 
 /**
  * Responsible for adding the AdonisJS logo on the VSCode Sidebar
@@ -41,7 +42,7 @@ export class ViewContainer {
   /**
    * Initialize all tree views
    */
-  public static initViews(context: ExtensionContext) {
+  static initViews(context: ExtensionContext) {
     if (process.env.NODE_ENV === 'test') return
 
     HelpTreeDataView.createView(context)

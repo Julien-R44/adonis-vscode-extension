@@ -1,13 +1,14 @@
-import { basename, dirname, join, relative } from 'path'
-import { existsSync } from 'fs'
-import { window, workspace } from 'vscode'
 import dedent from 'dedent'
+import { existsSync } from 'node:fs'
+import { window, workspace } from 'vscode'
 import commonPathPrefix from 'common-path-prefix'
+import { basename, dirname, join, relative } from 'node:path'
+
+import { Logger } from './logger'
+import type { AdonisProject } from '../types/projects'
 import { PkgJson } from '../adonis_project/files/pkg_json'
 import { Adonis6Project } from '../adonis_project/adonis6_project'
 import { Adonis5Project } from '../adonis_project/adonis5_project'
-import { Logger } from './logger'
-import type { AdonisProject } from '../types/projects'
 
 export default class ProjectManager {
   /**

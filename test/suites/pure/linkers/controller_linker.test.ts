@@ -1,6 +1,7 @@
+import dedent from 'dedent'
 import { join } from 'node:path'
 import { test } from '@japa/runner'
-import dedent from 'dedent'
+
 import { ControllersLinker } from '../../../../src/linkers/controllers_linker'
 import {
   createAdonis5Project,

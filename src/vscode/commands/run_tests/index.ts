@@ -4,7 +4,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle node ace test command
  */
 export class RunTests extends BaseCommand {
-  public static async run(options: { arguments?: string } = {}) {
+  static async run(options: { arguments?: string } = {}) {
     let commandArguments = options.arguments || ''
 
     /**

@@ -1,7 +1,8 @@
+import dedent from 'dedent'
 import { join } from 'node:path'
 import { test } from '@japa/runner'
-import dedent from 'dedent'
-import {slash} from '../../../../src/utilities/index'
+
+import { slash } from '../../../../src/utilities/index'
 import { createAdonis5Project } from '../../../../test_helpers'
 import { InertiaLinker } from '../../../../src/linkers/inertia_linker'
 

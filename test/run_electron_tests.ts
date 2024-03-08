@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { downloadAndUnzipVSCode, runTests } from '@vscode/test-electron'
 
 async function main() {

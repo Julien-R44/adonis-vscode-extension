@@ -1,15 +1,16 @@
-import { pathToFileURL } from 'url'
+import { pathToFileURL } from 'node:url'
+import type { Event, TreeDataProvider, type TreeItem } from 'vscode'
 import {
   EventEmitter,
   MarkdownString,
   ThemeColor,
   ThemeIcon,
-  type TreeItem,
   TreeItemCollapsibleState,
   Uri,
 } from 'vscode'
-import { Extension } from '../../extension'
+
 import { Notifier } from '../../notifier'
+import { Extension } from '../../extension'
 import ProjectManager from '../../project_manager'
 import { TreeRoutesBuilder } from '../../../routes_tree/tree_routes_builder'
 import type { RouteNode } from '../../../routes_tree/nodes/route_node_factory'
@@ -19,7 +20,6 @@ import type {
   RouteDomainNode,
   RouteGroupNode,
 } from '../../../types'
-import type { Event, TreeDataProvider } from 'vscode'
 
 type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDomainNode | BaseNode
 
@@ -35,8 +35,8 @@ export class RoutesTreeDataProvider
   #rawRoutes: AceListRoutesResultV6 = []
   #errored = false
 
-  public flatView = false
-  public readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
+  flatView = false
+  readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
 
   constructor() {
     Extension.routesTreeDataProvider = this
@@ -81,14 +81,14 @@ export class RoutesTreeDataProvider
     }
   }
 
-  public refresh() {
+  refresh() {
     this.#onDidChangeTreeData.fire(undefined)
   }
 
   /**
    * Returns the UI state of the given walked node
    */
-  public getTreeItem(element: RouteTreeDataProviderPossiblesNodes): TreeItem | Thenable<TreeItem> {
+  getTreeItem(element: RouteTreeDataProviderPossiblesNodes): TreeItem | Thenable<TreeItem> {
     if ('children' in element) {
       return this.#buildGroupTreeItem(element)
     }
@@ -108,7 +108,7 @@ export class RoutesTreeDataProvider
    * Returns the children of the given node
    * If `element` is `undefined` then return the root node
    */
-  public getChildren(element?: RouteTreeDataProviderPossiblesNodes) {
+  getChildren(element?: RouteTreeDataProviderPossiblesNodes) {
     if (this.#errored) {
       return [
         {
@@ -128,7 +128,7 @@ export class RoutesTreeDataProvider
     return []
   }
 
-  public async toggleFlatView() {
+  async toggleFlatView() {
     this.flatView = !this.flatView
 
     const project = ProjectManager.currentProject
@@ -141,7 +141,7 @@ export class RoutesTreeDataProvider
     this.refresh()
   }
 
-  public async getAllRoutes() {
+  async getAllRoutes() {
     this.#errored = false
     this.flatView = false
 

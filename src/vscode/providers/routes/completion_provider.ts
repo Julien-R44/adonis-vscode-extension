@@ -1,15 +1,16 @@
+import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
+
 import ProjectManager from '../../project_manager'
+import { CompletionFactory } from '../../factories/completion_factory'
+import { ControllerSuggester } from '../../../suggesters/controller_suggester'
+import { ControllerMethodSuggester } from '../../../suggesters/controller_method_suggester'
 import {
   controllerMethodCompletionRegex,
   controllerNameCompletionRegex,
 } from '../../../utilities/regexes'
-import { ControllerSuggester } from '../../../suggesters/controller_suggester'
-import { CompletionFactory } from '../../factories/completion_factory'
-import { ControllerMethodSuggester } from '../../../suggesters/controller_method_suggester'
-import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
 export default class RouteControllerCompletionProvider implements CompletionItemProvider {
-  public async provideCompletionItems(doc: TextDocument, pos: Position) {
+  async provideCompletionItems(doc: TextDocument, pos: Position) {
     let showMethodSuggestions = false
     let range = doc.getWordRangeAtPosition(pos, controllerNameCompletionRegex)
 

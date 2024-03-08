@@ -1,6 +1,7 @@
-import { platform } from 'process'
 import { window } from 'vscode'
+import { platform } from 'node:process'
 import { node as execaNode } from 'execa'
+
 import ExtConfig from './utilities/config'
 import type { AdonisProject } from '../types/projects'
 
@@ -31,7 +32,7 @@ export class AceExecutor {
   /**
    * Execute a `node ace x` command
    */
-  public static async exec({ adonisProject, command, background = true }: ExecOptions) {
+  static async exec({ adonisProject, command, background = true }: ExecOptions) {
     let path = adonisProject.path
     if (this.isWindows && path.startsWith('/')) {
       path = path.substring(1)

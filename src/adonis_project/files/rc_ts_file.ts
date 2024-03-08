@@ -1,9 +1,10 @@
-import { readFileSync } from 'fs'
 import { parse } from '@babel/parser'
+import { readFileSync } from 'node:fs'
 import traverse from '@babel/traverse'
-import { isIdentifier, isStringLiteral } from '@babel/types'
 import type { NodePath } from '@babel/traverse'
 import type { ObjectProperty } from '@babel/types'
+import { isIdentifier, isStringLiteral } from '@babel/types'
+
 import type { RcFile } from '../../types'
 
 /**

@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:middleware command
  */
 export class Middleware extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the middleware name
      */

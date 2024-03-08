@@ -1,5 +1,6 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { test } from '@japa/runner'
+
 import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
 import { ControllerSuggester } from '../../../../src/suggesters/controller_suggester'
 

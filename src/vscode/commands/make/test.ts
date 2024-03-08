@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:test command
  */
 export class Test extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the test suite name
      */

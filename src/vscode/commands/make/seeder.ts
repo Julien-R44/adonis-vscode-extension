@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:seeder command
  */
 export class Seeder extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the seeder name
      */

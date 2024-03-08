@@ -1,5 +1,5 @@
-import { window } from 'vscode'
 import dedent from 'dedent'
+import { window } from 'vscode'
 
 export class Logger {
   static #channel = window.createOutputChannel('AdonisJS')

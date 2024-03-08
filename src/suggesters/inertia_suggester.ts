@@ -1,16 +1,17 @@
-import { join, normalize, relative } from 'path'
 import fg from 'fast-glob'
-import {slash} from '../utilities/index'
+import { join, normalize, relative } from 'node:path'
+
+import { slash } from '../utilities/index'
 import type { Suggestion } from '../types'
 import type { AdonisProject } from '../types/projects'
 
 export class InertiaSuggester {
-  public static async getInertiaSuggestions(options: {
+  static async getInertiaSuggestions(options: {
     text: string
     project: AdonisProject
     pagesDirectory: string
   }): Promise<Suggestion[]> {
-    const text = options.text.replaceAll(/\"|\'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
+    const text = options.text.replaceAll(/"|'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
 
     const pagesDirectory = join(options.project.path, options.pagesDirectory)
     const globPattern = slash(`${pagesDirectory}/**/**.{vue,jsx,tsx,svelte}`)

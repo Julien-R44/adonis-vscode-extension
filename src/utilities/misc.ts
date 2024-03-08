@@ -1,7 +1,8 @@
-import * as fs from 'fs'
-import { join } from 'path'
+import * as fs from 'node:fs'
+import { join } from 'node:path'
 import { Extractor } from '@julr/module-methods-extractor'
-import {slash} from '../utilities/index'
+
+import { slash } from '../utilities/index'
 import type { Controller } from '../types'
 import type { AdonisProject } from '../types/projects'
 
@@ -80,8 +81,8 @@ export function getMethodsInSourceFile(sourcePath: string) {
 /**
  * Get the line number a method is declared in a source file.
  *
- * @param methodName Method name to locate
  * @param sourcePath Source file to extract from
+ * @param methodName Method name to locate
  */
 export async function getLineNumber(
   sourcePath: string,

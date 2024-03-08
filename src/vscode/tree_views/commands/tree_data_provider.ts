@@ -1,8 +1,9 @@
 import { EventEmitter, ThemeIcon, TreeItemCollapsibleState } from 'vscode'
-import ProjectManager from '../../project_manager'
-import { Extension } from '../../extension'
-import type { AceCommandNode } from '../../../types/projects'
 import type { Event, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
+
+import { Extension } from '../../extension'
+import ProjectManager from '../../project_manager'
+import type { AceCommandNode } from '../../../types/projects'
 
 /**
  * Provide the data to be displayed in the VSCode "Commands" Tree View
@@ -11,7 +12,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode
   #onDidChangeTreeData = new EventEmitter()
   #tree: AceCommandNode[] = []
 
-  public readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
+  readonly onDidChangeTreeData: Event<any> = this.#onDidChangeTreeData.event
 
   constructor() {
     Extension.commandsTreeDataProvider = this
@@ -25,14 +26,14 @@ export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode
   /**
    * Refresh the tree view
    */
-  public refresh() {
+  refresh() {
     this.#onDidChangeTreeData.fire(undefined)
   }
 
   /**
    * Returns the UI state of the given walked node
    */
-  public getTreeItem(element: AceCommandNode): TreeItem | Thenable<TreeItem> {
+  getTreeItem(element: AceCommandNode): TreeItem | Thenable<TreeItem> {
     if ('children' in element) {
       return {
         collapsibleState: TreeItemCollapsibleState.Collapsed,
@@ -56,7 +57,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode
    * Returns the children of the given node
    * If `element` is `undefined` then return the root node
    */
-  public getChildren(element?: AceCommandNode): ProviderResult<AceCommandNode[]> {
+  getChildren(element?: AceCommandNode): ProviderResult<AceCommandNode[]> {
     if (!element) {
       return this.#tree
     }
@@ -68,7 +69,7 @@ export class CommandsTreeDataProvider implements TreeDataProvider<AceCommandNode
     return []
   }
 
-  public async buildTree() {
+  async buildTree() {
     this.#tree = await ProjectManager.currentProject.getCommands()
     this.refresh()
   }

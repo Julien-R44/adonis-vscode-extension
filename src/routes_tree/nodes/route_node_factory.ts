@@ -1,9 +1,10 @@
-import { relative } from 'path'
+import { relative } from 'node:path'
 import { pascalCase } from 'change-case'
+
 import { parseMagicString, slash } from '../../utilities'
-import { arraysEqual, controllerMagicStringToPath, getLineNumber } from '../../utilities/misc'
 import type { AdonisProject } from '../../types/projects'
 import type { HttpMethod, RawRouteV6 } from '../../types'
+import { arraysEqual, controllerMagicStringToPath, getLineNumber } from '../../utilities/misc'
 
 export interface RouteNode {
   /**
@@ -119,7 +120,7 @@ export class RouteNodeFactory {
       color: this.#getRouteColor(item),
       tooltip: '',
       isClosure,
-      // @ts-expect-error
+      // @ts-expect-error fix this
       controller: {
         name: controller?.name || 'Unknown',
         found: !!path,

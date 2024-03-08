@@ -1,11 +1,12 @@
+import type { ExtensionContext } from 'vscode'
 import vscode, { SymbolKind, Uri, commands } from 'vscode'
-import ProjectManager from '../../project_manager'
-import { Extension } from '../../extension'
+
 import { Notifier } from '../../notifier'
+import { Extension } from '../../extension'
 import ExtConfig from '../../utilities/config'
+import ProjectManager from '../../project_manager'
 import { searchAndOpenSymbol, showDocumentAtLine } from '../../utilities'
 import type { RouteNode } from '../../../routes_tree/nodes/route_node_factory'
-import type { ExtensionContext } from 'vscode'
 
 function refreshRouteCommand() {
   return Extension.routesTreeDataProvider.getAllRoutes()
@@ -52,7 +53,7 @@ function toggleFlatRouteViewCommand() {
 }
 
 export const registerRoutesTreeViewCommands = (context: ExtensionContext) => {
-  const viewCommands: [string, Function][] = [
+  const viewCommands: [string, (...args: any) => any][] = [
     [ExtConfig.buildCommandId('view.routes.refresh'), refreshRouteCommand],
     [ExtConfig.buildCommandId('view.routes.open-in-browser'), openInBrowserCommand],
     [ExtConfig.buildCommandId('view.routes.copy-link'), copyLinkCommand],

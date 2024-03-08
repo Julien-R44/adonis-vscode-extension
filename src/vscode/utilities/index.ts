@@ -1,6 +1,7 @@
-import { Range, Selection, TextEditorRevealType, type Uri, commands, window } from 'vscode'
+import type { SymbolInformation, SymbolKind, type Uri } from 'vscode'
+import { Range, Selection, TextEditorRevealType, commands, window } from 'vscode'
+
 import { Notifier } from '../notifier'
-import type { SymbolInformation, SymbolKind } from 'vscode'
 
 /**
  * Open a text document at the given line

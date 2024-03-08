@@ -1,7 +1,8 @@
-import { join, normalize } from 'path'
-import { BaseAdonisProject } from './base_adonis_project'
+import { join, normalize } from 'node:path'
+
 import { RcTsFile } from './files/rc_ts_file'
 import type { AceListCommandsResult } from '../types'
+import { BaseAdonisProject } from './base_adonis_project'
 import type { AceCommandNode, AdonisProject, Routes } from '../types/projects'
 
 export class Adonis6Project extends BaseAdonisProject implements AdonisProject {

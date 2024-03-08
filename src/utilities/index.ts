@@ -30,11 +30,11 @@ export function parseMagicString(text: string): Controller | null {
  * Since the original package is now ESM only
  */
 export function slash(path: string) {
-	const isExtendedLengthPath = path.startsWith('\\\\?\\');
+  const isExtendedLengthPath = path.startsWith('\\\\?\\')
 
-	if (isExtendedLengthPath) {
-		return path;
-	}
+  if (isExtendedLengthPath) {
+    return path
+  }
 
-	return path.replace(/\\/g, '/');
+  return path.replace(/\\/g, '/')
 }

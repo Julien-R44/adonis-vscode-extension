@@ -1,9 +1,9 @@
-import { HelpAndFeedbackView } from 'vscode-ext-help-and-feedback-view'
-import type { Command, Link } from 'vscode-ext-help-and-feedback-view'
 import type { ExtensionContext } from 'vscode'
+import type { Command, Link } from 'vscode-ext-help-and-feedback-view'
+import { HelpAndFeedbackView } from 'vscode-ext-help-and-feedback-view'
 
 export class HelpTreeDataView {
-  public static createView(context: ExtensionContext) {
+  static createView(context: ExtensionContext) {
     const items: (Link | Command)[] = []
 
     items.push(
@@ -49,7 +49,6 @@ export class HelpTreeDataView {
       }
     )
 
-    // eslint-disable-next-line no-new
     new HelpAndFeedbackView(context, 'adonisjs.help', items)
   }
 }

@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
-
-import { join } from 'path'
+import { join } from 'node:path'
 import { commands, window, workspace } from 'vscode'
+
 import { Notifier } from '../notifier'
-import { AceExecutor } from '../ace_executor'
 import ExtConfig from '../utilities/config'
+import { AceExecutor } from '../ace_executor'
 import ProjectManager from '../project_manager'
 import { capitalize } from '../../utilities/misc'
 import type { AdonisProject } from '../../types/projects'

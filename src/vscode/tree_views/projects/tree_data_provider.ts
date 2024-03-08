@@ -7,6 +7,7 @@ import {
   type TreeItem,
   TreeItemCollapsibleState,
 } from 'vscode'
+
 import ProjectManager from '../../project_manager'
 
 /**
@@ -15,7 +16,7 @@ import ProjectManager from '../../project_manager'
  */
 export class ProjectsTreeDataProvider implements TreeDataProvider<any> {
   #onDidChangeTreeData = new EventEmitter<any>()
-  public readonly onDidChangeTreeData = this.#onDidChangeTreeData.event
+  readonly onDidChangeTreeData = this.#onDidChangeTreeData.event
 
   constructor() {
     ProjectManager.onDidChangeProject(() => this.#onDidChangeTreeData.fire(null))

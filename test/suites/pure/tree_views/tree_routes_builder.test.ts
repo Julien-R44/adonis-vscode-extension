@@ -1,7 +1,8 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
-import { TreeRoutesBuilder } from '../../../../src/routes_tree/tree_routes_builder'
+
 import { createAdonis6Project } from '../../../../test_helpers'
+import { TreeRoutesBuilder } from '../../../../src/routes_tree/tree_routes_builder'
 
 test.group('Tree Routes Builder', () => {
   test('Should not group if only one domain', async ({ fs, assert }) => {

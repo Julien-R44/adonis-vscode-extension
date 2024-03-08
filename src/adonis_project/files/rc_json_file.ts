@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+
 import type { RcFile } from '../../types'
 
 /**

@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:suite command
  */
 export class Suite extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the suite name
      */

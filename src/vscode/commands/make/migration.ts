@@ -1,5 +1,3 @@
-/* eslint-disable sonarjs/no-nested-template-literals */
-
 import { Notifier } from '../../notifier'
 import BaseCommand from '../../commands/base_command'
 
@@ -7,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:migration command
  */
 export class Migration extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the migration name
      */

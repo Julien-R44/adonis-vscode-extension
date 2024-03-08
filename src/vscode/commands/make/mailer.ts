@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:mailer command
  */
 export class Mailer extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the mailer name
      */

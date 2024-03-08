@@ -4,7 +4,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle node ace serve command
  */
 export class Serve extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Should watch the files ?
      */

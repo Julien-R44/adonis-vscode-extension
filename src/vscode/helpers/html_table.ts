@@ -144,7 +144,7 @@ export class HtmlTable {
   /**
    * Open a virtual html file in the VSCode integrated webview
    */
-  public static async openPanelWithTable(
+  static async openPanelWithTable(
     openPath: string,
     title: string,
     headers: string[],

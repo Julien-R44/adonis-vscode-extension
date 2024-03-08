@@ -1,12 +1,10 @@
-/* eslint-disable sonarjs/no-nested-template-literals */
-
 import BaseCommand from '../../commands/base_command'
 
 /**
  * Handle migration:rollback command
  */
 export class Rollback extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Prompt user database name
      */

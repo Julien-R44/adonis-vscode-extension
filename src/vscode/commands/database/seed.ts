@@ -1,11 +1,10 @@
-/* eslint-disable sonarjs/no-nested-template-literals */
 import BaseCommand from '../../commands/base_command'
 
 /**
  * Handle db:seed command
  */
 export class Seed extends BaseCommand {
-  public static async run() {
+  static async run() {
     const connection = await this.getInput(
       'Define a custom database connection for the seeders ? Leave empty for using the default.'
     )

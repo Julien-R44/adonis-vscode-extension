@@ -1,4 +1,5 @@
 import { test } from '@japa/runner'
+
 import { parseMagicString } from '../../../src/utilities'
 
 test.group('Utils | parseControllerString', () => {

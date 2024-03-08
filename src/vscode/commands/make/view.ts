@@ -6,7 +6,7 @@ import type { AdonisProject } from '../../../types/projects'
  * Handle make:view command
  */
 export class View extends BaseCommand {
-  public static async run(viewName?: string, project?: AdonisProject) {
+  static async run(viewName?: string, project?: AdonisProject) {
     /**
      * Get the view name
      */

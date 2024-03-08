@@ -1,7 +1,8 @@
-import { readFileSync } from 'fs'
-import { basename, join } from 'path'
-import { PkgJson } from './files/pkg_json'
+import { readFileSync } from 'node:fs'
+import { basename, join } from 'node:path'
+
 import type { RcFile } from '../types'
+import { PkgJson } from './files/pkg_json'
 import type { AdonisEnv } from '../types/projects'
 import type { AceManifest } from '../types/projects/v5'
 

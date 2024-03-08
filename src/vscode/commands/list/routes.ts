@@ -1,8 +1,9 @@
-import BaseCommand from '../../commands/base_command'
-import { HtmlTable } from '../../helpers/html_table'
-import { Notifier } from '../../notifier'
-import type { AdonisProject } from '../../../types/projects'
 import type { WebviewPanel } from 'vscode'
+
+import { Notifier } from '../../notifier'
+import { HtmlTable } from '../../helpers/html_table'
+import BaseCommand from '../../commands/base_command'
+import type { AdonisProject } from '../../../types/projects'
 
 export class RouteList extends BaseCommand {
   private static readonly command = 'list:routes --json'
@@ -65,7 +66,7 @@ export class RouteList extends BaseCommand {
   /**
    * Run the command
    */
-  public static async run() {
+  static async run() {
     try {
       const { res, headers, rows } = await this.execAndParseRoutes()
       const panel = await HtmlTable.openPanelWithTable('routes-list', 'Route List', headers, rows)

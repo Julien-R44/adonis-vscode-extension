@@ -5,7 +5,7 @@ import BaseCommand from '../../commands/base_command'
  * Handle make:command command
  */
 export class Command extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Get the command name
      */

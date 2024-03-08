@@ -499,8 +499,9 @@
     "@japa/runner": "^2.5.1",
     "@japa/snapshot": "1.0.1-3",
     "@japa/spec-reporter": "^1.3.3",
-    "@julr/eslint-config": "^0.3.2",
+    "@julr/eslint-config": "^1.0.0",
     "@julr/module-methods-extractor": "^0.0.1",
+    "@julr/tooling-configs": "^2.1.0",
     "@types/babel__traverse": "^7.20.3",
     "@types/dedent": "^0.7.1",
     "@types/lodash.groupby": "^4.6.8",
@@ -514,11 +515,11 @@
     "common-path-prefix": "^3.0.0",
     "dedent": "^0.7.0",
     "dotenv": "^16.3.1",
-    "eslint": "^8.42.0",
+    "eslint": "^8.57.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.3.1",
     "lodash.groupby": "^4.6.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.2.5",
     "semver": "^7.5.4",
     "sinon": "^15.2.0",
     "ts-node": "^10.9.2",
@@ -542,23 +543,6 @@
         "openapi-types",
         "@babel/core"
       ]
-    }
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "out",
-      "syntaxes",
-      "test/fixtures",
-      "snippets",
-      "schemas"
-    ],
-    "extends": [
-      "@julr/eslint-config-ts",
-      "@julr/eslint-config-prettier"
-    ],
-    "rules": {
-      "no-useless-escape": "off",
-      "sonarjs/no-duplicate-string": "off"
     }
   },
   "prettier": {

@@ -1,5 +1,6 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { test } from '@japa/runner'
+
 import { getLineNumber } from '../../../src/utilities/misc'
 
 test.group('Utils | getLineNumber', () => {

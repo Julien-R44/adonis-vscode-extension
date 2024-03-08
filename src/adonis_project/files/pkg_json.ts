@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { readFileSync } from 'node:fs'
 import semverMajor from 'semver/functions/major'
 
 /**
@@ -26,6 +26,6 @@ export class PkgJson {
     const version = this.dependencies?.[pkgName]
     if (!version) return
 
-    return semverMajor(version.replace(/^[^0-9]*/, ''))
+    return semverMajor(version.replace(/^\D*/, ''))
   }
 }

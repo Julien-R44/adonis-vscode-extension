@@ -1,9 +1,10 @@
-import { join, normalize, relative } from 'path'
 import fg from 'fast-glob'
-import {slash} from '../utilities/index'
-import { getMethodsInSourceFile } from '../utilities/misc'
+import { join, normalize, relative } from 'node:path'
+
+import { slash } from '../utilities/index'
 import type { Suggestion } from '../types'
 import type { AdonisProject } from '../types/projects'
+import { getMethodsInSourceFile } from '../utilities/misc'
 
 export class ControllerSuggester {
   /**
@@ -13,7 +14,7 @@ export class ControllerSuggester {
    * we keep only the controller name + methods
    */
   static #sanitizeInput(project: AdonisProject, text: string) {
-    text = text.replaceAll(/\"|\'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
+    text = text.replaceAll(/"|'/g, '').replaceAll('.', '/').replaceAll(/\s/g, '')
 
     if (project.isAdonis6()) {
       const match = text.match(/^#controllers\/(.*)$/)
@@ -70,7 +71,7 @@ export class ControllerSuggester {
     return controllersFiles.filter((file) => regex.test(file))
   }
 
-  public static async geControllerSuggestions(options: {
+  static async geControllerSuggestions(options: {
     text: string
     project: AdonisProject
   }): Promise<Suggestion[]> {

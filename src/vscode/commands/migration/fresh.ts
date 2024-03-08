@@ -1,12 +1,10 @@
-/* eslint-disable sonarjs/no-nested-template-literals */
-
 import BaseCommand from '../../commands/base_command'
 
 /**
  * Handle migration:fresh command
  */
 export class Fresh extends BaseCommand {
-  public static async run() {
+  static async run() {
     /**
      * Prompt user database name and if it should be seeded
      */

@@ -1,6 +1,7 @@
 import groupBy from 'lodash.groupby'
-import { RouteNodeFactory } from './nodes/route_node_factory'
+
 import type { AdonisProject } from '../types/projects'
+import { RouteNodeFactory } from './nodes/route_node_factory'
 import type { AceListRoutesResultV6, RawRouteV6 } from '../types'
 
 export class TreeRoutesBuilder {
@@ -21,7 +22,7 @@ export class TreeRoutesBuilder {
        * We ignore the /api/\d+ pattern to make the groups
        */
       const pattern = route.pattern.replace(/^(\/api)?\/v\d+/, '/')
-      return pattern.split('/').filter(Boolean)[0] || '/'
+      return pattern.split('/').find(Boolean) || '/'
     })
 
     const promises = Object.entries(routesGroups).map(async ([groupName, routes]) => ({

@@ -1,5 +1,6 @@
-import { join } from 'path'
 import fg from 'fast-glob'
+import { join } from 'node:path'
+
 import { slash } from '../utilities/index'
 import { inertiaRegex } from '../utilities/regexes'
 import type { InertiaLink } from '../types/linkers'
@@ -20,7 +21,7 @@ export class InertiaLinker {
     return { line, colStart, colEnd }
   }
 
-  public static async getLinks(options: {
+  static async getLinks(options: {
     fileContent: string
     project: AdonisProject
     pagesDirectory: string
@@ -30,7 +31,7 @@ export class InertiaLinker {
     const matchesArray = Array.from(matches)
 
     const promises = matchesArray.map(async (match) => {
-      const fileName = match[1]!.replace(/\"|\'/g, '').replace(/\./g, '/')
+      const fileName = match[1]!.replace(/"|'/g, '').replace(/\./g, '/')
 
       const fullName = join(
         options.project.path,

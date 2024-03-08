@@ -1,8 +1,9 @@
 import { Uri, commands, window } from 'vscode'
+import type { ExtensionContext } from 'vscode'
+
 import { Extension } from '../../extension'
 import ExtConfig from '../../utilities/config'
 import ProjectManager from '../../project_manager'
-import type { ExtensionContext } from 'vscode'
 import type { AceCommandNode } from '../../../types/projects'
 
 function refreshCommands() {
@@ -18,7 +19,7 @@ async function openCommandFile(node: AceCommandNode) {
 }
 
 export const registerCommandsTreeViewCommands = (context: ExtensionContext) => {
-  const viewCommands: [string, Function][] = [
+  const viewCommands: [string, (...args: any) => any][] = [
     [ExtConfig.buildCommandId('view.commands.refresh'), refreshCommands],
     [ExtConfig.buildCommandId('view.commands.open-command'), openCommandFile],
   ]
