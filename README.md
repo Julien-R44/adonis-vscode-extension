@@ -12,6 +12,7 @@
 * Open and see docs within VSCode
 * .adonisrc.json file validation with JSON Schema
 * Multiple Workspaces and Monorepos support 
+* Inertia.js support
 * Go To Controller 
 
 > [!NOTE]
@@ -52,6 +53,7 @@ Autocompletion for the name and the handler of controllers. <kbd>Ctrl</kbd> + <k
 - `useUnixCd`: Use Unix-style `cd` for windows terminals (Useful when using Cygwin or Git Bash)
 - `quickJump`: Enable quick jump by using <kbd>Ctrl</kbd> + <kbd>Click</kbd>
 - `runMigrationInBackground`: Run migration/seeds commands in background. By default, they are executed in the built-in terminal of VSCode so that you can see the output.
+- `pagesDirectory` : The directory where your Inertia.js pages are located. Default is `inertia/pages`
 
 ## IntelliSense while typing
 In the context of controller and view autocompletion, we are inside strings. By default, VSCode totally disables the display of IntelliSense suggestions inside strings. If you want to see the autocompletion of your controllers and views, you will have to press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to manually trigger IntelliSense.
