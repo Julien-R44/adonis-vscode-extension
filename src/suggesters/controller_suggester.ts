@@ -1,6 +1,6 @@
 import { join, normalize, relative } from 'path'
 import fg from 'fast-glob'
-import slash from 'slash'
+import {slash} from '../utilities/index'
 import { getMethodsInSourceFile } from '../utilities/misc'
 import type { Suggestion } from '../types'
 import type { AdonisProject } from '../types/projects'

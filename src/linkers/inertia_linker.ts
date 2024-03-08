@@ -1,6 +1,6 @@
 import { join } from 'path'
 import fg from 'fast-glob'
-import slash from 'slash'
+import { slash } from '../utilities/index'
 import { inertiaRegex } from '../utilities/regexes'
 import type { InertiaLink } from '../types/linkers'
 import type { AdonisProject } from '../types/projects'

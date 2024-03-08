@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
-import slash from 'slash'
+import {slash} from '../../../../src/utilities/index'
 import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
 import { RouteNodeFactory } from '../../../../src/routes_tree/nodes/route_node_factory'
 import type { RawRouteV6 } from '../../../../src/types'

@@ -24,3 +24,17 @@ export function parseMagicString(text: string): Controller | null {
     fullPath: sanitized,
   }
 }
+
+/**
+ * Copy/paste from https://github.com/sindresorhus/slash/blob/main/index.js
+ * Since the original package is now ESM only
+ */
+export function slash(path: string) {
+	const isExtendedLengthPath = path.startsWith('\\\\?\\');
+
+	if (isExtendedLengthPath) {
+		return path;
+	}
+
+	return path.replace(/\\/g, '/');
+}

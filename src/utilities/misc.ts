@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { join } from 'path'
 import { Extractor } from '@julr/module-methods-extractor'
-import slash from 'slash'
+import {slash} from '../utilities/index'
 import type { Controller } from '../types'
 import type { AdonisProject } from '../types/projects'
 
