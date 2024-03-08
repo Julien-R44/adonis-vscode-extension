@@ -1,4 +1,4 @@
-import type { SymbolInformation, SymbolKind, type Uri } from 'vscode'
+import type { SymbolInformation, SymbolKind, Uri } from 'vscode'
 import { Range, Selection, TextEditorRevealType, commands, window } from 'vscode'
 
 import { Notifier } from '../notifier'

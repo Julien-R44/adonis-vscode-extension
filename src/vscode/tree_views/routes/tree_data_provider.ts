@@ -1,5 +1,5 @@
 import { pathToFileURL } from 'node:url'
-import type { Event, TreeDataProvider, type TreeItem } from 'vscode'
+import type { Event, TreeDataProvider, TreeItem } from 'vscode'
 import {
   EventEmitter,
   MarkdownString,
