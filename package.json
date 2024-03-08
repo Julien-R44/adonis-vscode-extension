@@ -58,7 +58,7 @@
         "adonisjs.inertia.pagesDirectory": {
           "type": "string",
           "description": "The path to the directory containing your Inertia pages. Relative to the project root.",
-          "default": "resources/js/Pages"
+          "default": "inertia/pages"
         }
       }
     },
