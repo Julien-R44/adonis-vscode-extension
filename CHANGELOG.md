@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.3
+
+- Fixed a bug where Inertia links were not correctly detected. See https://github.com/Julien-R44/adonis-vscode-extension/issues/35
+- Remove the warnings when Inertia links are not found. We gonna use another approach to handle this, at Typescript level instead of the extension level.
+- Change the default `pagesDirectory` for Inertia to `./inertia/pages` since this is the default directory for Inertia Starter kit.
+
 ## 1.2.1 
 
 Inertia suggestions were only working for Vue. Now they also work for React and svelte and is able by picking up `.jsx`, `.tsx` and `.svelte` files in the `resources/js/pages` directory.
