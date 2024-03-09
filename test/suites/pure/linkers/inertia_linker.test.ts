@@ -22,7 +22,7 @@ test.group('Inertia Linker', () => {
       inertia.render('Users/Create')
       inertia.render('Users/Update')
       router.get('/test', (ctx) => {
-        return ctx.inertia.render('test')
+        return ctx.inertia.render('test', { data: 'test' })
       })
     `
 

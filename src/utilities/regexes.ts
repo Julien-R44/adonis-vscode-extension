@@ -1,7 +1,7 @@
 /**
  * Used by inertia linker and suggester
  */
-export const inertiaRegex = new RegExp(/inertia\.render\(["'](.*)["']/, 'g')
+export const inertiaRegex = new RegExp(/inertia\.render\(["'](.*?)["']/, 'g')
 export const inertiaCompletionRegex = new RegExp(/(?<=inertia\.render\()(["'])[^"']*\1/, 'g')
 
 /**
