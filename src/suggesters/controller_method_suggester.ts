@@ -18,7 +18,10 @@ export class ControllerMethodSuggester {
     const methods = getMethodsInSourceFile(foundController.filePath)
 
     return methods
-      .filter((m) => m.startsWith(method!))
+      .filter((m) => {
+        if (!method) return true
+        return m.startsWith(method)
+      })
       .map((method) => ({
         text: method,
         description: 'Controller method',

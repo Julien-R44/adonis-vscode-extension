@@ -16,6 +16,7 @@ export default class RouteControllerCompletionProvider implements CompletionItem
       range = doc.getWordRangeAtPosition(pos, controllerMethodCompletionRegex)
     }
 
+    if (!range) return []
     const text = doc.getText(range)
 
     return showMethodSuggestions
