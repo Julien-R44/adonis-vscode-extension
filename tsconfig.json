@@ -34,7 +34,8 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

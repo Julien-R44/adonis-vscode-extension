@@ -53,7 +53,6 @@ function toggleFlatRouteViewCommand() {
 }
 
 export const registerRoutesTreeViewCommands = (context: ExtensionContext) => {
-  console.log('registerrr')
   const viewCommands: [string, (...args: any) => any][] = [
     [ExtConfig.buildCommandId('view.routes.refresh'), refreshRouteCommand],
     [ExtConfig.buildCommandId('view.routes.open-in-browser'), openInBrowserCommand],
