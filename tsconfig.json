@@ -10,7 +10,14 @@
     "baseUrl": "./",
     "rootDir": ".",
     "module": "commonjs",
-    "paths": {},
+    // https://devblogs.microsoft.com/typescript/announcing-typescript-5-4/#auto-import-support-for-subpath-imports
+    // Seems like it doesnt work with CJS ? Not sure why. So let's duplicate
+    // the entries here for now
+    "paths": {
+      "#/*": ["./src/*"],
+      "#types/*": ["./src/types/*"],
+      "#vscode/*": ["./src/vscode/*"]
+    },
     "resolveJsonModule": true,
     "strict": true,
     "allowUnreachableCode": false,
@@ -27,8 +34,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

@@ -4,7 +4,7 @@ import { workspace } from 'vscode'
 import { test } from '@japa/runner'
 import type { WorkspaceFolder } from 'vscode'
 
-import { RouteControllerLinkProvider } from '../../../src/vscode/providers/routes/link_provider'
+import { RouteControllerLinkProvider } from '#vscode/providers/routes/link_provider'
 
 let mainWorkspace: string
 

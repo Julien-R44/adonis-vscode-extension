@@ -3,7 +3,7 @@ import { pascalCase } from 'change-case'
 
 import { parseMagicString, slash } from '../../utilities'
 import type { AdonisProject } from '../../types/projects'
-import type { HttpMethod, RawRouteV6 } from '../../types'
+import type { HttpMethod, RawRouteV6 } from '#types/index'
 import { arraysEqual, controllerMagicStringToPath, getLineNumber } from '../../utilities/misc'
 
 export interface RouteNode {

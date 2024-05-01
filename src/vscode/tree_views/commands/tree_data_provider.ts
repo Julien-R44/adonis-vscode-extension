@@ -1,9 +1,9 @@
 import { EventEmitter, ThemeIcon, TreeItemCollapsibleState } from 'vscode'
 import type { Event, ProviderResult, TreeDataProvider, TreeItem } from 'vscode'
 
-import { Extension } from '../../extension'
-import ProjectManager from '../../project_manager'
-import type { AceCommandNode } from '../../../types/projects'
+import { Extension } from '#vscode/extension'
+import ProjectManager from '#vscode/project_manager'
+import type { AceCommandNode } from '#types/projects'
 
 /**
  * Provide the data to be displayed in the VSCode "Commands" Tree View

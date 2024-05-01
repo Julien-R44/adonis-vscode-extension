@@ -1,9 +1,9 @@
 import type { WebviewPanel } from 'vscode'
 
-import { Notifier } from '../../notifier'
-import { HtmlTable } from '../../helpers/html_table'
-import BaseCommand from '../../commands/base_command'
-import type { AdonisProject } from '../../../types/projects'
+import { Notifier } from '#vscode/notifier'
+import type { AdonisProject } from '#types/projects'
+import { HtmlTable } from '#vscode/helpers/html_table'
+import BaseCommand from '#vscode/commands/base_command'
 
 export class RouteList extends BaseCommand {
   private static readonly command = 'list:routes --json'

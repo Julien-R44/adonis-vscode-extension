@@ -1,9 +1,9 @@
 import sinon from 'sinon'
 import { test } from '@japa/runner'
 
-import { AceExecutor } from '../../../src/vscode/ace_executor'
-import { RunTests } from '../../../src/vscode/commands/run_tests'
-import { Configure } from '../../../src/vscode/commands/configure'
+import { AceExecutor } from '#vscode/ace_executor'
+import { RunTests } from '#vscode/commands/run_tests'
+import { Configure } from '#vscode/commands/configure'
 
 test.group('Commands: Configure', (group) => {
   group.each.teardown(() => sinon.restore())

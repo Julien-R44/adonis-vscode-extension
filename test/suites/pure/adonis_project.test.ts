@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 
-import { Adonis6Project } from '../../../src/adonis_project/adonis6_project'
-import { Adonis5Project } from '../../../src/adonis_project/adonis5_project'
+import { Adonis6Project } from '#/adonis_project/adonis6_project'
+import { Adonis5Project } from '#/adonis_project/adonis5_project'
 
 test.group('Adonis Project', () => {
   test('should set name from package.json', async ({ fs, assert }) => {

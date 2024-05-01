@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 
-import { InertiaSuggester } from '../../../../src/suggesters/inertia_suggester'
-import { Adonis6Project } from '../../../../src/adonis_project/adonis6_project'
+import { InertiaSuggester } from '#/suggesters/inertia_suggester'
+import { Adonis6Project } from '#/adonis_project/adonis6_project'
 
 test.group('View Suggester', () => {
   test('basic', async ({ fs, assert }) => {

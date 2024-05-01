@@ -1,7 +1,7 @@
 import { resolve } from 'node:path'
 import { test } from '@japa/runner'
 
-import { getLineNumber } from '../../../src/utilities/misc'
+import { getLineNumber } from '#/utilities/misc'
 
 test.group('Utils | getLineNumber', () => {
   test('should works', async ({ assert }) => {

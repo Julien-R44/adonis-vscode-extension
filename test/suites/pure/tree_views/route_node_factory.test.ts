@@ -1,10 +1,10 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 
-import { slash } from '../../../../src/utilities/index'
-import type { RawRouteV6 } from '../../../../src/types'
+import { slash } from '#/utilities/index'
+import type { RawRouteV6 } from '#/types'
+import { RouteNodeFactory } from '#/routes_tree/nodes/route_node_factory'
 import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
-import { RouteNodeFactory } from '../../../../src/routes_tree/nodes/route_node_factory'
 
 test.group('Route node factory', () => {
   test('v6 magic | builds RouteNode', async ({ fs, assert }) => {

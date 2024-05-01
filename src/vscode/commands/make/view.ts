@@ -1,6 +1,6 @@
-import { Notifier } from '../../notifier'
-import BaseCommand from '../../commands/base_command'
-import type { AdonisProject } from '../../../types/projects'
+import { Notifier } from '#vscode/notifier'
+import type { AdonisProject } from '#types/projects'
+import BaseCommand from '#vscode/commands/base_command'
 
 /**
  * Handle make:view command

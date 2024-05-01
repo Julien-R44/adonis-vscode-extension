@@ -1,6 +1,6 @@
 import { CompletionItem, CompletionItemKind, MarkdownString } from 'vscode'
 
-import type { Suggestion } from '../../types'
+import type { Suggestion } from '#types/index'
 
 export class CompletionFactory {
   static fromSuggestions(suggestions: Suggestion[], itemKind = CompletionItemKind.Value) {

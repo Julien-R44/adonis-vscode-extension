@@ -1,11 +1,11 @@
 import { type DocumentLinkProvider, type TextDocument, Uri } from 'vscode'
 
-import ProjectManager from '../../project_manager'
-import { getLineNumber } from '../../../utilities/misc'
-import { DiagnosticCollection } from '../../file_diagnostics'
-import { ControllersLinker } from '../../../linkers/controllers_linker'
-import { DocumentLinkFactory } from '../../factories/document_link_factory'
-import type { RouteControllerLink } from '../../factories/document_link_factory'
+import { getLineNumber } from '#/utilities/misc'
+import ProjectManager from '#vscode/project_manager'
+import { DiagnosticCollection } from '#vscode/file_diagnostics'
+import { ControllersLinker } from '#/linkers/controllers_linker'
+import { DocumentLinkFactory } from '#vscode/factories/document_link_factory'
+import type { RouteControllerLink } from '#vscode/factories/document_link_factory'
 
 export class RouteControllerLinkProvider implements DocumentLinkProvider {
   #collection = new DiagnosticCollection('adonisjs-routes')

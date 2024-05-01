@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  external: ['vscode'],
+  external: ['vscode', '#vscode/*', '#/*'],
   format: ['cjs'],
   shims: false,
 })

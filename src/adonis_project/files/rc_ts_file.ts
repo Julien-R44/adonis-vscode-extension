@@ -5,7 +5,7 @@ import type { NodePath } from '@babel/traverse'
 import type { ObjectProperty } from '@babel/types'
 import { isIdentifier, isStringLiteral } from '@babel/types'
 
-import type { RcFile } from '../../types'
+import type { RcFile } from '#types/index'
 
 /**
  * Parser of RC File defined using TypeScript

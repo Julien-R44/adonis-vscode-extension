@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 
+import { ControllerSuggester } from '#/suggesters/controller_suggester'
 import { createAdonis5Project, createAdonis6Project } from '../../../../test_helpers'
-import { ControllerSuggester } from '../../../../src/suggesters/controller_suggester'
 
 test.group('Controller suggester', () => {
   test('adonis 6 | basic', async ({ fs, assert }) => {

@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 
-import { parseMagicString } from '../../../src/utilities'
+import { parseMagicString } from '#/utilities'
 
 test.group('Utils | parseControllerString', () => {
   test('full v6', ({ assert }) => {

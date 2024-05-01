@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 
-import type { RcFile } from '../../types'
+import type { RcFile } from '#types/index'
 
 /**
  * Parser of RC File defined using JSON

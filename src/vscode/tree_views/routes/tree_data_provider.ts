@@ -1,25 +1,13 @@
+import * as vscode from 'vscode'
 import { pathToFileURL } from 'node:url'
 import type { Event, TreeDataProvider, TreeItem } from 'vscode'
-import {
-  EventEmitter,
-  MarkdownString,
-  ThemeColor,
-  ThemeIcon,
-  TreeItemCollapsibleState,
-  Uri,
-} from 'vscode'
 
-import { Notifier } from '../../notifier'
-import { Extension } from '../../extension'
-import ProjectManager from '../../project_manager'
-import { TreeRoutesBuilder } from '../../../routes_tree/tree_routes_builder'
-import type { RouteNode } from '../../../routes_tree/nodes/route_node_factory'
-import type {
-  AceListRoutesResultV6,
-  BaseNode,
-  RouteDomainNode,
-  RouteGroupNode,
-} from '../../../types'
+import { Notifier } from '#vscode/notifier'
+import { Extension } from '#vscode/extension'
+import ProjectManager from '#vscode/project_manager'
+import { TreeRoutesBuilder } from '#/routes_tree/tree_routes_builder'
+import type { RouteNode } from '#/routes_tree/nodes/route_node_factory'
+import type { AceListRoutesResultV6, BaseNode, RouteDomainNode, RouteGroupNode } from '#types/index'
 
 type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDomainNode | BaseNode
 
@@ -29,7 +17,7 @@ type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDom
 export class RoutesTreeDataProvider
   implements TreeDataProvider<RouteTreeDataProviderPossiblesNodes>
 {
-  #onDidChangeTreeData = new EventEmitter()
+  #onDidChangeTreeData = new vscode.EventEmitter()
 
   #routes: RouteTreeDataProviderPossiblesNodes[] = []
   #rawRoutes: AceListRoutesResultV6 = []
@@ -45,11 +33,11 @@ export class RoutesTreeDataProvider
 
   #buildGroupTreeItem(element: RouteGroupNode) {
     return {
-      collapsibleState: TreeItemCollapsibleState.Collapsed,
+      collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
       label: element.label,
       description: element.description,
       tooltip: element.description,
-      iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
+      iconPath: element.icon ? new vscode.ThemeIcon(element.icon) : undefined,
     }
   }
 
@@ -61,7 +49,7 @@ export class RoutesTreeDataProvider
     }
 
     if (element.controller.found) {
-      const uri = Uri.parse(pathToFileURL(element.controller.path).href).with({
+      const uri = vscode.Uri.parse(pathToFileURL(element.controller.path).href).with({
         fragment: element.controller.lineNumber.toString(),
       })
       command.arguments = [uri]
@@ -75,9 +63,9 @@ export class RoutesTreeDataProvider
       label: element.label,
       command,
       description: element.description,
-      tooltip: new MarkdownString(element.tooltip),
+      tooltip: new vscode.MarkdownString(element.tooltip),
       contextValue,
-      iconPath: new ThemeIcon('arrow-circle-right', new ThemeColor(element.color)),
+      iconPath: new vscode.ThemeIcon('arrow-circle-right', new vscode.ThemeColor(element.color)),
     }
   }
 
@@ -100,7 +88,7 @@ export class RoutesTreeDataProvider
     return {
       label: element.label,
       description: element.description,
-      iconPath: element.icon ? new ThemeIcon(element.icon) : undefined,
+      iconPath: element.icon ? new vscode.ThemeIcon(element.icon) : undefined,
     }
   }
 

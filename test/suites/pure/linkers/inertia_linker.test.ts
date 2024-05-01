@@ -2,9 +2,9 @@ import dedent from 'dedent'
 import { join } from 'node:path'
 import { test } from '@japa/runner'
 
-import { slash } from '../../../../src/utilities/index'
+import { slash } from '#/utilities/index'
+import { InertiaLinker } from '#/linkers/inertia_linker'
 import { createAdonis5Project } from '../../../../test_helpers'
-import { InertiaLinker } from '../../../../src/linkers/inertia_linker'
 
 test.group('Inertia Linker', () => {
   test('should works', async ({ fs, assert }) => {

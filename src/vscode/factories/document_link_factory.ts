@@ -1,7 +1,7 @@
 import { pathToFileURL } from 'node:url'
 import { DocumentLink, Position, Range, Uri } from 'vscode'
 
-import type { Controller } from '../../types'
+import type { Controller } from '#types/index'
 import type { RouteLink, ViewLink } from '../../types/linkers'
 
 export class RouteControllerLink extends DocumentLink {

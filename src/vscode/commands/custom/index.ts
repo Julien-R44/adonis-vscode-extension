@@ -1,8 +1,8 @@
-import { Notifier } from '../../notifier'
-import { ArgType } from '../../../types/projects/v5'
-import BaseCommand from '../../commands/base_command'
-import type { AdonisProject } from '../../../types/projects'
-import type { CommandEntry } from '../../../types/projects/v6'
+import { Notifier } from '#vscode/notifier'
+import { ArgType } from '#types/projects/v5'
+import type { AdonisProject } from '#types/projects'
+import type { CommandEntry } from '#types/projects/v6'
+import BaseCommand from '#vscode/commands/base_command'
 
 /**
  * Generic class to run custom commands

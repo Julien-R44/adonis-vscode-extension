@@ -2,7 +2,7 @@
   "publisher": "jripouteau",
   "name": "adonis-vscode-extension",
   "displayName": "AdonisJS Extension",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "The official VSCode extension of AdonisJS",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
   "license": "MIT",
@@ -35,6 +35,11 @@
     "workspaceContains:**/.adonisrc.json",
     "workspaceContains:**/adonisrc.ts"
   ],
+  "imports": {
+    "#/*": "./src/*.js",
+    "#vscode/*": "./src/vscode/*.js",
+    "#types/*": "./src/types/*.js"
+  },
   "contributes": {
     "configuration": {
       "type": "object",
@@ -508,7 +513,7 @@
     "@types/node": "14.x",
     "@types/semver": "^7.5.8",
     "@types/sinon": "^10.0.20",
-    "@types/vscode": "^1.88.0",
+    "@types/vscode": "^1.65.0",
     "@vscode/test-electron": "^2.3.9",
     "c8": "^9.1.0",
     "change-case": "^4.1.2",

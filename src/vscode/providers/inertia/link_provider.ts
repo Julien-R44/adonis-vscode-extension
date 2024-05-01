@@ -1,9 +1,9 @@
 import type { DocumentLinkProvider, TextDocument } from 'vscode'
 
-import ExtConfig from '../../utilities/config'
-import ProjectManager from '../../project_manager'
-import { InertiaLinker } from '../../../linkers/inertia_linker'
-import { DocumentLinkFactory } from '../../factories/document_link_factory'
+import ExtConfig from '#vscode/utilities/config'
+import ProjectManager from '#vscode/project_manager'
+import { InertiaLinker } from '#/linkers/inertia_linker'
+import { DocumentLinkFactory } from '#vscode/factories/document_link_factory'
 
 export default class InertiaLinkProvider implements DocumentLinkProvider {
   async provideDocumentLinks(doc: TextDocument) {

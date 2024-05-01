@@ -1,13 +1,10 @@
 import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
-import ProjectManager from '../../project_manager'
-import { CompletionFactory } from '../../factories/completion_factory'
-import { ControllerSuggester } from '../../../suggesters/controller_suggester'
-import { ControllerMethodSuggester } from '../../../suggesters/controller_method_suggester'
-import {
-  controllerMethodCompletionRegex,
-  controllerNameCompletionRegex,
-} from '../../../utilities/regexes'
+import ProjectManager from '#vscode/project_manager'
+import { ControllerSuggester } from '#/suggesters/controller_suggester'
+import { CompletionFactory } from '#vscode/factories/completion_factory'
+import { ControllerMethodSuggester } from '#/suggesters/controller_method_suggester'
+import { controllerMethodCompletionRegex, controllerNameCompletionRegex } from '#/utilities/regexes'
 
 export default class RouteControllerCompletionProvider implements CompletionItemProvider {
   async provideCompletionItems(doc: TextDocument, pos: Position) {

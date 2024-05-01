@@ -1,11 +1,11 @@
 import { CompletionItemKind } from 'vscode'
 import type { CompletionItemProvider, Position, TextDocument } from 'vscode'
 
-import ExtConfig from '../../utilities/config'
-import ProjectManager from '../../project_manager'
-import { inertiaCompletionRegex } from '../../../utilities/regexes'
-import { CompletionFactory } from '../../factories/completion_factory'
-import { InertiaSuggester } from '../../../suggesters/inertia_suggester'
+import ExtConfig from '#vscode/utilities/config'
+import ProjectManager from '#vscode/project_manager'
+import { inertiaCompletionRegex } from '#/utilities/regexes'
+import { InertiaSuggester } from '#/suggesters/inertia_suggester'
+import { CompletionFactory } from '#vscode/factories/completion_factory'
 
 export class InertiaCompletionProvider implements CompletionItemProvider {
   /**

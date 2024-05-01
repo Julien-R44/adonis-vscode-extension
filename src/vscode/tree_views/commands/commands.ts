@@ -4,7 +4,7 @@ import type { ExtensionContext } from 'vscode'
 import { Extension } from '../../extension'
 import ExtConfig from '../../utilities/config'
 import ProjectManager from '../../project_manager'
-import type { AceCommandNode } from '../../../types/projects'
+import type { AceCommandNode } from '#types/projects'
 
 function refreshCommands() {
   ProjectManager.currentProject.reload()

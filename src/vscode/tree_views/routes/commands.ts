@@ -1,12 +1,12 @@
 import type { ExtensionContext } from 'vscode'
 import vscode, { SymbolKind, Uri, commands } from 'vscode'
 
-import { Notifier } from '../../notifier'
-import { Extension } from '../../extension'
-import ExtConfig from '../../utilities/config'
-import ProjectManager from '../../project_manager'
-import { searchAndOpenSymbol, showDocumentAtLine } from '../../utilities'
-import type { RouteNode } from '../../../routes_tree/nodes/route_node_factory'
+import { Notifier } from '#vscode/notifier'
+import { Extension } from '#vscode/extension'
+import ExtConfig from '#vscode/utilities/config'
+import ProjectManager from '#vscode/project_manager'
+import type { RouteNode } from '#/routes_tree/nodes/route_node_factory'
+import { searchAndOpenSymbol, showDocumentAtLine } from '#vscode/utilities'
 
 function refreshRouteCommand() {
   return Extension.routesTreeDataProvider.getAllRoutes()
@@ -53,6 +53,7 @@ function toggleFlatRouteViewCommand() {
 }
 
 export const registerRoutesTreeViewCommands = (context: ExtensionContext) => {
+  console.log('registerrr')
   const viewCommands: [string, (...args: any) => any][] = [
     [ExtConfig.buildCommandId('view.routes.refresh'), refreshRouteCommand],
     [ExtConfig.buildCommandId('view.routes.open-in-browser'), openInBrowserCommand],

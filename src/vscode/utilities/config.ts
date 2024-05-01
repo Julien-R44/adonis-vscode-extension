@@ -1,6 +1,6 @@
 import { workspace } from 'vscode'
 
-import type { Config, ConfigMisc } from '../../types/config'
+import type { Config, ConfigMisc } from '#types/config'
 
 /**
  * A wrapper around vscode configuration for this extension
