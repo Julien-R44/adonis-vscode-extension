@@ -77,3 +77,9 @@ But be warned, this will automatically display intellisense even in "traditional
 * Press `F5` to open a new VSCode window with your extensions loaded.
 * You can relaunch the extension from the debug toolbar after changing code in `src/extension.ts`.
 * You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with your extension to load your changes.
+
+## Sponsors
+
+If you like this project, [please consider supporting it by sponsoring it](https://github.com/sponsors/Julien-R44/). It will help a lot to maintain and improve it. Thanks a lot !
+
+![](https://github.com/julien-r44/static/blob/main/sponsorkit/sponsors.png?raw=true)
