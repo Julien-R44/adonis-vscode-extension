@@ -282,6 +282,10 @@
         {
           "command": "adonis-vscode-extension.test",
           "when": "adonisProjectLoaded == true"
+        },
+        {
+          "command": "adonis-vscode-extension.env.add",
+          "when": "adonisProjectLoaded == true"
         }
       ]
     },
@@ -453,6 +457,10 @@
       {
         "command": "adonis-vscode-extension.test",
         "title": "⌨️  AdonisJS(Ace) Run Tests"
+      },
+      {
+        "command": "adonis-vscode-extension.env.add",
+        "title": "⌨️  AdonisJS(Ace) Add Environment Variable"
       },
       {
         "command": "adonis-vscode-extension.docs.adonis",

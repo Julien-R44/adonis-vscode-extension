@@ -3,6 +3,7 @@ import * as vscode from 'vscode'
 import { Serve } from './serve'
 import { View } from './make/view'
 import { Test } from './make/test'
+import { EnvAdd } from './env/add'
 import { Model } from './make/model'
 import { Suite } from './make/suite'
 import { Run } from './migration/run'
@@ -239,6 +240,12 @@ export const commands = [
         description: 'Run AdonisJS tests',
         commandIdentifier: ExtConfig.buildCommandId(`test`),
         handler: RunTests.run.bind(RunTests),
+      },
+      {
+        aceCommand: 'env:add',
+        description: 'Add a new environment variable',
+        commandIdentifier: ExtConfig.buildCommandId(`env.add`),
+        handler: () => EnvAdd.run(),
       },
     ],
   },
