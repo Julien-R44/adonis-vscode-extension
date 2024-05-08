@@ -6,10 +6,14 @@ import { Notifier } from '#vscode/notifier'
 import { Extension } from '#vscode/extension'
 import ProjectManager from '#vscode/project_manager'
 import { TreeRoutesBuilder } from '#/routes_tree/tree_routes_builder'
-import type { RouteNode } from '#/routes_tree/nodes/route_node_factory'
+import type { RouteNodeDetails } from '#/routes_tree/nodes/route_node_factory'
 import type { AceListRoutesResultV6, BaseNode, RouteDomainNode, RouteGroupNode } from '#types/index'
 
-type RouteTreeDataProviderPossiblesNodes = RouteNode | RouteGroupNode | RouteDomainNode | BaseNode
+type RouteTreeDataProviderPossiblesNodes =
+  | RouteNodeDetails
+  | RouteGroupNode
+  | RouteDomainNode
+  | BaseNode
 
 /**
  * Provide the data to be displayed in the VSCode "Routes" Tree View
@@ -41,7 +45,7 @@ export class RoutesTreeDataProvider
     }
   }
 
-  #buildRouteTreeItem(element: RouteNode) {
+  #buildRouteTreeItem(element: RouteNodeDetails) {
     const command = {
       title: 'Open Controller',
       command: 'adonis-vscode-extension.view.routes.open-controller',
@@ -77,19 +81,41 @@ export class RoutesTreeDataProvider
    * Returns the UI state of the given walked node
    */
   getTreeItem(element: RouteTreeDataProviderPossiblesNodes): TreeItem | Thenable<TreeItem> {
-    if ('children' in element) {
-      return this.#buildGroupTreeItem(element)
+    console.log(element)
+    if ('children' in element && element.children.length > 0) {
+      return {
+        collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+        tooltip: element.description,
+        iconPath: element.icon ? new vscode.ThemeIcon(element.icon) : undefined,
+        label: element.segment,
+        description: `${element.endpointsCount} endpoints`,
+      }
     }
 
-    if ('controller' in element) {
-      return this.#buildRouteTreeItem(element)
+    // return {
+    //   label: element.node.label,
+    //   description: element.node.description,
+    //   iconPath: element.node.icon ? new vscode.ThemeIcon(element.node.icon) : undefined,
+    // }
+
+    if ('node' in element) {
+      return this.#buildRouteTreeItem({
+        label: element.node.label,
+        ...element.node,
+      })
     }
 
-    return {
-      label: element.label,
-      description: element.description,
-      iconPath: element.icon ? new vscode.ThemeIcon(element.icon) : undefined,
+    if ('endpoints' in element && element.endpoints.length > 0) {
+      return {
+        collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+        tooltip: element.description,
+        iconPath: element.icon ? new vscode.ThemeIcon(element.icon) : undefined,
+        label: element.endpoints[0].label,
+        description: `${element.endpointsCount} endpoints`,
+      }
     }
+
+    return {}
   }
 
   /**
@@ -107,10 +133,15 @@ export class RoutesTreeDataProvider
       ]
     }
 
+    console.log(this.#routes)
     if (!element) {
-      return this.#routes
+      return [...this.#routes.children]
+    } else if ('endpoints' in element) {
+      return [...element.children, ...element.endpoints]
     } else if ('children' in element) {
-      return element.children
+      return [...element.children]
+    } else if ('node' in element) {
+      return this.#routes
     }
 
     return []

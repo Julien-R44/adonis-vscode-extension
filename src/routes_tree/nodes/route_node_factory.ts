@@ -3,10 +3,10 @@ import { pascalCase } from 'change-case'
 
 import { parseMagicString, slash } from '../../utilities'
 import type { AdonisProject } from '../../types/projects'
-import type { HttpMethod, RawRouteV6 } from '#types/index'
+import type { HttpMethod, RawRouteV6 } from '../../types'
 import { arraysEqual, controllerMagicStringToPath, getLineNumber } from '../../utilities/misc'
 
-export interface RouteNode {
+export interface RouteNodeDetails {
   /**
    * Description of the route Node. All HTTP methods
    */
@@ -62,7 +62,7 @@ export class RouteNodeFactory {
     return 'charts.foreground'
   }
 
-  static #buildTooltip(project: AdonisProject, route: RouteNode) {
+  static #buildTooltip(project: AdonisProject, route: RouteNodeDetails) {
     const relativePath = route.controller.found
       ? slash(relative(project.path, route.controller.path))
       : 'Not found'
@@ -114,7 +114,7 @@ export class RouteNodeFactory {
       lineNumber = getLineNumberResult.lineno
     }
 
-    const node: RouteNode = {
+    const node: RouteNodeDetails = {
       description: item.methods.join(', '),
       label: item.pattern === '/*' ? '*' : `${item.pattern}`,
       color: this.#getRouteColor(item),

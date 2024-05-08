@@ -5,7 +5,7 @@ import { Notifier } from '#vscode/notifier'
 import { Extension } from '#vscode/extension'
 import ExtConfig from '#vscode/utilities/config'
 import ProjectManager from '#vscode/project_manager'
-import type { RouteNode } from '#/routes_tree/nodes/route_node_factory'
+import type { RouteNodeDetails } from '#/routes_tree/nodes/route_node_factory'
 import { searchAndOpenSymbol, showDocumentAtLine } from '#vscode/utilities'
 
 function refreshRouteCommand() {
@@ -34,11 +34,11 @@ async function openControllerCommand(uriOrSymbol?: Uri) {
   }
 }
 
-function openInBrowserCommand(route: RouteNode) {
+function openInBrowserCommand(route: RouteNodeDetails) {
   commands.executeCommand('vscode.open', Uri.parse(route.url))
 }
 
-function copyLinkCommand(route: RouteNode) {
+function copyLinkCommand(route: RouteNodeDetails) {
   vscode.env.clipboard.writeText(route.url)
   Notifier.showMessage('Link was copied to your clipboard.')
 }

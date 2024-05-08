@@ -1,0 +1,1226 @@
+[
+  {
+    "domain": "root",
+    "routes": [
+      {
+        "name": "backoffice.login",
+        "pattern": "/backoffice/auth/login",
+        "methods": ["GET"],
+        "handler": {
+          "type": "closure",
+          "name": "closure"
+        },
+        "middleware": ["guest"]
+      },
+      {
+        "name": "",
+        "pattern": "/backoffice/auth/send-otp",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/auth_controller.js",
+          "method": "generateLoginOTP"
+        },
+        "middleware": ["guest"]
+      },
+      {
+        "name": "",
+        "pattern": "/backoffice/auth/verify-otp",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/auth_controller.js",
+          "method": "verifyLoginOTP"
+        },
+        "middleware": ["guest"]
+      },
+      {
+        "name": "",
+        "pattern": "/backoffice/auth/logout",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/auth_controller.js",
+          "method": "logout"
+        },
+        "middleware": []
+      },
+      {
+        "name": "backoffice.dashboard",
+        "pattern": "/backoffice/dashboard",
+        "methods": ["GET"],
+        "handler": {
+          "type": "closure",
+          "name": "closure"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "backoffice.settings",
+        "pattern": "/backoffice/settings",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/settings_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "",
+        "pattern": "/backoffice/settings",
+        "methods": ["PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/settings_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.index",
+        "pattern": "/backoffice/zones",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.create",
+        "pattern": "/backoffice/zones/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.store",
+        "pattern": "/backoffice/zones",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.show",
+        "pattern": "/backoffice/zones/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.edit",
+        "pattern": "/backoffice/zones/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.update",
+        "pattern": "/backoffice/zones/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "zones.destroy",
+        "pattern": "/backoffice/zones/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/zones_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.index",
+        "pattern": "/backoffice/clients",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.create",
+        "pattern": "/backoffice/clients/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.store",
+        "pattern": "/backoffice/clients",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.show",
+        "pattern": "/backoffice/clients/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.edit",
+        "pattern": "/backoffice/clients/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.update",
+        "pattern": "/backoffice/clients/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "clients.destroy",
+        "pattern": "/backoffice/clients/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/clients_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.index",
+        "pattern": "/backoffice/crewmen",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.create",
+        "pattern": "/backoffice/crewmen/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.store",
+        "pattern": "/backoffice/crewmen",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.show",
+        "pattern": "/backoffice/crewmen/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.edit",
+        "pattern": "/backoffice/crewmen/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.update",
+        "pattern": "/backoffice/crewmen/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "crewmen.destroy",
+        "pattern": "/backoffice/crewmen/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/crew_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.index",
+        "pattern": "/backoffice/vehicles",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.create",
+        "pattern": "/backoffice/vehicles/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.store",
+        "pattern": "/backoffice/vehicles",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.show",
+        "pattern": "/backoffice/vehicles/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.edit",
+        "pattern": "/backoffice/vehicles/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.update",
+        "pattern": "/backoffice/vehicles/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "vehicles.destroy",
+        "pattern": "/backoffice/vehicles/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/vehicle_templates_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.index",
+        "pattern": "/backoffice/subscriptions",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.create",
+        "pattern": "/backoffice/subscriptions/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.store",
+        "pattern": "/backoffice/subscriptions",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.show",
+        "pattern": "/backoffice/subscriptions/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.edit",
+        "pattern": "/backoffice/subscriptions/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.update",
+        "pattern": "/backoffice/subscriptions/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "subscriptions.destroy",
+        "pattern": "/backoffice/subscriptions/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/subscriptions_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.index",
+        "pattern": "/backoffice/charge-options",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.create",
+        "pattern": "/backoffice/charge-options/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.store",
+        "pattern": "/backoffice/charge-options",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.show",
+        "pattern": "/backoffice/charge-options/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.edit",
+        "pattern": "/backoffice/charge-options/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.update",
+        "pattern": "/backoffice/charge-options/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_options.destroy",
+        "pattern": "/backoffice/charge-options/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_options_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.index",
+        "pattern": "/backoffice/charge-emplacements",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.create",
+        "pattern": "/backoffice/charge-emplacements/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.store",
+        "pattern": "/backoffice/charge-emplacements",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.show",
+        "pattern": "/backoffice/charge-emplacements/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.edit",
+        "pattern": "/backoffice/charge-emplacements/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.update",
+        "pattern": "/backoffice/charge-emplacements/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "charge_emplacements.destroy",
+        "pattern": "/backoffice/charge-emplacements/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/charge_emplacements_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.index",
+        "pattern": "/backoffice/companies",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.create",
+        "pattern": "/backoffice/companies/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.store",
+        "pattern": "/backoffice/companies",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.show",
+        "pattern": "/backoffice/companies/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.edit",
+        "pattern": "/backoffice/companies/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.update",
+        "pattern": "/backoffice/companies/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies.destroy",
+        "pattern": "/backoffice/companies/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/companies_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.index",
+        "pattern": "/backoffice/companies/:companyId/users",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.create",
+        "pattern": "/backoffice/companies/:companyId/users/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.store",
+        "pattern": "/backoffice/companies/:companyId/users",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.show",
+        "pattern": "/backoffice/companies/:companyId/users/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.edit",
+        "pattern": "/backoffice/companies/:companyId/users/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.update",
+        "pattern": "/backoffice/companies/:companyId/users/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_users.destroy",
+        "pattern": "/backoffice/companies/:companyId/users/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_users_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.index",
+        "pattern": "/backoffice/companies/:companyId/subscriptions",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.create",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.store",
+        "pattern": "/backoffice/companies/:companyId/subscriptions",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.show",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.edit",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.update",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions.destroy",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscriptions_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.index",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "index"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.create",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users/create",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.store",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "store"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.show",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "show"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.edit",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users/:id/edit",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "edit"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.update",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users/:id",
+        "methods": ["PUT", "PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "update"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "companies_company_id_subscriptions_subscription_id_users.destroy",
+        "pattern": "/backoffice/companies/:companyId/subscriptions/:subscriptionId/users/:id",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "./app/modules/admin/controllers/company_subscription_users_controller.js",
+          "method": "destroy"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "backoffice.district",
+        "pattern": "/backoffice/district",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/districts_controller",
+          "method": "create"
+        },
+        "middleware": ["auth", "ensureRole"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/otp/validate",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "validateOTP"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/otp/generate/login",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "generateLoginOTP"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/otp/generate/register",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "generateRegisterOTP"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/google/redirect/login",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "googleLoginRedirect"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/google/redirect/register",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "googleRegisterRedirect"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/auth/logout",
+        "methods": ["DELETE"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/auth_controller",
+          "method": "logout"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/me_controller",
+          "method": "getMe"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me",
+        "methods": ["PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/me_controller",
+          "method": "updateMe"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/charges",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_charge_orders_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/charges/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_charge_orders_controller",
+          "method": "show"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/charges/:id/ask-cancellation",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_charge_orders_controller",
+          "method": "askCancellation"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/vehicles",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_vehicles_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/vehicles/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_vehicles_controller",
+          "method": "show"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/notifications",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_notifications_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/notifications",
+        "methods": ["PATCH"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_notifications_controller",
+          "method": "updateMyNotifications"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/companies",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_companies_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/subscriptions",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_subscriptions_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/subscriptions/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_subscriptions_controller",
+          "method": "show"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/subscriptions/:id/charges",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/my_subscription_charges_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/me/ask-charge",
+        "methods": ["POST"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/charge_orders_controller",
+          "method": "askCharge"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/subscriptions",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/subscriptions_controller",
+          "method": "index"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/subscriptions/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/subscriptions_controller",
+          "method": "show"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/subscriptions/:id/charge-options",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/subscriptions_controller",
+          "method": "getSubscriptionChargeOptions"
+        },
+        "middleware": ["auth"]
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/charge-emplacements",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/charge_emplacements_controller",
+          "method": "index"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/charge-emplacements/:id",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/charge_emplacements_controller",
+          "method": "show"
+        },
+        "middleware": []
+      },
+      {
+        "name": "",
+        "pattern": "/api/v1/charge-options",
+        "methods": ["GET"],
+        "handler": {
+          "type": "controller",
+          "moduleNameOrPath": "#controllers/charge_options_controller",
+          "method": "index"
+        },
+        "middleware": []
+      }
+    ]
+  }
+]
