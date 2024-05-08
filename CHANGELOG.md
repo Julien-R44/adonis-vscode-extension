@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.3.0
+
+- Fix a bug where Controller Methods were displayed as autocomplete suggestions in places where they should not be.
+- Added the `env:add` command. Can be executed through the command palette or the tree view.
+
 ## 1.2.3
 
 - Fixed a bug where Inertia links were not correctly detected. See https://github.com/Julien-R44/adonis-vscode-extension/issues/35
