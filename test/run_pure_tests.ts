@@ -1,4 +1,5 @@
 import { assert } from '@japa/assert'
+import { pathToFileURL } from 'node:url'
 import { snapshot } from '@japa/snapshot'
 import { fileSystem } from '@japa/file-system'
 import { specReporter } from '@japa/spec-reporter'
@@ -31,7 +32,7 @@ configure({
     }),
   ],
   reporters: [specReporter()],
-  importer: (filePath) => import(filePath),
+  importer: (filePath) => import(pathToFileURL(filePath).href),
 })
 
 /*
