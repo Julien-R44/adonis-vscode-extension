@@ -1,7 +1,9 @@
 import { window } from 'vscode'
+import { existsSync } from 'node:fs'
 import { platform } from 'node:process'
 import { node as execaNode } from 'execa'
 
+import { Notifier } from './notifier'
 import ExtConfig from './utilities/config'
 import type { AdonisProject } from '../types/projects'
 
@@ -12,17 +14,25 @@ interface ExecOptions {
 }
 
 export class AceExecutor {
-  private static isWindows = platform === 'win32'
-  private static shellPath = AceExecutor.isWindows ? 'cmd.exe' : undefined
+  static #isWindows = platform === 'win32'
+  static #shellPath = AceExecutor.#isWindows ? 'cmd.exe' : undefined
+
+  /**
+   * Ensure that node_modules are installed in the project
+   */
+  static #hasNodeModules(adonisProject: AdonisProject) {
+    const hasNodeModules = existsSync(`${adonisProject.path}/node_modules`)
+    return hasNodeModules
+  }
 
   /**
    * Execute a command in the foreground, in the VSCode integrated terminal
    */
-  private static sendTextToAdonisTerminal(command: string) {
+  static #sendTextToAdonisTerminal(command: string) {
     let terminal = window.terminals.find((openedTerminal) => openedTerminal.name === 'AdonisJS Ace')
 
     if (!terminal) {
-      terminal = window.createTerminal(`AdonisJS Ace`, this.shellPath)
+      terminal = window.createTerminal(`AdonisJS Ace`, this.#shellPath)
     }
 
     terminal.show()
@@ -33,8 +43,15 @@ export class AceExecutor {
    * Execute a `node ace x` command
    */
   static async exec({ adonisProject, command, background = true }: ExecOptions) {
+    if (!this.#hasNodeModules(adonisProject)) {
+      Notifier.showWarning(
+        'Node modules seems to be missing in your project. Make sure to install your dependencies before using the extension.'
+      )
+      return { result: undefined, adonisProject }
+    }
+
     let path = adonisProject.path
-    if (this.isWindows && path.startsWith('/')) {
+    if (this.#isWindows && path.startsWith('/')) {
       path = path.substring(1)
     }
 
@@ -62,7 +79,7 @@ export class AceExecutor {
         ? `cd /d "${path}" && ${command}`
         : `cd "${path}" && ${command}`
 
-    this.sendTextToAdonisTerminal(cmdWithCd)
+    this.#sendTextToAdonisTerminal(cmdWithCd)
 
     return { adonisProject }
   }

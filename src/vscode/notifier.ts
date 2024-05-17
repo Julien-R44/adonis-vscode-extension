@@ -3,11 +3,22 @@ import { window } from 'vscode'
 export class Notifier {
   static outputChannel = window.createOutputChannel('AdonisJS')
 
+  static #buildMessage(message: string) {
+    return `[AdonisJS] ${message}`
+  }
+
   /**
    * Show a message to the user
    */
   static async showMessage(message: string) {
-    return window.showInformationMessage(message)
+    return window.showInformationMessage(this.#buildMessage(message))
+  }
+
+  /**
+   * Show a warning message to the user
+   */
+  static async showWarning(message: string) {
+    return window.showWarningMessage(this.#buildMessage(message))
   }
 
   /**

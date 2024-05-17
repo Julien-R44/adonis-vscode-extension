@@ -98,6 +98,7 @@ export default class BaseCommand {
 
     try {
       const res = await this.execCmd(command, background, project)
+      if (!res.result) return
 
       if (openCreatedFile) {
         await this.openCreatedFile(res.adonisProject, res.result!.stdout)

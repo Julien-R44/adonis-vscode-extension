@@ -25,7 +25,9 @@ export class Adonis6Project extends BaseAdonisProject implements AdonisProject {
       background: true,
     })
 
-    return JSON.parse(result!.stdout) as AceListCommandsResult
+    if (!result) return []
+
+    return JSON.parse(result.stdout) as AceListCommandsResult
   }
 
   /**
@@ -83,7 +85,9 @@ export class Adonis6Project extends BaseAdonisProject implements AdonisProject {
       background: true,
     })
 
-    return JSON.parse(result!.stdout) as Promise<Routes>
+    if (!result) return []
+
+    return JSON.parse(result.stdout) as Promise<Routes>
   }
 
   /**

@@ -100,7 +100,9 @@ export class Adonis5Project extends BaseAdonisProject implements AdonisProject {
       background: true,
     })
 
-    return RoutesOutputConverter.convert(JSON.parse(result!.stdout))
+    if (!result) return []
+
+    return RoutesOutputConverter.convert(JSON.parse(result.stdout))
   }
 
   /**
