@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.3.1
+
+- Handle case where the `node_modules` folder is not present in your project and an error is shown in the output panel when executing an ace command. This is now fixed and the extension will instead display a small warning `Please install your dependencies`.
+
 ## 1.3.0
 
 - Fix a bug where Controller Methods were displayed as autocomplete suggestions in places where they should not be.
