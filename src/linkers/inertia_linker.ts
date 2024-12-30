@@ -12,9 +12,12 @@ export class InertiaLinker {
 
     // we have to lookup the line with the render( prefix because there could be multiple appearances of the same file name
     // e.g. if you declare a route with the path /about and have your page called about.vue etc., it would highlight the wrong line
-    const line = lines.findIndex(
-      (line) => line.includes('render(') && line.includes(options.match[1]!)
-    )
+    const line = lines.findIndex((line) => {
+      return (
+        (line.includes('render(') || lines.includes('renderInertia(')) &&
+        line.includes(options.match[1]!)
+      )
+    })
     const colStart = lines[line]!.indexOf(options.match[1]!)
     const colEnd = colStart + options.match[1]!.length
 
