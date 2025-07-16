@@ -176,4 +176,38 @@ test.group('Controller Linker', () => {
       line: 0,
     })
   })
+
+  test('should work with multiline route declaration', async ({ fs, assert }) => {
+    const project = createAdonis6Project(join(fs.basePath, 'my-project'))
+    await fs.create(
+      'my-project/app/controllers/users_controller.ts',
+      dedent`
+        export default class UsersController {}
+      `
+    )
+
+    const code = dedent`
+      router
+        .get('/users', '#controllers/users_controller.index')
+    `
+
+    const result = await ControllersLinker.getLinks({
+      fileContent: code,
+      project,
+    })
+
+    const positions = result.map((r) => r.position)
+    assert.snapshot(positions).matchInline(`
+      [
+        {
+          "colEnd": 53,
+          "colStart": 18,
+          "line": 1,
+        },
+      ]
+    `)
+
+    const paths = result.map((r) => r.controllerPath)
+    assert.sameDeepMembers(paths, [join(project.path, 'app/controllers/users_controller.ts')])
+  })
 })
